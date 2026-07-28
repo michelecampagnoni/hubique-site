@@ -643,6 +643,260 @@ body.pointer-on #cursor-glow { opacity: 1; }
   }
 }
 
+/* --------------------------------------------------------------------------
+   Guide & Insights — editorial layer for business decision makers
+   -------------------------------------------------------------------------- */
+.editorial-hero img {
+  object-position: center;
+}
+
+.resource-meta,
+.insight-topic,
+.insight-status,
+.source-note,
+.featured-points span {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.resource-meta {
+  display: block;
+  margin-bottom: 18px;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+}
+
+.decision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.decision-card,
+.insight-card,
+.featured-insight,
+.risk-list article,
+.timeline article {
+  border: var(--panel-border);
+  background:
+    repeating-linear-gradient(0deg, rgba(17,20,23,.022) 0 1px, transparent 1px 5px),
+    color-mix(in srgb, var(--paper-raised) 92%, var(--paper));
+}
+
+.decision-card {
+  min-height: 285px;
+  padding: 26px;
+  border-radius: 25px 14px 29px 16px;
+}
+
+.decision-card > span {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 48px;
+  place-items: center;
+  border: var(--panel-border);
+  border-radius: 50%;
+  background: var(--sun);
+  font-weight: 900;
+}
+
+.decision-card:nth-child(2) > span { background: var(--sky); }
+.decision-card:nth-child(3) > span { background: var(--grass); }
+.decision-card h3 { margin-bottom: 10px; }
+
+.timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.timeline article {
+  display: grid;
+  grid-template-columns: minmax(175px, .34fr) 1fr;
+  gap: 28px;
+  padding: 26px;
+  border-radius: 20px 11px 23px 13px;
+}
+
+.timeline time {
+  align-self: start;
+  width: fit-content;
+  padding: 9px 13px;
+  border: var(--panel-border);
+  border-radius: 99px;
+  background: var(--sun);
+  font-size: .83rem;
+  font-weight: 900;
+}
+
+.timeline article:nth-child(2) time { background: var(--tang); }
+.timeline article:nth-child(3) time { background: var(--grass); }
+.timeline article:nth-child(4) time { background: var(--sky); }
+.timeline h3,
+.risk-list h3 { margin: 0 0 7px; }
+.timeline p,
+.risk-list p { margin: 0; }
+
+.source-note {
+  max-width: 920px;
+  margin: 18px 0 0;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+}
+
+.legal-note {
+  padding-top: 22px;
+  border-top: .5px solid color-mix(in srgb, var(--ink) 30%, transparent);
+}
+
+.risk-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.risk-list article {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 17px;
+  padding: 25px;
+  border-radius: 22px 13px 25px 15px;
+}
+
+.risk-dot {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  border: var(--panel-border);
+  border-radius: 50%;
+  background: var(--grass);
+}
+.risk-mid { background: var(--sun); }
+.risk-high { background: var(--tang); }
+.risk-stop { background: var(--grape); }
+
+.manager-checklist {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  counter-reset: manager-step;
+  list-style: none;
+  border-top: var(--panel-border);
+}
+
+.manager-checklist li {
+  display: grid;
+  grid-template-columns: minmax(260px, .6fr) 1fr;
+  gap: 34px;
+  padding: 22px 0;
+  border-bottom: var(--panel-border);
+  counter-increment: manager-step;
+}
+
+.manager-checklist b::before {
+  content: "0" counter(manager-step) " ";
+  color: var(--tang);
+}
+
+.featured-insight {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  gap: 44px;
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: 31px 17px 35px 20px;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(0,178,255,.23), transparent 28%),
+    repeating-linear-gradient(0deg, rgba(17,20,23,.022) 0 1px, transparent 1px 5px),
+    color-mix(in srgb, var(--paper-raised) 92%, var(--paper));
+}
+
+.featured-insight h2 {
+  max-width: 850px;
+  margin: 22px 0 14px;
+}
+
+.featured-points {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.featured-points span {
+  padding: 11px 13px;
+  border: var(--panel-border);
+  border-radius: 99px;
+  background: rgba(255,255,255,.64);
+}
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.insight-card {
+  display: flex;
+  min-height: 320px;
+  padding: 25px;
+  flex-direction: column;
+  border-radius: 24px 13px 27px 15px;
+  transition: transform .25s ease, background-color .25s ease;
+}
+
+.insight-card:nth-child(4n+1) { --card-accent: var(--sun); }
+.insight-card:nth-child(4n+2) { --card-accent: var(--sky); }
+.insight-card:nth-child(4n+3) { --card-accent: var(--grass); }
+.insight-card:nth-child(4n+4) { --card-accent: var(--grape); }
+.insight-card:hover {
+  transform: translateY(-4px) rotate(-.15deg);
+  background-color: color-mix(in srgb, var(--card-accent) 9%, var(--paper-raised));
+}
+.insight-topic {
+  width: fit-content;
+  padding: 7px 10px;
+  border: var(--panel-border);
+  border-radius: 99px;
+  background: var(--card-accent);
+}
+.insight-card h3 {
+  margin: 40px 0 12px;
+  font-size: clamp(1.28rem, 1.65vw, 1.75rem);
+  line-height: 1.04;
+}
+.insight-card p { margin: 0; }
+.insight-status {
+  margin-top: auto;
+  padding-top: 24px;
+  color: color-mix(in srgb, var(--ink) 54%, transparent);
+}
+
+@media (max-width: 900px) {
+  .decision-grid,
+  .insight-grid { grid-template-columns: 1fr 1fr; }
+  .featured-insight { grid-template-columns: 1fr; }
+  .featured-points { flex-direction: row; flex-wrap: wrap; }
+}
+
+@media (max-width: 640px) {
+  .hero-copy .tag {
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.45;
+  }
+  .decision-grid,
+  .risk-list,
+  .insight-grid { grid-template-columns: 1fr; }
+  .decision-card { min-height: 0; }
+  .decision-card > span { margin-bottom: 32px; }
+  .timeline article,
+  .manager-checklist li { grid-template-columns: 1fr; gap: 13px; }
+  .insight-card { min-height: 285px; }
+  .featured-points { flex-direction: column; }
+}
+
 /* --- percorso illustrato tra hero e contenuto --- */
 .story-strip {
   position: relative;

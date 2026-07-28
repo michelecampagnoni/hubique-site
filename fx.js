@@ -38,6 +38,14 @@
     'chi-siamo': {
       kicker: 'Esperienza che diventa metodo',
       stages: ['Campo', 'Ricerca', 'Persone', 'Risultati']
+    },
+    'ai-act-pmi': {
+      kicker: 'Dalla regola al processo',
+      stages: ['Mappa', 'Classifica', 'Proteggi', 'Documenta']
+    },
+    insights: {
+      kicker: 'Segnali utili, decisioni concrete',
+      stages: ['Osserva', 'Filtra', 'Decidi', 'Misura']
     }
   };
   var story = pageStories[page] || pageStories.index;
