@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Readiness Assessment per PMI — Hubique</title>
+<meta name="description" content="Valuta in pochi minuti il grado di adozione AI della tua azienda e la tua maturità personale. Ricevi un report con priorità, rischi e prossime azioni.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231F4FD8'/%3E%3Ctext x='16' y='23' font-family='Helvetica,Arial,sans-serif' font-size='20' font-weight='bold' fill='white' text-anchor='middle'%3Eh%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20260728h">
+</head>
+<body class="assessment-page">
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">hubique<span>.</span></a>
+    <nav class="nav-links">
+      <a href="ai-adoption.html">AI Adoption</a>
+      <a href="ai-agents.html">AI Agents</a>
+      <a href="settori.html">Settori</a>
+      <a href="chi-siamo.html">Chi siamo</a>
+      <div class="nav-resources"><a href="ai-act-pmi.html">AI Act</a><a href="insights.html">Insights</a><a class="active" href="assessment.html">Test AI</a></div>
+      <a class="btn" href="mailto:info@hubique.it">Parliamone</a>
+    </nav>
+  </div>
+</header>
+
+<main class="assessment-main">
+  <div class="assessment-shell">
+    <section class="assessment-intro is-active" data-screen="intro" aria-labelledby="assessment-title">
+      <div class="assessment-intro-copy">
+        <span class="tag">AI Readiness Assessment · 4 minuti</span>
+        <h1 id="assessment-title">Quanto è pronta la tua azienda per usare davvero l'AI?</h1>
+        <p class="lead">Dodici domande per distinguere l'uso occasionale da un'adozione che restituisce tempo, migliora i processi e resta sotto controllo.</p>
+        <div class="assessment-split">
+          <div><b>70%</b><span>Azienda</span><small>Strategia, processi, dati e governance</small></div>
+          <div><b>30%</b><span>Persona</span><small>Competenze, pratica e capacità di guidare il cambiamento</small></div>
+        </div>
+        <button class="btn assessment-start" type="button">Inizia il test</button>
+        <p class="assessment-fineprint">Il risultato è orientativo: serve a scegliere da dove partire, non è una certificazione.</p>
+        <details class="assessment-method">
+          <summary>Come viene calcolato</summary>
+          <p>Ogni risposta vale da 0 a 3. Il risultato combina quattro dimensioni aziendali e due personali; una media geometrica dà più peso all'azienda e penalizza gli squilibri, senza nasconderli dietro una media semplice.</p>
+        </details>
+      </div>
+      <div class="assessment-intro-art" aria-hidden="true">
+        <div class="assessment-orbit orbit-a"></div>
+        <div class="assessment-orbit orbit-b"></div>
+        <div class="assessment-core">AI</div>
+        <span class="assessment-node node-a">Dati</span>
+        <span class="assessment-node node-b">Processi</span>
+        <span class="assessment-node node-c">Persone</span>
+        <span class="assessment-node node-d">Regole</span>
+      </div>
+    </section>
+
+    <section class="assessment-profile" data-screen="profile" aria-labelledby="profile-title" hidden>
+      <div class="assessment-topline">
+        <span class="assessment-phase">Prima di iniziare</span>
+        <span>Profilo</span>
+      </div>
+      <h2 id="profile-title">Contestualizziamo il risultato</h2>
+      <p class="lead">Queste risposte non entrano nel punteggio: servono a rendere il report più pertinente.</p>
+      <div class="profile-grid">
+        <fieldset>
+          <legend>Qual è il tuo ruolo?</legend>
+          <label><input type="radio" name="role" value="Imprenditore o CEO"><span>Imprenditore o CEO</span></label>
+          <label><input type="radio" name="role" value="Manager o responsabile"><span>Manager o responsabile</span></label>
+          <label><input type="radio" name="role" value="Professionista o operativo"><span>Professionista o operativo</span></label>
+          <label><input type="radio" name="role" value="Consulente o altro"><span>Consulente o altro</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>Quante persone lavorano in azienda?</legend>
+          <label><input type="radio" name="size" value="1–9"><span>1–9</span></label>
+          <label><input type="radio" name="size" value="10–49"><span>10–49</span></label>
+          <label><input type="radio" name="size" value="50–249"><span>50–249</span></label>
+          <label><input type="radio" name="size" value="250+"><span>250+</span></label>
+        </fieldset>
+      </div>
+      <div class="assessment-actions">
+        <button class="btn btn-ghost assessment-back" type="button">Indietro</button>
+        <button class="btn assessment-profile-next" type="button" disabled>Vai alle domande</button>
+      </div>
+    </section>
+
+    <section class="assessment-question" data-screen="question" aria-live="polite" hidden>
+      <div class="assessment-progress" aria-hidden="true"><span></span></div>
+      <div class="assessment-topline">
+        <span class="assessment-phase"></span>
+        <span class="assessment-count"></span>
+      </div>
+      <div class="assessment-question-copy">
+        <span class="assessment-dimension"></span>
+        <h2 class="assessment-question-title"></h2>
+        <p class="assessment-question-help"></p>
+      </div>
+      <fieldset class="assessment-options"></fieldset>
+      <p class="assessment-error" role="alert" hidden>Scegli una risposta per continuare.</p>
+      <div class="assessment-actions">
+        <button class="btn btn-ghost assessment-prev" type="button">Indietro</button>
+        <button class="btn assessment-next" type="button">Avanti</button>
+      </div>
+    </section>
+
+    <section class="assessment-result" data-screen="result" aria-labelledby="result-title" hidden>
+      <div class="result-heading">
+        <div>
+          <span class="tag">Il tuo profilo AI</span>
+          <h1 id="result-title">Il punto non è il voto. È la prossima decisione.</h1>
+        </div>
+        <button class="btn btn-ghost assessment-restart" type="button">Rifai il test</button>
+      </div>
+
+      <div class="result-overview">
+        <div class="score-orbit" aria-label="Punteggio complessivo">
+          <span class="score-value">0</span><small>/100</small>
+        </div>
+        <div class="result-summary">
+          <span class="result-level">—</span>
+          <h2 class="result-headline">—</h2>
+          <p class="result-copy"></p>
+          <div class="result-pill-row">
+            <span>Azienda <b class="company-score">0</b>/100</span>
+            <span>Persona <b class="person-score">0</b>/100</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-preview">
+        <article>
+          <span class="result-label">Punto forte</span>
+          <h3 class="result-strength-title">—</h3>
+          <p class="result-strength-copy"></p>
+        </article>
+        <article>
+          <span class="result-label">Priorità</span>
+          <h3 class="result-priority-title">—</h3>
+          <p class="result-priority-copy"></p>
+        </article>
+      </div>
+
+      <div class="report-gate">
+        <div class="report-locked-preview" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="report-gate-card">
+          <span class="tag">Report completo</span>
+          <h2>Sblocca dimensioni e prossime tre mosse</h2>
+          <p>Lascia l'email per leggere l'analisi completa: sei dimensioni, eventuali rischi e tre azioni ordinate per priorità.</p>
+          <form class="assessment-email-form">
+            <label for="assessment-email">Email di lavoro</label>
+            <div class="email-row">
+              <input id="assessment-email" name="email" type="email" autocomplete="email" placeholder="nome@azienda.it" required>
+              <button class="btn" type="submit">Sblocca il report</button>
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" name="consent" required>
+              <span>Acconsento a ricevere il report e a essere ricontattato da Hubique. Ho letto la <a href="assets/privacy-policy.pdf" target="_blank" rel="noopener">privacy policy</a>.</span>
+            </label>
+            <p class="email-status" role="status"></p>
+          </form>
+        </div>
+      </div>
+
+      <div class="full-report" hidden>
+        <div class="report-section-heading">
+          <span class="tag">Analisi completa</span>
+          <h2>Le sei dimensioni della tua readiness</h2>
+        </div>
+        <div class="dimension-report"></div>
+        <div class="report-bottom-grid">
+          <article class="report-actions-card">
+            <span class="tag">Prossimi 90 giorni</span>
+            <h2>Tre mosse, nell'ordine giusto</h2>
+            <ol class="report-actions-list"></ol>
+          </article>
+          <article class="report-flags-card">
+            <span class="tag">Attenzioni</span>
+            <h2>Rischi da non ignorare</h2>
+            <div class="report-flags"></div>
+          </article>
+        </div>
+        <div class="report-cta">
+          <div><span class="tag">Parliamone</span><h2>Vuoi confrontare il risultato con un processo reale?</h2></div>
+          <a class="btn assessment-mailto" href="mailto:info@hubique.it?subject=Assessment%20AI">Richiedi un confronto</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hubique S.r.l. · P.IVA 12588200969</span>
+    <span><a href="ai-adoption.html">AI Adoption</a> · <a href="ai-agents.html">AI Agents</a> · <a href="settori.html">Settori</a> · <a href="chi-siamo.html">Chi siamo</a> · <a href="ai-act-pmi.html">AI Act</a> · <a href="insights.html">Insights</a> · <a href="assessment.html">Test AI</a></span>
+  </div>
+</footer>
+
+<script src="assessment.js?v=20260728a" defer></script>
+</body>
+</html>
