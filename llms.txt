@@ -1,0 +1,18 @@
+# Hubique
+
+> Hubique S.r.l. è un system integrator AI italiano per piccole e medie imprese. Fondata da FG Invest, Zest (venture del Gruppo Gabetti) e Banca Intesa, lavora per il Gruppo Gabetti e per l'Ospedale San Camillo di Roma e porta la stessa qualità nelle PMI. Due linee di servizio: consulenza e formazione AI (spesso a costo zero grazie alla formazione finanziata) e agenti AI integrati nei processi aziendali, sempre con approvazione umana sulle azioni verso l'esterno. Sede: Milano, Via Bernardo Quaranta 40. Contatto: info@hubique.it.
+
+## Pagine principali
+
+- [Home](https://hubique.it/): l'AI dentro i processi delle PMI — agenti su misura per preventivi, follow-up commerciale, risposte ai clienti e contenuti
+- [AI Adoption](https://hubique.it/ai-adoption.html): consulenza di adozione AI — assessment, scelta strumenti, AI policy, formazione di manager e team con formazione agevolata e finanziata
+- [AI Agents](https://hubique.it/ai-agents.html): agenti AI per processi commerciali, clienti e supporto, documenti e conoscenza, contenuti — integrati con email, CRM e gestionale
+- [Settori](https://hubique.it/settori.html): verticali su real estate, legno e arredo, architettura e interior, edilizia e serramenti, sanità
+- [Chi siamo](https://hubique.it/chi-siamo.html): storia, soci fondatori, referenze (Gruppo Gabetti, Ospedale San Camillo) e principi di lavoro
+- [AI Act per le PMI](https://hubique.it/ai-act-pmi.html): guida operativa all'AI Act per imprenditori e manager — scadenze, ruoli, rischi e piano in 7 mosse
+- [Insights](https://hubique.it/insights.html): analisi e guide sull'AI nelle PMI
+
+## Strumenti gratuiti
+
+- [AI Readiness Assessment](https://hubique.it/assessment.html): test di 4 minuti sulla maturità AI di azienda e persona, con report e priorità
+- [AI Act Compliance Check](https://hubique.it/ai-act-check.html): check di 5 minuti sulla conformità AI Act, con scadenze personalizzate sul profilo
