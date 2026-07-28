@@ -508,6 +508,28 @@
     var form = event.currentTarget;
     if (!form.reportValidity()) return;
     var email = form.elements.email.value.trim();
+    /* invio del lead via FormSubmit (nessun backend proprio): la mail arriva
+       a m.campagnoni@hubique.it con copia a info@hubique.it. Fire-and-forget:
+       se la rete fallisce il report si sblocca comunque. */
+    try {
+      fetch('https://formsubmit.co/ajax/m.campagnoni@hubique.it', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Lead test — AI Readiness Assessment (' + state.result.overall + '/100)',
+          _cc: 'info@hubique.it',
+          _template: 'table',
+          test: 'AI Readiness Assessment',
+          email: email,
+          punteggio: state.result.overall + '/100',
+          azienda: state.result.company + '/100',
+          persona: state.result.person + '/100',
+          ruolo: state.profile.role,
+          dimensione: state.profile.size,
+          pagina: 'https://hubique.it/assessment.html'
+        })
+      }).catch(function () {});
+    } catch (e) {}
     try {
       localStorage.setItem('hubique_assessment_lead', JSON.stringify({
         email: email,

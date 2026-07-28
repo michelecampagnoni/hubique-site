@@ -560,6 +560,29 @@
     var form = event.currentTarget;
     if (!form.reportValidity()) return;
     var email = form.elements.email.value.trim();
+    /* invio del lead via FormSubmit (nessun backend proprio): la mail arriva
+       a m.campagnoni@hubique.it con copia a info@hubique.it. Fire-and-forget:
+       se la rete fallisce il report si sblocca comunque. */
+    try {
+      fetch('https://formsubmit.co/ajax/m.campagnoni@hubique.it', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Lead test — AI Act Compliance Check (' + state.result.overall + '/100 · ' + state.result.band.name + ')',
+          _cc: 'info@hubique.it',
+          _template: 'table',
+          test: 'AI Act Compliance Check',
+          email: email,
+          punteggio: state.result.overall + '/100',
+          fascia: state.result.band.name,
+          ruolo: state.profile.role,
+          dimensione: state.profile.size,
+          ambiti: state.profile.areas.join(', '),
+          ai_verso_pubblico: state.profile.publicAI ? 'sì' : 'no',
+          pagina: 'https://hubique.it/ai-act-check.html'
+        })
+      }).catch(function () {});
+    } catch (e) {}
     try {
       localStorage.setItem('hubique_aiact_lead', JSON.stringify({
         email: email,
