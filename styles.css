@@ -899,6 +899,15 @@ body.pointer-on #cursor-glow { opacity: 1; }
   transform: translateY(-5px) rotate(-.15deg);
   box-shadow: 0 12px 28px rgba(17,20,23,.1);
 }
+.press-card.press-featured {
+  grid-column: span 2;
+  min-height: 285px;
+  --press-accent: var(--tang);
+}
+.press-card.press-featured h3 {
+  max-width: 25ch;
+  font-size: clamp(1.65rem, 2.25vw, 2.55rem);
+}
 .press-source,
 .press-link {
   font-family: var(--mono);
@@ -983,6 +992,7 @@ body.pointer-on #cursor-glow { opacity: 1; }
   .risk-list,
   .insight-grid,
   .press-grid { grid-template-columns: 1fr; }
+  .press-card.press-featured { grid-column: auto; }
   .decision-card { min-height: 0; }
   .decision-card > span { margin-bottom: 32px; }
   .timeline article,
