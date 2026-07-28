@@ -2161,74 +2161,6 @@ section.cta-final > .wrap.cta-inner .tag {
   line-height: 1.35;
 }
 
-.assessment-intro-art {
-  position: relative;
-  min-height: min(640px, 75vh);
-  border: var(--panel-border);
-  border-radius: 42% 18% 39% 22%;
-  background:
-    radial-gradient(circle at center, rgba(255,178,0,.55) 0 11%, transparent 11.5%),
-    repeating-radial-gradient(circle at center, transparent 0 55px, rgba(17,20,23,.12) 56px 57px, transparent 58px 86px),
-    linear-gradient(135deg, rgba(0,178,255,.15), rgba(171,84,247,.14));
-  overflow: hidden;
-}
-.assessment-intro-art::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .35;
-  background: radial-gradient(circle, rgba(17,20,23,.35) 0 1px, transparent 1.3px) 0 0 / 13px 13px;
-  mask-image: linear-gradient(135deg, #000, transparent 68%);
-}
-.assessment-core {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  display: grid;
-  width: 112px;
-  height: 112px;
-  place-items: center;
-  border: var(--panel-border);
-  border-radius: 50%;
-  background: var(--sun);
-  font-size: 2.4rem;
-  font-weight: 900;
-  transform: translate(-50%, -50%);
-  animation: assessmentPulse 3.2s ease-in-out infinite;
-}
-.assessment-orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 1px dashed rgba(17,20,23,.52);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-.orbit-a { width: 56%; aspect-ratio: 1; }
-.orbit-b { width: 82%; aspect-ratio: 1; }
-.assessment-node {
-  position: absolute;
-  z-index: 2;
-  padding: 10px 14px;
-  border: var(--panel-border);
-  border-radius: 99px;
-  background: var(--paper-raised);
-  font-family: var(--mono);
-  font-size: .72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.node-a { top: 17%; left: 43%; background: var(--sky); }
-.node-b { top: 46%; right: 6%; background: var(--tang); }
-.node-c { bottom: 13%; left: 38%; background: var(--grass); }
-.node-d { top: 45%; left: 5%; background: var(--grape); color: white; }
-
-@keyframes assessmentPulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.06); }
-}
-
 .assessment-profile,
 .assessment-question,
 .assessment-result {
@@ -2692,7 +2624,6 @@ section.cta-final > .wrap.cta-inner .tag {
 
 @media (max-width: 900px) {
   .assessment-intro.is-active { grid-template-columns: 1fr; }
-  .assessment-intro-art { min-height: 430px; }
   .profile-grid,
   .dimension-report,
   .report-bottom-grid { grid-template-columns: 1fr; }
@@ -2707,7 +2638,6 @@ section.cta-final > .wrap.cta-inner .tag {
   }
   .assessment-intro h1 { font-size: clamp(2.65rem, 13vw, 4.2rem); }
   .assessment-split { grid-template-columns: 1fr; }
-  .assessment-intro-art { min-height: 330px; }
   .assessment-topline { margin-bottom: 38px; }
   .assessment-question-title,
   .assessment-profile > h2 { font-size: 2.45rem; }
