@@ -46,6 +46,10 @@
     insights: {
       kicker: 'Segnali utili, decisioni concrete',
       stages: ['Osserva', 'Filtra', 'Decidi', 'Misura']
+    },
+    prodotti: {
+      kicker: 'Dal processo al prodotto',
+      stages: ['Processo', 'Prodotto', 'Mercato', 'Evoluzione']
     }
   };
   var story = pageStories[page] || pageStories.index;
@@ -254,7 +258,7 @@
      ----------------------------------------------------------------------- */
   if ('IntersectionObserver' in window) {
     var revealTargets = document.querySelectorAll(
-      '.sec-head, .pain, .svc, .step, .case, .why, details, .callout, .demo, .hero-ill, .story-strip'
+      '.sec-head, .pain, .svc, .step, .case, .why, details, .callout, .demo, .hero-ill, .story-strip, .product'
     );
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
