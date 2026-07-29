@@ -171,7 +171,7 @@
     strip.innerHTML =
       '<div class="story-strip-inner">' +
         '<span class="story-kicker">' + story.kicker + '</span>' +
-        '<svg viewBox="0 0 1200 240" preserveAspectRatio="none">' +
+        '<svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMid meet">' +
           '<path d="M44 169 C190 78 274 178 398 128 S606 42 742 118 S960 199 1160 78" class="story-route"/>' +
           '<g fill="none" stroke="#111417" stroke-width="2">' +
             '<circle cx="112" cy="146" r="14" fill="#FFFFFF"/>' +
