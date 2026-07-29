@@ -2672,3 +2672,220 @@ section.cta-final > .wrap.cta-inner .tag {
   .email-row .btn { width: 100%; }
   .report-cta { align-items: flex-start; flex-direction: column; }
 }
+
+/* ==========================================================================
+   MOBILE — menu a pannello laterale + hero con artwork di sfondo
+   Il pannello specchia il rail desktop: capitoli numerati, risorse, CTA.
+   ========================================================================== */
+
+.nav-toggle,
+.nav-drawer,
+.nav-scrim { display: none; }
+
+@media (max-width: 720px) {
+  /* --- pulsante hamburger --- */
+  .nav-toggle {
+    display: inline-flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 46px;
+    height: 46px;
+    padding: 0 11px;
+    background: var(--paper-raised);
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ink);
+    transition: transform .3s var(--ease-out), opacity .2s ease;
+  }
+  body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* --- velo di sfondo --- */
+  .nav-scrim {
+    display: block;
+    position: fixed;
+    z-index: 58;
+    inset: 0;
+    background: rgba(17, 20, 23, .38);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  body.nav-open .nav-scrim { opacity: 1; pointer-events: auto; }
+  body.nav-open { overflow: hidden; }
+
+  /* --- pannello --- */
+  .nav-drawer {
+    display: flex;
+    position: fixed;
+    z-index: 60;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    gap: 20px;
+    width: min(330px, 86vw);
+    padding: 16px 18px 24px;
+    overflow-y: auto;
+    background: color-mix(in srgb, var(--paper) 95%, white);
+    border-left: 2px solid var(--ink);
+    transform: translateX(104%);
+    transition: transform .45s var(--ease-out);
+  }
+  body.nav-open .nav-drawer { transform: none; }
+
+  .nav-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-drawer-head .logo { font-size: 1.45rem; }
+  .nav-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: var(--paper-raised);
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .nav-drawer-links {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  /* capitoli numerati, come il rail desktop */
+  .nav-drawer-links > a:not(.btn) {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 84px;
+    padding: 38px 13px 12px;
+    border: 2px solid var(--ink);
+    border-radius: 13px;
+    background: var(--paper-raised);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: .92rem;
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  .nav-drawer-links > a:not(.btn)::before {
+    position: absolute;
+    top: 11px;
+    left: 13px;
+    font-family: var(--mono);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+  }
+  .nav-drawer-links > a:not(.btn)::after {
+    content: "\2197";
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 1rem;
+  }
+  .nav-drawer-links > a:nth-child(1)::before { content: "01"; }
+  .nav-drawer-links > a:nth-child(2)::before { content: "02"; }
+  .nav-drawer-links > a:nth-child(3)::before { content: "03"; }
+  .nav-drawer-links > a:nth-child(4)::before { content: "04"; }
+  .nav-drawer-links > a:nth-child(2) { background: var(--sun); }
+  .nav-drawer-links > a:nth-child(3) { background: var(--tang); }
+  .nav-drawer-links > a:nth-child(4) { background: var(--grass); color: #fff; }
+  .nav-drawer-links > a.active { box-shadow: -5px 5px 0 rgba(17, 20, 23, .12); }
+
+  /* risorse: pill scure compatte */
+  .nav-drawer .nav-resources {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .nav-drawer .nav-resources a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 4px;
+    border-radius: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: .6rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .nav-drawer .nav-resources a.active { background: var(--grape); }
+
+  .nav-drawer .btn {
+    width: 100%;
+    padding: 14px 8px;
+    background: var(--grape);
+    color: #fff !important;
+    text-align: center;
+    border-radius: 13px;
+  }
+
+  /* entrata scaglionata delle voci */
+  .nav-drawer-links > * {
+    opacity: 0;
+    transform: translateX(26px);
+    transition: opacity .3s ease, transform .4s var(--ease-out);
+  }
+  body.nav-open .nav-drawer-links > * { opacity: 1; transform: none; }
+  body.nav-open .nav-drawer-links > *:nth-child(1) { transition-delay: .06s; }
+  body.nav-open .nav-drawer-links > *:nth-child(2) { transition-delay: .11s; }
+  body.nav-open .nav-drawer-links > *:nth-child(3) { transition-delay: .16s; }
+  body.nav-open .nav-drawer-links > *:nth-child(4) { transition-delay: .21s; }
+  body.nav-open .nav-drawer-links > *:nth-child(5) { transition-delay: .26s; }
+  body.nav-open .nav-drawer-links > *:nth-child(6) { transition-delay: .31s; }
+
+  /* --- hero: artwork sopra e dietro il copy, con velo di lettura --- */
+  .hero-grid {
+    position: relative;
+    gap: 0;
+  }
+  .hero-grid .hero-photo {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    min-height: 0;
+    border-radius: 26px;
+  }
+  .hero-grid .hero-photo figcaption { display: none; }
+  .hero-grid .hero-copy {
+    position: relative;
+    z-index: 1;
+    justify-content: flex-end;
+    min-height: 132vw;
+    padding: 46vw 16px 20px;
+    border-radius: 26px;
+    background: linear-gradient(180deg,
+      rgba(244, 233, 225, 0) 24%,
+      rgba(244, 233, 225, .58) 46%,
+      rgba(244, 233, 225, .94) 72%);
+  }
+  .hero-grid .hero-copy h1 { text-shadow: 0 4px 0 rgba(17, 20, 23, .16); }
+}
