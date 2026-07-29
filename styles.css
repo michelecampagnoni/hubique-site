@@ -2811,9 +2811,11 @@ section.cta-final > .wrap.cta-inner .tag {
   .nav-drawer-links > a:nth-child(2)::before { content: "02"; }
   .nav-drawer-links > a:nth-child(3)::before { content: "03"; }
   .nav-drawer-links > a:nth-child(4)::before { content: "04"; }
+  .nav-drawer-links > a:nth-child(5)::before { content: "05"; }
   .nav-drawer-links > a:nth-child(2) { background: var(--sun); }
   .nav-drawer-links > a:nth-child(3) { background: var(--tang); }
   .nav-drawer-links > a:nth-child(4) { background: var(--grass); color: #fff; }
+  .nav-drawer-links > a:nth-child(5) { background: var(--grape); color: #fff; }
   .nav-drawer-links > a.active { box-shadow: -5px 5px 0 rgba(17, 20, 23, .12); }
 
   /* risorse: pill scure compatte */
@@ -2861,6 +2863,7 @@ section.cta-final > .wrap.cta-inner .tag {
   body.nav-open .nav-drawer-links > *:nth-child(4) { transition-delay: .21s; }
   body.nav-open .nav-drawer-links > *:nth-child(5) { transition-delay: .26s; }
   body.nav-open .nav-drawer-links > *:nth-child(6) { transition-delay: .31s; }
+  body.nav-open .nav-drawer-links > *:nth-child(7) { transition-delay: .36s; }
 
   /* --- hero: artwork sopra e dietro il copy, con velo di lettura --- */
   .hero-grid {

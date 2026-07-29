@@ -36,6 +36,16 @@
   var drawerLinks = navLinks.cloneNode(true);
   drawerLinks.className = 'nav-drawer-links';
 
+  /* Prodotti esiste solo come capitolo del menu mobile: sul rail desktop
+     i quattro capitoli restano invariati. */
+  var prodottiLink = document.createElement('a');
+  prodottiLink.href = 'prodotti.html';
+  prodottiLink.textContent = 'Prodotti';
+  if (/(^|\/)prodotti\.html$/.test(window.location.pathname)) {
+    prodottiLink.className = 'active';
+  }
+  drawerLinks.insertBefore(prodottiLink, drawerLinks.querySelector('.nav-resources'));
+
   drawer.appendChild(drawerHead);
   drawer.appendChild(drawerLinks);
   body.appendChild(drawer);
