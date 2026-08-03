@@ -13,6 +13,16 @@
 - [AI Act per le PMI](https://hubique.it/ai-act-pmi.html): guida operativa all'AI Act per imprenditori e manager — scadenze, ruoli, rischi e piano in 7 mosse
 - [Insights](https://hubique.it/insights.html): analisi e guide sull'AI nelle PMI
 
+## Articoli — serie General Tech in Real Estate
+
+- [Expert Systems](https://hubique.it/expert-systems-real-estate.html): come le regole di un professionista esperto diventano processi automatici in agenzia
+- [Fuzzy Logic](https://hubique.it/fuzzy-logic-real-estate.html): interpretare richieste sfumate dei clienti ("non troppo costosa", "abbastanza luminosa")
+- [Machine Learning](https://hubique.it/machine-learning-real-estate.html): lead scoring, valutazioni e previsioni dai dati che il CRM raccoglie già
+- [Data Preprocessing](https://hubique.it/data-preprocessing-real-estate.html): perché i dati sparsi tra CRM, gestionali e PDF non generano valore e come prepararli per l'AI
+- [Model Evaluation](https://hubique.it/model-evaluation-real-estate.html): come si misura l'affidabilità di un modello AI prima di fidarsi delle sue decisioni
+- [Decision Tree](https://hubique.it/decision-tree-real-estate.html): decisioni supportate dai dati e spiegabili passo per passo, fino alle Random Forest
+- [Deep Neural Network](https://hubique.it/deep-neural-network-real-estate.html): Computer Vision e reti neurali su foto, planimetrie e documenti dell'agenzia
+
 ## Strumenti gratuiti
 
 - [AI Readiness Assessment](https://hubique.it/assessment.html): test di 4 minuti sulla maturità AI di azienda e persona, con report e priorità

@@ -2978,3 +2978,93 @@ section.cta-final > .wrap.cta-inner .tag {
 @media (min-width: 981px) {
   .product, .product-head { border-width: .5px; }
 }
+
+/* --------------------------------------------------------------------------
+   Insights — articoli pubblicati (serie AI nel Real Estate)
+   -------------------------------------------------------------------------- */
+a.insight-card {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.insight-card-media {
+  padding: 0;
+  overflow: hidden;
+}
+
+.insight-card-media > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: var(--panel-border);
+}
+
+.insight-card-media .insight-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px 25px 25px;
+}
+
+.insight-card-media .insight-body h3 {
+  margin: 18px 0 12px;
+}
+
+.article-prose {
+  max-width: 780px;
+}
+
+.article-prose h2 {
+  margin: 46px 0 16px;
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
+  line-height: 1.08;
+}
+
+.article-prose p {
+  margin: 0 0 16px;
+  line-height: 1.65;
+}
+
+.article-prose ul {
+  margin: 0 0 16px;
+  padding-left: 22px;
+  line-height: 1.65;
+}
+
+.article-prose ul li { margin-bottom: 6px; }
+
+.article-kicker {
+  font-weight: 700;
+}
+
+.article-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 26px;
+  align-items: center;
+  margin: 44px 0;
+  padding: clamp(24px, 3vw, 38px);
+  border: var(--panel-border);
+  border-radius: 26px 14px 29px 16px;
+  background:
+    radial-gradient(circle at 90% 15%, rgba(255,178,0,.25), transparent 32%),
+    repeating-linear-gradient(0deg, rgba(17,20,23,.022) 0 1px, transparent 1px 5px),
+    color-mix(in srgb, var(--paper-raised) 92%, var(--paper));
+}
+
+.article-cta h3 {
+  margin: 14px 0 8px;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  line-height: 1.1;
+}
+
+.article-cta p { margin: 0; }
+
+.article-cta .btn { white-space: nowrap; }
+
+@media (max-width: 720px) {
+  .article-cta {
+    grid-template-columns: 1fr;
+  }
+}
