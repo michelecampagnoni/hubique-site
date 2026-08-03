@@ -164,7 +164,8 @@
      ----------------------------------------------------------------------- */
   var main = document.querySelector('main');
   var hero = main && main.firstElementChild;
-  if (main && hero) {
+  var isArticle = /-real-estate$/.test(page);
+  if (main && hero && !isArticle) {
     var strip = document.createElement('div');
     strip.className = 'story-strip';
     strip.setAttribute('aria-hidden', 'true');
