@@ -3184,16 +3184,19 @@ body.has-promo-bar { padding-bottom: 76px; }
 .fondi-page .assessment-question.is-active {
   display: flex;
   flex-direction: column;
-  min-height: calc(100dvh - 40px);
+  height: calc(100dvh - 40px);
+  max-height: calc(100dvh - 40px);
+  overflow: hidden;
 }
-.fondi-page .assessment-question .assessment-question-copy h2 { font-size: clamp(1.7rem, 3vw, 3rem); }
+.fondi-page .assessment-question .assessment-topline { margin-bottom: 8px; }
+.fondi-page .assessment-question .assessment-question-copy h2 { font-size: clamp(1.5rem, 2.6vw, 2.5rem); margin: 6px 0 8px; }
+.fondi-page .assessment-question .assessment-question-help { font-size: .95rem; }
 .fondi-page .assessment-question .assessment-question-help { margin-bottom: 0; }
 .fondi-page .fondi-actions-top { margin: 14px 0 6px; }
 .fondi-drum {
   position: relative;
   flex: 1 1 auto;
-  min-height: 300px;
-  max-height: 62vh;
+  min-height: 160px;
   margin-top: 4px;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -3227,6 +3230,7 @@ body.has-promo-bar { padding-bottom: 76px; }
 .fondi-page .assessment-option .option-index { transition: background-color .15s ease, color .15s ease; }
 .fondi-page .assessment-option:hover .option-index { background: var(--accent); color: white; }
 @media (max-width: 760px) {
-  .fondi-drum { min-height: 240px; max-height: none; }
+  .fondi-page .assessment-question.is-active { height: calc(100dvh - 8px); max-height: calc(100dvh - 8px); }
+  .fondi-drum { min-height: 140px; }
   .fondi-page .assessment-options { padding: 4px 2px 30px; }
 }

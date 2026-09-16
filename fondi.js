@@ -95,6 +95,14 @@
   /* riquadro risposte: a ogni domanda si riparte dall'alto */
   var drum = screens.question.querySelector('.fondi-drum');
   function drumReset() { if (drum) drum.scrollTop = 0; }
+  /* la rotella ovunque sulla schermata domanda scorre le risposte */
+  if (drum) {
+    screens.question.addEventListener('wheel', function (event) {
+      if (event.target.closest && event.target.closest('.fondi-drum')) return;
+      drum.scrollTop += event.deltaY;
+      event.preventDefault();
+    }, { passive: false });
+  }
 
   /* ---------- motore ---------- */
   function guessFund(A) {
