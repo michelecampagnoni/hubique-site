@@ -3068,3 +3068,102 @@ a.insight-card {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Quanto copre il fondo (fondi.html) ---------- */
+.fondi-page .score-orbit small { font-size: 1.1rem; }
+.fondi-tool .fondi-est { margin-top: 12px; }
+.fondi-tool .fondi-est b,
+.fondi-table td b { font-size: 1.15em; font-weight: 900; }
+.fondi-tool .fondi-need { margin-top: 10px; font-size: .88rem; color: var(--muted); }
+.fondi-tag {
+  padding: 8px 10px;
+  border: var(--panel-border);
+  border-radius: 10px;
+  background: var(--paper-raised);
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.fondi-tag-soon { background: color-mix(in srgb, var(--tang) 22%, white); }
+.fondi-tag-wait { color: var(--muted); }
+.fondi-table-wrap { overflow-x: auto; margin-top: 8px; }
+.fondi-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.fondi-table th {
+  padding: 8px 6px;
+  border-bottom: 2px solid var(--ink);
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.fondi-table td { padding: 12px 6px; border-top: var(--panel-border); vertical-align: top; }
+.fondi-table td:nth-child(n+2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.fondi-table tr.is-pick td { font-weight: 700; }
+.fondi-note { margin: 14px 0 0; font-size: .85rem; color: var(--muted); }
+.fondi-cta-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+.report-cta .fondi-cta-buttons .btn-ghost { background: var(--paper); color: var(--ink); }
+.fondi-sources { margin-top: 18px; font-size: .78rem; color: var(--muted); }
+@media (max-width: 760px) { .fondi-cta-buttons { width: 100%; } .fondi-cta-buttons .btn { flex: 1; text-align: center; } }
+
+/* ---------- Promo "Quanto copre il fondo": barra fissa + modale ---------- */
+body.has-promo-bar { padding-bottom: 76px; }
+.promo-bar {
+  position: fixed;
+  z-index: 60;
+  left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 56px 12px 20px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 -8px 30px rgba(17,20,23,.18);
+}
+.promo-bar p { margin: 0; font-size: .95rem; line-height: 1.35; }
+.promo-bar p b { color: var(--sun); }
+.promo-bar .btn { flex: none; padding: 10px 16px; }
+.promo-bar .promo-close {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  border: 0; background: transparent; color: var(--paper);
+  font-size: 1.2rem; line-height: 1; cursor: pointer; padding: 6px;
+}
+@media (max-width: 640px) {
+  .promo-bar { flex-direction: column; align-items: stretch; text-align: center; gap: 10px; padding-right: 20px; }
+  .promo-bar .promo-close { top: 10px; transform: none; }
+  body.has-promo-bar { padding-bottom: 130px; }
+}
+.promo-modal[hidden] { display: none; }
+.promo-modal {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(17,20,23,.55);
+}
+.promo-card {
+  position: relative;
+  width: min(640px, 100%);
+  padding: clamp(26px, 4vw, 46px);
+  border: var(--panel-border);
+  border-radius: 26px 14px 29px 16px;
+  background: var(--paper-raised);
+  box-shadow: 0 24px 60px rgba(17,20,23,.28);
+}
+.promo-card h2 { margin: 18px 0 12px; font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1; }
+.promo-card p { margin: 0 0 18px; }
+.promo-card .promo-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.promo-card .promo-later { border: 0; background: transparent; color: var(--muted); font: inherit; cursor: pointer; text-decoration: underline; }
+.promo-card .promo-close {
+  position: absolute; right: 14px; top: 12px;
+  border: 0; background: transparent; font-size: 1.3rem; cursor: pointer; padding: 6px; color: var(--ink);
+}
