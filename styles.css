@@ -3201,14 +3201,14 @@ body.has-promo-bar { padding-bottom: 76px; }
   scrollbar-width: none;
   perspective: 900px;
   perspective-origin: 50% 50%;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 88%, transparent 100%);
 }
 .fondi-drum::-webkit-scrollbar { display: none; }
 .fondi-page .assessment-options {
   max-width: 1240px;
   margin: 0;
-  padding: 26vh 4px;
+  padding: 6px 4px 30vh;
   transform-style: preserve-3d;
 }
 .fondi-page .assessment-option {
@@ -3223,5 +3223,5 @@ body.has-promo-bar { padding-bottom: 76px; }
 }
 @media (max-width: 760px) {
   .fondi-page .assessment-question.is-active { min-height: calc(100vh - 8px); max-height: calc(100vh - 8px); }
-  .fondi-page .assessment-options { padding: 18vh 2px; }
+  .fondi-page .assessment-options { padding: 4px 2px 24vh; }
 }
