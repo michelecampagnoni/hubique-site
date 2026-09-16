@@ -300,6 +300,13 @@
     state.answers[event.target.name] = event.target.value;
     screens.question.querySelectorAll('.assessment-option').forEach(function (l) { l.classList.toggle('is-selected', l.querySelector('input').checked); });
     screens.question.querySelector('.assessment-error').hidden = true;
+    /* la scelta fa avanzare da sola: niente scroll fino al pulsante */
+    var answered = state.current;
+    setTimeout(function () {
+      if (state.current !== answered) return;
+      if (state.current === questions.length - 1) { renderResult(); showScreen('result'); return; }
+      state.current += 1; renderQuestion(); showScreen('question');
+    }, 260);
   });
   screens.question.querySelector('.assessment-next').addEventListener('click', function () {
     var q = questions[state.current];

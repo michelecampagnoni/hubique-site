@@ -3167,3 +3167,15 @@ body.has-promo-bar { padding-bottom: 76px; }
   position: absolute; right: 14px; top: 12px;
   border: 0; background: transparent; font-size: 1.3rem; cursor: pointer; padding: 6px; color: var(--ink);
 }
+
+.fondi-actions-top {
+  max-width: 1240px;
+  margin: 26px 0 -14px;
+  padding-top: 0;
+  justify-content: flex-end;
+  border-top: 0;
+}
+.fondi-page .assessment-question-help::after {
+  content: " Scegli una risposta: si passa da soli alla successiva.";
+  color: var(--muted);
+}
