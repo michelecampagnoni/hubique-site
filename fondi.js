@@ -64,6 +64,7 @@
     });
     /* sulle domande la pagina resta ferma: scorrono solo le risposte */
     document.body.classList.toggle('fondi-lock', name === 'question');
+    document.documentElement.classList.toggle('fondi-lock', name === 'question');
     window.scrollTo({ top: 0, behavior: name === 'question' ? 'auto' : 'smooth' });
   }
 
@@ -103,6 +104,7 @@
       if (event.target.closest && event.target.closest('.fondi-drum')) return;
       drum.scrollTop += event.deltaY;
       event.preventDefault();
+      if (window.scrollY) window.scrollTo(0, 0);
     }, { passive: false });
   }
 

@@ -3235,4 +3235,4 @@ body.has-promo-bar { padding-bottom: 76px; }
   .fondi-page .assessment-options { padding: 4px 2px 30px; }
 }
 
-body.fondi-lock { overflow: hidden; }
+html.fondi-lock, body.fondi-lock { overflow: hidden; height: 100%; }
