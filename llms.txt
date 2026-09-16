@@ -5,8 +5,8 @@
 ## Pagine principali
 
 - [Home](https://hubique.it/): l'AI dentro i processi delle PMI — agenti su misura per preventivi, follow-up commerciale, risposte ai clienti e contenuti
-- [AI Adoption](https://hubique.it/ai-adoption.html): consulenza di adozione AI — assessment, scelta strumenti, AI policy, formazione di manager e team con formazione agevolata e finanziata
-- [AI Agents](https://hubique.it/ai-agents.html): agenti AI per processi commerciali, clienti e supporto, documenti e conoscenza, contenuti — integrati con email, CRM e gestionale
+- [AI in azienda](https://hubique.it/ai-adoption.html): percorso in cui un informatico esperto di AI affianca le persone dell'azienda e costruisce con loro gli strumenti sui processi (40 ore, 100 ore o programma); è formazione, pagata da fondi interprofessionali e voucher, in molti casi a costo zero
+- [Strumenti AI](https://hubique.it/strumenti.html): undici strumenti in produzione (assistente preventivi, ricerca clienti e prima mail, follow-up offerte, risposte ai clienti, base di conoscenza, scadenze e manutenzioni, rapportino a voce, render e configuratori, annunci immobiliari, triage assistenza, generatore di offerte)
 - [Prodotti](https://hubique.it/prodotti.html): i software proprietari Hubique — RealHub (sviluppo immobiliare), Hub Agency (agenzie immobiliari), Jarvis (assistente AI sulla conoscenza aziendale delle PMI) — più i progetti su misura
 - [Settori](https://hubique.it/settori.html): verticali su real estate, legno e arredo, architettura e interior, edilizia e serramenti, sanità
 - [Chi siamo](https://hubique.it/chi-siamo.html): storia, soci fondatori, referenze (Gruppo Gabetti, Ospedale San Camillo) e principi di lavoro

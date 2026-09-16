@@ -40,7 +40,7 @@
      i quattro capitoli restano invariati. */
   var prodottiLink = document.createElement('a');
   prodottiLink.href = 'prodotti.html';
-  prodottiLink.textContent = 'Prodotti';
+  prodottiLink.textContent = 'Software';
   if (/(^|\/)prodotti\.html$/.test(window.location.pathname)) {
     prodottiLink.className = 'active';
   }
