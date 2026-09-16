@@ -3234,3 +3234,5 @@ body.has-promo-bar { padding-bottom: 76px; }
   .fondi-drum { min-height: 140px; }
   .fondi-page .assessment-options { padding: 4px 2px 30px; }
 }
+
+body.fondi-lock { overflow: hidden; }

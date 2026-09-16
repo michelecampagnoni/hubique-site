@@ -62,7 +62,9 @@
       screens[key].hidden = !active;
       screens[key].classList.toggle('is-active', active);
     });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    /* sulle domande la pagina resta ferma: scorrono solo le risposte */
+    document.body.classList.toggle('fondi-lock', name === 'question');
+    window.scrollTo({ top: 0, behavior: name === 'question' ? 'auto' : 'smooth' });
   }
 
   function renderQuestion() {
