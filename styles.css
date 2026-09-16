@@ -3180,56 +3180,45 @@ body.has-promo-bar { padding-bottom: 76px; }
   color: var(--muted);
 }
 
-/* ---------- fondi: rullo 3D delle risposte, intestazione ferma ---------- */
+/* ---------- fondi: intestazione ferma, risposte in un riquadro scorrevole ---------- */
 .fondi-page .assessment-question.is-active {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 40px);
-  max-height: calc(100vh - 40px);
-  overflow: hidden;
+  min-height: calc(100dvh - 40px);
 }
-.fondi-page .assessment-question .assessment-question-copy h2 { font-size: clamp(1.9rem, 3.4vw, 3.4rem); }
+.fondi-page .assessment-question .assessment-question-copy h2 { font-size: clamp(1.7rem, 3vw, 3rem); }
 .fondi-page .assessment-question .assessment-question-help { margin-bottom: 0; }
-.fondi-page .fondi-actions-top { margin: 16px 0 6px; }
+.fondi-page .fondi-actions-top { margin: 14px 0 6px; }
 .fondi-drum {
   position: relative;
   flex: 1 1 auto;
-  min-height: 0;
+  min-height: 300px;
+  max-height: 62vh;
   margin-top: 4px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: none;
-  perspective: 1400px;
-  perspective-origin: 50% 50%;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 4%, #000 92%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 4%, #000 92%, transparent 100%);
+  scrollbar-width: thin;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
 }
-.fondi-drum::-webkit-scrollbar { display: none; }
 .fondi-page .assessment-options {
   max-width: 1240px;
   margin: 0;
-  padding: 6px 4px 30vh;
-  transform-style: preserve-3d;
+  padding: 8px 4px 40px;
 }
 .fondi-page .assessment-option {
-  --drum: none;
-  --press: 1;
-  transform: var(--drum) scale(var(--press));
-  transform-origin: 50% 50%;
-  transition: transform .08s linear, opacity .08s linear, background-color .15s ease, border-color .15s ease;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
+  transition: transform .08s ease, background-color .15s ease, border-color .15s ease;
   cursor: pointer;
 }
 .fondi-page .assessment-option:hover {
+  transform: none;
   background-color: var(--accent-soft);
   border-color: var(--accent);
 }
 .fondi-page .assessment-option:active {
-  --press: .97;
+  transform: scale(.97);
   background-color: color-mix(in srgb, var(--accent) 22%, white);
   border-color: var(--accent);
-  transition-duration: .05s;
 }
 .fondi-page .assessment-option.is-selected {
   background-color: color-mix(in srgb, var(--sun) 28%, white);
@@ -3237,10 +3226,7 @@ body.has-promo-bar { padding-bottom: 76px; }
 }
 .fondi-page .assessment-option .option-index { transition: background-color .15s ease, color .15s ease; }
 .fondi-page .assessment-option:hover .option-index { background: var(--accent); color: white; }
-@media (prefers-reduced-motion: reduce) {
-  .fondi-page .assessment-option { transform: none !important; opacity: 1 !important; }
-}
 @media (max-width: 760px) {
-  .fondi-page .assessment-question.is-active { min-height: calc(100vh - 8px); max-height: calc(100vh - 8px); }
-  .fondi-page .assessment-options { padding: 4px 2px 24vh; }
+  .fondi-drum { min-height: 240px; max-height: none; }
+  .fondi-page .assessment-options { padding: 4px 2px 30px; }
 }
