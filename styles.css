@@ -3199,10 +3199,10 @@ body.has-promo-bar { padding-bottom: 76px; }
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
-  perspective: 900px;
+  perspective: 1400px;
   perspective-origin: 50% 50%;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 88%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 4%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 4%, #000 92%, transparent 100%);
 }
 .fondi-drum::-webkit-scrollbar { display: none; }
 .fondi-page .assessment-options {

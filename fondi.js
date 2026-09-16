@@ -105,8 +105,8 @@
       var d = (r.top + r.height / 2 - mid) / half; /* -1 sopra … +1 sotto */
       if (d > 1.4) d = 1.4; if (d < -1.4) d = -1.4;
       var a = Math.abs(d);
-      el.style.transform = 'rotateX(' + (-d * 32) + 'deg) translateZ(' + (-a * 90) + 'px)';
-      el.style.opacity = String(Math.max(.35, 1 - a * .5));
+      el.style.transform = 'rotateX(' + (-d * 10) + 'deg) translateZ(' + (-a * 28) + 'px)';
+      el.style.opacity = String(Math.max(.62, 1 - a * .28));
     });
   }
   function drumReset() {
