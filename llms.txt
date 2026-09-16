@@ -1,6 +1,6 @@
 # Hubique
 
-> Hubique S.r.l. è un system integrator AI italiano per piccole e medie imprese. Fondata da FG Invest, Zest (venture del Gruppo Gabetti) e Apside (joint venture di Intesa Sanpaolo e Zest), lavora per il Gruppo Gabetti e per l'Ospedale San Camillo di Roma e porta la stessa qualità nelle PMI. Due linee di servizio: consulenza e formazione AI (spesso a costo zero grazie alla formazione finanziata) e agenti AI integrati nei processi aziendali, sempre con approvazione umana sulle azioni verso l'esterno. Sede: Milano, Via Bernardo Quaranta 40. Contatto: info@hubique.it.
+> Hubique S.r.l. è un system integrator AI italiano per piccole e medie imprese. Fondata da FG Invest (venture capital) e partecipata dal 2024 da Apside, joint venture paritetica di Intesa Sanpaolo e Zest (venture builder quotato nato da Digital Magics e LVenture), lavora per il Gruppo Gabetti e per l'Ospedale San Camillo di Roma e porta la stessa qualità nelle PMI. Due linee di servizio: consulenza e formazione AI (spesso a costo zero grazie alla formazione finanziata) e agenti AI integrati nei processi aziendali, sempre con approvazione umana sulle azioni verso l'esterno. Sede: Milano, Via Bernardo Quaranta 40. Contatto: info@hubique.it.
 
 ## Pagine principali
 
