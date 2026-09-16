@@ -89,6 +89,40 @@
     screens.question.querySelector('.assessment-next').textContent =
       state.current === questions.length - 1 ? 'Vedi il quadro' : 'Avanti';
     screens.question.querySelector('.assessment-error').hidden = true;
+    drumReset();
+  }
+
+  /* ---------- rullo 3D: le risposte ruotano attorno al centro del contenitore ---------- */
+  var drum = screens.question.querySelector('.fondi-drum');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function drumPaint() {
+    if (!drum || reduceMotion) return;
+    var rect = drum.getBoundingClientRect();
+    var mid = rect.top + rect.height / 2;
+    var half = rect.height / 2 || 1;
+    drum.querySelectorAll('.assessment-option').forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var d = (r.top + r.height / 2 - mid) / half; /* -1 sopra … +1 sotto */
+      if (d > 1.4) d = 1.4; if (d < -1.4) d = -1.4;
+      var a = Math.abs(d);
+      el.style.transform = 'rotateX(' + (-d * 38) + 'deg) translateZ(' + (-a * 140) + 'px)';
+      el.style.opacity = String(Math.max(.25, 1 - a * .55));
+    });
+  }
+  function drumReset() {
+    if (!drum) return;
+    /* la prima risposta parte al centro del rullo */
+    var first = drum.querySelector('.assessment-option');
+    if (first) drum.scrollTop = first.offsetTop - drum.clientHeight / 2 + first.offsetHeight / 2;
+    requestAnimationFrame(drumPaint);
+  }
+  if (drum) {
+    var ticking = false;
+    drum.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () { drumPaint(); ticking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', drumPaint);
   }
 
   /* ---------- motore ---------- */

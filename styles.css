@@ -3179,3 +3179,49 @@ body.has-promo-bar { padding-bottom: 76px; }
   content: " Scegli una risposta: si passa da soli alla successiva.";
   color: var(--muted);
 }
+
+/* ---------- fondi: rullo 3D delle risposte, intestazione ferma ---------- */
+.fondi-page .assessment-question.is-active {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 40px);
+  max-height: calc(100vh - 40px);
+  overflow: hidden;
+}
+.fondi-page .assessment-question .assessment-question-copy h2 { font-size: clamp(1.9rem, 3.4vw, 3.4rem); }
+.fondi-page .assessment-question .assessment-question-help { margin-bottom: 0; }
+.fondi-page .fondi-actions-top { margin: 16px 0 6px; }
+.fondi-drum {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 82%, transparent 100%);
+}
+.fondi-drum::-webkit-scrollbar { display: none; }
+.fondi-page .assessment-options {
+  max-width: 1240px;
+  margin: 0;
+  padding: 26vh 4px;
+  transform-style: preserve-3d;
+}
+.fondi-page .assessment-option {
+  transform-origin: 50% 50%;
+  transition: transform .08s linear, opacity .08s linear;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+.fondi-page .assessment-option:hover { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .fondi-page .assessment-option { transform: none !important; opacity: 1 !important; }
+}
+@media (max-width: 760px) {
+  .fondi-page .assessment-question.is-active { min-height: calc(100vh - 8px); max-height: calc(100vh - 8px); }
+  .fondi-page .assessment-options { padding: 18vh 2px; }
+}
