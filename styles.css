@@ -3212,12 +3212,31 @@ body.has-promo-bar { padding-bottom: 76px; }
   transform-style: preserve-3d;
 }
 .fondi-page .assessment-option {
+  --drum: none;
+  --press: 1;
+  transform: var(--drum) scale(var(--press));
   transform-origin: 50% 50%;
-  transition: transform .08s linear, opacity .08s linear;
+  transition: transform .08s linear, opacity .08s linear, background-color .15s ease, border-color .15s ease;
   will-change: transform, opacity;
   backface-visibility: hidden;
+  cursor: pointer;
 }
-.fondi-page .assessment-option:hover { transform: none; }
+.fondi-page .assessment-option:hover {
+  background-color: var(--accent-soft);
+  border-color: var(--accent);
+}
+.fondi-page .assessment-option:active {
+  --press: .97;
+  background-color: color-mix(in srgb, var(--accent) 22%, white);
+  border-color: var(--accent);
+  transition-duration: .05s;
+}
+.fondi-page .assessment-option.is-selected {
+  background-color: color-mix(in srgb, var(--sun) 28%, white);
+  border-color: var(--ink);
+}
+.fondi-page .assessment-option .option-index { transition: background-color .15s ease, color .15s ease; }
+.fondi-page .assessment-option:hover .option-index { background: var(--accent); color: white; }
 @media (prefers-reduced-motion: reduce) {
   .fondi-page .assessment-option { transform: none !important; opacity: 1 !important; }
 }
