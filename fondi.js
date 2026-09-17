@@ -159,8 +159,8 @@
           est: 'Da verificare: conta solo se avete almeno 150 dipendenti e attivate il conto', need: 'Domanda di attivazione entro il 31 gennaio; poi piano condiviso ed ente attuatore.', c: 0 });
       }
       if (A.size === 's4' || A.size === 's5') t.push({ name: 'For.Te · Avviso 2/2026', tag: 'soon', tagText: 'entro il 20 ott 2026', color: 'tang',
-        what: 'Riservato ad aziende da 51 a 249 dipendenti: aula, affiancamento, coaching.',
-        est: 'Copre la formazione di un percorso intero', need: 'Ente attuatore, presentazione entro il 20 ottobre.', c: 0, perc: 15000, prog: 30000 });
+        what: 'Piani aziendali riservati ad aziende da 51 a 149 dipendenti: aula, affiancamento, coaching. Sotto i 51 solo dentro piani territoriali o settoriali di un ente (40–60 ore).',
+        est: 'Copre la formazione di un percorso intero (fino a 149 dipendenti)', need: 'Ente attuatore, presentazione entro il 20 ottobre.', c: 0, perc: 15000, prog: 30000 });
       if (A.size === 's1' || A.size === 's2' || A.size === 's3') t.push({ name: 'For.Te · Catalogo Nazionale Voucher', tag: 'wait', tagText: 'non copre questo percorso', color: 'sky',
         what: 'Sotto i 150 dipendenti For.Te non ha un conto aziendale. Fino a 50 dipendenti offre solo voucher per corsi a catalogo (massimo ' + (A.size === 's1' ? '5.000' : '5.000–6.000') + ' euro), erogati esclusivamente dagli enti presenti nel catalogo: non un percorso in azienda come il nostro.',
         est: 'Non conta nella copertura: per il vostro caso pesano i voucher regionali e camerali', need: 'Se volete un conto formazione vero, valutate il passaggio a Fondimpresa (adesione gratuita sull’UniEmens).', c: 0 });
