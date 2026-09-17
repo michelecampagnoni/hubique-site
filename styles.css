@@ -3107,6 +3107,9 @@ a.insight-card {
 .fondi-cta-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
 .report-cta .fondi-cta-buttons .btn-ghost { background: var(--paper); color: var(--ink); }
 .fondi-sources { margin-top: 18px; font-size: .78rem; color: var(--muted); }
+.fondi-disclaimer { margin: 16px 0 0; padding: 12px 14px; border-left: 3px solid var(--muted); background: rgba(74,84,100,.06); font-size: .82rem; line-height: 1.5; color: var(--muted); max-width: 80ch; }
+.fondi-disclaimer b { color: var(--ink); }
+.legal-note { margin-top: 14px; font-size: .82rem; line-height: 1.5; color: var(--muted); max-width: 80ch; }
 @media (max-width: 760px) { .fondi-cta-buttons { width: 100%; } .fondi-cta-buttons .btn { flex: 1; text-align: center; } }
 
 /* ---------- Promo "Quanto copre il fondo": barra fissa + modale ---------- */
