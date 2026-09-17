@@ -3102,6 +3102,7 @@ a.insight-card {
 }
 .fondi-table td { padding: 12px 6px; border-top: var(--panel-border); vertical-align: top; }
 .fondi-table td:nth-child(n+2) { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.fondi-table td.fondi-mix { white-space: normal; min-width: 11ch; font-size: .85rem; color: var(--muted); }
 .fondi-table tr.is-pick td { font-weight: 700; }
 .fondi-note { margin: 14px 0 0; font-size: .85rem; color: var(--muted); }
 .fondi-cta-buttons { display: flex; flex-wrap: wrap; gap: 10px; }

@@ -37,10 +37,14 @@
   var SIZE = { s1: 5, s2: 15, s3: 35, s4: 75, s5: 175, s6: 400 };
   var PAY = { p1: 350e3, p2: 750e3, p3: 1.7e6, p4: 4e6, p5: 8e6 };
   var PROJECTS = [
-    { key: 'sprint', label: 'Un processo, 40 ore, due settimane', total: 6000, training: .9 },
-    { key: 'perc', label: 'Tre processi, 100 ore, un trimestre', total: 15000, training: .8 },
-    { key: 'prog', label: 'Programma con progetto digitale, 6–9 mesi', total: 40000, training: .6 }
+    { key: 'sprint', label: 'Un processo, 40 ore, due settimane', total: 6000, training: .9, minTraining: .3 },
+    { key: 'perc', label: 'Tre processi, 100 ore, un trimestre', total: 15000, training: .8, minTraining: .3 },
+    { key: 'prog', label: 'Programma con progetto digitale, 6–9 mesi', total: 40000, training: .6, minTraining: .3 }
   ];
+  /* `training` = quota di formazione del taglio standard; `minTraining` = quota minima
+     sotto cui il percorso non è più formazione vera. Il motore prova tutte le ripartizioni
+     tra questi due estremi e sceglie quella che massimizza la copertura. */
+  var FUND_FOR_SECTOR = { ind: 'Fondimpresa', art: 'Fondartigianato', com: 'For.Te o Fondimpresa', stu: 'Fondoprofessioni', agr: 'For.Agri', ns: 'Fondimpresa' };
 
   var state = { current: 0, answers: {}, result: null };
   var screens = {
@@ -165,9 +169,11 @@
       t.push({ name: 'Fondartigianato', tag: 'open', tagText: 'avvisi periodici', color: 'grass',
         what: 'Fondo delle imprese artigiane: piani aziendali e voucher a bando.', est: 'Da verificare sull’avviso in corso', need: 'Ente attuatore.', c: 0, sprint: 3000, perc: 5000, prog: 5000 });
     } else if (fund === 'nessuno') {
-      t.push({ name: 'Adesione a un fondo interprofessionale', tag: 'wait', tagText: 'da fare ora', color: 'sky',
-        what: 'Non costa nulla: si sceglie sul modello UniEmens del mese. Da lì lo 0,30% che già versate all’INPS inizia a tornare come conto formazione.',
-        est: 'Effetto dal mese successivo all’adesione', need: 'Una riga sul cedolino, la fa il consulente del lavoro.', c: 0 });
+      var fy = round500(yearly * .7);
+      t.push({ name: 'Adesione a un fondo interprofessionale (' + (FUND_FOR_SECTOR[A.sector] || 'Fondimpresa') + ')', tag: 'wait', tagText: 'da fare ora', color: 'sky',
+        what: 'Non costa nulla: si sceglie sul modello UniEmens del mese. Da lì lo 0,30% che già versate all’INPS inizia a tornare come conto formazione. Oggi quel versato resta all’INPS.',
+        est: 'Conto stimato dopo 12 mesi dall’adesione: circa ' + eur(fy) + ' l’anno' + estNote + '. Non conta per il primo progetto, sì per i successivi.',
+        need: 'Una riga sul cedolino, la fa il consulente del lavoro. Effetto dal mese successivo.', c: 0, future: fy });
     } else {
       var ca = round500(yearly * .6 * 2 * conto);
       t.push({ name: 'Il vostro fondo interprofessionale', tag: 'open', tagText: 'da verificare', color: 'grass',
@@ -183,7 +189,7 @@
       t.push({ name: 'Regione Piemonte · Voucher digitalizzazione PMI 2026', tag: 'soon', tagText: 'domande 22 ott – 15 dic 2026', color: 'sky',
         what: 'Fondo perduto al ' + Math.round(pct * 100) + '% su software, cloud, AI e canoni fino a due anni; consulenza e formazione fino al 30% del progetto. Massimo 25.000 euro. Ordine cronologico: si parte il 22 ottobre alle 11.',
         est: 'Su un progetto da 40 mila: circa ' + eur(Math.min(25000, 40000 * pct)),
-        need: 'Self-assessment digitale obbligatorio, fornitore qualificato (Hubique lo è), spese solo dopo la domanda.' + (dem ? ' Attenzione al tetto de minimis.' : ''), v: pct, vmax: 25000 });
+        need: 'Self-assessment digitale obbligatorio, fornitore qualificato (Hubique lo è), spese solo dopo la domanda.' + (dem ? ' Attenzione al tetto de minimis.' : ''), v: pct, vmax: 25000, base: 'all', trainCap: .3 });
     }
     if (A.region === 'lom' && dim !== 'grande') {
       var n = Math.min(size, 10);
@@ -193,26 +199,62 @@
         c: n * 2000 * (dim === 'micro' ? .9 : dim === 'piccola' ? .7 : .5) });
       t.push({ name: 'Camera di Commercio Milano MB Lodi · Voucher doppia transizione', tag: 'open', tagText: 'spese entro il 30 apr 2027', color: 'sky',
         what: '50% a fondo perduto fino a 10.000 euro su consulenza e formazione digitale, investimento minimo 4.000.',
-        est: 'Fino a ' + eur(10000) + ', solo per le province di Milano, Monza Brianza e Lodi', need: 'Fornitore qualificato, domanda a sportello.', v: .5, vmax: 10000 });
+        est: 'Fino a ' + eur(10000) + ', solo per le province di Milano, Monza Brianza e Lodi', need: 'Fornitore qualificato, domanda a sportello.', v: .5, vmax: 10000, base: 'training' });
     }
     if (A.region === 'ven' && dim !== 'grande') t.push({ name: 'Camere di Commercio venete · Voucher digitali', tag: 'soon', tagText: 'Padova e Treviso entro il 23 ott 2026', color: 'sky',
       what: 'Contributo al 50% su consulenza e formazione digitale, importi tipici fino a 10.000 euro; varia per provincia.',
-      est: 'Fino a ' + eur(10000) + ', da verificare per la vostra provincia', need: 'Fornitore qualificato.', v: .5, vmax: 10000 });
+      est: 'Fino a ' + eur(10000) + ', da verificare per la vostra provincia', need: 'Fornitore qualificato.', v: .5, vmax: 10000, base: 'training' });
     if (A.region === 'emr' && dim !== 'grande') t.push({ name: 'Camera di Commercio di Bologna e avvisi di filiera regionali', tag: 'soon', tagText: 'Bologna entro il 15 ott 2026', color: 'sky',
       what: 'Voucher digitali camerali al 50% e avvisi regionali di filiera per la formazione tramite enti accreditati.',
-      est: 'Fino a ' + eur(10000) + ' camerali, da verificare per provincia', need: 'Fornitore qualificato o ente accreditato.', v: .5, vmax: 10000 });
+      est: 'Fino a ' + eur(10000) + ' camerali, da verificare per provincia', need: 'Fornitore qualificato o ente accreditato.', v: .5, vmax: 10000, base: 'training' });
     if (A.region === 'fvg' && dim !== 'grande') t.push({ name: 'Voucher camerali e avvisi FVG', tag: 'open', tagText: 'da verificare', color: 'sky',
       what: 'Le Camere di Commercio del Friuli-Venezia Giulia attivano voucher digitali periodici; la Regione ha avvisi per la formazione continua.',
-      est: 'Da verificare con noi', need: 'Fornitore qualificato.', v: .5, vmax: 8000 });
+      est: 'Da verificare con noi', need: 'Fornitore qualificato.', v: .5, vmax: 8000, base: 'training' });
     if (A.region === 'nord' || A.region === 'centro' || A.region === 'sud') t.push({ name: 'Voucher camerali della vostra provincia', tag: 'open', tagText: 'da verificare', color: 'sky',
       what: 'Molte Camere di Commercio aderiscono al «Voucher doppia transizione» con contributi al 50% su consulenza e formazione digitale.',
-      est: 'Tipicamente fino a ' + eur(10000), need: 'Verifica per provincia.', v: .5, vmax: 8000 });
+      est: 'Tipicamente fino a ' + eur(10000), need: 'Verifica per provincia.', v: .5, vmax: 8000, base: 'training' });
     if (A.region === 'sud' && dim !== 'grande') t.push({ name: 'MIMIT · Sviluppo competenze PMI (Mezzogiorno)', tag: 'soon', tagText: 'sportello 10 set – 21 dic 2026', color: 'sky',
-      what: 'Contributo dal 50 al 70% su formazione e consulenza per le PMI del Sud.', est: 'Fino al 70% delle spese ammesse', need: 'Domanda a sportello.', v: .6, vmax: 20000 });
+      what: 'Contributo dal 50 al 70% su formazione e consulenza per le PMI del Sud.', est: 'Fino al 70% delle spese ammesse', need: 'Domanda a sportello.', v: .6, vmax: 20000, base: 'training' });
     t.push({ name: 'Fondo Nuove Competenze (4ª edizione)', tag: 'wait', tagText: 'attesa fine 2026', color: 'sun',
       what: 'Paga le ore dei lavoratori in formazione (non la docenza), con accordo sindacale. La terza edizione è chiusa; la quarta è attesa.',
       est: 'Si somma agli altri: copre il costo del tempo delle persone', need: 'Accordo sindacale, ente accreditato.', c: 0 });
     return t;
+  }
+
+  /* Copertura di un taglio per una data ripartizione formazione/strumenti.
+     - strumenti "formazione" (conto, contributo aggiuntivo, avvisi, cataloghi) pagano solo la formazione;
+     - voucher con base 'all' (es. Piemonte) pagano software+canoni e la formazione fino a trainCap del progetto;
+     - voucher con base 'training' (camerali, MIMIT) pagano consulenza e formazione;
+     - i voucher non si cumulano tra loro (si prende il migliore) e non pagano due volte la stessa spesa. */
+  function coverAt(tools, p, share) {
+    var trainCost = p.total * share, softCost = p.total - trainCost;
+    var train = 0;
+    tools.forEach(function (t) { if (t.c) train += t.c; if (t[p.key]) train = Math.max(train, t[p.key]); });
+    train = Math.min(train, trainCost);
+    var voucher = 0, vname = '';
+    tools.forEach(function (t) {
+      if (!t.v) return;
+      var eligible = t.base === 'training' ? trainCost : softCost + Math.min(trainCost, p.total * (t.trainCap || 1));
+      var amt = Math.min(t.vmax, eligible * t.v);
+      if (amt > voucher) { voucher = amt; vname = t.name; }
+    });
+    voucher = Math.min(voucher, p.total - train);
+    var covered = Math.min(p.total, train + voucher);
+    return { label: p.label, total: p.total, share: share, trainCost: trainCost, softCost: softCost,
+      train: train, voucher: voucher, voucherName: vname, covered: covered, left: p.total - covered };
+  }
+
+  /* Miglior mix: dal taglio standard si scende di 5 punti alla volta fino a minTraining,
+     e si tiene la ripartizione con la copertura più alta (a parità, più formazione). */
+  function bestMix(tools, p) {
+    var best = null;
+    for (var share = Math.round(p.training * 100); share >= Math.round(p.minTraining * 100); share -= 5) {
+      var x = coverAt(tools, p, share / 100);
+      if (!best || x.covered > best.covered + 1) best = x;
+    }
+    best.standard = p.training;
+    best.reshaped = Math.abs(best.share - p.training) > .01;
+    return best;
   }
 
   function calculate() {
@@ -225,23 +267,17 @@
     var tools = buildTools(A, ctx);
 
     var res = {};
-    PROJECTS.forEach(function (p) {
-      var trainCost = p.total * p.training, softCost = p.total - trainCost;
-      var train = 0;
-      tools.forEach(function (t) { if (t.c) train += t.c; if (t[p.key]) train = Math.max(train, t[p.key]); });
-      train = Math.min(train, trainCost);
-      var soft = 0;
-      tools.forEach(function (t) { if (t.v) soft = Math.max(soft, Math.min(t.vmax, (softCost + trainCost * .3) * t.v)); });
-      soft = Math.min(soft, softCost + Math.max(0, trainCost - train));
-      var covered = Math.min(p.total, train + soft);
-      res[p.key] = { label: p.label, total: p.total, covered: covered, left: p.total - covered };
-    });
+    PROJECTS.forEach(function (p) { res[p.key] = bestMix(tools, p); });
     var pick = { b1: 'sprint', b2: 'perc', b3: 'prog', b4: 'prog' }[A.budget] || 'sprint';
     var main = res[pick];
     var pct = Math.round(main.covered / main.total * 100);
     var soon = tools.filter(function (t) { return t.tag === 'soon'; });
     var now = tools.filter(function (t) { return t.tag !== 'wait'; });
     return { ctx: ctx, tools: tools, res: res, pick: pick, main: main, pct: pct, zero: main.left <= 500, soon: soon, now: now, guessed: A.fund === 'ns' || A.fund === 'altro' };
+  }
+
+  function mixText(x) {
+    return Math.round((1 - x.share) * 100) + '% strumenti · ' + Math.round(x.share * 100) + '% formazione';
   }
 
   function whyText(r) {
@@ -254,7 +290,9 @@
     if (A.used === 'si') parts.push('<b>Usate già il conto formazione:</b> il residuo è più basso.');
     if (!r.tools.some(function (t) { return t.v; })) parts.push('<b>Nessun voucher aperto per le licenze</b> nella vostra regione oggi: la parte strumenti resta a carico.');
     if (r.ctx.dim === 'micro') parts.push('<b>Sotto i dieci dipendenti</b> il conto formazione è piccolo: pesano di più voucher e avvisi.');
-    if (r.ctx.fund === 'nessuno') parts.push('<b>Senza adesione a un fondo</b> il versato resta all’INPS. Aderire non costa nulla.');
+    if (r.main.reshaped) parts.push('<b>Progetto ridisegnato:</b> con gli strumenti che avete oggi conviene un progetto con più software e canoni e meno ore di formazione (' + mixText(r.main) + '), perché è quello che il voucher paga.');
+    if (r.ctx.fund === 'nessuno') { var adh = r.tools.filter(function (t) { return t.future; })[0];
+      parts.push('<b>Senza adesione a un fondo</b> il versato resta all’INPS. Aderire non costa nulla' + (adh ? ' e vale circa ' + eurText(adh.future) + ' l’anno di conto formazione dal secondo progetto in poi' : '') + '.'); }
     parts.push('<b>La cifra è prudente:</b> al telefono, con i dati veri, spesso migliora.');
     return parts;
   }
@@ -265,14 +303,15 @@
     var R = screens.result;
     R.querySelector('.fondi-result-title').textContent = r.zero
       ? 'Nel vostro caso il primo progetto può arrivare a costo zero.'
-      : 'Nel vostro caso il fondo copre circa il ' + r.pct + '% del primo progetto.';
+      : 'Nel vostro caso ' + (r.ctx.fund === 'nessuno' ? 'i voucher disponibili coprono' : 'fondo e voucher coprono') + ' circa il ' + r.pct + '% del primo progetto.';
     R.querySelector('.score-value').textContent = r.pct;
     R.querySelector('.score-orbit').style.setProperty('--score', r.pct);
     R.querySelector('.result-level').textContent = 'Azienda ' + r.ctx.dim + ' · ' + LABELS.size[A.size] + ' dipendenti · ' + LABELS.region[A.region];
     R.querySelector('.result-headline').textContent = r.zero ? 'Copertura piena sul taglio scelto.' : 'Copertura stimata ' + r.pct + '% sul taglio scelto.';
     R.querySelector('.result-copy').textContent =
       (r.guessed ? 'Non conoscete il fondo: dal contratto indicato è probabile ' + LABELS.fund[r.ctx.fund] + ', e la stima parte da lì. ' : 'Fondo indicato: ' + LABELS.fund[r.ctx.fund] + '. ') +
-      'Taglio di progetto considerato: ' + r.main.label.toLowerCase() + ', ' + eurText(r.main.total) + '.';
+      'Taglio di progetto considerato: ' + r.main.label.toLowerCase() + ', ' + eurText(r.main.total) + '. ' +
+      'Mix consigliato: ' + mixText(r.main) + (r.main.reshaped ? ' (ridisegnato per usare al meglio gli strumenti disponibili).' : '.');
     R.querySelector('.fondi-left').textContent = r.zero ? 'zero' : eurText(r.main.left);
     R.querySelector('.fondi-count').textContent = r.now.length;
 
@@ -290,10 +329,10 @@
     }).join('');
 
     R.querySelector('.fondi-table').innerHTML =
-      '<tr><th>Progetto</th><th>Costo</th><th>Coperto</th><th>A vostro carico</th></tr>' +
+      '<tr><th>Progetto</th><th>Costo</th><th>Mix consigliato</th><th>Coperto</th><th>A vostro carico</th></tr>' +
       PROJECTS.map(function (p) {
         var x = r.res[p.key];
-        return '<tr' + (p.key === r.pick ? ' class="is-pick"' : '') + '><td>' + x.label + '</td><td>' + eurText(x.total) + '</td><td>' + eurText(x.covered) + '</td><td>' + (x.left <= 500 ? '<b>zero</b>' : '<b>' + eurText(x.left) + '</b>') + '</td></tr>';
+        return '<tr' + (p.key === r.pick ? ' class="is-pick"' : '') + '><td>' + x.label + '</td><td>' + eurText(x.total) + '</td><td class="fondi-mix">' + mixText(x) + '</td><td>' + eurText(x.covered) + '</td><td>' + (x.left <= 500 ? '<b>zero</b>' : '<b>' + eurText(x.left) + '</b>') + '</td></tr>';
       }).join('');
 
     R.querySelector('.fondi-why-title').textContent = r.zero ? 'Perché zero' : 'Perché non è zero';
@@ -358,7 +397,10 @@
           test: 'Quanto copre il fondo',
           email: email,
           copertura: r.pct + '% sul taglio ' + r.main.label,
+          mix_consigliato: mixText(r.main) + (r.main.reshaped ? ' (ridisegnato)' : ' (standard)'),
+          coperto: eurText(r.main.covered) + ' (formazione ' + eurText(r.main.train) + ' + voucher ' + eurText(r.main.voucher) + (r.main.voucherName ? ' ' + r.main.voucherName : '') + ')',
           quota_a_carico: r.zero ? 'zero' : eurText(r.main.left),
+          tre_tagli: PROJECTS.map(function (p) { var x = r.res[p.key]; return x.label + ': ' + mixText(x) + ', coperto ' + eurText(x.covered) + ', a carico ' + eurText(x.left); }).join(' | '),
           regione: LABELS.region[A.region],
           dipendenti: LABELS.size[A.size],
           contratto: A.sector,
