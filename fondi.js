@@ -44,7 +44,11 @@
   /* `training` = quota di formazione del taglio standard; `minTraining` = quota minima
      sotto cui il percorso non è più formazione vera. Il motore prova tutte le ripartizioni
      tra questi due estremi e sceglie quella che massimizza la copertura. */
-  var FUND_FOR_SECTOR = { ind: 'Fondimpresa', art: 'Fondartigianato', com: 'For.Te o Fondimpresa', stu: 'Fondoprofessioni', agr: 'For.Agri', ns: 'Fondimpresa' };
+  /* For.Te dà un conto aziendale solo da 150 dipendenti: sotto, alle aziende del commercio conviene Fondimpresa. */
+  function fundForSector(A) {
+    if (A.sector === 'com') return (A.size === 's5' || A.size === 's6') ? 'For.Te' : 'Fondimpresa';
+    return { ind: 'Fondimpresa', art: 'Fondartigianato', stu: 'Fondoprofessioni', agr: 'For.Agri' }[A.sector] || 'Fondimpresa';
+  }
 
   var state = { current: 0, answers: {}, result: null };
   var screens = {
@@ -141,16 +145,25 @@
         what: 'Corsi a catalogo fino a 40 ore, fino a 150 euro l’ora, con un’area dedicata all’intelligenza artificiale.',
         est: 'Copre un percorso da 40 ore, circa ' + eur(6000), need: 'Corso a catalogo di un ente qualificato; pesa in parte sul vostro conto.', c: 0, sprint: 6000 });
     } else if (fund === 'forte') {
-      var cf = round500(yearly * .7 * 2 * conto);
-      t.push({ name: 'For.Te · Conto individuale aziendale', tag: 'open', tagText: 'sempre aperto', color: 'grass',
-        what: 'Il versato torna come conto aziendale per formazione, anche on the job e coaching.',
-        est: 'Conto disponibile stimato: circa ' + eur(cf) + estNote, need: 'Piano condiviso, ente attuatore, registro e attestati.', c: cf });
+      /* For.Te: conto individuale aziendale solo da 150 dipendenti (a richiesta 150–249 entro il 31/01, automatico da 250).
+         Sotto 150 niente conto: 1–25 dip voucher a catalogo max 5.000, 26–50 max 6.000 (corsi solo di enti in catalogo,
+         non nostri, quindi fuori dal conto copertura); 51–149 solo avvisi. */
+      if (A.size === 's6') {
+        var cf = round500(yearly * .7 * 2 * conto);
+        t.push({ name: 'For.Te · Conto individuale aziendale', tag: 'open', tagText: 'sempre aperto', color: 'grass',
+          what: 'Da 250 dipendenti il conto è automatico: il versato torna come conto aziendale per formazione, anche on the job e coaching.',
+          est: 'Conto disponibile stimato: circa ' + eur(cf) + estNote, need: 'Piano condiviso, ente attuatore, registro e attestati.', c: cf });
+      } else if (A.size === 's5') {
+        t.push({ name: 'For.Te · Conto individuale aziendale (a richiesta)', tag: 'wait', tagText: 'solo da 150 dipendenti', color: 'sky',
+          what: 'Tra 150 e 249 dipendenti il conto si attiva su richiesta, con domanda entro il 31 gennaio. Sotto i 150 For.Te non ha un conto aziendale.',
+          est: 'Da verificare: conta solo se avete almeno 150 dipendenti e attivate il conto', need: 'Domanda di attivazione entro il 31 gennaio; poi piano condiviso ed ente attuatore.', c: 0 });
+      }
       if (A.size === 's4' || A.size === 's5') t.push({ name: 'For.Te · Avviso 2/2026', tag: 'soon', tagText: 'entro il 20 ott 2026', color: 'tang',
         what: 'Riservato ad aziende da 51 a 249 dipendenti: aula, affiancamento, coaching.',
         est: 'Copre la formazione di un percorso intero', need: 'Ente attuatore, presentazione entro il 20 ottobre.', c: 0, perc: 15000, prog: 30000 });
-      else t.push({ name: 'For.Te · Catalogo voucher 2026–27', tag: 'open', tagText: 'aperto', color: 'grass',
-        what: 'Per aziende da 1 a 50 dipendenti: corsi a catalogo pagati con voucher.',
-        est: 'Copre corsi brevi a catalogo, fino a circa ' + eur(4000), need: 'Corso inserito nel catalogo For.Te di un ente.', c: 0, sprint: 4000 });
+      if (A.size === 's1' || A.size === 's2' || A.size === 's3') t.push({ name: 'For.Te · Catalogo Nazionale Voucher', tag: 'wait', tagText: 'non copre questo percorso', color: 'sky',
+        what: 'Sotto i 150 dipendenti For.Te non ha un conto aziendale. Fino a 50 dipendenti offre solo voucher per corsi a catalogo (massimo ' + (A.size === 's1' ? '5.000' : '5.000–6.000') + ' euro), erogati esclusivamente dagli enti presenti nel catalogo: non un percorso in azienda come il nostro.',
+        est: 'Non conta nella copertura: per il vostro caso pesano i voucher regionali e camerali', need: 'Se volete un conto formazione vero, valutate il passaggio a Fondimpresa (adesione gratuita sull’UniEmens).', c: 0 });
     } else if (fund === 'fondoprof') {
       t.push({ name: 'Fondoprofessioni · Avviso 01/26', tag: 'soon', tagText: 'sportello fino al 9 ott 2026', color: 'tang',
         what: 'Piani monoaziendali fino a 20 mila euro, 8–40 ore, temi AI e digitale, per studi e aziende aderenti.',
@@ -170,7 +183,7 @@
         what: 'Fondo delle imprese artigiane: piani aziendali e voucher a bando.', est: 'Da verificare sull’avviso in corso', need: 'Ente attuatore.', c: 0, sprint: 3000, perc: 5000, prog: 5000 });
     } else if (fund === 'nessuno') {
       var fy = round500(yearly * .7);
-      t.push({ name: 'Adesione a un fondo interprofessionale (' + (FUND_FOR_SECTOR[A.sector] || 'Fondimpresa') + ')', tag: 'wait', tagText: 'da fare ora', color: 'sky',
+      t.push({ name: 'Adesione a un fondo interprofessionale (' + fundForSector(A) + ')', tag: 'wait', tagText: 'da fare ora', color: 'sky',
         what: 'Non costa nulla: si sceglie sul modello UniEmens del mese. Da lì lo 0,30% che già versate all’INPS inizia a tornare come conto formazione. Oggi quel versato resta all’INPS.',
         est: 'Conto stimato dopo 12 mesi dall’adesione: circa ' + eur(fy) + ' l’anno' + estNote + '. Non conta per il primo progetto, sì per i successivi.',
         need: 'Una riga sul cedolino, la fa il consulente del lavoro. Effetto dal mese successivo.', c: 0, future: fy });
@@ -185,11 +198,12 @@
 
     var dem = A.dem === 'tanto';
     if (A.region === 'pie' && dim !== 'grande') {
-      var pct = { micro: .65, piccola: .60, media: .50 }[dim];
+      /* Micro = meno di 10 ULA E fatturato o attivo ≤ 2 milioni: dai soli dipendenti non si sa, quindi base prudente 60%. */
+      var pct = { micro: .60, piccola: .60, media: .50 }[dim];
       t.push({ name: 'Regione Piemonte · Voucher digitalizzazione PMI 2026', tag: 'soon', tagText: 'domande 22 ott – 15 dic 2026', color: 'sky',
-        what: 'Fondo perduto al ' + Math.round(pct * 100) + '% su software, cloud, AI e canoni fino a due anni; consulenza e formazione fino al 30% del progetto. Massimo 25.000 euro. Ordine cronologico: si parte il 22 ottobre alle 11.',
+        what: 'Fondo perduto al ' + Math.round(pct * 100) + '%' + (dim === 'micro' ? ' (65% se, oltre ai dipendenti, fatturato o attivo non superano 2 milioni)' : '') + ' su software, cloud, AI e canoni fino a due anni; consulenza e formazione fino al 30% del progetto. Contributo da ' + (dim === 'micro' ? '4.000' : '5.000') + ' a 25.000 euro. Ordine cronologico: si parte il 22 ottobre alle 11.',
         est: 'Su un progetto da 40 mila: circa ' + eur(Math.min(25000, 40000 * pct)),
-        need: 'Self-assessment digitale obbligatorio, fornitore qualificato (Hubique lo è), spese solo dopo la domanda.' + (dem ? ' Attenzione al tetto de minimis.' : ''), v: pct, vmax: 25000, base: 'all', trainCap: .3 });
+        need: 'Self-assessment digitale obbligatorio, fornitore qualificato (Hubique lo è). Spese fatturate e pagate solo dopo la domanda; rendicontazione unica entro 6 mesi con almeno il 70% delle spese. Esclusi i beneficiari dei voucher 2023 e 2024.' + (dem ? ' Attenzione al tetto de minimis.' : ''), v: pct, vmax: 25000, base: 'all', trainCap: .3 });
     }
     if (A.region === 'lom' && dim !== 'grande') {
       var n = Math.min(size, 10);
@@ -290,6 +304,7 @@
     if (A.used === 'si') parts.push('<b>Usate già il conto formazione:</b> il residuo è più basso.');
     if (!r.tools.some(function (t) { return t.v; })) parts.push('<b>Nessun voucher aperto per le licenze</b> nella vostra regione oggi: la parte strumenti resta a carico.');
     if (r.ctx.dim === 'micro') parts.push('<b>Sotto i dieci dipendenti</b> il conto formazione è piccolo: pesano di più voucher e avvisi.');
+    if (r.ctx.fund === 'forte' && A.size !== 's6') parts.push('<b>For.Te sotto i 150 dipendenti non ha un conto aziendale:</b> i suoi voucher pagano solo corsi a catalogo di altri enti. Per un percorso in azienda conta il passaggio a Fondimpresa o gli avvisi.');
     if (r.main.reshaped) parts.push('<b>Progetto ridisegnato:</b> con gli strumenti che avete oggi conviene un progetto con più software e canoni e meno ore di formazione (' + mixText(r.main) + '), perché è quello che il voucher paga.');
     if (r.ctx.fund === 'nessuno') { var adh = r.tools.filter(function (t) { return t.future; })[0];
       parts.push('<b>Senza adesione a un fondo</b> il versato resta all’INPS. Aderire non costa nulla' + (adh ? ' e vale circa ' + eurText(adh.future) + ' l’anno di conto formazione dal secondo progetto in poi' : '') + '.'); }
