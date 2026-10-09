@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Questionario · Hubique</title>
+<style>
+:root{--bg:#000;--fg:#33ff66;--dim:#1f9a44;--faint:#0d3a1a;--warn:#ffb000;--box:#031a0a}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 "JetBrains Mono",Menlo,"Courier New",monospace}
+body{padding:24px 28px 120px;max-width:1000px;margin:0 auto}
+h1{font-size:21px;margin:0 0 6px}
+.bar{position:sticky;top:0;background:#000;border-bottom:1px solid var(--faint);padding:8px 0;margin-bottom:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;z-index:5;font-size:14px}
+.bar input{background:#010a03;color:var(--fg);border:1px solid var(--dim);padding:4px 8px;font:inherit;width:200px}
+.bar .sp{flex:1}#stato{color:var(--dim)}
+.intro{border:1px dashed var(--dim);padding:10px 14px;margin:12px 0 18px;color:var(--dim);font-size:14px}.intro b{color:var(--fg)}
+h2{font-size:17px;margin:30px 0 8px;padding:6px 10px;border-left:4px solid var(--fg);background:var(--box);display:flex;justify-content:space-between}
+h2 .n{color:var(--dim);font-size:13px}
+.q{display:grid;grid-template-columns:30px 1fr;gap:6px 10px;padding:9px 6px;border-bottom:1px solid var(--faint)}
+.q.ok{opacity:.6}.q.ok:focus-within{opacity:1}
+.q .k{color:var(--dim);font-size:13px;padding-top:4px}.q .t .why{color:var(--dim);font-size:13px;display:block}
+.q textarea{width:100%;min-height:40px;background:#010a03;color:var(--fg);border:1px solid var(--faint);padding:6px 8px;font:inherit;font-size:15px;resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--fg)}
+.meta{font-size:12px;color:var(--dim);margin-top:2px;min-height:14px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 6px}.opts label{border:1px solid var(--faint);padding:2px 8px;font-size:13px;cursor:pointer;color:var(--dim)}
+.opts input{display:none}.opts input:checked+span{color:#000;background:var(--fg);padding:0 4px}
+#err{color:#ff5555;border:1px solid #ff5555;padding:10px 14px;display:none;margin:12px 0}
+@media (max-width:600px){body{padding:12px}.q{grid-template-columns:1fr}.q .k{display:none}}
+</style></head><body>
+<div class="bar"><strong id="titolo">Questionario</strong><label>Chi compila: <input id="chi" placeholder="nome"></label><span class="sp"></span><span id="prog"></span><span id="stato">caricamento…</span></div>
+<h1>Questionario di configurazione</h1>
+<div class="intro">Le risposte si <b>salvano da sole</b> mentre scrivete: niente da inviare. Le domande già compilate durante la call sono in grigio, potete comunque correggerle. Scrivete il vostro nome nella casella in alto a destra, così sappiamo chi ha risposto. Non servono tutte le risposte in una volta: la pagina resta aperta e la vediamo anche noi in tempo reale.</div>
+<div id="err"></div>
+<div id="corpo"></div>
+<script>
+(function(){
+const FN='https://hkssysjqrpyauhbqxehr.supabase.co/functions/v1/questionario';
+const P=new URLSearchParams(location.search),T=P.get('t')||'',Q=P.get('q')||'econex-2026-10';
+const API=FN+'?t='+encodeURIComponent(T)+'&q='+encodeURIComponent(Q);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const stato=document.getElementById('stato'),err=document.getElementById('err'),corpo=document.getElementById('corpo'),chi=document.getElementById('chi');
+chi.value=localStorage.getItem('q_chi')||'';chi.addEventListener('input',()=>localStorage.setItem('q_chi',chi.value));
+function errore(m){err.textContent=m;err.style.display='block';stato.textContent='';}
+if(!T){errore('Manca il codice di accesso nel link: riapri il collegamento ricevuto per mail.');return;}
+let tot=0,coda=0;
+fetch(API+'&f=dati').then(r=>{if(!r.ok)throw new Error(r.status===403?'Codice di accesso non valido.':'Errore '+r.status);return r.json();}).then(q=>{
+  document.title=q.titolo+' · Hubique';document.getElementById('titolo').textContent=q.titolo;
+  let fatte=0,html='';
+  q.schema.forEach((sec,si)=>{
+    html+='<h2><span>'+esc(sec.titolo)+'</span><span class="n">'+sec.domande.length+' domande</span></h2>';
+    sec.domande.forEach((d,qi)=>{tot++;const id=(si+1)+'.'+(qi+1),r=q.dati[id]||{};if(r.a||r.o)fatte++;
+      const opts=d.opzioni?'<div class="opts">'+d.opzioni.map(o=>'<label><input type="radio" name="o'+id+'" value="'+esc(o)+'"'+(r.o===o?' checked':'')+'><span>'+esc(o)+'</span></label>').join('')+'</div>':'';
+      html+='<div class="q'+((r.a||r.o)?' ok':'')+'" data-id="'+id+'"><div class="k">'+id+'</div><div class="t">'+esc(d.testo)+(d.nota?'<span class="why">'+esc(d.nota)+'</span>':'')+'</div><div></div><div>'+opts+'<textarea placeholder="risposta">'+esc(r.a||'')+'</textarea><div class="meta">'+(r.chi?'ultima modifica: '+esc(r.chi)+(r.quando?' il '+esc(r.quando):''):'')+'</div></div></div>';
+    });
+  });
+  corpo.innerHTML=html;document.getElementById('prog').textContent=fatte+' / '+tot+' risposte';stato.textContent='tutto salvato';
+  function salva(d){const id=d.dataset.id,ta=d.querySelector('textarea'),o=(d.querySelector('input[type=radio]:checked')||{}).value||'';
+    coda++;stato.textContent='salvataggio…';stato.style.color='';
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,a:ta.value,o,chi:chi.value||'anonimo'})})
+     .then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{coda--;if(!coda)stato.textContent='salvato alle '+new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+       d.querySelector('.meta').textContent='ultima modifica: '+(chi.value||'anonimo')+' il '+j.quando;d.classList.toggle('ok',!!(ta.value||o));
+       document.getElementById('prog').textContent=document.querySelectorAll('.q.ok').length+' / '+tot+' risposte';})
+     .catch(()=>{coda--;stato.textContent='ERRORE di salvataggio, riprova';stato.style.color='#ff5555';});}
+  corpo.querySelectorAll('.q').forEach(d=>{let t;const ta=d.querySelector('textarea');
+    ta.addEventListener('input',()=>{clearTimeout(t);stato.textContent='modifiche in corso…';t=setTimeout(()=>salva(d),900);ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});
+    ta.addEventListener('blur',()=>{clearTimeout(t);salva(d);});
+    d.querySelectorAll('input[type=radio]').forEach(r=>r.addEventListener('change',()=>salva(d)));});
+}).catch(e=>errore(e.message||'Errore di caricamento.'));
+})();
+</script></body></html>
