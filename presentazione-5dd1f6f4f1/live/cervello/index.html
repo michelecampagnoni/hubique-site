@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jarvis · cervello · ricostruzione</title>
+<link rel="icon" href="data:,">
+<!--
+  Cervello · vista RICOSTRUZIONE dell'app Jarvis · chat VERA (19/10/2026).
+  Base grafica: la pagina v4 approvata da Michele (jarvis/proposte/cervello-ui-v4-grafica/anteprima.html): chat, cervello 3D
+  wireframe, cronologia, blocchi ridimensionabili (pannelli.js). Qui i dati non sono più fissi: ogni domanda fa girare la
+  catena (strumenti/cervello_ricostruzione.py) e ogni ricostruzione si salva in cervello/ricostruzioni/AAAA-MM-GG NN titolo/.
+  La pagina parla con l'app solo attraverso il ponte window.webkit.messageHandlers.cervello (CervelloPonte.swift).
+  Tutto locale: Three.js r169 in lib/, nessuna richiesta di rete, nessun CDN.
+-->
+<link rel="stylesheet" href="stile.css">
+<link rel="stylesheet" href="ricostruzione.css">
+<script type="importmap">{ "imports": { "three": "./lib/three.module.min.js", "three/addons/": "./lib/addons/" } }</script>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <span class="nome">JARVIS</span>
+    <span class="chip" id="chip">● RICOSTRUISCO DALLE FONTI</span>
+    <span class="ora" id="ora"></span>
+  </div>
+  <div class="main largo" id="main">
+    <section class="sezione sx" id="pannelloChat" aria-label="Chat">
+      <span class="tab">Chat</span><span class="staffa a"></span><span class="staffa b"></span><span class="staffa c"></span><span class="staffa d"></span>
+      <div class="testa">
+        <div class="testa-sx" id="testa"></div>
+        <div class="comandi">
+          <button class="azione" id="btnNuova" title="Torna a una chat vuota: la ricostruzione aperta resta salvata">+ NUOVA</button>
+          <button class="azione" id="btnElenco" aria-expanded="false" title="Le ricostruzioni salvate">RICOSTRUZIONI ▾</button>
+          <button class="azione" id="btnScarica" disabled title="Zip con racconto, elenco delle fonti, documenti, mail e chat collegate, in Download">SCARICA</button>
+        </div>
+      </div>
+      <div class="avviso-scarica" id="avvisoScarica" hidden></div>
+      <div class="chatwrap">
+        <div class="chat" id="chat" tabindex="-1"></div>
+        <button class="sotto-hint" id="sottoHint" hidden>↓ UNA DOMANDA PER TE, PIÙ SOTTO</button>
+      </div>
+      <form class="composer" id="composer" autocomplete="off">
+        <span class="p">›</span>
+        <input id="campo" placeholder="Chiedi al cervello di ricostruire una vicenda…" aria-label="Scrivi la domanda">
+        <button class="azione" type="submit" id="invia">INVIA</button>
+      </form>
+      <div class="lettore elenco" id="elenco" hidden role="dialog" aria-modal="true" aria-label="Ricostruzioni salvate">
+        <header>
+          <button class="azione" id="elencoChiudi" title="Esc">← TORNA</button>
+          <div><div class="tit">Ricostruzioni salvate</div><div class="sotto">cervello/ricostruzioni nella knowledge base · clic per riaprire</div></div>
+        </header>
+        <div class="pagina sinistra" id="elencoCorpo"></div>
+      </div>
+      <div class="lettore" id="lettore" hidden role="dialog" aria-modal="true" aria-labelledby="letTit">
+        <header>
+          <button class="azione" id="letTorna" title="Esc">← TORNA AL RACCONTO</button>
+          <span class="rif" id="letN"></span>
+          <div><div class="tit" id="letTit"></div><div class="sotto" id="letSotto"></div></div>
+        </header>
+        <div class="pagina" id="letPag"></div>
+        <footer>
+          <button class="azione" id="letPrec" aria-label="Fonte precedente" title="Freccia sinistra">‹ PRECEDENTE</button>
+          <button class="azione" id="letSucc" aria-label="Fonte successiva" title="Freccia destra">SUCCESSIVA ›</button>
+          <button class="azione" id="letApri">APRI NEL FINDER</button>
+        </footer>
+      </div>
+    </section>
+    <div class="dx">
+      <section class="sezione cervello" id="pannelloCervello" aria-label="Cervello">
+        <span class="tab">Cervello</span><span class="staffa a"></span><span class="staffa b"></span><span class="staffa c"></span><span class="staffa d"></span>
+        <div class="c3d" id="c3d">
+          <div class="c3-hud">
+            <div class="c3-gioco" title="Fonti già aperte nel cervello e lobi toccati">ESPLORATE <b id="gVis">0/0</b> · LOBI <b id="gLobi">0/4</b><div class="barra"><i id="gBarra"></i></div></div>
+            <button class="azione" id="c3Regole" aria-expanded="false" title="Come sono disposti i nodi">REGOLE</button>
+            <button class="azione" id="c3Home" title="Toglie il fuoco e torna alla vista iniziale">VISTA INIZIALE</button>
+          </div>
+          <div class="regole" id="regole" hidden></div>
+        </div>
+        <div class="c3-leg" aria-hidden="true"><span style="color:var(--violet)"><i class="pt"></i>MAIL · IN ALTO</span><span style="color:var(--green)"><i class="pt"></i>CHAT CHATGPT · A METÀ</span><span style="color:var(--cyan)"><i class="pt"></i>DOCUMENTI · IN BASSO</span><span><i class="an"></i>GIÀ APERTA</span><span><i class="ln"></i>LEGAME</span><span><i class="ln d"></i>2° LIV.</span></div>
+        <div class="cap" id="cap">In attesa di una domanda: le fonti della ricostruzione si accendono qui</div>
+      </section>
+      <section class="sezione crono-sez" id="pannelloCrono" aria-label="Cronologia">
+        <span class="tab" id="appTit">FLUSSO DI LAVORO</span><span class="staffa a"></span><span class="staffa b"></span><span class="staffa c"></span><span class="staffa d"></span>
+        <div class="testa2"><span class="h">LA VICENDA NEL TEMPO</span><span id="voci3" style="display:flex;gap:6px"><button class="azione" data-v="crono">CRONOLOGIA</button><button class="azione" data-v="mappa">MAPPA</button></span></div>
+        <div class="flusso" id="flusso"></div>
+        <div class="app-corpo" id="appCorpo"></div>
+      </section>
+    </div>
+  </div>
+</div>
+<!-- COPIA PER IL VIDEO (20/10/2026): ponte simulato con dati di PROVA, vicenda inventata. Non è la pagina dell'app. -->
+<script src="dati/vicenda.js"></script>
+<script src="ponte_prova.js"></script>
+<script src="ricostruzione.js"></script>
+<script>
+/* Avvio del 3D. Nella vista web dell'app o via http: moduli ES con import map locale (lib/cervello3d.js).
+   Aperta come file in Chrome (file://, dove Chrome blocca i moduli): lo stesso codice in lib/cervello3d.bundle.js. */
+(function(){
+  const s=document.createElement("script");
+  if(location.protocol==="file:"){ s.src="lib/cervello3d.bundle.js"; s.onload=()=>window.avvia3D(window.Cervello3DLib.creaCervello3D); }
+  else { s.type="module"; s.textContent='import { creaCervello3D } from "./lib/cervello3d.js"; window.avvia3D(creaCervello3D);'; }
+  document.body.appendChild(s);
+})();
+</script>
+<script src="pannelli.js"></script>
+</body>
+</html>

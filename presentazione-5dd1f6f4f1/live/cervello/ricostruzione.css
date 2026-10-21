@@ -1,0 +1,67 @@
+/* Aggiunte per la chat vera (19/10/2026): comandi in testa, elenco delle ricostruzioni, avanzamento della catena,
+   domanda della password, risposte di seguito. Stesso linguaggio dei pannelli (stile.css). */
+.testa{justify-content:space-between;flex-wrap:wrap;gap:8px}
+.testa-sx{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.testa-sx .codice{white-space:nowrap;flex:0 0 auto}
+.testa-sx .meta{white-space:nowrap}
+.testa-sx .titolo-sessione{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.comandi{display:flex;gap:6px;flex:0 0 auto}
+#btnScarica:not(:disabled){color:var(--bg);background:var(--cyan);border-color:var(--cyan)}
+#btnScarica:not(:disabled):hover{background:#7fe6ff}
+.avviso-scarica{font:11px/1.4 var(--mono);color:var(--green);border:.5px solid rgba(89,245,153,.45);background:rgba(89,245,153,.06);padding:6px 10px}
+.avviso-scarica.err{color:var(--red);border-color:rgba(255,102,107,.5);background:rgba(255,102,107,.06)}
+.avviso-scarica[hidden]{display:none}
+/* chat vuota */
+.vuota-chat{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;height:auto;min-height:100%}
+.vuota-chat .gr{font:600 17px var(--font);color:var(--text)}
+.vuota-chat .pc{font:13px/1.5 var(--font);color:var(--dim);max-width:560px}
+.vuota-chat .esempi{display:flex;flex-direction:column;gap:6px;align-items:center}
+.vuota-chat .esempi button{font:12px var(--mono);color:var(--cyan);text-decoration:underline;text-underline-offset:2px}
+.recenti{width:min(620px,100%);margin-top:6px;text-align:left}
+.recenti .h{font:700 9px var(--mono);letter-spacing:1.5px;color:var(--dim);margin-bottom:4px}
+/* elenco delle ricostruzioni */
+.pagina.sinistra{text-align:left}
+.voce{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;width:100%;text-align:left;padding:8px 10px;border:.5px solid rgba(51,214,250,.2);background:rgba(51,214,250,.03);margin-bottom:6px}
+.voce:hover,.voce:focus-visible{background:rgba(51,214,250,.1);border-color:rgba(51,214,250,.7);outline:none}
+.voce.attiva{border-color:var(--cyan)}
+.voce .cod{background:var(--cyan);color:var(--bg);font:700 10px var(--mono);padding:2px 5px;white-space:nowrap}
+.voce .t{font:600 14px var(--font);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.voce .s{font:9px var(--mono);letter-spacing:1px;color:var(--dim);text-align:right;white-space:nowrap}
+.voce .q{grid-column:2/4;font:12px var(--font);color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.voce .s.corso{color:var(--amber)} .voce .s.err{color:var(--red)}
+.elenco-vuoto{color:var(--dim);font:13px var(--font);padding:20px 0}
+/* avanzamento della catena */
+.lavoro{border:.5px solid rgba(255,189,82,.45);border-left:2px solid var(--amber);background:rgba(255,189,82,.05);padding:10px 12px;max-width:760px}
+.lavoro .h{font:700 10px var(--mono);letter-spacing:1.4px;color:var(--amber);display:flex;gap:10px;align-items:center}
+.lavoro .h .tm{margin-left:auto;color:var(--dim);letter-spacing:.5px;font-weight:400}
+.fasi-l{list-style:none;margin:8px 0 0;padding:0;font:13px/1.45 var(--font)}
+.fasi-l li{display:grid;grid-template-columns:18px 120px 1fr;gap:6px;padding:3px 0;color:var(--dim)}
+.fasi-l li .i{font:700 12px var(--mono);text-align:center}
+.fasi-l li .n{font:700 10px var(--mono);letter-spacing:1px;text-transform:uppercase;padding-top:2px}
+.fasi-l li.fatta{color:var(--text)} .fasi-l li.fatta .i{color:var(--green)}
+.fasi-l li.in_corso{color:var(--text)} .fasi-l li.in_corso .i{color:var(--amber);animation:pulsa 1.2s ease-in-out infinite}
+.fasi-l li.in_corso .n{color:var(--amber)}
+.fasi-l li.saltata .i{color:var(--dim)}
+.barra-l{height:3px;background:rgba(255,189,82,.15);margin-top:4px}
+.barra-l i{display:block;height:100%;background:var(--amber);transition:width .4s var(--ease)}
+.lavoro .nota{font:11px var(--mono);color:var(--dim);margin-top:8px;letter-spacing:.3px}
+.lavoro.err{border-color:rgba(255,102,107,.5);border-left-color:var(--red);background:rgba(255,102,107,.05)}
+.lavoro.err .h{color:var(--red)}
+@keyframes pulsa{50%{opacity:.35}}
+/* password degli archivi riservati */
+.chiave{margin-top:12px;border:.5px solid rgba(199,153,255,.55);border-left:2px solid var(--violet);background:rgba(199,153,255,.06);padding:10px 12px;max-width:760px}
+.chiave .h{font:700 10px var(--mono);letter-spacing:1.4px;color:var(--violet)}
+.chiave p{margin:6px 0;font:14px/1.45 var(--font)}
+.chiave ul{margin:4px 0 8px;padding-left:18px;font:12px/1.45 var(--font);color:var(--dim);max-height:120px;overflow:auto}
+.chiave form{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chiave input[type=password]{font:14px var(--font);background:rgba(0,0,0,.35);border:.5px solid rgba(199,153,255,.55);color:var(--text);padding:6px 8px;min-width:200px;outline:none}
+.chiave label{font:11px var(--mono);color:var(--dim)}
+.chiave .errata{color:var(--red);font:12px var(--mono)}
+/* riservato non aperto, seguiti */
+.riservato-no{margin-top:12px;font:12px/1.45 var(--font);color:var(--dim);border-top:.5px dashed rgba(199,153,255,.35);padding-top:8px}
+.riservato-no b{font:700 9px var(--mono);letter-spacing:1.2px;color:var(--violet)}
+.msg.seguito .msg-body{font-size:16px}
+.testo-fonte{max-width:760px;margin:14px auto 0;text-align:left}
+.testo-fonte pre{white-space:pre-wrap;font:13px/1.5 var(--font);color:var(--text);background:rgba(0,0,0,.25);border:.5px solid rgba(51,214,250,.15);padding:10px 12px;max-height:none}
+.crono .pt.r{opacity:.9}
+.ponte-assente{color:var(--amber);font:12px var(--mono);margin-top:8px}

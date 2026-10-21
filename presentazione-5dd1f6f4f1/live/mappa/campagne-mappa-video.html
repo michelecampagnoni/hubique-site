@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<!-- COPIA PER IL VIDEO v3 (20/10/2026) di dashboard/campagne-mappa.html: dati oscurati e generici, three.js locale. Non è la pagina dell'app. -->
+<meta charset="utf-8">
+<title>Jarvis · Campagne · Mappa d'Italia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Mappa 3D delle campagne outreach (14/10/2026). Stessa mappa della pagina SCRAPING: scena, terreno, zoom, punti e clic
+     vengono da hud/mappa-italia.js, condiviso con scraping-mappa.html. Dati: data/campagna-<id>.js (window.PUNTI_CAMPAGNA),
+     data/campagne.js (window.CAMPAGNE), data/report-indice.js (window.REPORT), scritti da strumenti/campagne_punti.py.
+     Contratto: data/CAMPAGNE-CONTRATTO.md. Hash: #campagna=<id> | #campagna=tutte, &compatto dentro il pannello, &prova
+     per la verifica automatica (console). L'app chiama window.reportInPreparazione([domini]) e window.reportPronto(dominio, url). -->
+<style>
+  :root { --bg:#040c18; --cyan:#33d6fa; --cyan2:#73eaff; --green:#59f599; --amber:#ffbd52; --red:#ff666b; --violet:#c799ff; --dim:rgba(255,255,255,.55); }
+  html,body { margin:0; height:100%; overflow:hidden; background:#000509; color:#fff; font-family:"SF Mono",Menlo,monospace; }
+  #app { position:fixed; inset:0; touch-action:none; cursor:crosshair; background:linear-gradient(180deg,#0a3a5e 0%,#061f3a 30%,#02101d 62%,#000509 100%); }
+  .hud { position:fixed; pointer-events:none; }
+  #top { top:14px; left:16px; right:16px; }
+  #titolo { font-size:11px; letter-spacing:2.5px; color:var(--cyan); text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #sotto { font-size:10px; letter-spacing:1.5px; color:var(--dim); margin-top:5px; text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #lista { top:96px; right:14px; width:230px; font-size:9px; letter-spacing:1px; }
+  .r { display:flex; align-items:center; gap:6px; margin:2px 0; color:var(--dim); text-transform:uppercase; }
+  .r b { width:104px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .r s { flex:1; height:3px; background:rgba(51,214,250,.12); position:relative; text-decoration:none; }
+  .r s u { position:absolute; left:0; top:0; bottom:0; text-decoration:none; }
+  .r em { width:58px; text-align:right; font-style:normal; color:#fff; }
+  .r.tit { color:var(--cyan); letter-spacing:1.5px; margin-bottom:5px; }
+  #legenda { left:16px; bottom:14px; font-size:9px; letter-spacing:1.4px; color:var(--dim); line-height:1.7; }
+  #barra { width:230px; height:5px; margin:4px 0 6px; background:linear-gradient(90deg,#33d6fa 0%,#33d6fa 15%,#ffbd52 20%,#59f599 100%); }
+  #tip { position:fixed; padding:5px 9px; font-size:10px; letter-spacing:1px; line-height:1.5; background:rgba(4,12,24,.92); border:1px solid var(--cyan); pointer-events:none; display:none; text-transform:uppercase; max-width:420px; z-index:5; }
+  #nowebgl { position:fixed; inset:0; display:none; align-items:center; justify-content:center; color:var(--red); letter-spacing:2px; }
+  body.compatto #lista { display:none; }
+  body.compatto #legenda .lungo { display:none; }
+  #filtri { left:16px; top:58px; display:flex; flex-wrap:wrap; gap:6px; max-width:min(800px, calc(100% - 290px)); pointer-events:auto; }
+  #filtri.chiusi .piu { display:none; }
+  body.compatto #filtri { right:16px; gap:4px; max-width:none; }
+  .f { display:flex; align-items:center; gap:6px; padding:4px 9px; font:600 9px "SF Mono",Menlo,monospace; letter-spacing:1.4px; color:rgba(255,255,255,.75);
+       background:rgba(4,12,24,.85); border:1px solid rgba(51,214,250,.35); cursor:pointer; text-transform:uppercase; user-select:none; white-space:nowrap; flex-shrink:0; }
+  body.compatto .f { padding:3px 7px; letter-spacing:1.1px; }
+  .f i { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .f em { font-style:normal; color:rgba(255,255,255,.5); }
+  .f.on { color:#fff; border-color:#fff; background:linear-gradient(rgba(51,214,250,.2),rgba(51,214,250,.2)),rgba(4,12,24,.92); box-shadow:0 0 8px rgba(115,234,255,.5); }
+  .f.off { opacity:.45; }
+  .f.zero { opacity:.3; }
+  .f.o { border-color:rgba(255,189,82,.4); }
+  .f.o.on { border-color:#fff; background:linear-gradient(rgba(255,189,82,.2),rgba(255,189,82,.2)),rgba(4,12,24,.92); box-shadow:0 0 8px rgba(255,189,82,.45); }
+  .f.o b, .f.v b { font-weight:600; color:var(--amber); }
+  .f.v { border-color:rgba(199,153,255,.4); }
+  .f.v b { color:var(--violet); }
+  .f.v.on { border-color:#fff; background:linear-gradient(rgba(199,153,255,.2),rgba(199,153,255,.2)),rgba(4,12,24,.92); box-shadow:0 0 8px rgba(199,153,255,.45); }
+  .f.q { cursor:default; border-color:rgba(199,153,255,.4); }
+  .f.q b { font-weight:600; color:var(--violet); }
+  .f.q input[type=range] { width:110px; height:3px; accent-color:#c799ff; cursor:pointer; margin:0; }
+  .f.q span { color:#fff; min-width:22px; text-align:right; }
+  .f.cerca { cursor:text; padding:2px 6px; }
+  .f.cerca input { background:transparent; border:0; outline:0; color:#fff; font:600 9px "SF Mono",Menlo,monospace; letter-spacing:1.2px; width:150px; text-transform:uppercase; }
+  .f.cerca input::placeholder { color:rgba(255,255,255,.4); }
+  .riga { flex-basis:100%; height:0; }
+  /* Selected dot: fixed card with the buttons (CHIEDI REPORT) */
+  #scheda { position:fixed; right:14px; bottom:14px; width:330px; max-width:calc(100% - 28px); padding:10px 12px 11px; font-size:10px; letter-spacing:1px; line-height:1.55;
+            background:rgba(4,12,24,.94); border:1px solid var(--cyan); box-shadow:0 0 14px rgba(51,214,250,.25); display:none; text-transform:uppercase; pointer-events:auto; z-index:4; }
+  #scheda:before, #scheda:after { content:""; position:absolute; width:10px; height:10px; border:2px solid var(--cyan2); }
+  #scheda:before { left:-3px; top:-3px; border-right:0; border-bottom:0; } #scheda:after { right:-3px; bottom:-3px; border-left:0; border-top:0; }
+  #scheda .x { position:absolute; right:8px; top:5px; cursor:pointer; color:var(--dim); font-size:12px; }
+  #scheda .x:hover { color:#fff; }
+  #scheda .n { color:#fff; font-weight:700; font-size:11px; padding-right:18px; }
+  #scheda .d { color:var(--cyan2); }
+  #scheda .g { color:rgba(255,255,255,.6); }
+  #scheda .st { display:inline-flex; align-items:center; gap:5px; }
+  #scheda .st i { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  #scheda .bt { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  #scheda .bt .f.rep { border-color:rgba(89,245,153,.6); color:var(--green); }
+  #scheda .bt .f.chiedi { border-color:rgba(255,189,82,.7); color:var(--amber); }
+  #scheda .bt .f.attesa { border-color:rgba(199,153,255,.6); color:var(--violet); cursor:default; }
+  .ok { color:var(--green); } .no { color:var(--red); } .am { color:var(--amber); }
+</style>
+<style>/* COPIA PER IL VIDEO: dati oscurati */ .f[data-p], .f.cerca { display:none !important; }</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="hud" id="top"><div id="titolo">CAMPAGNE · MAPPA D'ITALIA</div><div id="sotto">in attesa dei dati…</div></div>
+<div class="hud" id="lista"></div>
+<div class="hud" id="filtri"></div>
+<div class="hud" id="legenda">REGIONI: NESSUN CONTATTO → POCHI RAGGIUNTI → TUTTI RAGGIUNTI<div id="barra"></div><span class="lungo">PUNTI: CLIC SUI COLORI PER FILTRARE, PIÙ VOCI INSIEME SI SOMMANO · LE RIGHE SI COMBINANO · CLIC SU UN PUNTO: REPORT SE C'È, ALTRIMENTI IL SITO</span></div>
+<div id="tip"></div>
+<div id="scheda"></div>
+<div id="nowebgl">WEBGL NON DISPONIBILE</div>
+
+<script src="../dashboard/data/italia-regioni.js"></script>
+<script src="../dashboard/data/italia-rilievo.js"></script>
+<script src="../dashboard/hud/mappa-italia.js"></script>
+<script type="importmap">
+{ "imports": { "three": "../cervello/lib/three.module.min.js", "three/addons/": "../cervello/lib/addons/" } }
+</script>
+<script type="module">
+// Diagnostics for Jarvis: errors and a first render report go to the app log via the «log» channel.
+const diagnosi = m => { try { window.webkit?.messageHandlers?.log?.postMessage(String(m)); } catch (e) {} };
+addEventListener('error', e => diagnosi('campagne-mappa errore: ' + e.message + ' @' + (e.lineno || '')));
+addEventListener('unhandledrejection', e => diagnosi('campagne-mappa promessa: ' + (e.reason && e.reason.message || e.reason)));
+
+import * as T0 from 'three';
+const THREE = { ...T0, Timer: class { constructor() { this._p = null; this._d = 0; this._e = 0; } update(t) { t = t ?? performance.now(); if (this._p !== null) { this._d = (t - this._p) / 1000; this._e += this._d; } this._p = t; return this; } getDelta() { return this._d; } getElapsed() { return this._e; } } };
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const WebGL = { isWebGL2Available: () => !!document.createElement('canvas').getContext('webgl2') };
+
+const H = new URLSearchParams(location.hash.slice(1).replace(/&?compatto/, '&compatto=1'));
+// 14/10: cambio di campagna con solo il #frammento (navigazione nello stesso documento) → ricarica con i dati nuovi.
+addEventListener('hashchange', () => location.reload());
+if (H.has('compatto')) document.body.classList.add('compatto');
+const CAMPAGNA = H.get('campagna') || 'tutte';
+const TUTTE = CAMPAGNA === 'tutte';
+const PROVA = H.has('prova');
+if (!WebGL.isWebGL2Available()) { document.getElementById('nowebgl').style.display = 'flex'; throw new Error('no webgl2'); }
+const KB = new URL('../', location.href);   // this page lives in <KB>/dashboard/
+const app = n => window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers[n];
+
+// ---- States (stato più alto raggiunto, contract §1) and colours from the HUD palette ----
+const STATI = [
+  ['da_raggiungere', 'da raggiungere', 0x2a7d9a],
+  ['in_coda', 'in coda', 0xc799ff],
+  ['inviata', 'inviata', 0x4d8fff],
+  ['aperta', 'aperta', 0x33d6fa],
+  ['cliccata', 'cliccata', 0xffbd52],
+  ['risposta', 'risposta', 0x59f599],
+  ['rimbalzata', 'rimbalzata', 0xff666b],
+  ['disiscritto', 'disiscritto', 0xb3687a],
+];
+const COL = Object.fromEntries(STATI.map(([k, , c]) => [k, c]));
+const NOME_STATO = Object.fromEntries(STATI.map(([k, n]) => [k, n]));
+const DA_RAGG = ['da_raggiungere', 'in_coda'];
+const RAGG = STATI.map(([k]) => k).filter(k => !DA_RAGG.includes(k));
+const raggiunto = p => !DA_RAGG.includes(p.s);
+const mm = p => p.m || {};
+// Metrics among the reached ones (OR between the selected ones)
+const METRICHE = [
+  ['inviata', 'inviata', p => (mm(p).inviate || 0) > 0 || raggiunto(p)],
+  ['aperta', 'aperta', p => (mm(p).aperture || 0) > 0 || ['aperta', 'cliccata', 'risposta'].includes(p.s)],
+  ['cliccata', 'cliccata', p => (mm(p).clic || 0) > 0 || p.s === 'cliccata'],
+  ['risposta', 'risposta', p => (mm(p).risposte || 0) > 0 || p.s === 'risposta'],
+  ['rimbalzata', 'rimbalzata', p => p.s === 'rimbalzata'],
+  ['disiscritto', 'disiscritto', p => p.s === 'disiscritto'],
+  ['lead', 'lead', p => !!mm(p).lead],
+  ['appuntamento', 'appuntamento', p => !!mm(p).appuntamento],
+  ['offerta', 'offerta', p => !!mm(p).offerta],
+  ['report', 'report pronto', p => !!urlReport(p)],
+];
+const VOTI = [['A', 'A', 0x59f599], ['B', 'B', 0x33d6fa], ['C', 'C', 0xffbd52], ['D', 'D', 0xff666b], ['-', 'senza voto', 0x55707f]];
+
+// ---- Filters: each row combines with the others (AND), voices inside a row add up (OR) ----
+const fStato = new Set(), fMetr = new Set(), fVoto = new Set(), fFascia = new Set(), fPos = new Set();
+// Position quality (contract §1, «pos»): exact from scraping, town centre, or phone-prefix district
+const POSIZIONI = [['esatta', 'esatta'], ['comune', 'centro comune'], ['prefisso', 'distretto telefonico']];
+const approssimata = p => p.pos === 'comune' || p.pos === 'prefisso';
+let qMin = 0, senzaQ = true, cerca = '';
+const okStato = p => !fStato.size || fStato.has(p.s);
+const okMetr = p => !fMetr.size || METRICHE.some(([k, , f]) => fMetr.has(k) && f(p));
+const okVoto = p => !fVoto.size || fVoto.has(p.v || '-');
+const okFascia = p => !fFascia.size || fFascia.has(p.f || '-');   // «f» = fascia caldi A-D (regola ERP)
+const okPos = p => !fPos.size || fPos.has(p.pos || 'esatta');
+const okQual = p => (p.q === null || p.q === undefined) ? senzaQ : p.q >= qMin;
+const okCerca = p => !cerca || p._t.includes(cerca);
+const visibile = p => okStato(p) && okMetr(p) && okVoto(p) && okFascia(p) && okPos(p) && okQual(p) && okCerca(p);
+
+// ---- Reports: from the point, the index, or the app (reportPronto); «in preparazione» from the app ----
+let REPORT = {};
+const pronti = {}, inPrep = new Set(JSON.parse(localStorage.getItem('campagne:inprep') || '[]'));
+const salvaPrep = () => { try { localStorage.setItem('campagne:inprep', JSON.stringify([...inPrep])); } catch (e) {} };
+function urlReport(p) {
+  const d = (p.dominio || '').toLowerCase();
+  if (pronti[d]) return pronti[d];
+  const r = p.report || REPORT[d] || REPORT[p.dominio];
+  return r ? (/^file:|^https?:/.test(r) ? r : new URL(r, KB).href) : null;
+}
+window.reportInPreparazione = domini => {   // full current list from the app
+  inPrep.clear(); (domini || []).forEach(d => inPrep.add(String(d).toLowerCase())); salvaPrep(); aggiornaVista();
+};
+window.reportPronto = (dominio, url) => {
+  const d = String(dominio).toLowerCase(); pronti[d] = url; inPrep.delete(d); salvaPrep(); aggiornaVista();
+};
+function aggiornaVista() { applicaFiltro(); disegnaFiltri(); if (selezionato >= 0) scheda(selezionato); }
+
+// ---- Map (shared with SCRAPING) ----
+let P = [];
+const M = window.creaMappaItalia(THREE, OrbitControls, {
+  diagnosi,
+  visibile: i => visibile(P[i]),
+  tipPunto: i => riquadro(P[i], false),
+  tipRegione: Rg => Rg.nome + (Rg.target < 0 ? ' · nessun contatto' : ' · ' + Rg.rag + '/' + Rg.siti + ' raggiunti (' + Math.round(100 * Rg.rag / Math.max(1, Rg.siti)) + '%)'),
+  clicPunto: i => { seleziona(i); apri(P[i]); },
+  clicVuoto: () => seleziona(-1),
+});
+const { renderer, camera, controls, regioni, quota, regioneDi, vtmp, tip } = M;
+window.__V = { M, P: () => P, seleziona: i => seleziona(i), urlReport: p => urlReport(p) };   // solo per le riprese
+
+function esc(t) { return String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+const hex = c => '#' + new THREE.Color(c).getHexString();
+const data = s => { if (!s) return ''; const d = new Date(s); return isNaN(d) ? '' : d.toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }); };
+const sito = p => p.sito || (p.dominio ? 'https://' + p.dominio : '');
+
+// Label (hover) and card (selection): name, domain, town, person, state, metrics, quality, grade, report
+function riquadro(p, pieno) {
+  const m = mm(p), rep = urlReport(p), d = (p.dominio || '').toLowerCase();
+  const metr = [];
+  if (raggiunto(p) || m.inviate) metr.push((m.inviate || 0) + ((m.inviate || 0) === 1 ? ' invio' : ' invii'));
+  if (m.aperture) metr.push(m.aperture + (m.aperture === 1 ? ' apertura' : ' aperture'));
+  if (m.clic) metr.push(m.clic + ' clic');
+  if (m.risposte) metr.push('<span class="ok" style="color:#59f599">' + m.risposte + (m.risposte === 1 ? ' risposta' : ' risposte') + '</span>');
+  const flag = [m.lead && 'lead', m.appuntamento && 'appuntamento', m.offerta && 'offerta'].filter(Boolean);
+  let h = '<b class="n" style="color:#fff">' + esc(p.nome || p.dominio) + '</b><br>' +
+    '<span class="d" style="color:#73eaff">' + esc(p.dominio || '') + '</span>' + (p.comune ? ' · ' + esc(p.comune) : '') +
+    (approssimata(p) ? '<br><span style="color:#ffbd52">○ posizione approssimata (' + (p.pos === 'comune' ? 'centro comune' : 'distretto telefonico') + ')</span>' : '') +
+    (p.persona || p.ruolo ? '<br>' + esc(p.persona || '') + (p.persona && p.ruolo ? ' · ' : '') + '<span style="color:rgba(255,255,255,.6)">' + esc(p.ruolo || '') + '</span>' : '') +
+    '<br><span class="st"><i style="background:' + hex(COL[p.s] ?? COL.da_raggiungere) + ';display:inline-block;width:8px;height:8px;border-radius:50%"></i> ' + esc(NOME_STATO[p.s] || p.s) + '</span>' +
+    (metr.length ? ' · ' + metr.join(' · ') : '') + (m.ultima ? ' · ultima ' + data(m.ultima) : '') +
+    (flag.length ? '<br><span class="am" style="color:#ffbd52">' + flag.join(' · ') + '</span>' : '') +
+    '<br><span style="color:rgba(255,255,255,.6)">qualità ' + (p.q === null || p.q === undefined ? '—' : p.q) + ' · voto ' + (p.v || '—') + ' · fascia ' + (p.f || '—') + '</span>' +
+    (rep ? ' · <span class="ok" style="color:#59f599">report pronto</span>' : inPrep.has(d) ? ' · <span style="color:#c799ff">report in preparazione</span>' : '') +
+    (TUTTE && p._camp ? '<br><span style="color:rgba(255,255,255,.6)">campagna: ' + esc(p._camp) + '</span>' : '');
+  if (!pieno) h += '<br><span style="color:rgba(255,255,255,.6)">clic: ' + (rep ? 'apre il report' : 'apre il sito') + (rep ? '' : ' · scheda con chiedi report') + '</span>';
+  return h;
+}
+let selezionato = -1;
+function seleziona(i) { selezionato = i; M.fissa(i); scheda(i); }
+function scheda(i) {
+  const el = document.getElementById('scheda');
+  if (i < 0 || !P[i]) { el.style.display = 'none'; return; }
+  const p = P[i], rep = urlReport(p), d = (p.dominio || '').toLowerCase();
+  el.innerHTML = '<span class="x" title="chiudi">✕</span>' + riquadro(p, true) + '<div class="bt">' +
+    (rep ? '<div class="f rep" data-a="report">APRI REPORT</div>' : '') +
+    (sito(p) ? '<div class="f" data-a="sito">APRI SITO</div>' : '') +
+    (rep ? '' : inPrep.has(d) ? '<div class="f attesa">REPORT IN PREPARAZIONE…</div>' : '<div class="f chiedi" data-a="chiedi">CHIEDI REPORT</div>') + '</div>';
+  el.style.display = 'block';
+  el.querySelector('.x').onclick = () => seleziona(-1);
+  el.querySelectorAll('[data-a]').forEach(b => b.onclick = () => {
+    const a = b.dataset.a;
+    if (a === 'report') manda('apri', rep);
+    else if (a === 'sito') manda('apri', sito(p));
+    else if (a === 'chiedi') chiediReport(p);
+  });
+}
+addEventListener('keydown', e => { if (e.key === 'Escape') seleziona(-1); });
+// Inside Jarvis the page asks the app («apri», «report»); in a browser it opens a tab or writes to the console.
+function manda(canale, v) {
+  if (!v) return;
+  const h = app(canale);
+  if (h) { h.postMessage(v); return; }
+  if (canale === 'apri') window.open(v, '_blank', 'noopener'); else console.log('RICHIESTA ' + canale, v);
+}
+function apri(p) { const u = urlReport(p) || sito(p); manda('apri', u); }
+function chiediReport(p) {
+  manda('report', JSON.stringify({ dominio: p.dominio || '', nome: p.nome || '', sito: sito(p), comune: p.comune || '', campagna: p._campId || CAMPAGNA }));
+  if (p.dominio) { inPrep.add(p.dominio.toLowerCase()); salvaPrep(); }
+  aggiornaVista();
+}
+
+// ---- Filter buttons with counts (each row's counts follow the selection of the other rows) ----
+const conta = (escludi) => P.filter(p => (escludi === 's' || okStato(p)) && (escludi === 'm' || okMetr(p)) && (escludi === 'v' || okVoto(p)) && (escludi === 'f' || okFascia(p)) && (escludi === 'p' || okPos(p)) && (escludi === 'q' || okQual(p)) && okCerca(p));
+let aperti = !document.body.classList.contains('compatto');   // compact (inside the panel): filters folded, one click opens them
+const filtriAttivi = () => (fStato.size ? 1 : 0) + (fMetr.size ? 1 : 0) + (fVoto.size ? 1 : 0) + (fFascia.size ? 1 : 0) + (fPos.size ? 1 : 0) + (qMin > 0 ? 1 : 0) + (senzaQ ? 0 : 1) + (cerca ? 1 : 0);
+const ugualeA = arr => fStato.size === arr.length && arr.every(k => fStato.has(k));
+function disegnaFiltri() {
+  const el = document.getElementById('filtri');
+  const attivo = document.activeElement && el.contains(document.activeElement) ? document.activeElement.dataset.c : null;
+  const bs = conta('s'), ns = {}; bs.forEach(p => ns[p.s] = (ns[p.s] || 0) + 1);
+  const nR = bs.filter(raggiunto).length;
+  const bm = conta('m'), nm = Object.fromEntries(METRICHE.map(([k, , f]) => [k, bm.filter(f).length]));
+  const bv = conta('v'), nv = {}; bv.forEach(p => { const k = p.v || '-'; nv[k] = (nv[k] || 0) + 1; });
+  const bf = conta('f'), nf = {}; bf.forEach(p => { const k = p.f || '-'; nf[k] = (nf[k] || 0) + 1; });
+  const bp = conta('p'), np = {}; bp.forEach(p => { const k = p.pos || 'esatta'; np[k] = (np[k] || 0) + 1; });
+  const bq = conta('q'), nSenzaQ = bq.filter(p => p.q === null || p.q === undefined).length, nQ = bq.filter(p => p.q !== null && p.q !== undefined && p.q >= qMin).length;
+  const cls = (set, k, base) => `f ${base || ''} ${set.has(k) ? 'on' : (set.size ? 'off' : '')}`;
+  const nVis = P.filter(visibile).length;
+  el.innerHTML =
+    `<div class="f ${fStato.size ? '' : 'on'}" data-g="*">TUTTI <em>${bs.length}</em></div>` +
+    `<div class="f ${ugualeA(RAGG) ? 'on' : ''}" data-g="r">RAGGIUNTI <em>${nR}</em></div>` +
+    `<div class="f ${ugualeA(DA_RAGG) ? 'on' : ''}" data-g="d">DA RAGGIUNGERE <em>${bs.length - nR}</em></div>` +
+    `<div class="f ${aperti ? 'on' : ''}" data-t="1">FILTRI ${aperti ? '−' : '+'}${filtriAttivi() ? ' <em>(' + filtriAttivi() + ' ATTIVI)</em>' : ''}</div>` +
+    `<div class="f ${nVis === P.length ? '' : 'on'}" style="cursor:default">VISIBILI <em>${nVis}/${P.length}</em></div>` +
+    `<div class="riga piu"></div>` +
+    STATI.map(([k, nome, c]) => `<div class="${cls(fStato, k)} piu ${ns[k] ? '' : 'zero'}" data-s="${k}"><i style="background:${hex(c)}"></i>${nome} <em>${ns[k] || 0}</em></div>`).join('') +
+    `<div class="riga"></div><div class="f o ${fMetr.size ? '' : 'on'}" data-m="*"><b>METRICHE</b> TUTTE <em>${bm.length}</em></div>` +
+    METRICHE.map(([k, nome]) => `<div class="${cls(fMetr, k, 'o')} ${nm[k] ? '' : 'zero'}" data-m="${k}">${nome} <em>${nm[k]}</em></div>`).join('') +
+    `<div class="riga"></div><div class="f v ${fVoto.size ? '' : 'on'}" data-v="*"><b>VOTO</b> TUTTI <em>${bv.length}</em></div>` +
+    VOTI.map(([k, nome, c]) => `<div class="${cls(fVoto, k, 'v')} ${nv[k] ? '' : 'zero'}" data-v="${k}"><i style="background:${hex(c)}"></i>${nome} <em>${nv[k] || 0}</em></div>`).join('') +
+    `<div class="riga"></div><div class="f v ${fFascia.size ? '' : 'on'}" data-fa="*"><b>FASCIA CALDI</b> TUTTE <em>${bf.length}</em></div>` +
+    VOTI.map(([k, nome, c]) => `<div class="${cls(fFascia, k, 'v')} ${nf[k] ? '' : 'zero'}" data-fa="${k}"><i style="background:${hex(c)}"></i>${k === '-' ? 'senza fascia' : nome} <em>${nf[k] || 0}</em></div>`).join('') +
+    `<div class="riga"></div><div class="f o ${fPos.size ? '' : 'on'}" data-p="*"><b>POSIZIONE</b> TUTTE <em>${bp.length}</em></div>` +
+    POSIZIONI.map(([k, nome]) => `<div class="${cls(fPos, k, 'o')} ${np[k] ? '' : 'zero'}" data-p="${k}">${k === 'esatta' ? '● ' : '○ '}${nome} <em>${np[k] || 0}</em></div>`).join('') +
+    `<div class="f q"><b>QUALITÀ ≥</b><input type="range" min="0" max="100" step="5" value="${qMin}" data-c="q"><span>${qMin}</span><em>${nQ}</em></div>` +
+    `<div class="f v ${senzaQ ? 'on' : 'off'}" data-n="1">SENZA PUNTEGGIO: ${senzaQ ? 'SÌ' : 'NO'} <em>${nSenzaQ}</em></div>` +
+    `<div class="f cerca"><input type="search" placeholder="CERCA NOME O DOMINIO" value="${esc(cerca)}" data-c="cerca"></div>`;
+  el.classList.toggle('chiusi', !aperti);
+  el.querySelectorAll('.f:not([data-g]):not([data-t])').forEach(b => { if (b.textContent.indexOf('VISIBILI') !== 0) b.classList.add('piu'); });
+  el.querySelectorAll('.riga').forEach(b => b.classList.add('piu'));
+  el.querySelector('.f[data-t]').onclick = () => { aperti = !aperti; disegnaFiltri(); };
+  el.querySelectorAll('.f[data-g]').forEach(b => b.onclick = () => {
+    fStato.clear(); const g = b.dataset.g;
+    if (g === 'r' && !ugualeA(RAGG)) RAGG.forEach(k => fStato.add(k));
+    if (g === 'd') DA_RAGG.forEach(k => fStato.add(k));
+    ridisegna();
+  });
+  const toggle = (set, k) => { if (k === '*') set.clear(); else if (set.has(k)) set.delete(k); else set.add(k); ridisegna(); };
+  el.querySelectorAll('.f[data-s]').forEach(b => b.onclick = () => toggle(fStato, b.dataset.s));
+  el.querySelectorAll('.f[data-m]').forEach(b => b.onclick = () => toggle(fMetr, b.dataset.m));
+  el.querySelectorAll('.f[data-v]').forEach(b => b.onclick = () => toggle(fVoto, b.dataset.v));
+  el.querySelectorAll('.f[data-p]').forEach(b => b.onclick = () => toggle(fPos, b.dataset.p));
+  el.querySelectorAll('.f[data-fa]').forEach(b => b.onclick = () => toggle(fFascia, b.dataset.fa));
+  el.querySelector('.f[data-n]').onclick = () => { senzaQ = !senzaQ; ridisegna(); };
+  const r = el.querySelector('input[data-c="q"]');
+  r.oninput = () => { qMin = +r.value; r.nextElementSibling.textContent = qMin; applicaFiltro(); };
+  r.onchange = () => ridisegna();
+  const s = el.querySelector('input[data-c="cerca"]');
+  s.oninput = () => { cerca = s.value.trim().toLowerCase(); clearTimeout(s._t); s._t = setTimeout(() => ridisegna(true), 180); applicaFiltro(); };
+  s.onkeydown = e => e.stopPropagation();
+  if (attivo) { const i = el.querySelector(`input[data-c="${attivo}"]`); if (i) { i.focus(); if (i.type === 'search') i.setSelectionRange(i.value.length, i.value.length); } }
+}
+function ridisegna() { applicaFiltro(); disegnaFiltri(); }
+const VUOTO = 0x07131f;   // centre of an approximate dot: dark, the coloured ring around it gives the state
+function applicaFiltro() {
+  M.coloraPunti((i, c) => { const p = P[i]; c.setHex(approssimata(p) ? VUOTO : (COL[p.s] ?? COL.da_raggiungere)); return visibile(p) ? 1 : 0.12; });
+  coloraAnelli();
+  if (selezionato >= 0 && P[selezionato] && !visibile(P[selezionato])) seleziona(-1);
+}
+
+// ---- Regions: coloured by share of reached contacts; list on the right ----
+function segnaRegioni() {
+  const tot = {}, rag = {};
+  for (const p of P) { const iso = regioneDi(p.x, p.y); if (!iso) continue; tot[iso] = (tot[iso] || 0) + 1; if (raggiunto(p)) rag[iso] = (rag[iso] || 0) + 1; }
+  for (const [iso, Rg] of Object.entries(regioni)) {
+    Rg.siti = tot[iso] || 0; Rg.rag = rag[iso] || 0; Rg.attiva = false;
+    Rg.target = Rg.siti ? 0.15 + 0.85 * Rg.rag / Rg.siti : -1;
+    if (!Rg.vista) { Rg.p = Rg.target; Rg.vista = true; }
+  }
+  const righe = Object.values(regioni).filter(Rg => Rg.siti).sort((a, b) => b.siti - a.siti);
+  document.getElementById('lista').innerHTML = (righe.length ? '<div class="r tit"><b>REGIONE</b><s style="background:none"></s><em>RAGG./TOT</em></div>' : '') + righe.map(Rg =>
+    `<div class="r"><b>${esc(Rg.nome)}</b><s><u style="width:${Math.round(100 * Rg.rag / Rg.siti)}%;background:${M.colore(Rg.target).getStyle()}"></u></s><em>${Rg.rag}/${Rg.siti}</em></div>`).join('');
+}
+
+// ---- Data: script files reloaded periodically; the view, zoom, filters and selection stay ----
+const carica = src => new Promise(ok => {
+  const s = document.createElement('script'); s.src = src + '?t=' + Date.now();
+  s.onload = () => { s.remove(); ok(true); }; s.onerror = () => { s.remove(); ok(false); };
+  document.head.appendChild(s);
+});
+let firma = '', info = { nome: '', aggiornato: '', senza: 0 }, inCorso = false;
+async function aggiornaDati() {
+  if (inCorso) return; inCorso = true;
+  try {
+    window.REPORT = undefined; await carica('data/report-indice.js'); const rep = window.REPORT || {};
+    REPORT = {}; for (const [k, v] of Object.entries(rep)) REPORT[k.toLowerCase()] = v;
+    window.CAMPAGNE = undefined; await carica('data/campagne.js'); const C = window.CAMPAGNE || null;
+    const files = [];
+    if (TUTTE) for (const c of (C && C.campagne) || []) files.push({ id: c.id, nome: c.nome, file: c.file_punti || ('data/campagna-' + c.id + '.js') });
+    else { const c = C && (C.campagne || []).find(c => c.id === CAMPAGNA); files.push({ id: CAMPAGNA, nome: c ? c.nome : '', file: (c && c.file_punti) || ('data/campagna-' + CAMPAGNA + '.js') }); }
+    const pezzi = [];
+    for (const f of files) { window.PUNTI_CAMPAGNA = undefined; if (await carica(f.file) && window.PUNTI_CAMPAGNA) pezzi.push({ f, D: window.PUNTI_CAMPAGNA }); }
+    const nuova = JSON.stringify(pezzi.map(x => [x.f.id, x.D.aggiornato, (x.D.punti || []).length])) + '|' + JSON.stringify(REPORT).length;
+    if (nuova === firma) return;
+    firma = nuova;
+    const nuovi = [];
+    for (const { f, D } of pezzi) for (const p of D.punti || []) {
+      if (!Number.isFinite(p.x) || !Number.isFinite(p.y)) continue;
+      p._camp = (D.campagna && D.campagna.nome) || f.nome; p._campId = (D.campagna && D.campagna.id) || f.id;
+      p._t = ((p.nome || '') + ' ' + (p.dominio || '') + ' ' + (p.comune || '') + ' ' + (p.persona || '')).toLowerCase();
+      nuovi.push(p);
+    }
+    info = {
+      nome: TUTTE ? 'TUTTE LE CAMPAGNE (' + pezzi.length + ')' : ((pezzi[0] && pezzi[0].D.campagna && pezzi[0].D.campagna.nome) || files[0].nome || CAMPAGNA),
+      aggiornato: pezzi.map(x => x.D.aggiornato).filter(Boolean).sort().pop() || (C && C.aggiornato) || '',
+      senza: pezzi.reduce((a, x) => a + (x.D.senza_coordinate || 0), 0),
+    };
+    const chiaveSel = selezionato >= 0 && P[selezionato] ? P[selezionato]._campId + '|' + P[selezionato].dominio : null;
+    disegnaPunti(nuovi);
+    if (chiaveSel) seleziona(P.findIndex(p => p._campId + '|' + p.dominio === chiaveSel));
+  } finally { inCorso = false; }
+}
+// Overlapping dots (same coordinates or within ~200 m): laid out on a golden-angle spiral around their centre, order
+// fixed by a hash of the domain, so every one can be hovered and clicked once zoomed in. Only on this page.
+const hashDi = t => { let h = 2166136261; for (const ch of String(t)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+function sparpaglia(lista) {
+  const CELLA = 0.002, PASSO = 0.006, gruppi = new Map();
+  for (const p of lista) { const k = Math.round(p.x / CELLA) + ':' + Math.round(p.y / CELLA); (gruppi.get(k) || gruppi.set(k, []).get(k)).push(p); }
+  for (const g of gruppi.values()) {
+    if (g.length === 1) { g[0]._x = g[0].x; g[0]._y = g[0].y; continue; }
+    const cx = g.reduce((a, p) => a + p.x, 0) / g.length, cy = g.reduce((a, p) => a + p.y, 0) / g.length;
+    g.sort((a, b) => hashDi(a.dominio || a.nome) - hashDi(b.dominio || b.nome) || String(a.dominio).localeCompare(String(b.dominio)));
+    g.forEach((p, k) => { const r = PASSO * Math.sqrt(k + 0.5), t = k * 2.39996323; p._x = cx + r * Math.cos(t); p._y = cy + r * Math.sin(t); });
+  }
+}
+// Approximate position: hollow ring in the state colour around a dark dot (second Points layer on the same positions)
+let anelli = null, idxAnelli = [];
+const tCerchio = (() => { const cv = document.createElement('canvas'); cv.width = cv.height = 64; const x = cv.getContext('2d'); x.beginPath(); x.arc(32, 32, 25, 0, Math.PI * 2); x.lineWidth = 9; x.strokeStyle = '#fff'; x.stroke(); const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+function disegnaAnelli(ps) {
+  if (anelli) { M.scene.remove(anelli); anelli.geometry.dispose(); anelli = null; }
+  idxAnelli = []; P.forEach((p, i) => { if (approssimata(p)) idxAnelli.push(i); });
+  if (!idxAnelli.length) return;
+  const pa = new Float32Array(idxAnelli.length * 3); idxAnelli.forEach((i, j) => pa.set(ps.subarray(i * 3, i * 3 + 3), j * 3));
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pa, 3)); g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(pa.length), 3));
+  anelli = new THREE.Points(g, new THREE.PointsMaterial({ size: 9 * Math.min(2, devicePixelRatio), sizeAttenuation: false, vertexColors: true, depthWrite: false, depthTest: false, alphaTest: 0.4, map: tCerchio }));
+  anelli.renderOrder = 10.5; M.scene.add(anelli); coloraAnelli();
+}
+function coloraAnelli() {
+  if (!anelli) return;
+  const cs = anelli.geometry.attributes.color.array, c = new THREE.Color();
+  idxAnelli.forEach((i, j) => { const p = P[i]; c.setHex(COL[p.s] ?? COL.da_raggiungere); const k = visibile(p) ? 1 : 0.12; cs[j * 3] = c.r * k; cs[j * 3 + 1] = c.g * k; cs[j * 3 + 2] = c.b * k; });
+  anelli.geometry.attributes.color.needsUpdate = true;
+}
+function disegnaPunti(nuovi) {
+  P = nuovi;
+  const n = P.length, ps = new Float32Array(n * 3), cs = new Float32Array(n * 3), c = new THREE.Color();
+  sparpaglia(P);
+  P.forEach((p, i) => { ps.set([p._x, p._y, quota(p.x, p.y) + 0.025], i * 3); c.setHex(approssimata(p) ? VUOTO : (COL[p.s] ?? COL.da_raggiungere)); cs.set([c.r, c.g, c.b], i * 3); });
+  M.disegnaPunti(ps, cs);
+  disegnaAnelli(ps);
+  applicaFiltro(); disegnaFiltri(); segnaRegioni();
+  M.mostraPunti();
+  const nR = P.filter(raggiunto).length;
+  document.getElementById('titolo').textContent = 'CAMPAGNE · ' + String(info.nome).toUpperCase();
+  document.getElementById('sotto').textContent = n + ' CONTATTI SULLA MAPPA · ' + nR + ' RAGGIUNTI · ' + (n - nR) + ' DA RAGGIUNGERE' +
+    (info.senza ? ' · ' + info.senza + ' SENZA COORDINATE' : '') + (info.aggiornato ? ' · AGGIORNATO ' + data(info.aggiornato) : '');
+  if (PROVA && !prova.fatta) { prova.fatta = true; setTimeout(prova, 300); }
+}
+aggiornaDati();
+setInterval(aggiornaDati, 20000);
+
+// #prova: automatic check in Chrome (console lines «PROVA …»)
+function prova() {
+  const accesi = () => P.filter(visibile).length;
+  const clic = sel => document.querySelector(sel)?.click();
+  console.log('PROVA PUNTI', P.length, 'raggiunti', P.filter(raggiunto).length);
+  clic('.f[data-g="r"]'); console.log('PROVA RAGGIUNTI', accesi());
+  clic('.f[data-m="risposta"]'); console.log('PROVA RAGGIUNTI+RISPOSTA', accesi(), '·', [...document.querySelectorAll('.f.o')].map(b => b.textContent.trim()).join(' | '));
+  clic('.f[data-m="*"]'); clic('.f[data-g="d"]'); console.log('PROVA DA RAGGIUNGERE', accesi());
+  clic('.f[data-g="*"]'); clic('.f[data-v="A"]'); console.log('PROVA VOTO A', accesi());
+  clic('.f[data-v="*"]'); clic('.f[data-fa="A"]'); console.log('PROVA FASCIA A', accesi()); clic('.f[data-fa="*"]');
+  for (const k of ['esatta', 'comune', 'prefisso']) { clic(`.f[data-p="${k}"]`); console.log('PROVA POSIZIONE', k, accesi()); clic('.f[data-p="*"]'); }
+  { const vis = new Set(P.map(p => p._x.toFixed(5) + ',' + p._y.toFixed(5))); console.log('PROVA SOVRAPPOSTI posizioni distinte', vis.size, 'su', P.length); }
+  qMin = 60; ridisegna(); console.log('PROVA QUALITA>=60 con senza punteggio', accesi());
+  clic('.f[data-n]'); console.log('PROVA QUALITA>=60 senza i non valutati', accesi());
+  qMin = 0; senzaQ = true; cerca = 'milano'; ridisegna(); console.log('PROVA CERCA milano', accesi());
+  cerca = ''; ridisegna();
+  // hover + click on the first dot with a report and the first without
+  controls.update(); camera.updateMatrixWorld();
+  const rc = renderer.domElement.getBoundingClientRect(), a = M.dots.geometry.attributes.position.array, wo = window.open;
+  window.open = u => console.log('PROVA CLIC apre', u);
+  for (const i of [P.findIndex(p => urlReport(p)), P.findIndex(p => !urlReport(p))]) {
+    if (i < 0) continue;
+    vtmp.set(a[i * 3], a[i * 3 + 1], a[i * 3 + 2]).project(camera);
+    const x = rc.left + (vtmp.x + 1) / 2 * rc.width, y = rc.top + (1 - vtmp.y) / 2 * rc.height;
+    renderer.domElement.dispatchEvent(new PointerEvent('pointermove', { clientX: x, clientY: y, bubbles: true }));
+    console.log('PROVA TIP', tip.style.display, tip.textContent);
+    renderer.domElement.dispatchEvent(new PointerEvent('pointerdown', { clientX: x, clientY: y, bubbles: true }));
+    renderer.domElement.dispatchEvent(new PointerEvent('pointerup', { clientX: x, clientY: y, bubbles: true }));
+    console.log('PROVA SCHEDA', document.getElementById('scheda').textContent);
+  }
+  window.open = wo;
+  clic('#scheda .f.chiedi');
+  console.log('PROVA DOPO CHIEDI', document.getElementById('scheda').textContent);
+  const sel = P[selezionato]; if (sel) { window.reportPronto(sel.dominio, 'file:///tmp/prova.html'); console.log('PROVA DOPO PRONTO', document.getElementById('scheda').textContent); }
+  inPrep.clear(); salvaPrep(); delete pronti[(sel && sel.dominio || '').toLowerCase()];
+}
+prova.fatta = false;
+</script>
+</body>
+</html>

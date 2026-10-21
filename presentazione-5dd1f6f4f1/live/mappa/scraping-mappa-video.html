@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<!-- COPIA PER IL VIDEO v3 (20/10/2026) di dashboard/scraping-mappa.html: dati oscurati e generici, three.js locale. Non è la pagina dell'app. -->
+<meta charset="utf-8">
+<title>Jarvis · Scraping · Mappa d'Italia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --bg:#040c18; --cyan:#33d6fa; --green:#59f599; --amber:#ffbd52; --red:#ff666b; --dim:rgba(255,255,255,.55); }
+  html,body { margin:0; height:100%; overflow:hidden; background:#000509; color:#fff; font-family:"SF Mono",Menlo,monospace; }
+  #app { position:fixed; inset:0; touch-action:none; cursor:crosshair; background:linear-gradient(180deg,#0a3a5e 0%,#061f3a 30%,#02101d 62%,#000509 100%); }
+  .hud { position:fixed; pointer-events:none; }
+  #top { top:14px; left:16px; right:16px; }
+  #titolo { font-size:11px; letter-spacing:2.5px; color:var(--cyan); text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #sotto { font-size:10px; letter-spacing:1.5px; color:var(--dim); margin-top:5px; text-transform:uppercase; }
+  #lista { top:96px; right:14px; width:210px; font-size:9px; letter-spacing:1px; }
+  .r { display:flex; align-items:center; gap:6px; margin:2px 0; color:var(--dim); text-transform:uppercase; }
+  .r b { width:104px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .r s { flex:1; height:3px; background:rgba(51,214,250,.12); position:relative; text-decoration:none; }
+  .r s u { position:absolute; left:0; top:0; bottom:0; text-decoration:none; }
+  .r em { width:38px; text-align:right; font-style:normal; color:#fff; }
+  .r.ora { color:var(--amber); }
+  #legenda { left:16px; bottom:14px; font-size:9px; letter-spacing:1.4px; color:var(--dim); line-height:1.7; }
+  #legenda i { display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 4px 0 10px; vertical-align:middle; }
+  #barra { width:230px; height:5px; margin:4px 0 6px; background:linear-gradient(90deg,#33d6fa 0%,#33d6fa 15%,#ffbd52 20%,#59f599 100%); }
+  #tip { position:fixed; padding:5px 9px; font-size:10px; letter-spacing:1px; background:rgba(4,12,24,.92); border:1px solid var(--cyan); pointer-events:none; display:none; text-transform:uppercase; }
+  #nowebgl { position:fixed; inset:0; display:none; align-items:center; justify-content:center; color:var(--red); letter-spacing:2px; }
+  body.compatto #lista { display:none; }
+  #filtri { left:16px; top:58px; display:flex; flex-wrap:wrap; gap:6px; max-width:560px; pointer-events:auto; }
+  .f { display:flex; align-items:center; gap:6px; padding:4px 9px; font:600 9px "SF Mono",Menlo,monospace; letter-spacing:1.4px; color:rgba(255,255,255,.75);
+       background:rgba(4,12,24,.75); border:1px solid rgba(51,214,250,.35); cursor:pointer; text-transform:uppercase; user-select:none; }
+  .f i { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .f em { font-style:normal; color:rgba(255,255,255,.5); }
+  .f.on { color:#fff; border-color:#fff; background:rgba(51,214,250,.18); box-shadow:0 0 8px rgba(115,234,255,.5); }
+  .f.off { opacity:.45; }
+  .f.o { border-color:rgba(255,189,82,.4); }
+  .f.o.on { border-color:#fff; background:rgba(255,189,82,.18); box-shadow:0 0 8px rgba(255,189,82,.45); }
+  .f.o b { font-weight:600; color:var(--amber); }
+  .riga { flex-basis:100%; height:0; }
+</style>
+<style>/* COPIA PER IL VIDEO: dati oscurati */ #lista em, .f em, #sotto { display:none !important; }</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="hud" id="top"><div id="titolo">SCRAPING · MAPPA D'ITALIA</div><div id="sotto">in attesa dei dati…</div></div>
+<div class="hud" id="lista"></div>
+<div class="hud" id="filtri"></div>
+<div class="hud" id="legenda">REGIONI: NON TOCCATA → CENSITA → FINITA<div id="barra"></div>SITI: CLIC SUI COLORI PER FILTRARE, PIÙ COLORI INSIEME SI SOMMANO · SOTTO: ORIGINE DEL DATO, SI COMBINA CON I COLORI</div>
+<div id="tip"></div>
+<div id="nowebgl">WEBGL NON DISPONIBILE</div>
+
+<script src="../dashboard/data/italia-regioni.js"></script>
+<script src="../dashboard/data/italia-rilievo.js"></script>
+<script src="../dashboard/hud/mappa-italia.js"></script>
+<script type="importmap">
+{ "imports": { "three": "../cervello/lib/three.module.min.js", "three/addons/": "../cervello/lib/addons/" } }
+</script>
+<script type="module">
+// Diagnostics for Jarvis (12/10): errors and a first render report go to the app log via the «log» channel.
+const diagnosi = m => { try { window.webkit?.messageHandlers?.log?.postMessage(String(m)); } catch (e) {} };
+addEventListener('error', e => diagnosi('errore: ' + e.message + ' @' + (e.lineno || '')));
+addEventListener('unhandledrejection', e => diagnosi('promessa: ' + (e.reason && e.reason.message || e.reason)));
+
+import * as T0 from 'three';
+const THREE = { ...T0, Timer: class { constructor() { this._p = null; this._d = 0; this._e = 0; } update(t) { t = t ?? performance.now(); if (this._p !== null) { this._d = (t - this._p) / 1000; this._e += this._d; } this._p = t; return this; } getDelta() { return this._d; } getElapsed() { return this._e; } } };
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const WebGL = { isWebGL2Available: () => !!document.createElement('canvas').getContext('webgl2') };
+
+// #compatto (inside Jarvis) · #giro=<nome> (points of that run: data/punti-<nome>.js) · #storico (no live status)
+const H = new URLSearchParams(location.hash.slice(1).replace(/&?compatto/, '&compatto=1'));
+if (H.has('compatto')) document.body.classList.add('compatto');
+const GIRO = H.get('giro');
+const STORICO = H.has('storico');
+// 16/10 (Francesco): un'altra lista selezionata nel pannello cambia solo il #frammento e WebKit non ricarica la
+// pagina; GIRO si legge una volta sola, quindi al cambio di frammento si ricarica tutto.
+addEventListener('hashchange', () => location.reload());
+if (!WebGL.isWebGL2Available()) { document.getElementById('nowebgl').style.display = 'flex'; throw new Error('no webgl2'); }
+
+const STATO = { 0: 0x2a7d9a, 1: 0xbfefff, 2: 0x9fffc9, A: 0x59f599, B: 0x33d6fa, C: 0xffbd52, D: 0xff666b };
+const FASI = ['CENSIMENTO', 'SERVER', 'LETTURA', 'JEV', 'SETACCIO', 'RISULTATI'];
+
+// Scene, terrain, borders, zoom, dots, hover and click: shared with the CAMPAGNE map (hud/mappa-italia.js, 14/10).
+const M = window.creaMappaItalia(THREE, OrbitControls, {
+  diagnosi,
+  visibile: i => visibile(dotData[i]),
+  tipPunto: i => {
+    const p = dotData[i];
+    const voto = typeof p[2] === 'string' ? 'voto ' + p[2] : ['censito', 'letto', 'letto, con mail'][p[2]] || '';
+    const origine = fontiDi(p).map(k => (ORIGINI.find(([o]) => o === k) || [k, k])[1]).join(' + ');
+    return '<b style="color:#fff">' + esc(p[3] || p[4]) + '</b><br><span style="color:#73eaff">' + esc(p[4] || '') + '</span>' + (p[5] ? ' · ' + esc(p[5]) : '') + '<br><span style="color:rgba(255,255,255,.6)">' + voto + (origine ? ' · da ' + esc(origine) : '') + ' · clic: apre il sito in Chrome</span>';
+  },
+  tipRegione: Rg => Rg.nome + (Rg.target < 0 ? ' · fuori dal giro' : ' · ' + Math.round(Math.max(0, Rg.target) * 100) + '%' + (Rg.siti ? ' · ' + Rg.siti + ' siti' : '')),
+  // Click on a dot: its site in a Chrome tab. Inside Jarvis the page asks the app (message «apri»), in a browser it opens a tab.
+  clicPunto: i => {
+    if (!dotData[i][4]) return;
+    const url = 'https://' + dotData[i][4];
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.apri) window.webkit.messageHandlers.apri.postMessage(url);
+    else window.open(url, '_blank', 'noopener');
+  },
+});
+const { renderer, camera, controls, regioni, quota, regioneDi, colore, vtmp, tip } = M;
+
+// ---- Site dots ----
+let dotData = [];
+function caricaPunti() {
+  if (!GIRO) return;
+  const s = document.createElement('script');
+  s.src = 'data/punti-' + GIRO + '.js?t=' + Date.now();
+  s.onload = () => { s.remove(); disegnaPunti(window.PUNTI); };
+  s.onerror = () => s.remove();
+  document.head.appendChild(s);
+}
+// Filters by dot colour (Michele 12/10): click a colour to see only those, click more to add them; «TUTTI» resets.
+// Second row (12/10): origin of the data (p[6] = «osm», «apify», «apollo» or several joined by «+»). A source button
+// keeps every dot that source found, also when merged with others; «PIÙ FONTI» only the merged ones. The two rows
+// combine (colour AND origin); the counts of each row follow the selection of the other one.
+const VOCI = [['A', 'voto A'], ['B', 'voto B'], ['C', 'voto C'], ['D', 'voto D'], ['2', 'letto con mail'], ['1', 'letto'], ['0', 'censito']];
+const ORIGINI = [['osm', 'OpenStreetMap'], ['apify', 'Google Maps'], ['apollo', 'Apollo'], ['+', 'più fonti']];
+const filtro = new Set(), filtroO = new Set();
+const chiaveStato = s => String(s);
+const fontiDi = p => String(p[6] || '').split('+').filter(Boolean);
+const haOrigine = (p, k) => k === '+' ? fontiDi(p).length > 1 : fontiDi(p).includes(k);
+const okColore = p => !filtro.size || filtro.has(chiaveStato(p[2]));
+const okOrigine = p => !filtroO.size || [...filtroO].some(k => haOrigine(p, k));
+function disegnaFiltri() {
+  const n = {}, no = {};
+  let nC = 0, nO = 0;
+  for (const p of dotData) {
+    if (okOrigine(p)) { n[chiaveStato(p[2])] = (n[chiaveStato(p[2])] || 0) + 1; nC++; }
+    if (okColore(p)) { nO++; for (const [k] of ORIGINI) if (haOrigine(p, k)) no[k] = (no[k] || 0) + 1; }
+  }
+  // Other sources a future run may bring (e.g. «hunter»): a button of their own
+  const altre = [...new Set(dotData.flatMap(fontiDi))].filter(k => !ORIGINI.some(([o]) => o === k));
+  for (const k of altre) no[k] = dotData.filter(p => okColore(p) && haOrigine(p, k)).length;
+  const voci = ORIGINI.concat(altre.map(k => [k, k])).filter(([k]) => no[k] || filtroO.has(k));
+  const conFonte = dotData.some(p => p[6]);
+  const el = document.getElementById('filtri');
+  el.innerHTML = `<div class="f ${filtro.size ? '' : 'on'}" data-k="*">TUTTI <em>${nC}</em></div>` +
+    VOCI.filter(([k]) => n[k] || filtro.has(k)).map(([k, nome]) => `<div class="f ${filtro.has(k) ? 'on' : (filtro.size ? 'off' : '')}" data-k="${k}"><i style="background:#${new THREE.Color(STATO[k]).getHexString()}"></i>${nome} <em>${n[k] || 0}</em></div>`).join('') +
+    (conFonte ? `<div class="riga"></div><div class="f o ${filtroO.size ? '' : 'on'}" data-o="*"><b>ORIGINE</b> TUTTE <em>${nO}</em></div>` +
+      voci.map(([k, nome]) => `<div class="f o ${filtroO.has(k) ? 'on' : (filtroO.size ? 'off' : '')}" data-o="${esc(k)}">${esc(nome)} <em>${no[k] || 0}</em></div>`).join('') : '');
+  el.querySelectorAll('.f').forEach(b => b.onclick = () => {
+    const [set, k] = b.dataset.o !== undefined ? [filtroO, b.dataset.o] : [filtro, b.dataset.k];
+    if (k === '*') set.clear(); else if (set.has(k)) set.delete(k); else set.add(k);
+    applicaFiltro(); disegnaFiltri();
+  });
+}
+function visibile(p) { return okColore(p) && okOrigine(p); }
+function applicaFiltro() {
+  M.coloraPunti((i, c) => { const p = dotData[i]; c.setHex(STATO[p[2]] ?? STATO[0]); return visibile(p) ? 1 : 0.12; });
+}
+function disegnaPunti(P) {
+  if (!P || P.giro !== GIRO) return;
+  dotData = P.punti;
+  const n = dotData.length, ps = new Float32Array(n * 3), cs = new Float32Array(n * 3), c = new THREE.Color();
+  dotData.forEach((p, i) => { ps.set([p[0], p[1], quota(p[0], p[1]) + 0.025], i * 3); c.setHex(STATO[p[2]] ?? STATO[0]); cs.set([c.r, c.g, c.b], i * 3); });
+  M.disegnaPunti(ps, cs);
+  applicaFiltro(); disegnaFiltri();
+  M.mostraPunti();
+  if (!STORICO && window.STATUS) aggiorna(window.STATUS);   // the counter in the title includes the dots just loaded
+  if (H.has('prova')) {   // #prova: clicks «A» then «B», logs how many dots stay lit
+    document.querySelector('.f[data-k="A"]')?.click(); document.querySelector('.f[data-k="B"]')?.click();
+    console.log('FILTRO', [...filtro].join('+'), dotData.filter(visibile).length, 'accesi su', dotData.length);
+    for (const o of ['osm', 'apify', '+']) {   // then each origin alone, combined with A+B
+      filtroO.clear(); document.querySelector(`.f[data-o="${o}"]`)?.click();
+      console.log('FILTRO ORIGINE', o, '+ voti', [...filtro].join('+'), dotData.filter(visibile).length, '· bottoni', [...document.querySelectorAll('.f.o')].map(b => b.textContent.trim()).join(' | '));
+    }
+    document.querySelector('.f[data-o="*"]')?.click();
+  }
+  if (H.has('prova')) {   // #prova: automatic check of the hover label on the first dot
+    controls.update(); camera.updateMatrixWorld(); const rc = renderer.domElement.getBoundingClientRect();
+    vtmp.set(ps[0], ps[1], ps[2]).project(camera);
+    renderer.domElement.dispatchEvent(new PointerEvent('pointermove', { clientX: rc.left + (vtmp.x + 1) / 2 * rc.width, clientY: rc.top + (1 - vtmp.y) / 2 * rc.height, bubbles: true }));
+    console.log('PROVA', tip.style.display, tip.textContent);
+    { const ox = rc.left + (vtmp.x + 1) / 2 * rc.width, oy = rc.top + (1 - vtmp.y) / 2 * rc.height, wo = window.open;
+      window.open = u => console.log('PROVA CLIC apre', u);
+      renderer.domElement.dispatchEvent(new PointerEvent('pointerdown', { clientX: ox, clientY: oy, bubbles: true }));
+      renderer.domElement.dispatchEvent(new PointerEvent('pointerup', { clientX: ox, clientY: oy, bubbles: true }));
+      window.open = wo; }
+  }
+  if (STORICO) for (const Rg of Object.values(regioni)) { Rg.target = -1; }
+  if (STORICO) segnaStorico();
+}
+// A past run: the regions that have its sites are «finished» (green), the others untouched.
+function segnaStorico() {
+  const per = {};
+  for (const p of dotData) { const iso = regioneDi(p[0], p[1]); if (iso) per[iso] = (per[iso] || 0) + 1; }
+  for (const [iso, Rg] of Object.entries(regioni)) { Rg.target = per[iso] ? 1 : -1; Rg.siti = per[iso] || 0; Rg.attiva = false; if (!Rg.vista) { Rg.p = Rg.target; Rg.vista = true; } }
+  document.getElementById('sotto').textContent = 'GIRO CONCLUSO · ' + dotData.length + ' SITI SULLA MAPPA';
+  lista(null);
+}
+if (GIRO) { caricaPunti(); setInterval(caricaPunti, STORICO ? 60000 : 10000); }
+
+// ---- Live status (dashboard/scraping-rapido-status.js) ----
+function carica() {
+  const s = document.createElement('script');
+  s.src = 'scraping-rapido-status.js?t=' + Date.now();
+  s.onload = () => { s.remove(); aggiorna(window.STATUS || null); };
+  s.onerror = () => s.remove();
+  document.head.appendChild(s);
+}
+if (!STORICO) { setInterval(carica, 2000); carica(); }
+
+function fase(st) {
+  const t = (st.titolo || '').toLowerCase(), log = st.log || [];
+  if (st.fine || t.includes('finito')) return 6;
+  if (log.some(l => l.includes('scarico i risultati'))) return 5;
+  if (t.includes('setaccio')) return 4;
+  if (t.includes('jev')) return 3;
+  if (t.includes('lettura') || log.some(l => l.includes('giro avviato'))) return 2;
+  if (log.some(l => l.includes('accendo il server'))) return 1;
+  return 0;
+}
+function aggiorna(st) {
+  if (!st) return;
+  const f = fase(st);
+  const chiave = 'mappa:' + (st.titolo || '').split(' · ')[0];
+  let visti = []; try { visti = JSON.parse(localStorage.getItem(chiave) || '[]'); } catch (e) {}
+  for (const l of st.log || []) {
+    const m = l.match(/OpenStreetMap (IT-\d+) \((\d+)\/(\d+)\)\D*(\d+) siti finora/);
+    if (m && !visti.some(v => v.iso === m[1])) visti.push({ iso: m[1], n: +m[2], fin: +m[4] });
+  }
+  visti.sort((a, b) => a.n - b.n);
+  try { localStorage.setItem(chiave, JSON.stringify(visti)); } catch (e) {}
+  const siti = {};
+  for (let i = 0; i + 1 < visti.length; i++) siti[visti[i].iso] = visti[i + 1].fin - visti[i].fin;
+  const corrente = f === 0 && visti.length ? visti[visti.length - 1].iso : null;
+  const toccate = new Set(visti.map(v => v.iso));
+  // Sites already on the map count as «touched» too (runs from a list, or regions censused before the page opened)
+  for (const p of dotData) { const iso = regioneDi(p[0], p[1]); if (iso) toccate.add(iso); }
+  let g = 0;
+  if (f === 1) g = 0.05; if (f === 2) g = 0.1 + 0.6 * ((st.fatti || 0) / Math.max(1, st.totale || 1));
+  if (f === 3) g = 0.8; if (f === 4) g = 0.9; if (f >= 5) g = 1;
+  const perReg = st.regioni || null;
+  for (const [iso, Rg] of Object.entries(regioni)) {
+    let p = -1;
+    if (perReg && perReg[iso]) p = 0.15 + 0.85 * ((perReg[iso].fatti || 0) / Math.max(1, perReg[iso].totale || 1));
+    else if (toccate.has(iso)) p = iso === corrente ? 0.07 : 0.15 + 0.85 * g;
+    if (!Rg.vista) { Rg.p = p; Rg.vista = true; }
+    Rg.target = p; Rg.attiva = iso === corrente || (f === 2 && p >= 0 && p < 1);
+    Rg.siti = siti[iso] || (perReg && perReg[iso] ? perReg[iso].totale : Rg.siti);
+  }
+  document.getElementById('titolo').textContent = 'SCRAPING · ' + (st.titolo || '').toUpperCase();
+  const corr = corrente ? regioni[corrente]?.nome : null;
+  document.getElementById('sotto').textContent = (st.fine ? 'FINITO' : (corr ? 'CENSIMENTO: ' + corr : 'FASE ' + FASI[Math.min(5, f)])) +
+    ' · ' + (st.fatti || 0) + '/' + (st.totale || 0) + ' LETTI · ' + dotData.length + ' SITI SULLA MAPPA';
+  lista(corrente);
+}
+function lista(corrente) {
+  const righe = Object.entries(regioni).filter(([, Rg]) => Rg.target >= 0).sort((a, b) => b[1].target - a[1].target || b[1].siti - a[1].siti);
+  document.getElementById('lista').innerHTML = righe.map(([iso, Rg]) => {
+    const col = colore(Rg.target).getStyle();
+    return `<div class="r ${iso === corrente ? 'ora' : ''}"><b>${Rg.nome}</b><s><u style="width:${Math.round(Math.max(0, Rg.target) * 100)}%;background:${col}"></u></s><em>${Rg.siti || ''}</em></div>`;
+  }).join('');
+}
+function esc(t) { return String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+</script>
+</body>
+</html>
