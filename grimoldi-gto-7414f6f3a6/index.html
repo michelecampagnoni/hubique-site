@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>G.T.O. — Gran Tipo Ovale · Grimoldi Milano</title>
+<style>
+  :root { --oro: #c9a96a; --testo: #e9e6df; --fondo: #0d0d0e; }
+  html, body { margin: 0; background: var(--fondo); color: var(--testo); font-family: "Helvetica Neue", Arial, sans-serif; }
+  #scena { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; touch-action: pan-y; }
+  .sfondo { position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 45%, #2a2a2d 0%, #111113 55%, #0b0b0c 100%); z-index: -1; }
+  /* lunghezza dello scroll: 6 schermate */
+  .pista { height: 600vh; position: relative; z-index: 1; pointer-events: none; }
+  .blocco { position: fixed; left: 7vw; bottom: 9vh; max-width: 360px; opacity: 0; transform: translateY(16px);
+            transition: opacity .5s ease, transform .5s ease; z-index: 2; pointer-events: none; }
+  .blocco.destra { left: auto; right: 7vw; text-align: right; }
+  .blocco.visibile { opacity: 1; transform: none; }
+  .blocco small { letter-spacing: .32em; text-transform: uppercase; color: var(--oro); font-size: 11px; }
+  .blocco h2 { font-weight: 300; font-size: clamp(26px, 3.4vw, 42px); margin: .35em 0 .3em; letter-spacing: .02em; }
+  .blocco p { font-size: 14px; line-height: 1.6; color: #bdb9b0; margin: 0; }
+  #etichette { position: fixed; inset: 0; pointer-events: none; z-index: 2; }
+  .etichetta { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 11px; letter-spacing: .18em;
+               text-transform: uppercase; color: var(--testo); opacity: 0; transition: opacity .3s; }
+  .richiami { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; opacity: 0; }
+  .richiami polyline { fill: none; stroke: rgba(201,169,106,.65); stroke-width: 1; }
+  .richiami circle { fill: var(--oro); }
+  #carico { position: fixed; inset: 0; display: grid; place-items: center; z-index: 5; background: var(--fondo); transition: opacity .6s; }
+  #carico span { letter-spacing: .3em; font-size: 11px; color: var(--oro); }
+  #avviso { display: none; position: fixed; inset: 0; place-items: center; text-align: center; z-index: 6; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div class="sfondo"></div>
+<canvas id="scena"></canvas>
+<div id="etichette"></div>
+<div id="carico"><span>G.T.O. · <b id="perc">0</b>%</span></div>
+<div id="avviso"><p>Il tuo browser non supporta WebGL 2: impossibile mostrare il modello 3D.</p></div>
+
+<div class="blocco" data-da="0" data-a="0.12"><small>Grimoldi Milano</small><h2>G.T.O.<br>Gran Tipo Ovale</h2><p>Scorri per scoprire l’orologio.</p></div>
+<div class="blocco destra" data-da="0.18" data-a="0.36"><small>La cassa</small><h2>57,95 × 36,40 mm</h2><p>Cassa ergonomica in acciaio 316L, curvata per seguire il polso. Corona a pressione con doppia guarnizione.</p></div>
+<div class="blocco" data-da="0.66" data-a="0.9"><small>Italian made</small><h2>Ogni pezzo al suo posto</h2><p>Quadrante tridimensionale scheletrato e movimento automatico svizzero ETA 2824, sotto un vetro zaffiro a cupola.</p></div>
+<div class="blocco destra" data-da="0.92" data-a="1.01"><small>G.T.O.</small><h2>No ordinary time</h2><p>Impermeabile 5 atm · fondello avvitato · fibbia butterfly in acciaio 316L.</p></div>
+<div class="pista"></div>
+
+<script type="module" src="./main.js?v=14"></script>
+</body>
+</html>
