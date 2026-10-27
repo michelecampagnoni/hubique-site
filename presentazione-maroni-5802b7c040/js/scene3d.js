@@ -193,8 +193,8 @@ S.cupola = () => frammenti('cupola');
 
 // 3 · orbita dei sette Kit attorno al reticolo
 export const KITS = [
-  { n: 1, nome: 'Inbound Kit', verbo: 'Risponde.', tip: 'Rivenditori, privati e committenti: ogni richiesta ha la sua risposta, pronta da approvare.', cap: 'inbound' },
-  { n: 2, nome: 'Scout Kit', verbo: 'Trova.', tip: 'Nuovi showroom nel mondo e nuovi marchi per cui lavorare.', cap: 'scout' },
+  { n: 1, nome: 'Scout Kit', verbo: 'Trova.', tip: 'Nuovi showroom nel mondo e nuovi marchi per cui lavorare.', cap: 'scout' },
+  { n: 2, nome: 'Inbound Kit', verbo: 'Risponde.', tip: 'Rivenditori, privati e committenti: ogni richiesta ha la sua risposta, pronta da approvare.', cap: 'inbound' },
   { n: 3, nome: 'Fin Kit', verbo: 'Fa i conti.', tip: 'DDT, fatture, banca e il margine vero di ogni commessa.', cap: 'fin' },
   { n: 4, nome: 'Brain Kit', verbo: 'Ricorda.', tip: 'Collezioni, commesse, disegni e mail in un unico posto.', cap: 'brain' },
   { n: 5, nome: 'Skill Kit', verbo: 'Applica il metodo.', tip: 'Sessant\'anni di mestiere, scritti una volta.', cap: 'skill' },
@@ -307,6 +307,46 @@ S.italia = (opts = {}) => {
     group: wrap, pick: [dots], pointsPick: true, pointsObj: dots, threshold: .12,
     update(t) { dg.setDrawRange(0, Math.floor(Math.min(1, t / 4) * list.length)); g.rotation.z = Math.sin(t * .15) * .12; },
     hoverPoint(i) { if (i == null) { ring.visible = false; return null; } ring.position.set(p[i * 3], .1, p[i * 3 + 2]); ring.visible = true; const q = list[i]; return `${q[3]} · voto ${q[2]} · clic: sito e dossier`; }
+  };
+};
+
+// 5b · pianeta: terre a punti, coste, showroom e studi colorati per voto (stesso stile dell'Italia)
+S.globo = () => {
+  const G = window.GLOBO; const g = new THREE.Group(); const R = 2.9;
+  const xyz = (la, lo, r = R) => { const a = la * Math.PI / 180, b = lo * Math.PI / 180; return [r * Math.cos(a) * Math.sin(b), r * Math.sin(a), r * Math.cos(a) * Math.cos(b)]; };
+  const core = new THREE.Mesh(new THREE.SphereGeometry(R * .985, 64, 48), new THREE.MeshBasicMaterial({ color: BG, transparent: true, opacity: .92 })); g.add(core);
+  const halo = glow(CYAN, R * 3.1); halo.material.opacity = .18; g.add(halo);
+  if (G) {
+    const p = [], c = [];
+    for (let i = 0; i < G.land.length; i += 2) { p.push(...xyz(G.land[i], G.land[i + 1], R * 1.004)); const k = .35 + ((i * 7919) % 100) / 100 * .65; c.push(.2 * k, .84 * k, .98 * k); }
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(p, 3)); geo.setAttribute('color', new THREE.Float32BufferAttribute(c, 3));
+    g.add(new THREE.Points(geo, new THREE.PointsMaterial({ size: .03, vertexColors: true, transparent: true, opacity: .8, depthWrite: false })));
+    const s = []; for (let i = 0; i < G.coast.length; i += 4) s.push(...xyz(G.coast[i], G.coast[i + 1], R * 1.006), ...xyz(G.coast[i + 2], G.coast[i + 3], R * 1.006));
+    g.add(segs(s, CYAN2, .5));
+  }
+  const grid = []; for (let la = -60; la <= 60; la += 30) for (let lo = 0; lo < 360; lo += 4) grid.push(...xyz(la, lo, R * 1.002), ...xyz(la, lo + 4, R * 1.002));
+  for (let lo = 0; lo < 360; lo += 30) for (let la = -80; la < 80; la += 4) grid.push(...xyz(la, lo, R * 1.002), ...xyz(la + 4, lo, R * 1.002));
+  g.add(segs(grid, CYAN, .08));
+  const vc = { A: new THREE.Color(GREEN), B: new THREE.Color(CYAN2), C: new THREE.Color(AMBER), D: new THREE.Color(RED) };
+  const list = G ? G.punti : [];
+  const p = new Float32Array(list.length * 3), c = new Float32Array(list.length * 3);
+  list.forEach((q, i) => { p.set(xyz(q[0], q[1], R * 1.02), i * 3); const k = vc[q[2]] || vc.B; c.set([k.r, k.g, k.b], i * 3); });
+  const dg = new THREE.BufferGeometry(); dg.setAttribute('position', new THREE.BufferAttribute(p, 3)); dg.setAttribute('color', new THREE.BufferAttribute(c, 3)); dg.setDrawRange(0, 0);
+  const dots = new THREE.Points(dg, new THREE.PointsMaterial({ size: .1, map: dotTex, vertexColors: true, transparent: true, alphaTest: .3, depthWrite: false })); g.add(dots);
+  const ring = glow(WHITE, .45); ring.visible = false; g.add(ring);
+  const orb = new THREE.Group(); [1.18, 1.32].forEach((k, j) => { const o = []; for (let i = 0; i < 128; i++) { if (j && i % 8 < 3) continue; const a = i / 128 * Math.PI * 2, b = (i + 1) / 128 * Math.PI * 2; o.push(Math.cos(a) * R * k, 0, Math.sin(a) * R * k, Math.cos(b) * R * k, 0, Math.sin(b) * R * k); } orb.add(segs(o, CYAN, j ? .25 : .4)); });
+  orb.rotation.x = .32; orb.rotation.z = -.2;
+  const wrap = new THREE.Group(); g.rotation.x = .38; wrap.add(g, orb);
+  let hot = false, spin = -0.18; const v = new THREE.Vector3(), cpos = new THREE.Vector3(), n = new THREE.Vector3();
+  return {
+    group: wrap, pick: [dots], pointsPick: true, pointsObj: dots, threshold: .1,
+    update(t, dt) { dg.setDrawRange(0, Math.floor(Math.min(1, t / 4) * list.length)); if (!hot) spin -= dt * .06; g.rotation.y = spin; orb.rotation.y = t * .1; },
+    hoverPoint(i) {
+      if (i == null) { ring.visible = false; hot = false; return null; }
+      v.set(p[i * 3], p[i * 3 + 1], p[i * 3 + 2]); dots.localToWorld(v); g.getWorldPosition(n); camera.getWorldPosition(cpos);
+      if (v.clone().sub(n).dot(cpos.clone().sub(v)) < 0) { ring.visible = false; hot = false; return null; }
+      hot = true; ring.position.set(p[i * 3], p[i * 3 + 1], p[i * 3 + 2]); ring.visible = true; const q = list[i]; return `${q[3]} · ${q[4]} · voto ${q[2]} · clic: sito e dossier`;
+    }
   };
 };
 
@@ -709,7 +749,7 @@ export function mostra(nome, opts = {}) {
   setHover(null); yaw = 0; pitch = 0; vel = 0;
   scene.environment = null; const make = S[nome] || S.ambient; current = make(opts); current.nome = nome; bloom.strength = current.bloom ?? .8; current.t0 = (performance.now() - t0) / 1000;
   root.add(current.group);
-  const cams = { italia: [0, 2.2, 9.5], brain: [0, .5, 8.5], agenda: [0, .2, 10], orbita: [0, 1.2, 12], chiusura: [0, 1.6, 14.5], ddt: [0, .3, 10.5], inbound: [0, .6, 11.5], preventivo: [0, .4, 11.5], skilllastre: [0, .5, 11.5], cupola: [0, 1.4, 11], sparsi: [0, .6, 10], mobile: [0, .9, 10.5], mobilereal: [0, .9, 10], sedia: [0, .9, 10] };
+  const cams = { italia: [0, 2.2, 9.5], brain: [0, .5, 8.5], agenda: [0, .2, 10], orbita: [0, 1.2, 12], chiusura: [0, 1.6, 14.5], ddt: [0, .3, 10.5], inbound: [0, .6, 11.5], preventivo: [0, .4, 11.5], skilllastre: [0, .5, 11.5], cupola: [0, 1.4, 11], sparsi: [0, .6, 10], mobile: [0, .9, 10.5], globo: [0, .8, 11], mobilereal: [0, .9, 10], sedia: [0, .9, 10] };
   view.cam.set(...(cams[nome] || [0, .6, 11]));
   root.position.x = opts.offsetX || 0; root.scale.setScalar(opts.scale || 1);
   view.look.set(0, opts.low ? -1.25 : 0, 0);

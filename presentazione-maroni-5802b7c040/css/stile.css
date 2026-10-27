@@ -192,3 +192,47 @@ svg .draw{stroke-dasharray:2000;stroke-dashoffset:2000;animation:draw 2.4s steps
 #help.on{display:flex}
 #help .panel{max-width:560px;text-align:left;font-size:15px;line-height:1.7}
 #help kbd{border:1px solid var(--cyan);padding:1px 6px;font-family:var(--m);color:var(--cyan2)}
+
+/* Fin Kit con la grafica dell'ERP Hubique (chiaro, barra laterale blu notte, accenti verde acqua) */
+.screen.erp{background:#f4f6f9;border-color:rgba(115,234,255,.5);display:grid;grid-template-columns:190px 1fr;font-family:Inter,"Helvetica Neue",Arial,sans-serif;color:#1d2433;border-radius:8px}
+.screen.erp:before{display:none}
+.erp-side{background:#0c1424;color:#cfd8e6;padding:14px 10px;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.erp-logo{font:800 15px/1 Inter,Arial,sans-serif;letter-spacing:.08em;color:#fff;padding:4px 8px 14px}.erp-logo span{color:#38b2c9}
+.erp-grp{font-size:12px;color:#fff;padding:6px 8px;font-weight:600}
+.erp-nav{all:unset;cursor:pointer;font-size:12.5px;padding:6px 10px 6px 18px;border-radius:7px;color:#c3cddc}
+.erp-nav.sub{padding-left:30px;font-size:11.5px}
+.erp-nav:hover{background:#18233a}.erp-nav.on{background:#1b2a44;color:#fff;box-shadow:inset 3px 0 0 #38b2c9}
+.erp-user{margin-top:auto;display:flex;gap:8px;align-items:center;font-size:12px;color:#fff;padding:8px}.erp-user b{width:28px;height:28px;border-radius:50%;background:#e9edf3;color:#1d2433;display:grid;place-items:center;font-size:11px}.erp-user small{display:block;color:#8d99ad;font-size:10.5px}
+.erp-main{position:relative;overflow:hidden;display:flex;flex-direction:column}
+.erp-top{height:40px;border-bottom:1px solid #e3e7ee;background:#fff;display:flex;align-items:center;gap:12px;padding:0 16px;justify-content:flex-end}.erp-top i{flex:1}.erp-top b{width:26px;height:26px;border-radius:50%;background:#eef1f5;display:grid;place-items:center;font-size:10px}
+.erp-chip{font-size:10px;letter-spacing:.12em;color:#9a6b00;background:#fff4d6;border:1px solid #f1d58a;padding:3px 8px;border-radius:20px}
+.erp-body{flex:1;overflow:hidden;padding:16px 20px}
+.erp-body.in>*{animation:erpin .45s both}.erp-body.in>*:nth-child(2){animation-delay:.05s}.erp-body.in>*:nth-child(3){animation-delay:.1s}.erp-body.in>*:nth-child(4){animation-delay:.15s}.erp-body.in>*:nth-child(5){animation-delay:.2s}
+@keyframes erpin{from{opacity:0;transform:translateY(8px)}}
+.erp-body h2{margin:0;font-size:24px;font-weight:700;color:#141a26}
+.erp-sub{margin:4px 0 12px;font-size:12px;color:#6b7588}
+.erp-pills{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.erp-pills>span{background:#fff;border:1px solid #dfe4ec;border-radius:20px;padding:5px 12px;font-size:11.5px;color:#3a4458}
+.erp-pills .seg{display:flex;padding:2px}.erp-pills .seg i{font-style:normal;padding:3px 10px;border-radius:14px}.erp-pills .seg i.on{background:#38b2c9;color:#fff}
+.erp-alert{background:#fff;border:1px solid #e3e7ee;border-radius:10px;padding:10px 14px;font-size:12px;display:flex;gap:10px;align-items:center;margin-bottom:12px}.erp-alert b{font-size:13.5px}
+.erp-alert.amber{border-left:4px solid #e3a008}.erp-alert.red{border-left:4px solid #dc3545;justify-content:space-between}
+.erp-alert.big b{display:block;font-size:30px;color:#dc3545;font-weight:700}.erp-alert.big small{display:block;font-size:11px;color:#6b7588}
+.erp-mini{display:flex;gap:8px}.erp-mini span{border:1px solid #e3e7ee;border-radius:8px;padding:6px 10px;font-size:10.5px;color:#6b7588}.erp-mini span b{display:block;font-size:13px;color:#141a26}
+.erp-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.erp-kpi{background:#fff;border:1px solid #e3e7ee;border-left:4px solid #cfd6e0;border-radius:10px;padding:9px 12px}.erp-kpi .t{font-size:11px;color:#6b7588}.erp-kpi .v{font-size:20px;font-weight:700;margin:3px 0}.erp-kpi .d{font-size:10px;color:#8a94a6}
+.erp-kpi.g{border-left-color:#1f9d55}.erp-kpi.g .v{color:#1f9d55}.erp-kpi.r{border-left-color:#dc3545}.erp-kpi.r .v{color:#dc3545}.erp-kpi.a{border-left-color:#e3a008;background:#fffbea}.erp-kpi.a .v{color:#b7791f}.erp-kpi.b{border-left-color:#2563eb}.erp-kpi.b .v{color:#2563eb}
+.erp-card{background:#fff;border:1px solid #e3e7ee;border-radius:10px;padding:10px 14px;font-size:13px}.erp-card svg{width:100%;height:120px}
+.erp-t{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid #e3e7ee;border-radius:10px;overflow:hidden;font-size:12px}
+.erp-t th{text-align:left;font-weight:500;color:#6b7588;padding:9px 10px;border-bottom:1px solid #e3e7ee;font-size:11.5px}.erp-t td{padding:9px 10px;border-bottom:1px solid #f0f2f6}
+.erp-t tr{animation:erpin .4s both;animation-delay:calc(var(--i,0)*.06s)}
+.erp-t .n{text-align:right;white-space:nowrap}.erp-t .neg{color:#dc3545;font-weight:600}.erp-t .sm{font-size:11px;color:#3a4458}.erp-t .lk{color:#2a7fb8;font-size:11px}
+.erp-tag{display:inline-block;font-size:10px;letter-spacing:.06em;border:1px solid #dfe4ec;border-radius:20px;padding:3px 9px;color:#3a4458;background:#fff;white-space:nowrap}.erp-tag.on{background:#2a9db5;color:#fff;border-color:#2a9db5}
+.erp-sev{display:inline-block;font-size:10.5px;border-radius:6px;padding:2px 8px}.erp-sev.r{background:#fde8ea;color:#c0283a}.erp-sev.a{background:#fff4d6;color:#9a6b00}
+.erp-split{display:grid;grid-template-columns:.8fr 1.4fr;gap:14px}
+.erp-paper{position:relative;background:#fbfaf6;border:1px solid #e3e0d6;border-radius:6px;padding:14px;font:11px "Courier New",monospace;color:#333;transform:rotate(-1.2deg);box-shadow:0 6px 18px rgba(0,0,0,.12);overflow:hidden}.erp-paper .ph{font-weight:700;font-size:13px;margin-bottom:4px}.erp-paper .pl{height:7px;background:#d9d6cc;margin:9px 0;border-radius:2px}
+.erp-paper .beam{position:absolute;left:0;right:0;height:30px;background:linear-gradient(180deg,transparent,rgba(56,178,201,.35),transparent);animation:beam 2.4s linear infinite}
+@keyframes beam{from{top:-30px}to{top:100%}}
+.erp-row{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.erp-btn{all:unset;cursor:pointer;background:#2a9db5;color:#fff;font-size:12px;padding:8px 16px;border-radius:20px}.erp-btn.done{background:#1f9d55}
+.erp-ask{all:unset;cursor:pointer;position:absolute;right:16px;bottom:14px;background:#2a9db5;color:#fff;font-size:12.5px;padding:9px 16px;border-radius:22px;box-shadow:0 6px 16px rgba(42,157,181,.4)}
+.erp-chat{position:absolute;right:16px;bottom:58px;width:340px;background:#fff;border:1px solid #e3e7ee;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:12px;font-size:12px;display:none}.erp-chat.on{display:block;animation:erpin .3s both}
+.erp-chat .q{background:#eef6f8;border-radius:10px;padding:8px 10px;margin-bottom:8px;margin-left:40px}.erp-chat .a{line-height:1.45;color:#1d2433}
