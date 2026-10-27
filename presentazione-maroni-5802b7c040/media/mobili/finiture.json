@@ -1,0 +1,158 @@
+{
+ "Vero30317": {
+  "model": "media/mobili/Vero30317/Vero30317.gltf",
+  "hooks": [
+   {
+    "mat": "STRUTTURA",
+    "label": "DRAWERS",
+    "opts": [
+     {
+      "nome": "Grey Oak",
+      "tex": "media/mobili/tex/Grey-Oak.jpg"
+     },
+     {
+      "nome": "Natural Sucupira",
+      "tex": "media/mobili/tex/Natural-Sucupira.jpg"
+     },
+     {
+      "nome": "Oak",
+      "tex": "media/mobili/tex/Oak.jpg"
+     },
+     {
+      "nome": "Sucupira",
+      "tex": "media/mobili/tex/Sucupira.jpg"
+     },
+     {
+      "nome": "Wenge CWLoak scaled",
+      "tex": "media/mobili/tex/Wenge_CWLoak-scaled.jpg"
+     },
+     {
+      "nome": "Rovere tinto ebano",
+      "tex": "media/mobili/tex/Rovere_tinto_ebano.jpg"
+     },
+     {
+      "nome": "Rovere tinto noce",
+      "tex": "media/mobili/tex/Rovere_tinto_noce.jpg"
+     }
+    ]
+   },
+   {
+    "mat": "INSERTI",
+    "label": "FRAME",
+    "opts": [
+     {
+      "nome": "Copper",
+      "tex": "media/mobili/tex/Copper.jpg"
+     },
+     {
+      "nome": "Dark Bronze 1",
+      "tex": "media/mobili/tex/Dark-Bronze-1.jpg"
+     },
+     {
+      "nome": "Titanium",
+      "tex": "media/mobili/tex/Titanium.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Mera70014": {
+  "model": "media/mobili/Mera70014/Mera70014.gltf",
+  "hooks": [
+   {
+    "mat": "RIVESTIMENTO",
+    "label": "UPHOLSTERY",
+    "opts": [
+     {
+      "nome": "AF 2401",
+      "tex": "media/mobili/tex/AF-2401.jpg"
+     },
+     {
+      "nome": "AF 2402",
+      "tex": "media/mobili/tex/AF-2402.jpg"
+     },
+     {
+      "nome": "AF 2403",
+      "tex": "media/mobili/tex/AF-2403.jpg"
+     },
+     {
+      "nome": "AF 2404",
+      "tex": "media/mobili/tex/AF-2404.jpg"
+     },
+     {
+      "nome": "AF 2405",
+      "tex": "media/mobili/tex/AF-2405.jpg"
+     },
+     {
+      "nome": "CF 701",
+      "tex": "media/mobili/tex/CF-701.jpg"
+     },
+     {
+      "nome": "CF 702",
+      "tex": "media/mobili/tex/CF-702.jpg"
+     },
+     {
+      "nome": "CF 703",
+      "tex": "media/mobili/tex/CF-703.jpg"
+     },
+     {
+      "nome": "CF 704",
+      "tex": "media/mobili/tex/CF-704.jpg"
+     }
+    ]
+   },
+   {
+    "mat": "PUNTALI",
+    "label": "POINTS",
+    "opts": [
+     {
+      "nome": "Copper",
+      "tex": "media/mobili/tex/Copper.jpg"
+     },
+     {
+      "nome": "Dark Bronze 1",
+      "tex": "media/mobili/tex/Dark-Bronze-1.jpg"
+     },
+     {
+      "nome": "Titanium",
+      "tex": "media/mobili/tex/Titanium.jpg"
+     }
+    ]
+   },
+   {
+    "mat": "STRUTTURA",
+    "label": "STRUCTURE",
+    "opts": [
+     {
+      "nome": "Grey Oak",
+      "tex": "media/mobili/tex/Grey-Oak.jpg"
+     },
+     {
+      "nome": "Natural Sucupira",
+      "tex": "media/mobili/tex/Natural-Sucupira.jpg"
+     },
+     {
+      "nome": "Oak",
+      "tex": "media/mobili/tex/Oak.jpg"
+     },
+     {
+      "nome": "Sucupira",
+      "tex": "media/mobili/tex/Sucupira.jpg"
+     },
+     {
+      "nome": "Wenge CWLoak scaled",
+      "tex": "media/mobili/tex/Wenge_CWLoak-scaled.jpg"
+     },
+     {
+      "nome": "Rovere tinto ebano",
+      "tex": "media/mobili/tex/Rovere_tinto_ebano.jpg"
+     },
+     {
+      "nome": "Rovere tinto noce",
+      "tex": "media/mobili/tex/Rovere_tinto_noce.jpg"
+     }
+    ]
+   }
+  ]
+ }
+}

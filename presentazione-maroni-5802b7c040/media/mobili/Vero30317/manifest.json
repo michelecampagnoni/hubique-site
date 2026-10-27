@@ -1,0 +1,96 @@
+{
+  "id": "Vero30317",
+  "slug": "vero-30317",
+  "name": "vero 30317",
+  "basePrice": 0,
+  "currency": "EUR",
+  "model": "/products/Vero30317/Vero30317.gltf",
+  "hooks": [
+    {
+      "id": "struttura",
+      "material": "STRUTTURA",
+      "label": "DRAWERS",
+      "slot": "map",
+      "options": [
+        {
+          "id": "grey-oak",
+          "label": "Grey Oak",
+          "thumb": "/textures/thumb/Grey-Oak-150.jpg",
+          "texture": "/textures/tex/Grey-Oak.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "natural-sucupira",
+          "label": "Natural Sucupira",
+          "thumb": "/textures/thumb/Natural-Sucupira-150.jpg",
+          "texture": "/textures/tex/Natural-Sucupira.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "oak",
+          "label": "Oak",
+          "thumb": "/textures/thumb/Oak-150.jpg",
+          "texture": "/textures/tex/Oak.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "sucupira",
+          "label": "Sucupira",
+          "thumb": "/textures/thumb/Sucupira-150.jpg",
+          "texture": "/textures/tex/Sucupira.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "wenge_cwloak-scaled",
+          "label": "Wenge CWLoak scaled",
+          "thumb": "/textures/thumb/Wenge_CWLoak-scaled-150.jpg",
+          "texture": "/textures/tex/Wenge_CWLoak-scaled.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "rovere_tinto_ebano",
+          "label": "Rovere tinto ebano",
+          "thumb": "/textures/thumb/Rovere_tinto_ebano-150.jpg",
+          "texture": "/textures/tex/Rovere_tinto_ebano.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "rovere_tinto_noce",
+          "label": "Rovere tinto noce",
+          "thumb": "/textures/thumb/Rovere_tinto_noce-150.jpg",
+          "texture": "/textures/tex/Rovere_tinto_noce.jpg",
+          "surcharge": 0
+        }
+      ]
+    },
+    {
+      "id": "inserti",
+      "material": "INSERTI",
+      "label": "FRAME",
+      "slot": "map",
+      "options": [
+        {
+          "id": "copper",
+          "label": "Copper",
+          "thumb": "/textures/thumb/Copper-150.jpg",
+          "texture": "/textures/tex/Copper.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "dark-bronze-1",
+          "label": "Dark Bronze 1",
+          "thumb": "/textures/thumb/Dark-Bronze-1-150.jpg",
+          "texture": "/textures/tex/Dark-Bronze-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "titanium",
+          "label": "Titanium",
+          "thumb": "/textures/thumb/Titanium-150.jpg",
+          "texture": "/textures/tex/Titanium.jpg",
+          "surcharge": 0
+        }
+      ]
+    }
+  ]
+}

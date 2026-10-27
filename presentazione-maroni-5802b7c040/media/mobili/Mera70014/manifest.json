@@ -1,0 +1,1791 @@
+{
+  "id": "Mera70014",
+  "slug": "mera-70014",
+  "name": "mera 70014",
+  "basePrice": 0,
+  "currency": "EUR",
+  "model": "/products/Mera70014/Mera70014.gltf",
+  "hooks": [
+    {
+      "id": "rivestimento",
+      "material": "RIVESTIMENTO",
+      "label": "UPHOLSTERY",
+      "slot": "map",
+      "options": [
+        {
+          "id": "af-2401",
+          "label": "AF 2401",
+          "thumb": "/textures/thumb/AF-2401-150.jpg",
+          "texture": "/textures/tex/AF-2401.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2402",
+          "label": "AF 2402",
+          "thumb": "/textures/thumb/AF-2402-150.jpg",
+          "texture": "/textures/tex/AF-2402.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2403",
+          "label": "AF 2403",
+          "thumb": "/textures/thumb/AF-2403-150.jpg",
+          "texture": "/textures/tex/AF-2403.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2404",
+          "label": "AF 2404",
+          "thumb": "/textures/thumb/AF-2404-150.jpg",
+          "texture": "/textures/tex/AF-2404.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2405",
+          "label": "AF 2405",
+          "thumb": "/textures/thumb/AF-2405-150.jpg",
+          "texture": "/textures/tex/AF-2405.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-701",
+          "label": "CF 701",
+          "thumb": "/textures/thumb/CF-701-150.jpg",
+          "texture": "/textures/tex/CF-701.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-702",
+          "label": "CF 702",
+          "thumb": "/textures/thumb/CF-702-150.jpg",
+          "texture": "/textures/tex/CF-702.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-703",
+          "label": "CF 703",
+          "thumb": "/textures/thumb/CF-703-150.jpg",
+          "texture": "/textures/tex/CF-703.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-704",
+          "label": "CF 704",
+          "thumb": "/textures/thumb/CF-704-150.jpg",
+          "texture": "/textures/tex/CF-704.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-705",
+          "label": "CF 705",
+          "thumb": "/textures/thumb/CF-705-150.jpg",
+          "texture": "/textures/tex/CF-705.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2801",
+          "label": "BF2801",
+          "thumb": "/textures/thumb/BF2801-150.jpg",
+          "texture": "/textures/tex/BF2801.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2802",
+          "label": "BF2802",
+          "thumb": "/textures/thumb/BF2802-150.jpg",
+          "texture": "/textures/tex/BF2802.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2803",
+          "label": "BF2803",
+          "thumb": "/textures/thumb/BF2803-150.jpg",
+          "texture": "/textures/tex/BF2803.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2804",
+          "label": "BF2804",
+          "thumb": "/textures/thumb/BF2804-150.jpg",
+          "texture": "/textures/tex/BF2804.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2805",
+          "label": "BF2805",
+          "thumb": "/textures/thumb/BF2805-150.jpg",
+          "texture": "/textures/tex/BF2805.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1001",
+          "label": "AF 1001",
+          "thumb": "/textures/thumb/AF-1001-150.jpg",
+          "texture": "/textures/tex/AF-1001.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1002",
+          "label": "AF 1002",
+          "thumb": "/textures/thumb/AF-1002-150.jpg",
+          "texture": "/textures/tex/AF-1002.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1003",
+          "label": "AF 1003",
+          "thumb": "/textures/thumb/AF-1003-150.jpg",
+          "texture": "/textures/tex/AF-1003.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1004",
+          "label": "AF 1004",
+          "thumb": "/textures/thumb/AF-1004-150.jpg",
+          "texture": "/textures/tex/AF-1004.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1005",
+          "label": "AF 1005",
+          "thumb": "/textures/thumb/AF-1005-150.jpg",
+          "texture": "/textures/tex/AF-1005.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2601",
+          "label": "AF2601",
+          "thumb": "/textures/thumb/AF2601-150.jpg",
+          "texture": "/textures/tex/AF2601.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2602",
+          "label": "AF2602",
+          "thumb": "/textures/thumb/AF2602-150.jpg",
+          "texture": "/textures/tex/AF2602.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2603",
+          "label": "AF2603",
+          "thumb": "/textures/thumb/AF2603-150.jpg",
+          "texture": "/textures/tex/AF2603.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2604",
+          "label": "AF2604",
+          "thumb": "/textures/thumb/AF2604-150.jpg",
+          "texture": "/textures/tex/AF2604.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2605",
+          "label": "AF2605",
+          "thumb": "/textures/thumb/AF2605-150.jpg",
+          "texture": "/textures/tex/AF2605.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2501",
+          "label": "BF 2501",
+          "thumb": "/textures/thumb/BF-2501-150.jpg",
+          "texture": "/textures/tex/BF-2501.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2502",
+          "label": "BF 2502",
+          "thumb": "/textures/thumb/BF-2502-150.jpg",
+          "texture": "/textures/tex/BF-2502.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2503",
+          "label": "BF 2503",
+          "thumb": "/textures/thumb/BF-2503-150.jpg",
+          "texture": "/textures/tex/BF-2503.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2504",
+          "label": "BF 2504",
+          "thumb": "/textures/thumb/BF-2504-150.jpg",
+          "texture": "/textures/tex/BF-2504.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2505",
+          "label": "BF 2505",
+          "thumb": "/textures/thumb/BF-2505-150.jpg",
+          "texture": "/textures/tex/BF-2505.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "df-501",
+          "label": "DF 501",
+          "thumb": "/textures/thumb/DF-501-150.jpg",
+          "texture": "/textures/tex/DF-501.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "df-502",
+          "label": "DF 502",
+          "thumb": "/textures/thumb/DF-502-150.jpg",
+          "texture": "/textures/tex/DF-502.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "df-503",
+          "label": "DF 503",
+          "thumb": "/textures/thumb/DF-503-150.jpg",
+          "texture": "/textures/tex/DF-503.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "df-504",
+          "label": "DF 504",
+          "thumb": "/textures/thumb/DF-504-150.jpg",
+          "texture": "/textures/tex/DF-504.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "df-505",
+          "label": "DF 505",
+          "thumb": "/textures/thumb/DF-505-150.jpg",
+          "texture": "/textures/tex/DF-505.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1801-1",
+          "label": "AF 1801 1",
+          "thumb": "/textures/thumb/AF-1801-1-150.jpg",
+          "texture": "/textures/tex/AF-1801-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1802-1",
+          "label": "AF 1802 1",
+          "thumb": "/textures/thumb/AF-1802-1-150.jpg",
+          "texture": "/textures/tex/AF-1802-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1803-1",
+          "label": "AF 1803 1",
+          "thumb": "/textures/thumb/AF-1803-1-150.jpg",
+          "texture": "/textures/tex/AF-1803-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1804-1",
+          "label": "AF 1804 1",
+          "thumb": "/textures/thumb/AF-1804-1-150.jpg",
+          "texture": "/textures/tex/AF-1804-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1805-1",
+          "label": "AF 1805 1",
+          "thumb": "/textures/thumb/AF-1805-1-150.jpg",
+          "texture": "/textures/tex/AF-1805-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2701",
+          "label": "AF2701",
+          "thumb": "/textures/thumb/AF2701-150.jpg",
+          "texture": "/textures/tex/AF2701.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2702",
+          "label": "AF2702",
+          "thumb": "/textures/thumb/AF2702-150.jpg",
+          "texture": "/textures/tex/AF2702.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2703",
+          "label": "AF2703",
+          "thumb": "/textures/thumb/AF2703-150.jpg",
+          "texture": "/textures/tex/AF2703.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2704",
+          "label": "AF2704",
+          "thumb": "/textures/thumb/AF2704-150.jpg",
+          "texture": "/textures/tex/AF2704.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2705",
+          "label": "AF2705",
+          "thumb": "/textures/thumb/AF2705-150.jpg",
+          "texture": "/textures/tex/AF2705.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-601",
+          "label": "CF 601",
+          "thumb": "/textures/thumb/CF-601-150.jpg",
+          "texture": "/textures/tex/CF-601.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-602",
+          "label": "CF 602",
+          "thumb": "/textures/thumb/CF-602-150.jpg",
+          "texture": "/textures/tex/CF-602.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-603",
+          "label": "CF 603",
+          "thumb": "/textures/thumb/CF-603-150.jpg",
+          "texture": "/textures/tex/CF-603.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-604",
+          "label": "CF 604",
+          "thumb": "/textures/thumb/CF-604-150.jpg",
+          "texture": "/textures/tex/CF-604.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-605",
+          "label": "CF 605",
+          "thumb": "/textures/thumb/CF-605-150.jpg",
+          "texture": "/textures/tex/CF-605.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2201",
+          "label": "AF 2201",
+          "thumb": "/textures/thumb/AF-2201-150.jpg",
+          "texture": "/textures/tex/AF-2201.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2202",
+          "label": "AF 2202",
+          "thumb": "/textures/thumb/AF-2202-150.jpg",
+          "texture": "/textures/tex/AF-2202.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2203",
+          "label": "AF 2203",
+          "thumb": "/textures/thumb/AF-2203-150.jpg",
+          "texture": "/textures/tex/AF-2203.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2204",
+          "label": "AF 2204",
+          "thumb": "/textures/thumb/AF-2204-150.jpg",
+          "texture": "/textures/tex/AF-2204.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2205",
+          "label": "AF 2205",
+          "thumb": "/textures/thumb/AF-2205-150.jpg",
+          "texture": "/textures/tex/AF-2205.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2201",
+          "label": "BF 2201",
+          "thumb": "/textures/thumb/BF-2201-150.jpg",
+          "texture": "/textures/tex/BF-2201.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2202",
+          "label": "BF 2202",
+          "thumb": "/textures/thumb/BF-2202-150.jpg",
+          "texture": "/textures/tex/BF-2202.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2203",
+          "label": "BF 2203",
+          "thumb": "/textures/thumb/BF-2203-150.jpg",
+          "texture": "/textures/tex/BF-2203.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2204",
+          "label": "BF 2204",
+          "thumb": "/textures/thumb/BF-2204-150.jpg",
+          "texture": "/textures/tex/BF-2204.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2205",
+          "label": "BF 2205",
+          "thumb": "/textures/thumb/BF-2205-150.jpg",
+          "texture": "/textures/tex/BF-2205.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-501",
+          "label": "BF 501",
+          "thumb": "/textures/thumb/BF-501-150.jpg",
+          "texture": "/textures/tex/BF-501.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-502",
+          "label": "BF 502",
+          "thumb": "/textures/thumb/BF-502-150.jpg",
+          "texture": "/textures/tex/BF-502.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-503",
+          "label": "BF 503",
+          "thumb": "/textures/thumb/BF-503-150.jpg",
+          "texture": "/textures/tex/BF-503.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-504",
+          "label": "BF 504",
+          "thumb": "/textures/thumb/BF-504-150.jpg",
+          "texture": "/textures/tex/BF-504.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-505",
+          "label": "BF 505",
+          "thumb": "/textures/thumb/BF-505-150.jpg",
+          "texture": "/textures/tex/BF-505.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2701",
+          "label": "BF2701",
+          "thumb": "/textures/thumb/BF2701-150.jpg",
+          "texture": "/textures/tex/BF2701.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2702",
+          "label": "BF2702",
+          "thumb": "/textures/thumb/BF2702-150.jpg",
+          "texture": "/textures/tex/BF2702.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2703",
+          "label": "BF2703",
+          "thumb": "/textures/thumb/BF2703-150.jpg",
+          "texture": "/textures/tex/BF2703.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2704",
+          "label": "BF2704",
+          "thumb": "/textures/thumb/BF2704-150.jpg",
+          "texture": "/textures/tex/BF2704.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2705",
+          "label": "BF2705",
+          "thumb": "/textures/thumb/BF2705-150.jpg",
+          "texture": "/textures/tex/BF2705.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-601",
+          "label": "BF 601",
+          "thumb": "/textures/thumb/BF-601-150.jpg",
+          "texture": "/textures/tex/BF-601.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-602",
+          "label": "BF 602",
+          "thumb": "/textures/thumb/BF-602-150.jpg",
+          "texture": "/textures/tex/BF-602.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-603",
+          "label": "BF 603",
+          "thumb": "/textures/thumb/BF-603-150.jpg",
+          "texture": "/textures/tex/BF-603.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-604",
+          "label": "BF 604",
+          "thumb": "/textures/thumb/BF-604-150.jpg",
+          "texture": "/textures/tex/BF-604.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-605",
+          "label": "BF 605",
+          "thumb": "/textures/thumb/BF-605-150.jpg",
+          "texture": "/textures/tex/BF-605.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af3001",
+          "label": "AF3001",
+          "thumb": "/textures/thumb/AF3001-150.jpg",
+          "texture": "/textures/tex/AF3001.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af3002",
+          "label": "AF3002",
+          "thumb": "/textures/thumb/AF3002-150.jpg",
+          "texture": "/textures/tex/AF3002.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af3003",
+          "label": "AF3003",
+          "thumb": "/textures/thumb/AF3003-150.jpg",
+          "texture": "/textures/tex/AF3003.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af3004",
+          "label": "AF3004",
+          "thumb": "/textures/thumb/AF3004-150.jpg",
+          "texture": "/textures/tex/AF3004.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af3005",
+          "label": "AF3005",
+          "thumb": "/textures/thumb/AF3005-150.jpg",
+          "texture": "/textures/tex/AF3005.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2801",
+          "label": "AF2801",
+          "thumb": "/textures/thumb/AF2801-150.jpg",
+          "texture": "/textures/tex/AF2801.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2802",
+          "label": "AF2802",
+          "thumb": "/textures/thumb/AF2802-150.jpg",
+          "texture": "/textures/tex/AF2802.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2803",
+          "label": "AF2803",
+          "thumb": "/textures/thumb/AF2803-150.jpg",
+          "texture": "/textures/tex/AF2803.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2804",
+          "label": "AF2804",
+          "thumb": "/textures/thumb/AF2804-150.jpg",
+          "texture": "/textures/tex/AF2804.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2805",
+          "label": "AF2805",
+          "thumb": "/textures/thumb/AF2805-150.jpg",
+          "texture": "/textures/tex/AF2805.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1801",
+          "label": "BF 1801",
+          "thumb": "/textures/thumb/BF-1801-150.jpg",
+          "texture": "/textures/tex/BF-1801.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1802",
+          "label": "BF 1802",
+          "thumb": "/textures/thumb/BF-1802-150.jpg",
+          "texture": "/textures/tex/BF-1802.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1803",
+          "label": "BF 1803",
+          "thumb": "/textures/thumb/BF-1803-150.jpg",
+          "texture": "/textures/tex/BF-1803.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1804",
+          "label": "BF 1804",
+          "thumb": "/textures/thumb/BF-1804-150.jpg",
+          "texture": "/textures/tex/BF-1804.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1805",
+          "label": "BF 1805",
+          "thumb": "/textures/thumb/BF-1805-150.jpg",
+          "texture": "/textures/tex/BF-1805.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1901",
+          "label": "BF 1901",
+          "thumb": "/textures/thumb/BF-1901-150.jpg",
+          "texture": "/textures/tex/BF-1901.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1902",
+          "label": "BF 1902",
+          "thumb": "/textures/thumb/BF-1902-150.jpg",
+          "texture": "/textures/tex/BF-1902.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1903",
+          "label": "BF 1903",
+          "thumb": "/textures/thumb/BF-1903-150.jpg",
+          "texture": "/textures/tex/BF-1903.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1904",
+          "label": "BF 1904",
+          "thumb": "/textures/thumb/BF-1904-150.jpg",
+          "texture": "/textures/tex/BF-1904.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-1905",
+          "label": "BF 1905",
+          "thumb": "/textures/thumb/BF-1905-150.jpg",
+          "texture": "/textures/tex/BF-1905.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1301",
+          "label": "AF 1301",
+          "thumb": "/textures/thumb/AF-1301-150.jpg",
+          "texture": "/textures/tex/AF-1301.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1302",
+          "label": "AF 1302",
+          "thumb": "/textures/thumb/AF-1302-150.jpg",
+          "texture": "/textures/tex/AF-1302.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1303",
+          "label": "AF 1303",
+          "thumb": "/textures/thumb/AF-1303-150.jpg",
+          "texture": "/textures/tex/AF-1303.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1304",
+          "label": "AF 1304",
+          "thumb": "/textures/thumb/AF-1304-150.jpg",
+          "texture": "/textures/tex/AF-1304.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1305",
+          "label": "AF 1305",
+          "thumb": "/textures/thumb/AF-1305-150.jpg",
+          "texture": "/textures/tex/AF-1305.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1901-1",
+          "label": "AF 1901 1",
+          "thumb": "/textures/thumb/AF-1901-1-150.jpg",
+          "texture": "/textures/tex/AF-1901-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1902-1",
+          "label": "AF 1902 1",
+          "thumb": "/textures/thumb/AF-1902-1-150.jpg",
+          "texture": "/textures/tex/AF-1902-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1903-1",
+          "label": "AF 1903 1",
+          "thumb": "/textures/thumb/AF-1903-1-150.jpg",
+          "texture": "/textures/tex/AF-1903-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1905-1",
+          "label": "AF 1905 1",
+          "thumb": "/textures/thumb/AF-1905-1-150.jpg",
+          "texture": "/textures/tex/AF-1905-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2901",
+          "label": "AF2901",
+          "thumb": "/textures/thumb/AF2901-150.jpg",
+          "texture": "/textures/tex/AF2901.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2902",
+          "label": "AF2902",
+          "thumb": "/textures/thumb/AF2902-150.jpg",
+          "texture": "/textures/tex/AF2902.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2903",
+          "label": "AF2903",
+          "thumb": "/textures/thumb/AF2903-150.jpg",
+          "texture": "/textures/tex/AF2903.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2904",
+          "label": "AF2904",
+          "thumb": "/textures/thumb/AF2904-150.jpg",
+          "texture": "/textures/tex/AF2904.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af2905",
+          "label": "AF2905",
+          "thumb": "/textures/thumb/AF2905-150.jpg",
+          "texture": "/textures/tex/AF2905.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2101",
+          "label": "AF 2101",
+          "thumb": "/textures/thumb/AF-2101-150.jpg",
+          "texture": "/textures/tex/AF-2101.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2102",
+          "label": "AF 2102",
+          "thumb": "/textures/thumb/AF-2102-150.jpg",
+          "texture": "/textures/tex/AF-2102.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2103",
+          "label": "AF 2103",
+          "thumb": "/textures/thumb/AF-2103-150.jpg",
+          "texture": "/textures/tex/AF-2103.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2104",
+          "label": "AF 2104",
+          "thumb": "/textures/thumb/AF-2104-150.jpg",
+          "texture": "/textures/tex/AF-2104.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2105",
+          "label": "AF 2105",
+          "thumb": "/textures/thumb/AF-2105-150.jpg",
+          "texture": "/textures/tex/AF-2105.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2601",
+          "label": "BF 2601",
+          "thumb": "/textures/thumb/BF-2601-150.jpg",
+          "texture": "/textures/tex/BF-2601.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2602",
+          "label": "BF 2602",
+          "thumb": "/textures/thumb/BF-2602-150.jpg",
+          "texture": "/textures/tex/BF-2602.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2603",
+          "label": "BF 2603",
+          "thumb": "/textures/thumb/BF-2603-150.jpg",
+          "texture": "/textures/tex/BF-2603.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2604",
+          "label": "BF 2604",
+          "thumb": "/textures/thumb/BF-2604-150.jpg",
+          "texture": "/textures/tex/BF-2604.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2605",
+          "label": "BF 2605",
+          "thumb": "/textures/thumb/BF-2605-150.jpg",
+          "texture": "/textures/tex/BF-2605.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2901",
+          "label": "BF2901",
+          "thumb": "/textures/thumb/BF2901-150.jpg",
+          "texture": "/textures/tex/BF2901.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2902",
+          "label": "BF2902",
+          "thumb": "/textures/thumb/BF2902-150.jpg",
+          "texture": "/textures/tex/BF2902.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2903",
+          "label": "BF2903",
+          "thumb": "/textures/thumb/BF2903-150.jpg",
+          "texture": "/textures/tex/BF2903.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2904",
+          "label": "BF2904",
+          "thumb": "/textures/thumb/BF2904-150.jpg",
+          "texture": "/textures/tex/BF2904.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf2905",
+          "label": "BF2905",
+          "thumb": "/textures/thumb/BF2905-150.jpg",
+          "texture": "/textures/tex/BF2905.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2501",
+          "label": "AF 2501",
+          "thumb": "/textures/thumb/AF-2501-150.jpg",
+          "texture": "/textures/tex/AF-2501.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2502",
+          "label": "AF 2502",
+          "thumb": "/textures/thumb/AF-2502-150.jpg",
+          "texture": "/textures/tex/AF-2502.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2503",
+          "label": "AF 2503",
+          "thumb": "/textures/thumb/AF-2503-150.jpg",
+          "texture": "/textures/tex/AF-2503.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2504",
+          "label": "AF 2504",
+          "thumb": "/textures/thumb/AF-2504-150.jpg",
+          "texture": "/textures/tex/AF-2504.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2505",
+          "label": "AF 2505",
+          "thumb": "/textures/thumb/AF-2505-150.jpg",
+          "texture": "/textures/tex/AF-2505.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1701-1",
+          "label": "AF 1701 1",
+          "thumb": "/textures/thumb/AF-1701-1-150.jpg",
+          "texture": "/textures/tex/AF-1701-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1702-1",
+          "label": "AF 1702 1",
+          "thumb": "/textures/thumb/AF-1702-1-150.jpg",
+          "texture": "/textures/tex/AF-1702-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1703-1",
+          "label": "AF 1703 1",
+          "thumb": "/textures/thumb/AF-1703-1-150.jpg",
+          "texture": "/textures/tex/AF-1703-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1704-1",
+          "label": "AF 1704 1",
+          "thumb": "/textures/thumb/AF-1704-1-150.jpg",
+          "texture": "/textures/tex/AF-1704-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-1705-1",
+          "label": "AF 1705 1",
+          "thumb": "/textures/thumb/AF-1705-1-150.jpg",
+          "texture": "/textures/tex/AF-1705-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-801",
+          "label": "AF 801",
+          "thumb": "/textures/thumb/AF-801-150.jpg",
+          "texture": "/textures/tex/AF-801.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-802",
+          "label": "AF 802",
+          "thumb": "/textures/thumb/AF-802-150.jpg",
+          "texture": "/textures/tex/AF-802.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-803",
+          "label": "AF 803",
+          "thumb": "/textures/thumb/AF-803-150.jpg",
+          "texture": "/textures/tex/AF-803.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-804",
+          "label": "AF 804",
+          "thumb": "/textures/thumb/AF-804-150.jpg",
+          "texture": "/textures/tex/AF-804.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-805",
+          "label": "AF 805",
+          "thumb": "/textures/thumb/AF-805-150.jpg",
+          "texture": "/textures/tex/AF-805.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2001",
+          "label": "AF 2001",
+          "thumb": "/textures/thumb/AF-2001-150.jpg",
+          "texture": "/textures/tex/AF-2001.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2002",
+          "label": "AF 2002",
+          "thumb": "/textures/thumb/AF-2002-150.jpg",
+          "texture": "/textures/tex/AF-2002.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2003",
+          "label": "AF 2003",
+          "thumb": "/textures/thumb/AF-2003-150.jpg",
+          "texture": "/textures/tex/AF-2003.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2004",
+          "label": "AF 2004",
+          "thumb": "/textures/thumb/AF-2004-150.jpg",
+          "texture": "/textures/tex/AF-2004.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2005",
+          "label": "AF 2005",
+          "thumb": "/textures/thumb/AF-2005-150.jpg",
+          "texture": "/textures/tex/AF-2005.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2006",
+          "label": "AF 2006",
+          "thumb": "/textures/thumb/AF-2006-150.jpg",
+          "texture": "/textures/tex/AF-2006.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2007",
+          "label": "AF 2007",
+          "thumb": "/textures/thumb/AF-2007-150.jpg",
+          "texture": "/textures/tex/AF-2007.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2008",
+          "label": "AF 2008",
+          "thumb": "/textures/thumb/AF-2008-150.jpg",
+          "texture": "/textures/tex/AF-2008.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2009",
+          "label": "AF 2009",
+          "thumb": "/textures/thumb/AF-2009-150.jpg",
+          "texture": "/textures/tex/AF-2009.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2010",
+          "label": "AF 2010",
+          "thumb": "/textures/thumb/AF-2010-150.jpg",
+          "texture": "/textures/tex/AF-2010.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-901",
+          "label": "AF 901",
+          "thumb": "/textures/thumb/AF-901-150.jpg",
+          "texture": "/textures/tex/AF-901.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-902",
+          "label": "AF 902",
+          "thumb": "/textures/thumb/AF-902-150.jpg",
+          "texture": "/textures/tex/AF-902.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-903",
+          "label": "AF 903",
+          "thumb": "/textures/thumb/AF-903-150.jpg",
+          "texture": "/textures/tex/AF-903.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-904",
+          "label": "AF 904",
+          "thumb": "/textures/thumb/AF-904-150.jpg",
+          "texture": "/textures/tex/AF-904.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-906",
+          "label": "AF 906",
+          "thumb": "/textures/thumb/AF-906-150.jpg",
+          "texture": "/textures/tex/AF-906.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-907",
+          "label": "AF 907",
+          "thumb": "/textures/thumb/AF-907-150.jpg",
+          "texture": "/textures/tex/AF-907.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-908",
+          "label": "AF 908",
+          "thumb": "/textures/thumb/AF-908-150.jpg",
+          "texture": "/textures/tex/AF-908.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-910",
+          "label": "AF 910",
+          "thumb": "/textures/thumb/AF-910-150.jpg",
+          "texture": "/textures/tex/AF-910.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2301",
+          "label": "AF 2301",
+          "thumb": "/textures/thumb/AF-2301-150.jpg",
+          "texture": "/textures/tex/AF-2301.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2302",
+          "label": "AF 2302",
+          "thumb": "/textures/thumb/AF-2302-150.jpg",
+          "texture": "/textures/tex/AF-2302.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2303",
+          "label": "AF 2303",
+          "thumb": "/textures/thumb/AF-2303-150.jpg",
+          "texture": "/textures/tex/AF-2303.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "af-2304",
+          "label": "AF 2304",
+          "thumb": "/textures/thumb/AF-2304-150.jpg",
+          "texture": "/textures/tex/AF-2304.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-1101",
+          "label": "CF 1101",
+          "thumb": "/textures/thumb/CF-1101-150.jpg",
+          "texture": "/textures/tex/CF-1101.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-1102",
+          "label": "CF 1102",
+          "thumb": "/textures/thumb/CF-1102-150.jpg",
+          "texture": "/textures/tex/CF-1102.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-1103",
+          "label": "CF 1103",
+          "thumb": "/textures/thumb/CF-1103-150.jpg",
+          "texture": "/textures/tex/CF-1103.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-1104",
+          "label": "CF 1104",
+          "thumb": "/textures/thumb/CF-1104-150.jpg",
+          "texture": "/textures/tex/CF-1104.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-1105",
+          "label": "CF 1105",
+          "thumb": "/textures/thumb/CF-1105-150.jpg",
+          "texture": "/textures/tex/CF-1105.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2101",
+          "label": "BF 2101",
+          "thumb": "/textures/thumb/BF-2101-150.jpg",
+          "texture": "/textures/tex/BF-2101.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2102",
+          "label": "BF 2102",
+          "thumb": "/textures/thumb/BF-2102-150.jpg",
+          "texture": "/textures/tex/BF-2102.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2103",
+          "label": "BF 2103",
+          "thumb": "/textures/thumb/BF-2103-150.jpg",
+          "texture": "/textures/tex/BF-2103.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2104",
+          "label": "BF 2104",
+          "thumb": "/textures/thumb/BF-2104-150.jpg",
+          "texture": "/textures/tex/BF-2104.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2105",
+          "label": "BF 2105",
+          "thumb": "/textures/thumb/BF-2105-150.jpg",
+          "texture": "/textures/tex/BF-2105.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2002",
+          "label": "BF 2002",
+          "thumb": "/textures/thumb/BF-2002-150.jpg",
+          "texture": "/textures/tex/BF-2002.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2003",
+          "label": "BF 2003",
+          "thumb": "/textures/thumb/BF-2003-150.jpg",
+          "texture": "/textures/tex/BF-2003.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2004",
+          "label": "BF 2004",
+          "thumb": "/textures/thumb/BF-2004-150.jpg",
+          "texture": "/textures/tex/BF-2004.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2005",
+          "label": "BF 2005",
+          "thumb": "/textures/thumb/BF-2005-150.jpg",
+          "texture": "/textures/tex/BF-2005.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bf-2001",
+          "label": "BF 2001",
+          "thumb": "/textures/thumb/BF-2001-150.jpg",
+          "texture": "/textures/tex/BF-2001.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-401",
+          "label": "CF 401",
+          "thumb": "/textures/thumb/CF-401-150.jpg",
+          "texture": "/textures/tex/CF-401.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-402",
+          "label": "CF 402",
+          "thumb": "/textures/thumb/CF-402-150.jpg",
+          "texture": "/textures/tex/CF-402.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-403",
+          "label": "CF 403",
+          "thumb": "/textures/thumb/CF-403-150.jpg",
+          "texture": "/textures/tex/CF-403.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-404",
+          "label": "CF 404",
+          "thumb": "/textures/thumb/CF-404-150.jpg",
+          "texture": "/textures/tex/CF-404.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "cf-405",
+          "label": "CF 405",
+          "thumb": "/textures/thumb/CF-405-150.jpg",
+          "texture": "/textures/tex/CF-405.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-001",
+          "label": "BL 001",
+          "thumb": "/textures/thumb/BL-001-150.jpg",
+          "texture": "/textures/tex/BL-001.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-002",
+          "label": "BL 002",
+          "thumb": "/textures/thumb/BL-002-150.jpg",
+          "texture": "/textures/tex/BL-002.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-003",
+          "label": "BL 003",
+          "thumb": "/textures/thumb/BL-003-150.jpg",
+          "texture": "/textures/tex/BL-003.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-004",
+          "label": "BL 004",
+          "thumb": "/textures/thumb/BL-004-150.jpg",
+          "texture": "/textures/tex/BL-004.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-005",
+          "label": "BL 005",
+          "thumb": "/textures/thumb/BL-005-150.jpg",
+          "texture": "/textures/tex/BL-005.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-201",
+          "label": "BL 201",
+          "thumb": "/textures/thumb/BL-201-150.jpg",
+          "texture": "/textures/tex/BL-201.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-202",
+          "label": "BL 202",
+          "thumb": "/textures/thumb/BL-202-150.jpg",
+          "texture": "/textures/tex/BL-202.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-203",
+          "label": "BL 203",
+          "thumb": "/textures/thumb/BL-203-150.jpg",
+          "texture": "/textures/tex/BL-203.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-204",
+          "label": "BL 204",
+          "thumb": "/textures/thumb/BL-204-150.jpg",
+          "texture": "/textures/tex/BL-204.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-205",
+          "label": "BL 205",
+          "thumb": "/textures/thumb/BL-205-150.jpg",
+          "texture": "/textures/tex/BL-205.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-206",
+          "label": "BL 206",
+          "thumb": "/textures/thumb/BL-206-150.jpg",
+          "texture": "/textures/tex/BL-206.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-207",
+          "label": "BL 207",
+          "thumb": "/textures/thumb/BL-207-150.jpg",
+          "texture": "/textures/tex/BL-207.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-208",
+          "label": "BL 208",
+          "thumb": "/textures/thumb/BL-208-150.jpg",
+          "texture": "/textures/tex/BL-208.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-209",
+          "label": "BL 209",
+          "thumb": "/textures/thumb/BL-209-150.jpg",
+          "texture": "/textures/tex/BL-209.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-210",
+          "label": "BL 210",
+          "thumb": "/textures/thumb/BL-210-150.jpg",
+          "texture": "/textures/tex/BL-210.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-211",
+          "label": "BL 211",
+          "thumb": "/textures/thumb/BL-211-150.jpg",
+          "texture": "/textures/tex/BL-211.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-212",
+          "label": "BL 212",
+          "thumb": "/textures/thumb/BL-212-150.jpg",
+          "texture": "/textures/tex/BL-212.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-213",
+          "label": "BL 213",
+          "thumb": "/textures/thumb/BL-213-150.jpg",
+          "texture": "/textures/tex/BL-213.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-214",
+          "label": "BL 214",
+          "thumb": "/textures/thumb/BL-214-150.jpg",
+          "texture": "/textures/tex/BL-214.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-215",
+          "label": "BL 215",
+          "thumb": "/textures/thumb/BL-215-150.jpg",
+          "texture": "/textures/tex/BL-215.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-601",
+          "label": "AL 601",
+          "thumb": "/textures/thumb/AL-601-150.jpg",
+          "texture": "/textures/tex/AL-601.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-602",
+          "label": "AL 602",
+          "thumb": "/textures/thumb/AL-602-150.jpg",
+          "texture": "/textures/tex/AL-602.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-603",
+          "label": "AL 603",
+          "thumb": "/textures/thumb/AL-603-150.jpg",
+          "texture": "/textures/tex/AL-603.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-604",
+          "label": "AL 604",
+          "thumb": "/textures/thumb/AL-604-150.jpg",
+          "texture": "/textures/tex/AL-604.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-605",
+          "label": "AL 605",
+          "thumb": "/textures/thumb/AL-605-150.jpg",
+          "texture": "/textures/tex/AL-605.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-501",
+          "label": "AL 501",
+          "thumb": "/textures/thumb/AL-501-150.jpg",
+          "texture": "/textures/tex/AL-501.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-502",
+          "label": "AL 502",
+          "thumb": "/textures/thumb/AL-502-150.jpg",
+          "texture": "/textures/tex/AL-502.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-503",
+          "label": "AL 503",
+          "thumb": "/textures/thumb/AL-503-150.jpg",
+          "texture": "/textures/tex/AL-503.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-504",
+          "label": "AL 504",
+          "thumb": "/textures/thumb/AL-504-150.jpg",
+          "texture": "/textures/tex/AL-504.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-505",
+          "label": "AL 505",
+          "thumb": "/textures/thumb/AL-505-150.jpg",
+          "texture": "/textures/tex/AL-505.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-103",
+          "label": "BL 103",
+          "thumb": "/textures/thumb/BL-103-150.jpg",
+          "texture": "/textures/tex/BL-103.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-104",
+          "label": "BL 104",
+          "thumb": "/textures/thumb/BL-104-150.jpg",
+          "texture": "/textures/tex/BL-104.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-105",
+          "label": "BL 105",
+          "thumb": "/textures/thumb/BL-105-150.jpg",
+          "texture": "/textures/tex/BL-105.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-101",
+          "label": "BL 101",
+          "thumb": "/textures/thumb/BL-101-150.jpg",
+          "texture": "/textures/tex/BL-101.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-102",
+          "label": "BL 102",
+          "thumb": "/textures/thumb/BL-102-150.jpg",
+          "texture": "/textures/tex/BL-102.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-106",
+          "label": "BL 106",
+          "thumb": "/textures/thumb/BL-106-150.jpg",
+          "texture": "/textures/tex/BL-106.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-107",
+          "label": "BL 107",
+          "thumb": "/textures/thumb/BL-107-150.jpg",
+          "texture": "/textures/tex/BL-107.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-108",
+          "label": "BL 108",
+          "thumb": "/textures/thumb/BL-108-150.jpg",
+          "texture": "/textures/tex/BL-108.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-109",
+          "label": "BL 109",
+          "thumb": "/textures/thumb/BL-109-150.jpg",
+          "texture": "/textures/tex/BL-109.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "bl-110",
+          "label": "BL 110",
+          "thumb": "/textures/thumb/BL-110-150.jpg",
+          "texture": "/textures/tex/BL-110.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-101",
+          "label": "AL 101",
+          "thumb": "/textures/thumb/AL-101-150.jpg",
+          "texture": "/textures/tex/AL-101.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-108",
+          "label": "AL 108",
+          "thumb": "/textures/thumb/AL-108-150.jpg",
+          "texture": "/textures/tex/AL-108.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-109",
+          "label": "AL 109",
+          "thumb": "/textures/thumb/AL-109-150.jpg",
+          "texture": "/textures/tex/AL-109.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-102",
+          "label": "AL 102",
+          "thumb": "/textures/thumb/AL-102-150.jpg",
+          "texture": "/textures/tex/AL-102.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-103",
+          "label": "AL 103",
+          "thumb": "/textures/thumb/AL-103-150.jpg",
+          "texture": "/textures/tex/AL-103.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-104",
+          "label": "AL 104",
+          "thumb": "/textures/thumb/AL-104-150.jpg",
+          "texture": "/textures/tex/AL-104.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-105",
+          "label": "AL 105",
+          "thumb": "/textures/thumb/AL-105-150.jpg",
+          "texture": "/textures/tex/AL-105.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-106",
+          "label": "AL 106",
+          "thumb": "/textures/thumb/AL-106-150.jpg",
+          "texture": "/textures/tex/AL-106.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-107",
+          "label": "AL 107",
+          "thumb": "/textures/thumb/AL-107-150.jpg",
+          "texture": "/textures/tex/AL-107.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-110",
+          "label": "AL 110",
+          "thumb": "/textures/thumb/AL-110-150.jpg",
+          "texture": "/textures/tex/AL-110.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-111",
+          "label": "AL 111",
+          "thumb": "/textures/thumb/AL-111-150.jpg",
+          "texture": "/textures/tex/AL-111.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-112",
+          "label": "AL 112",
+          "thumb": "/textures/thumb/AL-112-150.jpg",
+          "texture": "/textures/tex/AL-112.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-113",
+          "label": "AL 113",
+          "thumb": "/textures/thumb/AL-113-150.jpg",
+          "texture": "/textures/tex/AL-113.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-114",
+          "label": "AL 114",
+          "thumb": "/textures/thumb/AL-114-150.jpg",
+          "texture": "/textures/tex/AL-114.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-115",
+          "label": "AL 115",
+          "thumb": "/textures/thumb/AL-115-150.jpg",
+          "texture": "/textures/tex/AL-115.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-401",
+          "label": "AL 401",
+          "thumb": "/textures/thumb/AL-401-150.jpg",
+          "texture": "/textures/tex/AL-401.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-402",
+          "label": "AL 402",
+          "thumb": "/textures/thumb/AL-402-150.jpg",
+          "texture": "/textures/tex/AL-402.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-403",
+          "label": "AL 403",
+          "thumb": "/textures/thumb/AL-403-150.jpg",
+          "texture": "/textures/tex/AL-403.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-404",
+          "label": "AL 404",
+          "thumb": "/textures/thumb/AL-404-150.jpg",
+          "texture": "/textures/tex/AL-404.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "al-405",
+          "label": "AL 405",
+          "thumb": "/textures/thumb/AL-405-150.jpg",
+          "texture": "/textures/tex/AL-405.jpg",
+          "surcharge": 0
+        }
+      ]
+    },
+    {
+      "id": "puntali",
+      "material": "PUNTALI",
+      "label": "POINTS",
+      "slot": "map",
+      "options": [
+        {
+          "id": "copper",
+          "label": "Copper",
+          "thumb": "/textures/thumb/Copper-150.jpg",
+          "texture": "/textures/tex/Copper.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "dark-bronze-1",
+          "label": "Dark Bronze 1",
+          "thumb": "/textures/thumb/Dark-Bronze-1-150.jpg",
+          "texture": "/textures/tex/Dark-Bronze-1.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "titanium",
+          "label": "Titanium",
+          "thumb": "/textures/thumb/Titanium-150.jpg",
+          "texture": "/textures/tex/Titanium.jpg",
+          "surcharge": 0
+        }
+      ]
+    },
+    {
+      "id": "struttura",
+      "material": "STRUTTURA",
+      "label": "STRUCTURE",
+      "slot": "map",
+      "options": [
+        {
+          "id": "grey-oak",
+          "label": "Grey Oak",
+          "thumb": "/textures/thumb/Grey-Oak-150.jpg",
+          "texture": "/textures/tex/Grey-Oak.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "natural-sucupira",
+          "label": "Natural Sucupira",
+          "thumb": "/textures/thumb/Natural-Sucupira-150.jpg",
+          "texture": "/textures/tex/Natural-Sucupira.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "oak",
+          "label": "Oak",
+          "thumb": "/textures/thumb/Oak-150.jpg",
+          "texture": "/textures/tex/Oak.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "sucupira",
+          "label": "Sucupira",
+          "thumb": "/textures/thumb/Sucupira-150.jpg",
+          "texture": "/textures/tex/Sucupira.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "wenge_cwloak-scaled",
+          "label": "Wenge CWLoak scaled",
+          "thumb": "/textures/thumb/Wenge_CWLoak-scaled-150.jpg",
+          "texture": "/textures/tex/Wenge_CWLoak-scaled.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "rovere_tinto_ebano",
+          "label": "Rovere tinto ebano",
+          "thumb": "/textures/thumb/Rovere_tinto_ebano-150.jpg",
+          "texture": "/textures/tex/Rovere_tinto_ebano.jpg",
+          "surcharge": 0
+        },
+        {
+          "id": "rovere_tinto_noce",
+          "label": "Rovere tinto noce",
+          "thumb": "/textures/thumb/Rovere_tinto_noce-150.jpg",
+          "texture": "/textures/tex/Rovere_tinto_noce.jpg",
+          "surcharge": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<title>Hubique per Maroni · AI Integration Tools</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/stile.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="vignette"></div>
+<header id="top">
+  <span class="logo"><b>HUBIQUE</b> · AI INTEGRATION TOOLS · PER MARONI</span>
+  <nav id="nav"></nav>
+  <span id="count">01</span>
+</header>
+<main id="deck"></main>
+<footer id="bottom">
+  <span id="clock"></span>
+  <span>TRASCINA PER RUOTARE · PASSA SUGLI OGGETTI · H PER L'AIUTO</span>
+  <span class="arrows"><button id="prev">◀</button><button id="next">▶</button></span>
+</footer>
+<div id="bar"></div>
+<div id="tip"></div>
+<div id="scanlines"></div>
+<div id="help"><div class="panel">
+  <div style="color:var(--cyan);letter-spacing:.25em;font-weight:600;margin-bottom:8px">COMANDI</div>
+  <kbd>→</kbd> <kbd>spazio</kbd> avanti · <kbd>←</kbd> indietro<br>
+  <kbd>1</kbd>…<kbd>7</kbd> vai al Kit · <kbd>F</kbd> schermo intero<br>
+  Mouse sulla scena: la inclina · trascina: la fa girare · passa sugli oggetti: si accendono · clic: apre o approva<br>
+  Schermate: clic sull'elenco a destra per sceglierle
+</div></div>
+
+<script src="live/dashboard/data/italia-regioni.js"></script>
+<script src="live/dashboard/data/italia-rilievo.js"></script>
+<script src="live/mappa/data/punti-prova.js"></script>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
