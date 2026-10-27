@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Castangia 1850 · Questionario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#f3efe6;--navy:#1c2836;--ink:#15191f;--gold:#a2814f;--sand:#c8b596;--terra:#a96a3f;--line:rgba(28,40,54,.14);
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Jost","Helvetica Neue",sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--ivory);color:var(--ink);font:300 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+.bar{position:sticky;top:0;z-index:10;background:rgba(21,25,31,.96);color:var(--ivory);display:flex;align-items:center;gap:22px;padding:14px clamp(18px,4vw,56px);font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.bar .marchio{font:400 15px/1 var(--serif);letter-spacing:.42em}
+.bar .sp{flex:1}.bar label{display:flex;align-items:center;gap:10px;opacity:.85}
+.bar input{background:transparent;border:0;border-bottom:1px solid rgba(243,239,230,.4);color:var(--ivory);font:300 13px var(--sans);letter-spacing:.05em;padding:3px 2px;width:170px;text-transform:none}
+.bar input:focus{outline:none;border-color:var(--gold)}
+#prog{color:var(--sand)}#stato{opacity:.6;min-width:120px;text-align:right}
+.hero{position:relative;height:min(78vh,640px);background:#111 url(testata.jpg) 70% 35%/cover;display:flex;align-items:flex-end}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(21,25,31,.88) 0%,rgba(21,25,31,.55) 45%,rgba(21,25,31,.05) 75%),linear-gradient(180deg,transparent 55%,rgba(21,25,31,.6))}
+.hero .in{position:relative;z-index:1;color:var(--ivory);padding:0 clamp(22px,6vw,90px) clamp(36px,7vh,70px);max-width:620px}
+.kick{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--sand)}
+.hero h1{font:300 clamp(38px,6vw,68px)/1.05 var(--serif);margin:14px 0 16px}.hero h1 em{font-style:italic;color:var(--sand)}
+.hero p{font-size:16px;max-width:560px;opacity:.88;margin:0}
+main{max-width:920px;margin:0 auto;padding:0 clamp(20px,5vw,40px) 120px}
+.come{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-bottom:1px solid var(--line);padding:56px 0 46px}
+.come div{font-size:14px}.come b{display:block;font:400 22px/1.2 var(--serif);color:var(--navy);margin-bottom:6px}
+#err{display:none;margin:30px 0;padding:16px 20px;border:1px solid var(--terra);color:var(--terra)}
+.sez{padding:70px 0 10px}
+.sez .num{font:300 italic 64px/1 var(--serif);color:var(--gold)}
+.sez h2{font:300 clamp(30px,4vw,42px)/1.15 var(--serif);color:var(--navy);margin:6px 0 4px}
+.sez .conta{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.intro{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center;margin:34px 0 10px;background:var(--navy);color:var(--ivory)}
+.intro img{width:200px;height:240px;object-fit:cover;display:block}
+.intro p{font:300 italic 21px/1.45 var(--serif);margin:0;padding:24px 30px 24px 0}
+.q{padding:34px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:54px 1fr;gap:0 10px}
+.q .k{font:400 15px var(--serif);color:var(--gold);padding-top:4px}
+.q .t{font:400 23px/1.3 var(--serif);color:var(--navy)}
+.q .why{display:block;font:300 14px/1.5 var(--sans);color:#6b6457;margin-top:6px}
+.q .c{grid-column:2}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.opts label{cursor:pointer}.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;border:1px solid rgba(28,40,54,.35);padding:8px 16px;font:400 13px/1.3 var(--sans);letter-spacing:.03em;color:var(--navy);transition:all .2s}
+.opts label:hover span{border-color:var(--gold)}
+.opts input:checked+span{background:var(--navy);border-color:var(--navy);color:var(--ivory)}
+.opts input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.multi{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+textarea{width:100%;min-height:46px;margin-top:12px;background:transparent;border:0;border-bottom:1px solid rgba(28,40,54,.3);font:300 16px/1.5 var(--sans);color:var(--ink);padding:8px 2px;resize:vertical}
+textarea::placeholder{color:#a39b8c;font-style:italic}textarea:focus{outline:none;border-color:var(--gold)}
+.meta{font-size:12px;color:#8b8373;margin-top:6px;min-height:16px}
+.q.ok .k:after{content:" ✓";color:var(--navy)}
+.fine{margin-top:80px;text-align:center}
+.fine .m{font:400 26px/1 var(--serif);letter-spacing:.42em;color:var(--navy)}
+.fine p{font-size:13px;color:#6b6457;max-width:520px;margin:18px auto 0}
+.fine small{display:block;margin-top:30px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:700px){.bar{flex-wrap:wrap;gap:10px 16px;font-size:10px}.bar .sp{display:none}.bar input{width:130px}#stato{min-width:0}
+  .come{grid-template-columns:1fr;gap:18px}.intro{grid-template-columns:1fr}.intro img{width:100%;height:200px}.intro p{padding:0 22px 24px}
+  .q{grid-template-columns:1fr}.q .k{display:none}.q .c{grid-column:1}}
+</style></head><body>
+<div class="bar"><span class="marchio">CASTANGIA 1850</span><span class="sp"></span><label>Chi compila <input id="chi" placeholder="il vostro nome"></label><span id="prog"></span><span id="stato">caricamento…</span></div>
+<header class="hero"><div class="in">
+  <div class="kick">Area rivenditori · assistente digitale</div>
+  <h1>Un assistente per i vostri <em>retailer</em></h1>
+  <p>Poche domande per capire come lavorate e cosa vi serve davvero. Ci aiutano a costruire un sistema su misura, come i vostri abiti.</p>
+</div></header>
+<main>
+  <div class="come">
+    <div><b>Si salva da solo</b>Ogni risposta viene registrata mentre scrivete: non c'è nulla da inviare.</div>
+    <div><b>Dieci minuti</b>Quasi tutte le domande sono a scelta; nella casella sotto potete aggiungere quello che volete.</div>
+    <div><b>Anche in più persone</b>Potete interrompere e riprendere, o farlo completare a chi segue i tessuti.</div>
+  </div>
+  <div id="err"></div>
+  <div id="corpo"></div>
+  <div class="fine"><div class="m">CASTANGIA 1850</div>
+    <p>Grazie. Appena avete risposto vi proponiamo come partire: prima con un pannello semplice, poi un passo alla volta.</p>
+    <small>Questionario preparato da Hubique</small></div>
+</main>
+<script>
+(function(){
+const FN='https://hkssysjqrpyauhbqxehr.supabase.co/functions/v1/questionario';
+const P=new URLSearchParams(location.search),T=P.get('t')||'',Q=P.get('q')||'castangia-2026-10';
+const API=FN+'?t='+encodeURIComponent(T)+'&q='+encodeURIComponent(Q);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const stato=document.getElementById('stato'),err=document.getElementById('err'),corpo=document.getElementById('corpo'),chi=document.getElementById('chi');
+const ROMANI=['I','II','III','IV','V','VI'];
+chi.value=localStorage.getItem('q_chi')||'';chi.addEventListener('input',()=>localStorage.setItem('q_chi',chi.value));
+function errore(m){err.textContent=m;err.style.display='block';stato.textContent='';}
+if(!T){errore('Manca il codice di accesso nel link: riaprite il collegamento ricevuto per mail.');return;}
+let tot=0,coda=0;
+fetch(API+'&f=dati').then(r=>{if(!r.ok)throw new Error(r.status===403?'Codice di accesso non valido.':'Errore '+r.status);return r.json();}).then(q=>{
+  let fatte=0,html='';
+  q.schema.forEach((sec,si)=>{
+    const tit=String(sec.titolo).replace(/^\d+\.\s*/,'');
+    html+='<section class="sez"><div class="num">'+(ROMANI[si]||si+1)+'</div><h2>'+esc(tit)+'</h2><div class="conta">'+sec.domande.length+' domande</div>';
+    if(sec.intro)html+='<div class="intro"><img src="tessuto.jpg" alt=""><p>'+esc(sec.intro)+'</p></div>';
+    sec.domande.forEach((d,qi)=>{tot++;const id=(si+1)+'.'+(qi+1),r=q.dati[id]||{};if(r.a||r.o)fatte++;
+      const sel=d.multi?String(r.o||'').split('; '):[r.o],tipo=d.multi?'checkbox':'radio';
+      const opts=d.opzioni?'<div class="opts">'+d.opzioni.map(o=>'<label><input type="'+tipo+'" name="o'+id+'" value="'+esc(o)+'"'+(sel.includes(o)?' checked':'')+'><span>'+esc(o)+'</span></label>').join('')+'</div>'+(d.multi?'<div class="multi">anche più di una</div>':''):'';
+      html+='<div class="q'+((r.a||r.o)?' ok':'')+'" data-id="'+id+'"><div class="k">'+id+'</div><div class="t">'+esc(d.testo)+(d.nota?'<span class="why">'+esc(d.nota)+'</span>':'')+'</div><div class="c">'+opts+'<textarea placeholder="'+(d.opzioni?'note, se volete':'la vostra risposta')+'">'+esc(r.a||'')+'</textarea><div class="meta">'+(r.chi?'ultima modifica: '+esc(r.chi)+(r.quando?' · '+esc(r.quando):''):'')+'</div></div></div>';
+    });
+    html+='</section>';
+  });
+  corpo.innerHTML=html;document.getElementById('prog').textContent=fatte+' / '+tot;stato.textContent='tutto salvato';
+  function salva(d){const id=d.dataset.id,ta=d.querySelector('textarea'),o=Array.from(d.querySelectorAll('.opts input:checked')).map(x=>x.value).join('; ');
+    coda++;stato.textContent='salvataggio…';stato.style.color='';
+    fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id,a:ta.value,o,chi:chi.value||'anonimo'})})
+     .then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{coda--;if(!coda)stato.textContent='salvato alle '+new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+       d.querySelector('.meta').textContent='ultima modifica: '+(chi.value||'anonimo')+' · '+j.quando;d.classList.toggle('ok',!!(ta.value||o));
+       document.getElementById('prog').textContent=document.querySelectorAll('.q.ok').length+' / '+tot;})
+     .catch(()=>{coda--;stato.textContent='errore, riprovate';stato.style.color='#e0a27a';});}
+  corpo.querySelectorAll('.q').forEach(d=>{let t;const ta=d.querySelector('textarea');
+    ta.addEventListener('input',()=>{clearTimeout(t);stato.textContent='modifiche in corso…';t=setTimeout(()=>salva(d),900);ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';});
+    ta.addEventListener('blur',()=>{clearTimeout(t);salva(d);});
+    d.querySelectorAll('.opts input').forEach(r=>r.addEventListener('change',()=>salva(d)));});
+}).catch(e=>errore(e.message||'Errore di caricamento.'));
+})();
+</script></body></html>
