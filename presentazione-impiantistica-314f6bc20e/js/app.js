@@ -197,7 +197,7 @@ const SLIDES = [
         <div class="dep r" style="--i:3"><h3>INSTALLATO DA VOI</h3><p>Sui vostri server, nella vostra rete. Stesse funzioni.</p></div>
       </div>
       <div class="same r" style="--i:4">In entrambi i casi un'<b>istanza unica e dedicata</b>, non una piattaforma condivisa con altri clienti. I dati sono vostri ed esportabili quando volete.</div>
-      <div class="same r" style="--i:5;margin-top:10px"><b>Richiedi una demo:</b> vi mostriamo il flusso sul caso tipico della vostra azienda.</div><div class="contact r" style="--i:6"><div class="mk">HQ</div><div><div class="who">Michele Campagnoni</div><div class="role">CEO · HUBIQUE</div><a class="pe" href="mailto:m.campagnoni@hubique.it">m.campagnoni@hubique.it</a></div></div>
+      <div class="same r" style="--i:5;margin-top:10px"><a href="https://demo.realhub.it/login?da=presentazione-impiantistica" target="_blank" rel="noopener"><b>Richiedi una demo:</b></a> ricevi subito gli accessi e prova il gestionale con dati dimostrativi.</div><div class="contact r" style="--i:6"><div class="mk">HQ</div><div><div class="who">Michele Campagnoni</div><div class="role">CEO · HUBIQUE</div><a class="pe" href="mailto:m.campagnoni@hubique.it">m.campagnoni@hubique.it</a></div></div>
     </div>` },
 ];
 
