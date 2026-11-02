@@ -87,8 +87,8 @@ const SLIDES = [
         </div>
         <div class="ofc r" style="--i:3"><h3>Prezzo</h3>
           ${riga('Listino', '2.000 € <small>+ IVA</small>')}
-          ${riga('Sconto di fine mese', '−500 €')}
-          ${riga('Confermando entro il 31/10/2026', '1.500 € <small>+ IVA</small>', 'forte')}
+          ${riga('Sconto di benvenuto', '−500 €')}
+          ${riga('Confermando entro il 06/11/2026', '1.500 € <small>+ IVA</small>', 'forte')}
           ${riga('Dal secondo anno, rinnovo annuale', '1.500 € <small>+ IVA</small>')}
         </div>
         <div class="ofc tot r" style="--i:4"><h3>Proposta</h3>
