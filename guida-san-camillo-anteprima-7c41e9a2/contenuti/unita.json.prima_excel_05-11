@@ -15,7 +15,8 @@
    "telefoni": [
     "06 5870 4881"
    ],
-   "piano": "1 /2"
+   "piano": "1 /2",
+   "responsabile": "Direttore/Responsabile Maria Cristina Macciomei"
   },
   {
    "id": 2,
@@ -50,7 +51,8 @@
    "telefoni": [
     "06 5870 6166"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile vacante"
   },
   {
    "id": 4,
@@ -66,7 +68,8 @@
    "telefoni": [
     "06 5870 4208"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Fabiola Lapolla"
   },
   {
    "id": 5,
@@ -83,7 +86,7 @@
     "06 5870 3081"
    ],
    "piano": "Piano terra",
-   "responsabile_precedente": "Direttore Dott. Emilio D'Avino email edavino@scamilloforlanini.rm.it"
+   "responsabile": "Direttore/Responsabile Emilio D'Avino"
   },
   {
    "id": 6,
@@ -101,7 +104,7 @@
     "06 5870 4391"
    ],
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott. Flavio Grassi"
+   "responsabile": "Direttore/Responsabile Flavio Grassi"
   },
   {
    "id": 7,
@@ -117,7 +120,8 @@
    "telefoni": [
     "06 5870 4857"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Gianpaolo Luzzi"
   },
   {
    "id": 8,
@@ -153,7 +157,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOSD DIAGNOSTICA CUORE",
    "piano": "Piano terra",
-   "responsabile_precedente": "Responsabile Dott. Enrico Natale"
+   "responsabile": "Direttore/Responsabile Enrico Natale"
   },
   {
    "id": 10,
@@ -169,7 +173,8 @@
    "telefoni": [
     "06 5870 4530"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Enrico Natale"
   },
   {
    "id": 11,
@@ -188,7 +193,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uos-cardiologia-interventistica",
    "piano": ", 1°,2° e 5°",
-   "responsabile_precedente": "Direttore Dott. Gabrielli Domenico"
+   "responsabile": "Direttore/Responsabile Domenico Gabrielli"
   },
   {
    "id": 12,
@@ -203,7 +208,8 @@
    "telefoni": [
     "06 5870 4316"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Domenico Gabrielli"
   },
   {
    "id": 13,
@@ -220,7 +226,8 @@
    "telefoni": [
     "06 5870 4419"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Marco Pugliese"
   },
   {
    "id": 14,
@@ -236,7 +243,8 @@
    "telefoni": [
     "06 5870 4519"
    ],
-   "piano": "5° piano"
+   "piano": "5° piano",
+   "responsabile": "Direttore/Responsabile Antonio Terranova"
   },
   {
    "id": 15,
@@ -271,7 +279,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uos-cardiologia-interventistica",
    "piano": "Piano terra",
-   "responsabile_precedente": "Responsabile Dott. Francesco De Felice"
+   "responsabile": "Direttore/Responsabile Francesco De Felice"
   },
   {
    "id": 17,
@@ -287,7 +295,8 @@
    "telefoni": [
     "06 5870 3322"
    ],
-   "piano": "2° piano"
+   "piano": "2° piano",
+   "responsabile": "Direttore/Responsabile Francesco De Felice"
   },
   {
    "id": 18,
@@ -305,7 +314,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOS CARDIOARITMOLOGIA",
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott. Avella Andrea"
+   "responsabile": "Direttore/Responsabile Andrea Avella"
   },
   {
    "id": 19,
@@ -323,7 +332,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC CHIRURGIA GENERALE E DEI TRAPIANTI D'ORGANO",
    "piano": "4° piano",
-   "responsabile_precedente": "Direttore: Dott. Giuseppe Maria Ettorre"
+   "responsabile": "Direttore/Responsabile Giuseppe Maria Ettorre"
   },
   {
    "id": 20,
@@ -343,7 +352,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-maxillo-facciale",
    "piano": "1° piano",
-   "responsabile_precedente": "Direttore f.f. Dott. Pistilli Roberto"
+   "responsabile": "Direttore/Responsabile Andrea Cassoni"
   },
   {
    "id": 21,
@@ -356,7 +365,8 @@
    "edificio_nome": "BACCELLI",
    "edificio_lat": 41.868986,
    "edificio_lng": 12.456022,
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Andrea Cassoni"
   },
   {
    "id": 22,
@@ -387,7 +397,7 @@
     "06 5870 4464"
    ],
    "piano": "2° piano",
-   "responsabile_precedente": "Direttore Dott. Maritati Gabriele"
+   "responsabile": "Direttore/Responsabile Gabriele Maritati"
   },
   {
    "id": 24,
@@ -404,7 +414,7 @@
     "06 5870 4464"
    ],
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott. Pannone Alfonso"
+   "responsabile": "Direttore/Responsabile Alfonso Pannone"
   },
   {
    "id": 25,
@@ -421,7 +431,8 @@
    "telefoni": [
     "06 5870 4918"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Giuseppe Cardillo"
   },
   {
    "id": 26,
@@ -437,7 +448,8 @@
    "telefoni": [
     "06 5870 4640"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Annamaria Mazzotta"
   },
   {
    "id": 27,
@@ -457,7 +469,8 @@
     "06 5870 5551"
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOSD DIABETOLOGIA",
-   "piano": "2° piano"
+   "piano": "2° piano",
+   "responsabile": "Direttore/Responsabile Maria Rosaria Nardone"
   },
   {
    "id": 28,
@@ -472,7 +485,8 @@
    "telefoni": [
     "06 5870 4552"
    ],
-   "piano": "5° piano"
+   "piano": "5° piano",
+   "responsabile": "Direttore/Responsabile Maria Grazia Carbonelli"
   },
   {
    "id": 29,
@@ -492,7 +506,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOSD ENDOCRINOLOGIA",
    "piano": "3° piano",
-   "responsabile_precedente": "Responsabile f.f. Dott. Roberto Baldelli"
+   "responsabile": "Direttore/Responsabile Roberto Bandelli"
   },
   {
    "id": 30,
@@ -506,7 +520,11 @@
    "edificio_lat": 41.868138,
    "edificio_lng": 12.456407,
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-malattie-del-fegato",
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Adriano Pellicelli",
+   "telefoni": [
+    "06 5870 3808"
+   ]
   },
   {
    "id": 31,
@@ -523,7 +541,7 @@
     "06 5870 3670"
    ],
    "piano": "0 / 2",
-   "responsabile_precedente": "Direttore Dott. Roberto Faggiani"
+   "responsabile": "Direttore/Responsabile Roberto Faggiani"
   },
   {
    "id": 32,
@@ -540,7 +558,8 @@
     "06 5870 5545",
     "06 5870 3381"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile da definire"
   },
   {
    "id": 33,
@@ -555,9 +574,11 @@
    "edificio_lng": 12.456407,
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC NEFROLOGIA, DIALISI, TRAPIANTO DI RENE",
    "telefoni": [
+    "06 5870 4898",
     "06 5870 3808"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Paolo De Paolis"
   },
   {
    "id": 34,
@@ -576,7 +597,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC NEONATOLOGIA E TERAPIA INTENSIVA NEONATALE",
    "piano": "3° piano",
-   "responsabile_precedente": "Direttore Dott. Luca Maggio"
+   "responsabile": "Direttore/Responsabile Luca Maggio"
   },
   {
    "id": 35,
@@ -592,7 +613,8 @@
    "telefoni": [
     "06 5870 4432"
    ],
-   "piano": "2° piano"
+   "piano": "2° piano",
+   "responsabile": "Direttore/Responsabile Chiara Cafforio"
   },
   {
    "id": 36,
@@ -610,7 +632,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-neurochirurgia",
    "piano": "3° piano",
-   "responsabile_precedente": "Direttore Dott. Ricciuti Riccardo Antonio Email: rricciuti @scamilloforlanini.rm.it"
+   "responsabile": "Direttore/Responsabile Riccardo Antonio Ricciuti"
   },
   {
    "id": 37,
@@ -654,7 +676,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC NEUROLOGIA E NEUROFISIOPATOLOGIA",
    "piano": "1° piano",
-   "responsabile_precedente": "Direttore Dott. Claudio Gasperini"
+   "responsabile": "Direttore/Responsabile Claudio Gasperini"
   },
   {
    "id": 40,
@@ -685,7 +707,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uosd-stroke-unit",
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott.ssa Sabrina Anticoli"
+   "responsabile": "Direttore/Responsabile Sabrina Anticoli"
   },
   {
    "id": 42,
@@ -698,7 +720,8 @@
    "edificio_nome": "BACCELLI",
    "edificio_lat": 41.868986,
    "edificio_lng": 12.456022,
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Andrea Cassoni"
   },
   {
    "id": 43,
@@ -715,7 +738,8 @@
     "06 5870 4272"
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uosd-malattie-degenerative-sistema-nervoso",
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Tortorella Carla"
   },
   {
    "id": 44,
@@ -733,7 +757,7 @@
     "06 5870 5580"
    ],
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott. Roberto Bonfili"
+   "responsabile": "Direttore/Responsabile Roberto Bonfili"
   },
   {
    "id": 45,
@@ -749,7 +773,8 @@
    "telefoni": [
     "06 5870 3495"
    ],
-   "piano": "1 /2"
+   "piano": "1 /2",
+   "responsabile": "Direttore/Responsabile Roberta Battistini"
   },
   {
    "id": 46,
@@ -766,7 +791,7 @@
     "06 5870 3483"
    ],
    "piano": "Piano terra",
-   "responsabile_precedente": "Responsabile vacante Coordinatore: CI Dott.ssa Coratella Cesira"
+   "responsabile": "Direttore/Responsabile Salvatore De Marco"
   },
   {
    "id": 47,
@@ -783,7 +808,8 @@
    "telefoni": [
     "06 5870 4580"
    ],
-   "piano": "2° piano"
+   "piano": "2° piano",
+   "responsabile": "Direttore/Responsabile Carlo Garufi"
   },
   {
    "id": 48,
@@ -816,7 +842,8 @@
    "telefoni": [
     "06 5870 4431"
    ],
-   "piano": "Piano -1"
+   "piano": "Piano -1",
+   "responsabile": "Direttore/Responsabile Raffaele Barbara"
   },
   {
    "id": 50,
@@ -834,7 +861,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uosd-oncologia-della-mammella",
    "piano": "1° piano",
-   "responsabile_precedente": "Responsabile f.f. Dott.ssa Valentina Rossi"
+   "responsabile": "Direttore/Responsabile Valentina Rossi"
   },
   {
    "id": 51,
@@ -885,7 +912,8 @@
    "telefoni": [
     "06 5870 3860"
    ],
-   "piano": "1° - 2° e 3° piano"
+   "piano": "1° - 2° e 3° piano",
+   "responsabile": "Direttore/Responsabile Maria Giovanna Salerno"
   },
   {
    "id": 54,
@@ -901,7 +929,8 @@
    "telefoni": [
     "06 5870 4389"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Maria Giovanna Salerno"
   },
   {
    "id": 55,
@@ -919,7 +948,7 @@
    "telefoni": [
     "06 5870 3860"
    ],
-   "responsabile_precedente": "Responsabile ad interim Dott.ssa Maria Giovanna Salerno"
+   "responsabile": "Direttore/Responsabile Maria Giovanna Salerno"
   },
   {
    "id": 56,
@@ -934,7 +963,7 @@
    "edificio_lng": 12.455079,
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOS PATOLOGIA OSTETRICA",
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile vacante"
+   "responsabile": "Direttore/Responsabile Antonella Muzì"
   },
   {
    "id": 57,
@@ -950,7 +979,8 @@
    "telefoni": [
     "06 5870 3352"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Cucinelli Francesco"
   },
   {
    "id": 58,
@@ -968,7 +998,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-otorinolaringoiatria",
    "piano": "5° piano",
-   "responsabile_precedente": "Direttore Dott. Gianluca Bellocchi"
+   "responsabile": "Direttore/Responsabile Gianluca Bellocchi"
   },
   {
    "id": 59,
@@ -995,11 +1025,12 @@
    "edificio_lat": 41.86897,
    "edificio_lng": 12.454375,
    "telefoni": [
-    "06 5870 3276"
+    "06 5870 3276",
+    "06 5870 3037"
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-chirurgia-pediatrica",
    "piano": "1° piano",
-   "responsabile_precedente": "Direttore Dott. Vito Briganti"
+   "responsabile": "Direttore/Responsabile Vito Briganti"
   },
   {
    "id": 61,
@@ -1016,7 +1047,8 @@
     "06 5870 3360"
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-pediatria",
-   "responsabile_precedente": "Direttore Dott. Mauro Calvani"
+   "responsabile": "Direttore/Responsabile Mauro Calvani",
+   "piano": "Mauro calvani"
   },
   {
    "id": 62,
@@ -1031,7 +1063,9 @@
    "edificio_lng": 12.455875,
    "telefoni": [
     "06 5870 3360"
-   ]
+   ],
+   "responsabile": "Direttore/Responsabile Barbara Paggi",
+   "piano": "Barbara paggi"
   },
   {
    "id": 63,
@@ -1047,7 +1081,8 @@
    "telefoni": [
     "06 5870 4333"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Ermanno Puxeddu"
   },
   {
    "id": 64,
@@ -1066,7 +1101,7 @@
     "06 5870 5224"
    ],
    "piano": "2° piano",
-   "responsabile_precedente": "Direttore sostituto Dott. Batzella Sandro"
+   "responsabile": "Direttore/Responsabile Sandro Batzella"
   },
   {
    "id": 65,
@@ -1082,7 +1117,8 @@
    "telefoni": [
     "06 5870 3750"
    ],
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Loreta Di Michele"
   },
   {
    "id": 66,
@@ -1102,7 +1138,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC REUMATOLOGIA-1",
    "piano": "2° piano",
-   "responsabile_precedente": "Direttore Dott. Gian Domenico Sebastiani"
+   "responsabile": "Direttore/Responsabile Giandomenico Sebastiani"
   },
   {
    "id": 67,
@@ -1133,7 +1169,8 @@
     "06 5870 3244"
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-anestesia-e-rianimazione-neurochirurgica",
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Luigi Tritapepe"
   },
   {
    "id": 69,
@@ -1166,7 +1203,8 @@
    "telefoni": [
     "06 5870 3051"
    ],
-   "piano": "Piano -1"
+   "piano": "Piano -1",
+   "responsabile": "Direttore/Responsabile Michele Galluzzo"
   },
   {
    "id": 71,
@@ -1183,7 +1221,8 @@
    "telefoni": [
     "06 5870 3136"
    ],
-   "piano": "Piano -1"
+   "piano": "Piano -1",
+   "responsabile": "Direttore/Responsabile Maria Gabriella Mirante"
   },
   {
    "id": 72,
@@ -1201,7 +1240,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-medicina-d-urgenza-pronto-soccorso-obi",
    "piano": "4° piano",
-   "responsabile_precedente": "Responsabile Dr.ssa Lucia Rita Del Vecchio"
+   "responsabile": "Direttore/Responsabile Marilla Meggiolini"
   },
   {
    "id": 73,
@@ -1217,7 +1256,7 @@
     "06 5870 4910"
    ],
    "piano": "Piano -1",
-   "responsabile_precedente": "Responsabile vacante Pronto Soccorso - Area Critica 06 5870 4910/3033/3114 - fax 4682 Pronto Soccorso - Area Destinati 06 5870 6936/40/45"
+   "responsabile": "Direttore/Responsabile Maria Gabriella Mirante"
   },
   {
    "id": 74,
@@ -1235,7 +1274,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-medicina-interna",
    "piano": "2° e 3° piano",
-   "responsabile_precedente": "Direttore Dott.ssa Anna Linda Patti"
+   "responsabile": "Direttore/Responsabile Anna Linda Patti"
   },
   {
    "id": 75,
@@ -1248,7 +1287,8 @@
    "edificio_nome": "MARONCELLI",
    "edificio_lat": 41.868662,
    "edificio_lng": 12.454687,
-   "piano": "2° e 3° piano"
+   "piano": "2° e 3° piano",
+   "responsabile": "Direttore/Responsabile Gianluca Pitucco"
   },
   {
    "id": 76,
@@ -1261,7 +1301,8 @@
    "edificio_nome": "MARONCELLI",
    "edificio_lat": 41.868662,
    "edificio_lng": 12.454687,
-   "piano": "1° piano"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Giuseppe Famularo"
   },
   {
    "id": 77,
@@ -1279,7 +1320,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-ortopedia-e-traumatologia",
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott. Marco Spoliti"
+   "responsabile": "Direttore/Responsabile Riccardo Maria Lanzetti"
   },
   {
    "id": 78,
@@ -1296,7 +1337,8 @@
    "piano": "Piano terra",
    "telefoni": [
     "06 5870 3147"
-   ]
+   ],
+   "responsabile": "Direttore/Responsabile Emiliano Cingolani"
   },
   {
    "id": 79,
@@ -1312,7 +1354,8 @@
    "telefoni": [
     "06 5870 3025"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Pierluigi Marini"
   },
   {
    "id": 80,
@@ -1344,7 +1387,8 @@
    "telefoni": [
     "06 5870 3186"
    ],
-   "piano": "2° piano"
+   "piano": "2° piano",
+   "responsabile": "Direttore/Responsabile Marco Spoliti"
   },
   {
    "id": 82,
@@ -1361,7 +1405,8 @@
    "telefoni": [
     "06 5870 3212"
    ],
-   "piano": "2° piano"
+   "piano": "2° piano",
+   "responsabile": "Direttore/Responsabile Nicola Felici"
   },
   {
    "id": 83,
@@ -1375,7 +1420,8 @@
    "edificio_lat": 41.869906,
    "edificio_lng": 12.455875,
    "nota": "UOC UROLOGIA",
-   "responsabile_precedente": "Responsabile Dott. Marco Gaffi"
+   "responsabile": "Direttore/Responsabile Marco Gaffi",
+   "piano": "2° piano"
   },
   {
    "id": 84,
@@ -1393,7 +1439,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uosd-chirurgia-oncologica-mammella",
    "piano": "1° piano",
-   "responsabile_precedente": "Responsabile Dott. Di Cesare Fabio"
+   "responsabile": "Direttore/Responsabile Fabio Di Cesare"
   },
   {
    "id": 85,
@@ -1411,7 +1457,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uosd-riabilitazione-intensiva",
    "piano": "2° piano",
-   "responsabile_precedente": "Responsabile Dott. Cosimo Gambardella"
+   "responsabile": "Direttore/Responsabile Cosimo Gambardella"
   },
   {
    "id": 86,
@@ -1429,7 +1475,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC LABORATORIO DI GENETICA MEDICA",
    "piano": "1° piano",
-   "responsabile_precedente": "Direttore Dott.ssa Paola Grammatico Sito web: https://www.genetica-medica.it/"
+   "responsabile": "Direttore/Responsabile Irene Bottillo"
   },
   {
    "id": 87,
@@ -1446,7 +1492,7 @@
     "06 5870 4455"
    ],
    "piano": "1° piano",
-   "responsabile_precedente": "Responsabile"
+   "responsabile": "Direttore/Responsabile Francesca Clemintina Radio"
   },
   {
    "id": 88,
@@ -1463,7 +1509,7 @@
     "06 5870 3500"
    ],
    "piano": "Piano terra",
-   "responsabile_precedente": "Direttore Dott. Luca Pierelli"
+   "responsabile": "Direttore/Responsabile Luca Pierelli"
   },
   {
    "id": 89,
@@ -1481,7 +1527,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uos-strategie-trasfusionali-e-terapie-rigenerative",
    "piano": "Piano terra",
-   "responsabile_precedente": "Responsabile Dott. De Rosa Alessandro"
+   "responsabile": "Direttore/Responsabile Eleonora Ponte"
   },
   {
    "id": 90,
@@ -1497,7 +1543,8 @@
    "telefoni": [
     "06 5870 3562"
    ],
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Antonella Matteocci"
   },
   {
    "id": 91,
@@ -1514,7 +1561,7 @@
     "06 5870 3546"
    ],
    "piano": "Piano terra",
-   "responsabile_precedente": "Responsabile Dott.ssa Rondinelli Maria Beatrice"
+   "responsabile": "Direttore/Responsabile Rosa Leone"
   },
   {
    "id": 92,
@@ -1533,7 +1580,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-microbiologia-e-virologia",
    "piano": "Piano terra",
-   "responsabile_precedente": "Direttore Dott.ssa Gabriella Parisi"
+   "responsabile": "Direttore/Responsabile Assunta Gallo"
   },
   {
    "id": 93,
@@ -1551,7 +1598,7 @@
     "06 5870 3665"
    ],
    "piano": "Piano terra",
-   "responsabile_precedente": "Direttore Dott. Massimo Scorretti"
+   "responsabile": "Direttore/Responsabile Massimo Scorretti"
   },
   {
    "id": 94,
@@ -1583,7 +1630,8 @@
    "telefoni": [
     "06 5870 3239"
    ],
-   "piano": "Piano -1"
+   "piano": "Piano -1",
+   "responsabile": "Direttore/Responsabile Andrea Cortese"
   },
   {
    "id": 96,
@@ -1599,7 +1647,8 @@
    "telefoni": [
     "06 5870 4352"
    ],
-   "piano": "Piano -1"
+   "piano": "Piano -1",
+   "responsabile": "Direttore/Responsabile Laura Chiacchiararelli"
   },
   {
    "id": 97,
@@ -1617,7 +1666,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-medicina-nucleare",
    "piano": "Piano terra",
-   "responsabile_precedente": "Direttore f.f. Dott. Ventroni Guido"
+   "responsabile": "Direttore/Responsabile Guido Ventroni"
   },
   {
    "id": 98,
@@ -1632,12 +1681,13 @@
    "edificio_lng": 12.45706,
    "nota": "UOC Neuroradiologia",
    "telefoni": [
+    "06 5870 3160",
     "06 5870 4378",
     "06 5870 4725"
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/UOC NEURORADIOLOGIA",
-   "piano": "Piano terra",
-   "responsabile_precedente": "Responsabile Dott. Pampana Enrico  Sito web: http://neurointerventistica.it"
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Enrico Pampana"
   },
   {
    "id": 99,
@@ -1651,11 +1701,12 @@
    "edificio_lat": 41.869391,
    "edificio_lng": 12.453149,
    "telefoni": [
+    "06 5870 4378",
     "06 5870 3160",
     "06 5870 3220"
    ],
-   "piano": "1° piano",
-   "responsabile_precedente": "Direttore Dott. Roberto Cianni"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Enrico Pampana"
   },
   {
    "id": 100,
@@ -1674,7 +1725,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uosd-diagnostica-per-immagini-in-senologia",
    "piano": "1° piano",
-   "responsabile_precedente": "Responsabile Dott.ssa Francesca Svegliati"
+   "responsabile": "Direttore/Responsabile Francesca Svegliati"
   },
   {
    "id": 101,
@@ -1692,7 +1743,7 @@
    "telefoni": [
     "06 5870 5441"
    ],
-   "responsabile_precedente": "Responsabile sostituto Dott. Salvatore Cisternino  Servizio M.O.C.: 0658705441"
+   "responsabile": "Direttore/Responsabile Salvatore Cisternino"
   },
   {
    "id": 102,
@@ -1705,7 +1756,8 @@
    "edificio_nome": "MARCHIAFAVA",
    "edificio_lat": 41.868463,
    "edificio_lng": 12.457433,
-   "piano": "Piano terra"
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Mariano Feccia"
   },
   {
    "id": 103,
@@ -2122,7 +2174,12 @@
    "categoria": "Altro",
    "edificio": "E22",
    "edificio_lat": 41.866102049999995,
-   "edificio_lng": 12.457973747493792
+   "edificio_lng": 12.457973747493792,
+   "responsabile": "Direttore/Responsabile Marco Colasanti",
+   "telefoni": [
+    "06 5870 4816"
+   ],
+   "piano": "4° piano"
   },
   {
    "id": 138,
@@ -2152,7 +2209,7 @@
    ],
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-oncologia-duplica-1",
    "piano": "2° piano",
-   "responsabile_precedente": "Direttore Dott. Emiliozzi Paolo"
+   "responsabile": "Direttore/Responsabile Paolo Emiliozzi"
   }
  ]
 }
