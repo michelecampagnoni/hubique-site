@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Conti Agenzia · demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Conti Agenzia · modulo separato con la grafica di HubAgency (token presi dal CSS di hubagency.it, 05/11/2026) */
+:root{
+  --bg:#fafafa; --card:#fff; --fg:#171717; --muted:#737373; --border:#e5e5e5; --soft:#f5f5f5;
+  --primary:#c1121f; --primary-dark:#8b0000; --primary-soft:#fdecee; --sidebar:#0a0a0a;
+  --ok:#16a34a; --warn:#d97706; --radius:10px;
+  /* nomi usati dal codice della demo */
+  --cyan:var(--primary); --cyan2:var(--primary); --green:var(--ok); --amber:var(--warn); --red:var(--primary);
+  --violet:#f2a7ad; --dim:var(--muted); --line:var(--border); --mono:"Geist Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 "Geist",ui-sans-serif,system-ui,sans-serif}
+.ha{display:flex;min-height:100vh}
+.side{width:236px;flex:none;background:var(--sidebar);color:#f5f5f5;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:18px 14px}
+.side img{width:120px;margin:0 0 4px 6px}
+.side .mod{font-weight:600;font-size:15px;margin:0 8px 2px}
+.side .sub{font-size:12px;color:#a3a3a3;margin:0 8px 22px}
+#tabs{display:flex;flex-direction:column;gap:2px}
+#tabs button{all:unset;cursor:pointer;padding:9px 12px;border-radius:8px;font-size:14px;color:#d4d4d4}
+#tabs button:hover{background:#1a1a1a;color:#fff}
+#tabs button.on{background:var(--primary);color:#fff;font-weight:600}
+.side .foot{margin-top:auto;font-size:11.5px;color:#737373;padding:0 8px;line-height:1.4}
+main.wrap{flex:1;min-width:0;padding:22px 32px 60px;max-width:1320px}
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.topbar h1{font-size:22px;margin:0;font-weight:600;letter-spacing:-.02em}
+.topbar .spacer{flex:1}
+.tag{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary)}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.side{display:none}}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.panel .label{display:block;font-weight:600;font-size:15px;margin-bottom:12px}
+.panel .label .n{display:none}
+.panel.amber{border-left:3px solid var(--warn)} .panel.red{border-left:3px solid var(--primary)}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.kpi .k{font-size:13px;color:var(--muted)} .kpi .v{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:2px 0}
+.kpi .d{font-size:12.5px;color:var(--muted)}
+.kpi.green .v{color:var(--ok)} .kpi.red .v{color:var(--primary)} .kpi.amber .v{color:var(--fg)}
+.kpi.red{border-color:#f5c2c6;background:#fff8f8}
+.alert{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:10px 12px;border-radius:8px;background:var(--primary-soft);margin:8px 0;font-size:14px}
+.alert.amber{background:#fff7e6} .alert .ico{font-weight:700;color:var(--primary)}
+.vista{display:none}.vista.on{display:block}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{font-size:12px;font-weight:500;color:var(--muted);text-align:left;padding:8px;border-bottom:1px solid var(--border);background:var(--soft)}
+table.t td{padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+table.t td.n,table.t th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.t tr.tot td{font-weight:700;background:var(--soft)}
+.btn{font:500 13px "Geist",sans-serif;padding:6px 12px;border-radius:8px;cursor:pointer;background:#fff;color:var(--fg);border:1px solid var(--border)}
+.btn:hover{background:var(--soft)}
+.btn.green{background:var(--primary);color:#fff;border-color:var(--primary)} .btn.green:hover{background:var(--primary-dark)}
+.btn.amber{border-color:var(--warn);color:var(--warn)}
+.stato{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.s-att{background:#fff7e6;color:var(--warn)} .s-fatt{background:#eef2ff;color:#4338ca} .s-inc{background:#e9f8ef;color:var(--ok)} .s-ko{background:var(--primary-soft);color:var(--primary)}
+.fase{display:inline-flex;gap:3px}.fase i{width:14px;height:6px;border-radius:3px;background:#e5e5e5;display:inline-block}.fase i.on{background:var(--primary)}
+.barre{display:flex;align-items:flex-end;gap:18px;height:230px;padding:10px 6px 0;border-bottom:1px solid var(--border)}
+.barre .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;height:100%}
+.barre .col b{display:block}.barre .certo{background:var(--primary);border-radius:0 0 4px 4px}.barre .prob{background:var(--violet);border-radius:4px 4px 0 0}
+.barre .lordo{position:absolute;left:-4px;right:-4px;border-top:2px dashed #a3a3a3}
+.barre .val{font-size:12px;font-weight:600;text-align:center;margin-bottom:4px}
+.mesi{display:flex;gap:18px;padding:6px 6px 0}.mesi span{flex:1;text-align:center;font-size:12px;color:var(--muted)}
+.leg{display:flex;gap:18px;font-size:12.5px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+#toast{position:fixed;right:22px;bottom:22px;z-index:60;max-width:420px;display:flex;flex-direction:column;gap:8px}
+#toast div{background:#171717;color:#fff;border-radius:10px;padding:11px 14px;font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.25);border-left:3px solid var(--primary)}
+pre.code{background:#0a0a0a;color:#e5e5e5;border-radius:8px;padding:12px 14px;font:12.5px/1.5 var(--mono);overflow:auto}
+.flusso{display:flex;gap:10px;flex-wrap:wrap}
+.flusso div{flex:1;min-width:150px;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13.5px;background:var(--soft)}
+.flusso div b{display:block;color:var(--primary);font-size:12.5px;margin-bottom:4px}
+.mini{font-size:12.5px;color:var(--muted)}
+select.src,input{font:14px "Geist",sans-serif;background:#fff;color:var(--fg);border:1px solid var(--border);border-radius:8px;padding:6px 8px}
+.footer{margin-top:28px;font-size:12px;color:var(--muted)}
+.tl-row{display:grid;grid-template-columns:minmax(220px,1.3fr) 2fr 150px;gap:14px;align-items:center;padding:10px 8px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:8px}
+.tl-row:hover{background:var(--soft)} .tl-row.on{background:var(--primary-soft)}
+.tl-bar{position:relative;height:12px;background:var(--soft);border-radius:6px}
+.tl-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px}
+.tl-bar u{position:absolute;top:-4px;bottom:-4px;width:2px;background:#171717}
+.tl-num{text-align:right;font-variant-numeric:tabular-nums;font-size:13.5px}
+.stack{display:flex;height:16px;border-radius:8px;overflow:hidden;margin:6px 0 8px}
+.stack b{display:block;height:100%}
+.chip{font-size:11.5px;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.chip.wa{background:#e9f8ef;color:#15803d} .chip.ag{background:#eef2ff;color:#4338ca} .chip.ge{background:#fdecee;color:var(--primary)}
+</style>
+</head>
+<body>
+<div class="ha">
+<aside class="side">
+  <img src="logo-hubagency.png" alt="HubAgency">
+  <div class="mod">Conti Agenzia</div>
+  <div class="sub">entrate, uscite, provvigioni</div>
+  <nav id="tabs">
+    <button data-v="semplice" class="on">Il mio mese</button>
+    <button data-v="pipeline">Trattative e previsione</button>
+    <button data-v="incassi">Incassi e fatture</button>
+    <button data-v="banca">Banca e riconciliazione</button>
+    <button data-v="provv">Provvigioni e sub-broker</button>
+    <button data-v="tempo">Tempo per trattativa</button>
+    <button data-v="resa">Tempo e resa</button>
+  </nav>
+  <div class="foot">Modulo separato.<br>Oggi non è una funzione di HubAgency.</div>
+</aside>
+<main class="wrap">
+
+  <div class="topbar">
+    <h1>Agenzia demo · Milano Città Studi</h1>
+    <span class="tag">DEMO · DATI FITTIZI</span>
+    <span class="spacer"></span>
+    <span class="mini">Trattative da
+      <select class="src" id="fonte">
+        <option value="myagency">MyAgency (Gabetti) · da collegare</option>
+        <option value="hubagency">HubAgency</option>
+      </select></span>
+    <button class="btn" id="reset">Ricomincia</button>
+  </div>
+
+
+
+
+
+  <section class="vista on" id="v-semplice">
+    <div class="grid g4" id="mese-big"></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="panel">
+        <span class="label"><span class="n">A</span>Dove vanno i soldi · novembre</span>
+        <div id="voci"></div>
+        <p style="margin-top:12px"><b>Segna una spesa</b><br>
+          <input id="sp-voce" placeholder="es. cartelli vendesi" style="width:46%;padding:6px">
+          <select id="sp-cat" class="src" style="padding:6px"></select>
+          <input id="sp-imp" placeholder="€" style="width:90px;padding:6px;text-align:right">
+          <button class="btn green" id="sp-add">Aggiungi</button></p>
+      </div>
+      <div class="panel">
+        <span class="label"><span class="n">B</span>Costi fissi del mese (ipotesi, si cambiano)</span>
+        <table class="t" id="t-fissi"></table>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label"><span class="n">C</span>Soldi in arrivo · prossimi 60 giorni</span>
+      <table class="t" id="t-arrivo"></table>
+    </div>
+  </section>
+
+  <section class="vista" id="v-tempo">
+    <div class="panel">
+      <span class="label">Tempo per trattativa</span>
+      <p class="mini" style="margin-top:-6px">Ore <b>stimate</b> dalle attività che l'agente fa già: visite in agenda, telefonate e passaggi nel gestionale, vocali WhatsApp al numero dell'agenzia. Nessun dato da inserire. La barra confronta le ore spese con quelle che servono di solito a una trattativa simile arrivata alla stessa fase (riga nera). Prima quelle che costano di più.</p>
+      <div id="tl-lista"></div>
+      <div class="leg"><span><i style="background:var(--ok)"></i>nella norma</span><span><i style="background:var(--warn)"></i>fino al 40% in più</span><span><i style="background:var(--primary)"></i>oltre: sta costando troppo</span><span><i style="background:#171717;width:2px"></i>ore attese a questa fase</span></div>
+    </div>
+    <div class="panel" style="margin-top:14px" id="tl-dettaglio"></div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label">Tempi standard (si tarano con due settimane di prova su due o tre agenti)</span>
+      <table class="t" id="t-std"></table>
+    </div>
+  </section>
+
+  <section class="vista" id="v-resa">
+    <div class="panel">
+      <span class="label"><span class="n">09</span>Come si legge</span>
+      <p>Ogni ora conta. Il <b>costo dell'ora</b> è quanto costa tenere aperta l'agenzia diviso le ore lavorate. Le ore spese su incarichi che non si chiudono non spariscono: vengono divise sugli affari chiusi come <b>costo di acquisizione</b>, e ogni provvigione se lo porta dietro. Meno ore per affare, a parità di provvigione, vuol dire agente migliore.</p>
+      <p class="mini">Le ore si segnano con un tocco («+30 min» sulla trattativa) o arrivano da sole dall'agenda: visita di un'ora in calendario = un'ora sulla trattativa di quell'immobile.</p>
+    </div>
+    <div class="grid g4" id="resa-kpi" style="margin-top:14px"></div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label"><span class="n">10</span>Agenti · ultimi 12 mesi</span>
+      <table class="t" id="t-agenti"></table>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label"><span class="n">11</span>Trattative aperte · quanto rendono davvero</span>
+      <table class="t" id="t-resa"></table>
+    </div>
+  </section>
+
+  <section class="vista" id="v-pipeline">
+  <div class="grid g4" id="kpi" style="margin-bottom:14px"></div>
+
+    <div class="panel">
+      <span class="label"><span class="n">01</span>Previsione provvigioni · prossimi 6 mesi (imponibile)</span>
+      <div class="barre" id="barre"></div>
+      <div class="mesi" id="mesi"></div>
+      <div class="leg"><span><i style="background:var(--green)"></i>certo (proposta accettata o oltre)</span>
+        <span><i style="background:var(--violet)"></i>probabile, pesato sulla fase</span>
+        <span><i style="border-top:2px dashed #a3a3a3;height:0;width:16px;border-radius:0"></i>se chiudessero tutte</span></div>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label"><span class="n">02</span>Trattative importate dal gestionale</span>
+      <table class="t" id="t-opp"></table>
+      <p class="mini">Vendita: provvigione in percentuale sul prezzo, fattura di acconto al preliminare e saldo al rogito. Affitto: mensilità di canone per lato, una sola fattura alla firma del contratto.</p>
+      <p class="mini">«Avanza fase» simula l'aggiornamento che arriverebbe dal CRM: alla proposta accettata nascono gli incassi attesi, al preliminare e al rogito le fatture.</p>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label"><span class="n">02b</span>Vendite e affitti a confronto · trattative aperte</span>
+      <table class="t" id="t-tipi"></table>
+    </div>
+  </section>
+
+  <section class="vista" id="v-incassi">
+    <div class="panel">
+      <span class="label"><span class="n">03</span>Scadenzario provvigioni attive</span>
+      <table class="t" id="t-inc"></table>
+    </div>
+  </section>
+
+  <section class="vista" id="v-banca">
+    <div class="panel">
+      <span class="label"><span class="n">04</span>Movimenti bancari</span>
+      <p><button class="btn" id="importa">Importa estratto conto</button>
+         <button class="btn green" id="riconcilia">Riconcilia in automatico</button>
+         <span class="mini">Abbinamento: importo uguale al centesimo e nome del cliente nella causale = automatico; il resto resta in proposta.</span></p>
+      <table class="t" id="t-banca"></table>
+    </div>
+  </section>
+
+  <section class="vista" id="v-provv">
+    <div class="panel">
+      <span class="label"><span class="n">05</span>Regole provvigionali dell'agenzia (modificabili)</span>
+      <table class="t" id="t-regole"></table>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <span class="label"><span class="n">06</span>Ripartizione per trattativa (affare intero)</span>
+      <table class="t" id="t-split"></table>
+    </div>
+    <div class="panel amber" style="margin-top:14px">
+      <span class="label"><span class="n">07</span>Da pagare · nascono solo a incasso avvenuto</span>
+      <table class="t" id="t-uscite"></table>
+    </div>
+  </section>
+
+
+
+  <div class="footer">Conti Agenzia · modulo Hubique con la grafica di HubAgency · 05/11/2026 · agenzia, persone e importi inventati · nessun collegamento a sistemi reali</div>
+</main>
+</div>
+<div id="toast"></div>
+
+<script>
+const OGGI = '2026-11-05';
+const FASI = [
+  {id:'incarico',    nome:'Incarico',    p:.15},
+  {id:'visite',      nome:'Visite',      p:.30},
+  {id:'proposta',    nome:'Proposta',    p:.55},
+  {id:'accettata',   nome:'Accettata',   p:.90},
+  {id:'preliminare', nome:'Preliminare', p:.97},
+  {id:'rogito',      nome:'Rogito',      p:1}
+];
+const FASI_AFF = [
+  {id:'incarico',  nome:'Incarico',        p:.15},
+  {id:'visite',    nome:'Visite',          p:.35},
+  {id:'proposta',  nome:'Proposta',        p:.60},
+  {id:'accettata', nome:'Accettata',       p:.90},
+  {id:'rogito',    nome:'Firma contratto', p:1}
+];
+const AFF = o => o.tipo==='affitto';
+const FS = o => AFF(o) ? FASI_AFF : FASI;
+const IX = (o,id) => FS(o).findIndex(f => f.id === id);
+const nomeLato = (o,l) => AFF(o) ? (l==='vend'?'proprietario':'inquilino') : (l==='vend'?'venditore':'acquirente');
+const nomeTranche = (o,q) => AFF(o) ? 'firma contratto' : (q==='preliminare'?'acconto preliminare':'saldo rogito');
+const REGOLE0 = {
+  provv_vend:   {t:'Vendita · provvigione lato venditore', v:.03, pct:true},
+  provv_acq:    {t:'Vendita · provvigione lato acquirente', v:.03, pct:true},
+  minimo:       {t:'Vendita · minimo per lato (€)', v:2500},
+  acconto:      {t:'Vendita · quota fatturata al preliminare', v:.5, pct:true},
+  aff_mens:     {t:'Affitto · mensilità di canone per lato', v:1},
+  aff_min:      {t:'Affitto · minimo per lato (€)', v:500},
+  royalty:      {t:'Royalty rete in percentuale (se oltre alla fee fissa)', v:0, pct:true},
+  agente:       {t:'Quota agente sul netto', v:.35, pct:true},
+  ritenuta:     {t:'Ritenuta segnalatore occasionale', v:.20, pct:true},
+  iva:          {t:'IVA', v:.22, pct:true}
+};
+const OPP0 = [
+  {id:'T-1041', tipo:'vendita', ore:9, imm:'Trilocale via Pacini 22, Milano', cod:'3316201', prezzo:420000, fase:'proposta', agente:'Giulia Ferri',
+   vend:'Marco Rossi', acq:'Elena Bianchi', prel:'2026-12-10', rog:'2027-02-15'},
+  {id:'T-1038', ore:14, imm:'Bilocale Città Studi, Milano', cod:'3316188', prezzo:285000, fase:'accettata', agente:'Luca Moretti',
+   vend:'Carla Fontana', acq:'Davide Greco', prel:'2026-11-20', rog:'2027-01-20',
+   sub:{nome:'Paolo Neri', tipo:'occasionale', pct:.15, lato:'acq'}},
+  {id:'T-1029', ore:22, imm:'Villa con vista mare, Camogli', cod:'3316147', prezzo:1150000, fase:'visite', agente:'Giulia Ferri',
+   vend:'Fam. Lombardi', acq:'(da collaborazione)', prel:'2027-01-30', rog:'2027-03-30',
+   collab:{agenzia:'Agenzia partner Rapallo', lato:'acq'}},
+  {id:'T-1044', ore:3, imm:'Quadrilocale centro, Monza', cod:'3316222', prezzo:510000, fase:'incarico', agente:'Luca Moretti',
+   vend:'Sergio Villa', acq:'—', prel:'2027-02-20', rog:'2027-04-15'},
+  {id:'T-1017', ore:31, imm:'Attico Navigli, Milano', cod:'3316090', prezzo:890000, fase:'preliminare', agente:'Giulia Ferri',
+   vend:'Anna Verdi', acq:'Roberto Gallo', prel:'2026-10-15', rog:'2026-12-18',
+   sub:{nome:'Studio Kappa Srl', tipo:'piva', pct:.20, lato:'vend'}},
+  {id:'T-1046', ore:6, imm:'Monolocale Lambrate, Milano', cod:'3316230', prezzo:175000, fase:'proposta', agente:'Luca Moretti',
+   vend:'Irene Costa', acq:'Matteo Riva', prel:'2026-12-05', rog:'2027-02-10'},
+  {id:'T-1009', ore:18, imm:'Trilocale con box, Sesto San Giovanni', cod:'3316051', prezzo:330000, fase:'rogito', agente:'Luca Moretti',
+   vend:'Franco Marini', acq:'Sara Conti', prel:'2026-09-12', rog:'2026-10-28'},
+  {id:'T-1050', ore:11, imm:'Negozio a reddito, piazzale Loreto', cod:'3316241', prezzo:640000, fase:'visite', agente:'Giulia Ferri',
+   vend:'Immobiliare Delta Srl', acq:'—', prel:'2027-02-28', rog:'2027-04-28'},
+  {id:'A-2001', tipo:'affitto', ore:4, imm:'Bilocale arredato Porta Romana, Milano', cod:'3316250', canone:1400, fase:'proposta', agente:'Luca Moretti',
+   vend:'Giorgio Sala', acq:'Martina Leone', rog:'2026-11-25'},
+  {id:'A-2002', tipo:'affitto', ore:6, imm:'Trilocale Isola, Milano', cod:'3316254', canone:2100, fase:'accettata', agente:'Giulia Ferri',
+   vend:'Patrizia Ricci', acq:'Tommaso Bruno', rog:'2026-11-15', sub:{nome:'Paolo Neri', tipo:'occasionale', pct:.15, lato:'acq'}},
+  {id:'A-2003', tipo:'affitto', ore:5, imm:'Ufficio 120 mq Lambrate, Milano', cod:'3316261', canone:3200, fase:'visite', agente:'Luca Moretti',
+   vend:'Immobiliare Delta Srl', acq:'—', rog:'2027-01-10'}
+];
+
+
+/* costi fissi mensili: ipotesi da verificare con un'agenzia vera */
+const FISSI0 = [
+  {voce:'Fee mensile rete Gabetti', cat:'Rete', imp:1200},
+  {voce:'Affitto ufficio (o rata mutuo)', cat:'Sede', imp:1850},
+  {voce:'Utenze, telefono, internet', cat:'Sede', imp:280},
+  {voce:'Immobiliare.it', cat:'Portali', imp:650},
+  {voce:'Idealista', cat:'Portali', imp:300},
+  {voce:'Segretaria (costo azienda)', cat:'Personale', imp:2300},
+  {voce:'Commercialista', cat:'Servizi', imp:250},
+  {voce:'Assicurazione RC mediatore (annua / 12)', cat:'Servizi', imp:60},
+  {voce:'Auto e carburante', cat:'Auto', imp:400}
+];
+const CATEGORIE = ['Rete','Sede','Portali','Personale','Servizi','Auto','Pubblicità','Visure e pratiche','Altro'];
+const SPESE0 = [
+  {data:'2026-11-03', voce:'Cartelli VENDESI', cat:'Pubblicità', imp:180},
+  {data:'2026-11-04', voce:'Visure catastali Via Pacini', cat:'Visure e pratiche', imp:45}
+];
+/* storico 12 mesi per agente: valutazioni fatte, incarichi presi, affari chiusi, ore su chiusi e su persi, provvigioni incassate */
+const AGENTI0 = [
+  {nome:'Giulia Ferri', val:34, inc:21, chiusi:10, ore_ok:230, ore_ko:260, provv:104000, ore_anno:1700},
+  {nome:'Luca Moretti', val:30, inc:17, chiusi:7,  ore_ok:180, ore_ko:260, provv:64000,  ore_anno:1700}
+];
+
+/* tempi standard per attività, in ore */
+const STD0 = {
+  valutazione:{t:'Valutazione e acquisizione', h:2,    fonte:'ge'},
+  visita:     {t:'Visita con cliente',          h:1.5,  fonte:'ag'},
+  telefonata: {t:'Telefonata',                   h:10/60, fonte:'ge'},
+  messaggio:  {t:'Messaggi WhatsApp',            h:5/60, fonte:'wa'},
+  proposta:   {t:'Proposta e trattativa prezzo', h:1,    fonte:'ge'},
+  documenti:  {t:'Documenti e pratiche',         h:1,    fonte:'ge'},
+  preliminare:{t:'Preliminare',                  h:2,    fonte:'ag'},
+  rogito:     {t:'Rogito o firma contratto',     h:3,    fonte:'ag'}
+};
+const FONTI = {ag:'agenda', ge:'gestionale', wa:'WhatsApp'};
+const COLORI = {valutazione:'#8b0000', visita:'#c1121f', telefonata:'#f2a7ad', messaggio:'#86efac', proposta:'#171717', documenti:'#a3a3a3', preliminare:'#525252', rogito:'#d97706'};
+const CONTEGGI = {
+  'T-1041':{valutazione:1,visita:3,telefonata:12,messaggio:10,proposta:1},
+  'T-1038':{valutazione:1,visita:5,telefonata:18,messaggio:15,proposta:2,documenti:1},
+  'T-1029':{valutazione:1,visita:9,telefonata:20,messaggio:25,documenti:2},
+  'T-1044':{valutazione:1,telefonata:4,messaggio:3},
+  'T-1017':{valutazione:1,visita:8,telefonata:30,messaggio:30,proposta:3,documenti:3,preliminare:1},
+  'T-1046':{valutazione:1,visita:2,telefonata:6,messaggio:8,proposta:1},
+  'T-1009':{valutazione:1,visita:6,telefonata:20,messaggio:20,proposta:1,documenti:2,preliminare:1,rogito:1},
+  'T-1050':{valutazione:1,visita:4,telefonata:10,messaggio:6},
+  'A-2001':{visita:3,telefonata:5,messaggio:6,proposta:1},
+  'A-2002':{visita:4,telefonata:6,messaggio:8,proposta:1,documenti:1},
+  'A-2003':{visita:2,telefonata:4,messaggio:3}
+};
+/* ore che servono di solito per arrivare in fondo (storico agenzia), e quota attesa a ogni fase */
+const ATTESE = {vendita:24, affitto:8};
+const QUOTA_FASE = {incarico:.1, visite:.45, proposta:.7, accettata:.8, preliminare:.9, rogito:1};
+function generaEventi(){
+  const ev = {};
+  for (const [id,cnt] of Object.entries(CONTEGGI)) {
+    const o = OPP0.find(x=>x.id===id); let seme = [...id].reduce((a,c)=>a*31+c.charCodeAt(0),7)%9973;
+    const rnd = () => (seme = (seme*48271)%2147483647)/2147483647;
+    const fine = new Date((o.rog && o.rog<OGGI ? o.rog : OGGI)), giorni = 40 + Math.round(rnd()*80);
+    ev[id] = [];
+    const ordine = ['valutazione','visita','telefonata','messaggio','proposta','documenti','preliminare','rogito'];
+    for (const tipo of ordine) for (let k=0;k<(cnt[tipo]||0);k++) {
+      const pos = {valutazione:0, proposta:.75, documenti:.85, preliminare:.92, rogito:1}[tipo] ?? rnd()*.9;
+      const d = new Date(fine); d.setDate(d.getDate() - Math.round(giorni*(1-pos)));
+      const fonte = tipo==='visita' && rnd()<.35 ? 'wa' : STD0[tipo].fonte;
+      ev[id].push({data:d.toISOString().slice(0,10), tipo, fonte});
+    }
+    ev[id].sort((a,b)=>b.data.localeCompare(a.data));
+  }
+  return ev;
+}
+let S; // stato
+const clone = o => JSON.parse(JSON.stringify(o));
+const mig = t => t.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const eur = v => { const [i,d]=Math.abs(v).toFixed(2).split('.'); return (v<0?'−':'') + '€ ' + mig(i) + ',' + d; };
+const eur0 = v => (Math.round(v)<0?'−':'') + '€ ' + mig(String(Math.abs(Math.round(v))));
+const dIt = d => d ? d.split('-').reverse().join('/') : '';
+const r2 = v => Math.round(v*100)/100;
+const R = k => S.regole[k].v;
+function toast(t){ const d=document.createElement('div'); d.innerHTML=t; document.getElementById('toast').appendChild(d); setTimeout(()=>d.remove(),5200); }
+
+/* provvigione lorda di un lato */
+function lordoLato(o, lato){
+  if (AFF(o)) return Math.max(o.canone * R('aff_mens'), R('aff_min'));
+  return Math.max(o.prezzo * (lato==='vend'?R('provv_vend'):R('provv_acq')), R('minimo')); }
+/* lati fatturati da noi: in collaborazione ogni agenzia fattura al proprio cliente */
+function lati(o){ return o.collab ? ['vend','acq'].filter(l=>l!==o.collab.lato) : ['vend','acq']; }
+
+/* tranche: acconto al preliminare, saldo al rogito, per ciascun lato */
+function tranche(o){
+  const out=[];
+  for (const lato of lati(o)) {
+    const nostra = lordoLato(o, lato);
+    const rate = AFF(o) ? [['rogito', 1, o.rog]] : [['preliminare', R('acconto'), o.prel], ['rogito', 1-R('acconto'), o.rog]];
+    for (const [q, pct, data] of rate) {
+      out.push({key:o.id+'|'+lato+'|'+q, opp:o.id, lato, quando:q, data, imponibile:r2(nostra*pct),
+        cliente: lato==='vend'?o.vend:o.acq});
+    }
+  }
+  return out;
+}
+
+function nuovoStato(){
+  S = {regole:clone(REGOLE0), opp:clone(OPP0), crediti:{}, fatture:[], banca:[], uscite:[], nfatt:212, importato:false,
+       fissi:clone(FISSI0), spese:clone(SPESE0), agenti:clone(AGENTI0), std:clone(STD0), eventi:generaEventi(), scelta:'T-1029'};
+  for (const o of S.opp) sincronizza(o, true);
+  // storico: T-1017 acconto già incassato; T-1009 acconto incassato, saldo fatturato e non ancora abbinato
+  for (const c of Object.values(S.crediti)) {
+    if ((c.opp==='T-1017' || c.opp==='T-1009') && c.quando==='preliminare') incassa(c, '2026-'+(c.opp==='T-1017'?'10-20':'09-18'), true);
+  }
+  S.banca.push({id:'M-9001', data:'2026-11-02', desc:'ADDEBITO CANONE AFFITTO UFFICIO NOVEMBRE', importo:-1850, stato:'non pertinente'});
+  S.banca.push({id:'M-9002', data:'2026-11-03', desc:'COMMISSIONI POS OTTOBRE', importo:-38.4, stato:'non pertinente'});
+}
+
+/* porta crediti e fatture al livello della fase della trattativa */
+function sincronizza(o, silenzioso){
+  const i = IX(o,o.fase);
+  if (i < IX(o,'accettata')) return;
+  let nuovi=0, tot=0;
+  for (const t of tranche(o)) {
+    if (!S.crediti[t.key]) { S.crediti[t.key] = {...t, stato:'attesa', iva:r2(t.imponibile*R('iva'))}; S.crediti[t.key].totale = r2(t.imponibile + S.crediti[t.key].iva); nuovi++; tot+=t.imponibile; }
+    const c = S.crediti[t.key];
+    if (c.stato==='attesa' && i >= IX(o,c.quando)) {
+      c.stato='fatturata'; c.fattura = 'FT 2026/' + (++S.nfatt); c.data_fatt = c.quando==='preliminare'? (o.prel<OGGI?o.prel:OGGI) : (o.rog<OGGI?o.rog:OGGI);
+      S.fatture.push(c.fattura);
+      if (!silenzioso) toast(`Fattura <b>${c.fattura}</b> a ${c.cliente}: ${eur(c.totale)} (${nomeTranche(o,c.quando)})`);
+    }
+  }
+  if (nuovi && !silenzioso) toast(`<b>${o.id}</b>: la previsione diventa credito reale, ${eur0(tot)} + IVA in scadenzario`);
+}
+
+/* ripartizione di un imponibile incassato */
+function ripartisci(o, lato, imp){
+  const sub = o.sub && o.sub.lato===lato ? imp*o.sub.pct : 0;
+  const roy = imp*R('royalty');
+  const netto = imp - sub - roy;
+  const ag = netto*R('agente');
+  return {sub:r2(sub), roy:r2(roy), ag:r2(ag), agenzia:r2(netto-ag)};
+}
+
+function incassa(c, data, silenzioso){
+  c.stato='incassata'; c.data_inc=data;
+  const o = S.opp.find(x=>x.id===c.opp);
+  const p = ripartisci(o, c.lato, c.imponibile);
+  const rif = `${c.opp} · ${c.fattura}`, quando = data;
+  if (p.roy) S.uscite.push({a:'Rete franchising (royalty)', rif, data:quando, imp:p.roy, nota:'fattura della rete, mese successivo', stato:'da pagare'});
+  S.uscite.push({a:o.agente+' (agente)', rif, data:quando, imp:p.ag, nota:'in busta o su sua fattura', stato:'da pagare'});
+  if (p.sub) {
+    const occ = o.sub.tipo==='occasionale';
+    S.uscite.push({a:o.sub.nome+(occ?' (segnalatore occasionale)':' (sub-broker con partita IVA)'), rif, data:quando, imp:p.sub,
+      nota: occ ? `netto ${eur(p.sub*(1-R('ritenuta')))}, ritenuta ${eur(p.sub*R('ritenuta'))} con F24 entro il 16 del mese dopo`
+                : `attendere sua fattura: ${eur(p.sub*(1+R('iva')))} IVA compresa`, stato:'da pagare'});
+  }
+  if (!silenzioso) toast(`Incassata <b>${c.fattura}</b>: generati i pagamenti da fare (agente${p.sub?', sub-broker':''}${p.roy?', royalty':''})`);
+}
+
+/* ---------- viste ---------- */
+function kpi(){
+  const cred = Object.values(S.crediti);
+  const prev = previsione(); const prob = prev.reduce((a,m)=>a+m.prob,0), certo = prev.reduce((a,m)=>a+m.certo,0);
+  const daInc = cred.filter(c=>c.stato==='fatturata').reduce((a,c)=>a+c.totale,0);
+  const scad = cred.filter(c=>c.stato==='fatturata' && c.data_fatt < '2026-10-31').length;
+  const usc = S.uscite.filter(u=>u.stato==='da pagare').reduce((a,u)=>a+u.imp,0);
+  const daAbb = S.banca.filter(m=>m.stato==='da abbinare' || m.stato==='proposta').length;
+  document.getElementById('kpi').innerHTML = [
+    ['Previsione 6 mesi', eur0(certo+prob), `certo ${eur0(certo)} · probabile ${eur0(prob)}`, 'cyan'],
+    ['Fatture da incassare', eur0(daInc), scad? `${scad} emesse prima del 31/10`:'nessuna vecchia', scad?'amber':'green'],
+    ['Movimenti da abbinare', String(daAbb), S.importato?'dopo l\'import':'importa l\'estratto conto', daAbb?'amber':'green'],
+    ['Provvigioni da pagare', eur0(usc), 'royalty, agenti, sub-broker', usc?'red':'green']
+  ].map(([k,v,d,t])=>`<div class="kpi ${t}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
+}
+
+function previsione(){
+  const mesi=[]; let d=new Date(OGGI.slice(0,7)+'-01');
+  for (let i=0;i<6;i++){ mesi.push({m:d.toISOString().slice(0,7), certo:0, prob:0, lordo:0}); d.setMonth(d.getMonth()+1); }
+  for (const o of S.opp) {
+    const f = FS(o)[IX(o,o.fase)];
+    for (const t of tranche(o)) {
+      const m = mesi.find(x=>x.m===t.data.slice(0,7)); if (!m) continue;
+      const c = S.crediti[t.key];
+      if (c && c.stato==='incassata') continue;
+      m.lordo += t.imponibile;
+      if (IX(o,o.fase) >= IX(o,'accettata')) m.certo += t.imponibile; else m.prob += t.imponibile*f.p;
+    }
+  }
+  return mesi;
+}
+
+function vPipeline(){
+  const mesi = previsione(); const max = Math.max(...mesi.map(m=>Math.max(m.lordo, m.certo+m.prob)), 1);
+  const nomi = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  document.getElementById('barre').innerHTML = mesi.map(m=>`<div class="col">
+      <div class="val">${eur0(m.certo+m.prob)}</div>
+      <b class="prob" style="height:${m.prob/max*190}px" title="probabile ${eur0(m.prob)}"></b>
+      <b class="certo" style="height:${m.certo/max*190}px" title="certo ${eur0(m.certo)}"></b>
+      <span class="lordo" style="bottom:${m.lordo/max*190}px" title="se chiudessero tutte ${eur0(m.lordo)}"></span></div>`).join('');
+  document.getElementById('mesi').innerHTML = mesi.map(m=>`<span>${nomi[+m.m.slice(5)-1]} ${m.m.slice(2,4)}</span>`).join('');
+  const rows = S.opp.map(o=>{
+    const F = FS(o), i = IX(o,o.fase), nostra = lati(o).reduce((a,l)=>a+lordoLato(o,l),0);
+    const extra = [o.sub?`sub-broker ${o.sub.nome} ${o.sub.pct*100}% lato ${nomeLato(o,o.sub.lato)}`:'',
+                   o.collab?`collaborazione: ${o.collab.agenzia} fattura il lato ${nomeLato(o,o.collab.lato)}`:''].filter(Boolean).join(' · ');
+    return `<tr><td><b>${o.id}</b><div class="mini">cod. ${o.cod}</div></td><td>${o.imm}<div class="mini">${o.agente}${extra?' · '+extra:''}</div></td>
+      <td class="n">${AFF(o)? eur0(o.canone)+'<div class="mini">al mese</div>' : eur0(o.prezzo)}</td>
+      <td><span class="fase">${F.map((_,k)=>`<i class="${k<=i?'on':''}"></i>`).join('')}</span><div class="mini">${F[i].nome} · ${Math.round(F[i].p*100)}%</div></td>
+      <td class="n">${eur0(nostra)}<div class="mini">pesata ${eur0(nostra*F[i].p)}</div></td>
+      <td class="n">${AFF(o)? 'firma '+dIt(o.rog) : dIt(o.prel)+'<div class="mini">rogito '+dIt(o.rog)+'</div>'}</td>
+      <td>${i<F.length-1?`<button class="btn" data-avanza="${o.id}">Avanza fase ›</button>`:'<span class="stato s-inc">chiusa</span>'}</td></tr>`;
+  }).join('');
+  document.getElementById('t-opp').innerHTML = `<tr><th>Trattativa</th><th>Immobile</th><th class="n">Prezzo</th><th>Fase</th><th class="n">Provvigione nostra</th><th class="n">Preliminare / firma</th><th></th></tr>${rows}`;
+}
+
+function vIncassi(){
+  const cred = Object.values(S.crediti).sort((a,b)=>a.data.localeCompare(b.data));
+  const cls = {attesa:'s-att', fatturata:'s-fatt', incassata:'s-inc'};
+  const nome = {attesa:'credito atteso', fatturata:'fatturata', incassata:'incassata'};
+  let tot=0;
+  const rows = cred.map(c=>{ if(c.stato!=='incassata') tot+=c.totale;
+    return `<tr><td class="n">${dIt(c.data)}</td><td><b>${c.opp}</b> · ${nomeTranche(S.opp.find(o=>o.id===c.opp),c.quando)}</td>
+    <td>${c.cliente}<div class="mini">${nomeLato(S.opp.find(o=>o.id===c.opp),c.lato)}</div></td>
+    <td>${c.fattura||'—'}${c.data_fatt?`<div class="mini">${dIt(c.data_fatt)}</div>`:''}</td>
+    <td class="n">${eur(c.imponibile)}</td><td class="n">${eur(c.totale)}</td>
+    <td><span class="stato ${cls[c.stato]}">${nome[c.stato]}</span>${c.data_inc?`<div class="mini">${dIt(c.data_inc)}</div>`:''}</td></tr>`; }).join('');
+  document.getElementById('t-inc').innerHTML = `<tr><th class="n">Scadenza</th><th>Voce</th><th>Cliente</th><th>Fattura</th><th class="n">Imponibile</th><th class="n">Totale</th><th>Stato</th></tr>${rows||'<tr><td colspan=7 class="mini">Nessun credito: nessuna proposta accettata.</td></tr>'}
+    <tr class="tot"><td colspan=5>Ancora da incassare (IVA compresa)</td><td class="n">${eur(tot)}</td><td></td></tr>`;
+}
+
+function vBanca(){
+  const cls = {'abbinato':'s-inc', 'proposta':'s-att', 'da abbinare':'s-ko', 'non pertinente':''};
+  const rows = S.banca.slice().sort((a,b)=>b.data.localeCompare(a.data)).map(m=>`<tr><td class="n">${dIt(m.data)}</td><td>${m.desc}</td>
+    <td class="n" style="color:${m.importo<0?'var(--red)':'var(--green)'}">${eur(m.importo)}</td>
+    <td><span class="stato ${cls[m.stato]}">${m.stato}</span>${m.rif?`<div class="mini">${m.rif}</div>`:''}</td>
+    <td>${m.stato==='proposta'?`<button class="btn amber" data-conferma="${m.id}">Conferma</button>`:''}</td></tr>`).join('');
+  document.getElementById('t-banca').innerHTML = `<tr><th class="n">Data</th><th>Causale</th><th class="n">Importo</th><th>Abbinamento</th><th></th></tr>${rows}`;
+}
+
+function vProvv(){
+  document.getElementById('t-regole').innerHTML = `<tr><th>Regola</th><th class="n">Valore</th></tr>` + Object.entries(S.regole).map(([k,r])=>
+    `<tr><td>${r.t}</td><td class="n"><input data-regola="${k}" value="${r.pct?r2(r.v*100):r.v}" style="width:80px;text-align:right;padding:4px 8px"> ${r.pct?'%':''}</td></tr>`).join('');
+  let T={l:0,c:0,s:0,r:0,a:0,g:0};
+  const rows = S.opp.map(o=>{
+    const lordo = lordoLato(o,'vend')+lordoLato(o,'acq'); const coll = o.collab? lordoLato(o,o.collab.lato) : 0;
+    let s=0,r=0,a=0,g=0;
+    for (const lato of lati(o)) { const p = ripartisci(o,lato,lordoLato(o,lato)); s+=p.sub; r+=p.roy; a+=p.ag; g+=p.agenzia; }
+    T.l+=lordo;T.c+=coll;T.s+=s;T.r+=r;T.a+=a;T.g+=g;
+    return `<tr><td><b>${o.id}</b> <span class="mini">${AFF(o)?'affitto':'vendita'} · ${FS(o)[IX(o,o.fase)].nome}</span></td><td class="n">${eur0(lordo)}</td><td class="n">${coll?eur0(coll):'—'}</td>
+      <td class="n">${s?eur0(s):'—'}</td><td class="n">${eur0(r)}</td><td class="n">${eur0(a)}<div class="mini">${o.agente}</div></td><td class="n"><b>${eur0(g)}</b></td></tr>`;}).join('');
+  document.getElementById('t-split').innerHTML = `<tr><th>Trattativa</th><th class="n">Lordo</th><th class="n">Agenzia partner</th><th class="n">Sub-broker</th><th class="n">Royalty rete</th><th class="n">Agente</th><th class="n">Resta all'agenzia</th></tr>${rows}
+    <tr class="tot"><td>Totale portafoglio</td><td class="n">${eur0(T.l)}</td><td class="n">${eur0(T.c)}</td><td class="n">${eur0(T.s)}</td><td class="n">${eur0(T.r)}</td><td class="n">${eur0(T.a)}</td><td class="n">${eur0(T.g)}</td></tr>`;
+  const u = S.uscite;
+  document.getElementById('t-uscite').innerHTML = `<tr><th>A chi</th><th>Riferimento</th><th class="n">Importo</th><th>Nota</th></tr>` +
+    (u.length ? u.map(x=>`<tr><td>${x.a}</td><td class="mini">${x.rif}</td><td class="n">${eur(x.imp)}</td><td class="mini">${x.nota}</td></tr>`).join('')
+              : '<tr><td colspan=4 class="mini">Nulla da pagare.</td></tr>');
+}
+
+
+/* ---------- conti semplici e resa ---------- */
+const MESE = '2026-11';
+const fissiMese = () => S.fissi.reduce((a,f)=>a+f.imp,0);
+const costoOra = () => fissiMese()*12 / S.agenti.reduce((a,g)=>a+g.ore_anno,0);
+function mese(){
+  const cred = Object.values(S.crediti);
+  const entrato = cred.filter(c=>c.stato==='incassata' && (c.data_inc||'').startsWith(MESE)).reduce((a,c)=>a+c.imponibile,0);
+  const arriva = cred.filter(c=>c.stato!=='incassata' && c.data.startsWith(MESE)).reduce((a,c)=>a+c.imponibile,0);
+  const provv = S.uscite.filter(u=>(u.data||'').startsWith(MESE)).reduce((a,u)=>a+u.imp,0);
+  const spese = S.spese.filter(x=>x.data.startsWith(MESE)).reduce((a,x)=>a+x.imp,0);
+  return {entrato, arriva, fissi:fissiMese(), provv, spese, uscito: fissiMese()+provv+spese};
+}
+function vSemplice(){
+  const m = mese(), resta = m.entrato - m.uscito, manca = Math.max(0, m.uscito - m.entrato - m.arriva);
+  document.getElementById('mese-big').innerHTML = [
+    ['Entrato a novembre', eur0(m.entrato), `più ${eur0(m.arriva)} attesi entro fine mese`, 'green'],
+    ['Uscito a novembre', eur0(m.uscito), `fissi ${eur0(m.fissi)} · provvigioni ${eur0(m.provv)} · altro ${eur0(m.spese)}`, 'amber'],
+    ['Ti resta', eur0(resta), resta<0?'per ora sei sotto':'sopra le spese', resta<0?'red':'green'],
+    ['Per pareggiare il mese', manca? eur0(manca) : 'coperto', manca? 'mancano, contando anche gli incassi attesi':'con gli incassi attesi', manca?'red':'green']
+  ].map(([k,v,d,t])=>`<div class="kpi ${t}"><div class="k">${k}</div><div class="v" style="font-size:32px">${v}</div><div class="d">${d}</div></div>`).join('');
+  const per = {};
+  S.fissi.forEach(f=>per[f.cat]=(per[f.cat]||0)+f.imp);
+  S.spese.filter(x=>x.data.startsWith(MESE)).forEach(x=>per[x.cat]=(per[x.cat]||0)+x.imp);
+  if (m.provv) per['Provvigioni ad agenti e sub-broker']=m.provv;
+  const tot = Object.values(per).reduce((a,v)=>a+v,0), voci = Object.entries(per).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('voci').innerHTML = voci.map(([c,v])=>`<div style="margin:7px 0"><div style="display:flex;justify-content:space-between;font-size:14px"><span>${c}</span><span style="font-family:var(--mono)">${eur0(v)} · ${Math.round(v/tot*100)}%</span></div>
+    <div style="height:8px;border-radius:4px;background:var(--soft)"><div style="height:8px;width:${v/voci[0][1]*100}%;background:var(--cyan);border-radius:4px"></div></div></div>`).join('');
+  document.getElementById('sp-cat').innerHTML = CATEGORIE.map(c=>`<option>${c}</option>`).join('');
+  document.getElementById('t-fissi').innerHTML = S.fissi.map((f,i)=>`<tr><td>${f.voce}<div class="mini">${f.cat}</div></td>
+    <td class="n"><input data-fisso="${i}" value="${f.imp}" style="width:90px;text-align:right;padding:4px 8px"></td></tr>`).join('')
+    + `<tr class="tot"><td>Totale al mese</td><td class="n">${eur0(fissiMese())}</td></tr>`;
+  const lim = '2027-01-05';
+  const arr = Object.values(S.crediti).filter(c=>c.stato!=='incassata' && c.data<=lim).sort((a,b)=>a.data.localeCompare(b.data));
+  document.getElementById('t-arrivo').innerHTML = `<tr><th class="n">Quando</th><th>Da chi</th><th>Perché</th><th class="n">Quanto</th></tr>` +
+    (arr.length? arr.map(c=>`<tr><td class="n">${dIt(c.data)}${c.data<OGGI?'<div><span class="stato s-ko">in ritardo</span></div>':''}</td><td>${c.cliente}</td><td>${S.opp.find(o=>o.id===c.opp).imm} · ${nomeTranche(S.opp.find(o=>o.id===c.opp),c.quando)}</td><td class="n">${eur0(c.imponibile)}</td></tr>`).join('')
+               : '<tr><td colspan=4 class="mini">Niente in arrivo: nessuna proposta accettata.</td></tr>');
+}
+function vResa(){
+  const co = costoOra();
+  const A = S.agenti.reduce((t,g)=>{for(const k of ['val','inc','chiusi','ore_ok','ore_ko','provv']) t[k]=(t[k]||0)+g[k]; return t;},{});
+  const acq = A.ore_ko*co/A.chiusi;
+  document.getElementById('resa-kpi').innerHTML = [
+    ['Costo di un\'ora', eur0(co), `costi fissi annui ÷ ${S.agenti.reduce((a,g)=>a+g.ore_anno,0)} ore lavorate`, 'cyan'],
+    ['Valutazioni › incarichi', Math.round(A.inc/A.val*100)+'%', `${A.inc} incarichi su ${A.val} valutazioni`, 'cyan'],
+    ['Incarichi › affari chiusi', Math.round(A.chiusi/A.inc*100)+'%', `${A.chiusi} chiusi su ${A.inc}`, A.chiusi/A.inc<.5?'amber':'green'],
+    ['Costo di acquisizione', eur0(acq), `per affare chiuso: ${Math.round(A.ore_ko/A.chiusi)} ore perse su incarichi andati a vuoto`, 'amber']
+  ].map(([k,v,d,t])=>`<div class="kpi ${t}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('');
+  document.getElementById('t-agenti').innerHTML = `<tr><th>Agente</th><th class="n">Valutazioni › incarichi</th><th class="n">Incarichi › chiusi</th><th class="n">Ore vere per affare</th><th class="n">Costo acquisizione</th><th class="n">Provvigioni</th><th class="n">Resa per ora</th></tr>` +
+    S.agenti.map(g=>{ const oreVere=(g.ore_ok+g.ore_ko)/g.chiusi;
+      return `<tr><td><b>${g.nome}</b></td><td class="n">${Math.round(g.inc/g.val*100)}%</td><td class="n">${Math.round(g.chiusi/g.inc*100)}%</td>
+      <td class="n">${Math.round(oreVere)} h<div class="mini">${Math.round(g.ore_ok/g.chiusi)} sull'affare + ${Math.round(g.ko=g.ore_ko/g.chiusi)} perse</div></td>
+      <td class="n">${eur0(g.ore_ko*co/g.chiusi)}</td><td class="n">${eur0(g.provv)}</td><td class="n"><b>${eur0(g.provv/(g.ore_ok+g.ore_ko))}</b>/h</td></tr>`}).join('');
+  document.getElementById('t-resa').innerHTML = `<tr><th>Trattativa</th><th class="n">Ore</th><th class="n">Provvigione nostra</th><th class="n">Costo tempo</th><th class="n">Costo acquisizione</th><th class="n">Margine vero</th><th class="n">Resa per ora</th><th></th></tr>` +
+    S.opp.map(o=>{ const prov = lati(o).reduce((a,l)=>{const p=ripartisci(o,l,lordoLato(o,l)); return a+p.agenzia+p.ag;},0);
+      const ct=o.ore*co, marg=prov-ct-acq, ag=S.agenti.find(g=>g.nome===o.agente), oreVere=o.ore+(ag?ag.ore_ko/ag.chiusi:0);
+      return `<tr><td><b>${o.id}</b><div class="mini">${o.imm} · ${o.agente}</div></td><td class="n">${fmtOre(o.ore)}</td><td class="n">${eur0(prov)}</td>
+      <td class="n">${eur0(ct)}</td><td class="n">${eur0(acq)}</td><td class="n" style="color:${marg<0?'var(--red)':'var(--green)'}"><b>${eur0(marg)}</b></td>
+      <td class="n">${eur0(prov/oreVere)}/h</td><td><button class="btn" data-tl="${o.id}">Dettaglio</button></td></tr>`}).join('')
+    + `<tr><td colspan=8 class="mini">Provvigione nostra = dopo sub-broker e royalty, prima della quota agente. Resa per ora = provvigione ÷ (ore sulla trattativa + ore perse medie dell'agente per ogni affare chiuso).</td></tr>`;
+}
+
+function vTipi(){
+  const righe = ['vendita','affitto'].map(t=>{
+    const os = S.opp.filter(o=>(o.tipo||'vendita')===t && o.fase!=='rogito');
+    const nostra = os.reduce((a,o)=>a+lati(o).reduce((x,l)=>x+lordoLato(o,l),0),0);
+    const pes = os.reduce((a,o)=>a+lati(o).reduce((x,l)=>x+lordoLato(o,l),0)*FS(o)[IX(o,o.fase)].p,0);
+    const ore = os.reduce((a,o)=>a+o.ore,0);
+    return `<tr><td><b>${t==='vendita'?'Vendite':'Affitti'}</b></td><td class="n">${os.length}</td><td class="n">${eur0(nostra)}</td><td class="n">${eur0(os.length?nostra/os.length:0)}</td><td class="n">${eur0(pes)}</td><td class="n">${ore} h</td><td class="n"><b>${eur0(ore?nostra/ore:0)}</b>/h</td></tr>`;});
+  document.getElementById('t-tipi').innerHTML = `<tr><th>Tipo</th><th class="n">Trattative</th><th class="n">Provvigioni se chiudono</th><th class="n">Media per trattativa</th><th class="n">Pesata sulla fase</th><th class="n">Ore finora</th><th class="n">Resa per ora</th></tr>${righe.join('')}`;
+}
+const oreDi = o => Math.round((S.eventi[o.id]||[]).reduce((a,e)=>a+S.std[e.tipo].h,0)*10)/10;
+const attese = o => ATTESE[o.tipo||'vendita'] * QUOTA_FASE[o.fase];
+function calcolaOre(){ for (const o of S.opp) o.ore = oreDi(o); }
+const fmtOre = h => { const t=Math.round(h*60); return Math.floor(t/60)+' h'+(t%60?' '+String(t%60).padStart(2,'0'):''); };
+function vTempo(){
+  const righe = S.opp.map(o=>({o, ore:o.ore, att:attese(o), ix:o.ore/attese(o)})).sort((a,b)=>b.ix-a.ix);
+  const max = Math.max(...righe.map(r=>Math.max(r.ore,r.att)));
+  const col = ix => ix<=1.1?'var(--ok)':ix<=1.4?'var(--warn)':'var(--primary)';
+  document.getElementById('tl-lista').innerHTML = righe.map(r=>`<div class="tl-row ${r.o.id===S.scelta?'on':''}" data-tl="${r.o.id}">
+      <div><b>${r.o.id}</b> · ${r.o.imm}<div class="mini">${AFF(r.o)?'affitto':'vendita'} · ${FS(r.o)[IX(r.o,r.o.fase)].nome} · ${r.o.agente}</div></div>
+      <div class="tl-bar"><i style="width:${r.ore/max*100}%;background:${col(r.ix)}"></i><u style="left:${r.att/max*100}%"></u></div>
+      <div class="tl-num"><b>${fmtOre(r.ore)}</b> su ${fmtOre(r.att)}<div class="mini" style="color:${col(r.ix)}">${Math.round(r.ix*100)}% del normale</div></div></div>`).join('');
+  const o = S.opp.find(x=>x.id===S.scelta), ev = S.eventi[o.id]||[];
+  const prov = lati(o).reduce((a,l)=>a+lordoLato(o,l),0), ix = o.ore/attese(o);
+  const pr = FS(o)[IX(o,o.fase)].p, oreFine = o.ore / QUOTA_FASE[o.fase], resaAtt = prov*pr/Math.max(oreFine,.1);
+  const mediaAg = S.agenti.reduce((x,g)=>x+g.provv,0) / S.agenti.reduce((x,g)=>x+g.ore_ok+g.ore_ko,0);
+  const per = {}; ev.forEach(e=>{ per[e.tipo]=per[e.tipo]||{n:0,h:0}; per[e.tipo].n++; per[e.tipo].h+=S.std[e.tipo].h; });
+  const voci = Object.entries(per).sort((a,b)=>b[1].h-a[1].h);
+  const perFonte = {}; ev.forEach(e=>perFonte[e.fonte]=(perFonte[e.fonte]||0)+1);
+  document.getElementById('tl-dettaglio').innerHTML = `
+    <span class="label">${o.id} · ${o.imm}</span>
+    <div class="grid g4">
+      <div class="kpi"><div class="k">Ore stimate</div><div class="v">${fmtOre(o.ore)}</div><div class="d">${ev.length} attività registrate</div></div>
+      <div class="kpi ${ix>1.4?'red':''}"><div class="k">Di solito a questa fase</div><div class="v">${fmtOre(attese(o))}</div><div class="d">${Math.round(ix*100)}% del normale</div></div>
+      <div class="kpi"><div class="k">Provvigione se chiude</div><div class="v">${eur0(prov)}</div><div class="d">${AFF(o)?'affitto':'vendita'}</div></div>
+      <div class="kpi ${resaAtt<mediaAg?'red':'green'}"><div class="k">Resa attesa all'ora</div><div class="v">${eur0(resaAtt)}</div><div class="d">media agenzia ${eur0(mediaAg)} · a questo ritmo ${fmtOre(oreFine)} in tutto, probabilità ${Math.round(pr*100)}%</div></div>
+    </div>
+    <p style="margin:16px 0 0"><b>Dove è andato il tempo</b></p>
+    <div class="stack">${voci.map(([t,v])=>`<b title="${S.std[t].t}: ${fmtOre(v.h)}" style="width:${v.h/o.ore*100}%;background:${COLORI[t]}"></b>`).join('')}</div>
+    <div class="leg" style="margin-top:0">${voci.map(([t,v])=>`<span><i style="background:${COLORI[t]}"></i>${S.std[t].t} · ${v.n} × ${fmtOre(S.std[t].h)} = <b>${fmtOre(v.h)}</b></span>`).join('')}</div>
+    <p class="mini" style="margin:12px 0">Da dove arrivano i dati: ${Object.entries(perFonte).map(([f,n])=>`<span class="chip ${f}">${FONTI[f]} ${n}</span>`).join(' ')}
+      &nbsp; <button class="btn" data-vocale="${o.id}">Simula un vocale WhatsApp</button></p>
+    <table class="t"><tr><th class="n">Data</th><th>Attività</th><th>Fonte</th><th class="n">Tempo</th></tr>
+      ${ev.slice(0,12).map(e=>`<tr><td class="n">${dIt(e.data)}</td><td>${S.std[e.tipo].t}${e.nota?`<div class="mini">${e.nota}</div>`:''}</td><td><span class="chip ${e.fonte}">${FONTI[e.fonte]}</span></td><td class="n">${fmtOre(S.std[e.tipo].h)}</td></tr>`).join('')}
+      ${ev.length>12?`<tr><td colspan=4 class="mini">e altre ${ev.length-12} attività più vecchie</td></tr>`:''}</table>`;
+  document.getElementById('t-std').innerHTML = `<tr><th>Attività</th><th>Da dove arriva</th><th class="n">Minuti</th></tr>` + Object.entries(S.std).map(([k,v])=>
+    `<tr><td>${v.t}</td><td><span class="chip ${v.fonte}">${FONTI[v.fonte]}</span></td><td class="n"><input data-std="${k}" value="${Math.round(v.h*60)}" style="width:80px;text-align:right"></td></tr>`).join('');
+}
+function tutto(){ calcolaOre(); vTempo(); kpi(); vSemplice(); vPipeline(); vTipi(); vIncassi(); vBanca(); vProvv(); vResa(); }
+
+/* ---------- azioni ---------- */
+function vaiA(v){ document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on', x.dataset.v===v)); document.querySelectorAll('.vista').forEach(x=>x.classList.toggle('on', x.id==='v-'+v)); }
+document.addEventListener('click', e=>{
+  const r = e.target.closest('.tl-row'); if (r) { S.scelta=r.dataset.tl; tutto(); return; }
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.v) { document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on', x===b));
+    document.querySelectorAll('.vista').forEach(x=>x.classList.toggle('on', x.id==='v-'+b.dataset.v)); return; }
+  if (b.dataset.avanza) { const o=S.opp.find(x=>x.id===b.dataset.avanza); const F=FS(o), i=IX(o,o.fase);
+    o.fase = F[i+1].id; toast(`${o.id}: ${F[i].nome} › <b>${F[i+1].nome}</b> (aggiornamento dal CRM)`); sincronizza(o); tutto(); return; }
+  if (b.dataset.conferma) { const m=S.banca.find(x=>x.id===b.dataset.conferma); const c=S.crediti[m.chiave];
+    m.stato='abbinato'; incassa(c, m.data); tutto(); return; }
+  if (b.dataset.tl) { S.scelta=b.dataset.tl; vaiA('tempo'); tutto(); return; }
+  if (b.dataset.vocale) { const o=S.opp.find(x=>x.id===b.dataset.vocale); const via=o.imm.split(',')[0];
+    S.eventi[o.id].unshift({data:OGGI, tipo:'visita', fonte:'wa', nota:`vocale di ${o.agente.split(' ')[0]}: «visita ${via} con ${o.acq!=='—'?o.acq:'un cliente nuovo'}, un'ora e mezza»`});
+    tutto(); toast(`Vocale trascritto e attaccato a <b>${o.id}</b>: +1 h 30 di visita`); return; }
+  if (b.id==='sp-add') { const v=document.getElementById('sp-voce').value.trim(), imp=parseFloat(document.getElementById('sp-imp').value.replace(',','.'));
+    if (!v||isNaN(imp)) { toast('Scrivi la voce e l\'importo'); return; }
+    S.spese.push({data:OGGI, voce:v, cat:document.getElementById('sp-cat').value, imp}); tutto(); toast(`Spesa segnata: ${v}, ${eur0(imp)}`); return; }
+  if (b.id==='reset') { nuovoStato(); tutto(); toast('Dati di prova ripristinati'); return; }
+  if (b.id==='importa') { importa(); tutto(); return; }
+  if (b.id==='riconcilia') { riconcilia(); tutto(); return; }
+});
+document.addEventListener('change', e=>{
+  if (e.target.dataset.regola) { const r=S.regole[e.target.dataset.regola]; const v=parseFloat(String(e.target.value).replace(',','.'));
+    if (!isNaN(v)) { r.v = r.pct? v/100 : v; tutto(); toast('Regola aggiornata: previsione e ripartizioni ricalcolate (le fatture già emesse non cambiano)'); } }
+  if (e.target.dataset.fisso) { const v=parseFloat(String(e.target.value).replace(',','.')); if(!isNaN(v)){ S.fissi[+e.target.dataset.fisso].imp=v; tutto(); toast('Costo fisso aggiornato: anche il costo dell\'ora cambia'); } }
+  if (e.target.dataset.std) { const v=parseFloat(String(e.target.value).replace(',','.')); if(!isNaN(v)){ S.std[e.target.dataset.std].h=v/60; tutto(); toast('Tempo standard aggiornato: ore di tutte le trattative ricalcolate'); } }
+  if (e.target.id==='fonte') toast(`Connettore: <b>${e.target.selectedOptions[0].text}</b>. Nel POC i dati restano gli stessi.`);
+});
+
+/* estratto conto simulato: un bonifico per ogni fattura aperta; uno con causale generica, uno con importo diverso */
+function importa(){
+  const aperte = Object.values(S.crediti).filter(c=>c.stato==='fatturata' && !S.banca.some(m=>m.chiave===c.key));
+  if (!aperte.length) { toast('Nessuna fattura aperta: avanza qualche trattativa al preliminare o al rogito'); return; }
+  let n=0;
+  aperte.forEach((c,k)=>{
+    const strano = k===1, generico = k===2;
+    S.banca.push({id:'M-'+(9100+S.banca.length), data:'2026-11-0'+(4+(k%2)), chiave:c.key,
+      desc: generico ? `BONIFICO DA ${c.cliente.toUpperCase()} SALDO COMPETENZE` : `BONIFICO DA ${c.cliente.toUpperCase()} PAGAMENTO ${c.fattura}`,
+      importo: strano ? r2(c.totale - 150) : c.totale, stato:'da abbinare'}); n++;
+  });
+  S.banca.push({id:'M-'+(9100+S.banca.length), data:'2026-11-04', desc:'BONIFICO DA SCONOSCIUTO RIF 88213', importo:1220, stato:'da abbinare'});
+  S.importato = true;
+  toast(`Importati ${n+1} movimenti dall'estratto conto`);
+}
+
+function riconcilia(){
+  let auto=0, prop=0;
+  for (const m of S.banca.filter(x=>x.stato==='da abbinare' && x.importo>0)) {
+    const aperte = Object.values(S.crediti).filter(c=>c.stato==='fatturata');
+    const tok = c => c.cliente.toUpperCase().split(/\s+/).filter(w=>w.length>2);
+    const esatto = aperte.find(c=>Math.abs(c.totale-m.importo)<.01 && tok(c).some(w=>m.desc.includes(w)));
+    if (esatto) { m.stato='abbinato'; m.rif=`${esatto.fattura} · ${esatto.cliente}`; incassa(esatto, m.data, true); auto++; continue; }
+    const nome = aperte.find(c=>tok(c).some(w=>m.desc.includes(w)));
+    if (nome) { m.stato='proposta'; m.chiave=nome.key; m.rif=`${nome.fattura}? differenza ${eur(m.importo-nome.totale)}`; prop++; }
+  }
+  toast(`Riconciliazione: <b>${auto}</b> abbinati in automatico, <b>${prop}</b> da confermare, il resto resta da abbinare`);
+}
+
+nuovoStato(); tutto();
+if (location.hash) vaiA(location.hash.slice(1));
+</script>
+</body>
+</html>
