@@ -101,8 +101,8 @@ const SLIDES = [
     nota: `Questionari scritti in collaborazione con uno psicometrista certificato. Nessun test clinico: misurano competenze e preferenze di lavoro.`, url: DEMO.talent, img: 'demo-t-cassetti.jpg', alt: `Catalogo dei cassetti di Gabetti Talent` }) },
 
   { id: 'talent-pipeline', nome: 'Talent · selezione', scena: 'ambient', html: demo({
-    n: 7, kick: `Gabetti Talent · la selezione`, titolo: `Dal telefono del candidato`, em: `alla scelta del titolare`,
-    cosa: `Il candidato riceve un link e compila dal telefono solo i cassetti del suo profilo, dopo informativa e consenso. Il punteggio, calcolato con regole fisse dalle risposte, arriva come proposta interna: per ogni competenza il valore contro il livello atteso e la spiegazione. Il titolare sposta i candidati tra le colonne, li confronta, corregge un punteggio con una nota: tutto resta nel registro delle decisioni.`,
+    n: 7, kick: `Gabetti Talent · la selezione`, titolo: `Dal questionario del candidato`, em: `alla scelta del titolare`,
+    cosa: `Il candidato riceve un link e risponde da qualsiasi dispositivo, telefono, tablet o computer, alle domande dei soli cassetti del suo profilo, dopo informativa e consenso. Il punteggio, calcolato con regole fisse dalle risposte, arriva come proposta interna: per ogni competenza il valore contro il livello atteso e la spiegazione. Il titolare sposta i candidati tra le colonne, li confronta, corregge un punteggio con una nota: tutto resta nel registro delle decisioni.`,
     vant: [['Agenzia', `Meno colloqui a vuoto: si incontra chi ha il profilo.`], ['Agenzia', `Si vede subito dove la persona è forte e dove va formata.`], ['Gabetti', `Tempi e qualità delle assunzioni misurati agenzia per agenzia.`]],
     nota: `La piattaforma suggerisce, decide sempre una persona. Nessuno scarto automatico.`, url: DEMO.talentPipe, img: 'demo-t-pipeline.jpg', alt: `Pipeline dei candidati di un'agenzia` }) },
 
