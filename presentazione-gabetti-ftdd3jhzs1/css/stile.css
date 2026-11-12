@@ -20,9 +20,9 @@ html,body{margin:0;height:100%;background:var(--fondo);color:var(--fg);font-fami
 #top .lg{display:block;height:34px;width:auto}
 #count{font:400 15px var(--sans);letter-spacing:.14em;font-variant-numeric:tabular-nums;color:var(--fg2)}
 #bottom{position:fixed;left:0;right:0;bottom:0;height:68px;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,3.4vw,52px)}
-#dots{display:flex;gap:6px;flex-wrap:wrap}
+#dots{display:flex;gap:2px;flex-wrap:nowrap;overflow:hidden}
 #dots button{all:unset;cursor:pointer;height:30px;display:flex;align-items:center;gap:8px;padding:0 6px;font:400 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--fg2)}
-#dots button:before{content:"";width:20px;height:1px;background:var(--fg2);opacity:.5;transition:all .35s}
+#dots button:before{content:"";width:16px;height:1px;background:var(--fg2);opacity:.5;transition:all .35s}
 #dots button span{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .4s ease}
 #dots button:hover span,#dots button.on span{max-width:240px}
 #dots button.on{color:var(--fg)}

@@ -10,15 +10,20 @@ const DEMO = {
   dossier: 'https://hubagency-casa3d.vercel.app',
   arreda: 'https://arreda-demo.vercel.app',
   ristruttura: 'https://hubagency-casa3d.vercel.app/dossier.html',
-  talent: 'https://gabetti-talent.vercel.app',
+  talent: 'https://gabetti-talent.vercel.app/#/ats/cassetti?come=franchisor',
+  talentPipe: 'https://gabetti-talent.vercel.app/#/ats/pipeline?come=franchisor',
+  talentAnnunci: 'https://gabetti-talent.vercel.app/#/annunci?come=franchisor',
+  talentForm: 'https://gabetti-talent.vercel.app/#/formazione?come=agente',
+  talentGioco: 'https://gabetti-talent.vercel.app/#/allenamento?come=agente',
+  talentRete: 'https://gabetti-talent.vercel.app/#/cruscotto?come=franchisor',
 };
-const host = u => u.replace(/^https:\/\//, '').replace(/\/$/, '');
+const host = u => u.replace(/^https:\/\//, '').replace(/[#?].*$/, '').replace(/\/$/, '');
 
 // una slide per demo: cosa fa, tre vantaggi, schermata, pulsante
 function demo({ n, kick, titolo, em, cosa, vant, nota, url, img, alt, eti = ETI }) {
   return `
     <div class="in demo-t">
-      <div class="kick r" style="--i:0">Demo ${n} di 6 · ${kick}</div>
+      <div class="kick r" style="--i:0">Demo ${n} di 11 · ${kick}</div>
       <h2 class="r" style="--i:1">${titolo} <em>${em}</em></h2>
       <p class="lead r" style="--i:2">${cosa}</p>
       <ul class="vant">
@@ -84,6 +89,48 @@ const SLIDES = [
     vant: [['Agenzia', 'Contatti interessati a quella casa, dall\'annuncio.'], ['Agenzia', 'Annunci più coinvolgenti per chi li guarda.'], ['Gabetti', 'Una funzione di rete, con il marchio Gabetti.']],
     nota: 'Il risultato è un\'immagine indicativa: mobili e proporzioni possono differire.', url: DEMO.arreda, img: 'demo-arreda.jpg', alt: 'Stanza in vendita arredata con i mobili del visitatore', eti: 'IMMAGINE INDICATIVA' }) },
 
+  { id: 'ristr', nome: 'Ristrutturazione', scena: 'ambient', html: demo({
+    n: 5, kick: `Quanto costerebbe ristrutturarlo`, titolo: `La casa da sistemare,`, em: `con il conto dei lavori`,
+    cosa: `Nel Dossier Immobile per l'acquirente, due scelte con un tocco: rinfrescata, parziale o completa, e finitura base, media o alta. Esce la spesa a forchetta voce per voce (demolizioni, pavimenti, bagni, impianti, serramenti, tinteggiatura), con il perché di ogni cifra, la fonte del prezzo, il costo al metro quadro e le settimane di cantiere.`,
+    vant: [['Agenzia', `L'obiezione «ma quanto devo spenderci?» trova risposta subito.`], ['Agenzia', `Le case da ristrutturare si propongono con numeri, non con impressioni.`], ['Gabetti', `Uno strumento in più che i portali non danno.`]],
+    nota: `Stima indicativa con fonti dichiarate, non è un preventivo: serve sempre il sopralluogo di un'impresa. Nella versione per il proprietario non compare.`, url: DEMO.ristruttura, img: 'demo-ristr.jpg', alt: `Pagina «Quanto costerebbe ristrutturarlo» del dossier` }) },
+
+  { id: 'talent-cassetti', nome: 'Talent · profili', scena: 'ambient', html: demo({
+    n: 6, kick: `Gabetti Talent · il candidato giusto`, titolo: `Ogni ruolo,`, em: `le sue competenze`,
+    cosa: `Per ogni posizione (agente junior e senior, acquisitore, segreteria, consulente mutui) si costruisce il profilo del candidato ideale aprendo solo i «cassetti» che servono: 24 questionari brevi, ognuno su una sola competenza, 14 di comportamento (negoziazione, controllo emotivo, gestione del rifiuto…) e 10 di mestiere (normativa, valutazione, strumenti digitali). Per ogni cassetto si sceglie peso e livello atteso.`,
+    vant: [['Agenzia', `Un agente e una segretaria non si misurano con lo stesso test.`], ['Agenzia', `Profili già pronti per i ruoli tipici, modificabili.`], ['Gabetti', `Un metodo di selezione unico per tutta la rete.`]],
+    nota: `Questionari scritti da Hubique, da validare con uno psicometrista prima dell'uso reale. Nessun test clinico: misurano competenze e preferenze di lavoro.`, url: DEMO.talent, img: 'demo-t-cassetti.jpg', alt: `Catalogo dei cassetti di Gabetti Talent` }) },
+
+  { id: 'talent-pipeline', nome: 'Talent · selezione', scena: 'ambient', html: demo({
+    n: 7, kick: `Gabetti Talent · la selezione`, titolo: `Dal telefono del candidato`, em: `alla scelta del titolare`,
+    cosa: `Il candidato riceve un link e compila dal telefono solo i cassetti del suo profilo, dopo informativa e consenso. Il punteggio, calcolato con regole fisse dalle risposte, arriva come proposta interna: per ogni competenza il valore contro il livello atteso e la spiegazione. Il titolare sposta i candidati tra le colonne, li confronta, corregge un punteggio con una nota: tutto resta nel registro delle decisioni.`,
+    vant: [['Agenzia', `Meno colloqui a vuoto: si incontra chi ha il profilo.`], ['Agenzia', `Si vede subito dove la persona è forte e dove va formata.`], ['Gabetti', `Tempi e qualità delle assunzioni misurati agenzia per agenzia.`]],
+    nota: `La piattaforma suggerisce, decide sempre una persona. Nessuno scarto automatico.`, url: DEMO.talentPipe, img: 'demo-t-pipeline.jpg', alt: `Pipeline dei candidati di un'agenzia` }) },
+
+  { id: 'talent-annunci', nome: 'Talent · annunci', scena: 'ambient', html: demo({
+    n: 8, kick: `Gabetti Talent · gli annunci`, titolo: `L'annuncio di lavoro`, em: `nasce dal profilo`,
+    cosa: `L'annuncio si scrive da solo partendo dal profilo a cassetti della posizione; si può riscrivere con un tono diverso e si vede l'anteprima per Indeed, LinkedIn, InfoJobs, Subito Lavoro e la pagina «Lavora con noi». Per ogni ricerca si segue lo stato su ogni portale. I file per Google for Jobs e il feed Indeed sono reali e scaricabili.`,
+    vant: [['Agenzia', `Un annuncio fatto bene in un minuto, su tutti i portali.`], ['Agenzia', `Le candidature entrano già nella pipeline giusta.`], ['Gabetti', `Annunci con lo stesso stile e lo stesso marchio in tutta la rete.`]],
+    nota: `Nella demo la pubblicazione sui portali è simulata: nessun annuncio esce davvero.`, url: DEMO.talentAnnunci, img: 'demo-t-annunci.jpg', alt: `Annunci di lavoro con lo stato per portale` }) },
+
+  { id: 'talent-formazione', nome: 'Talent · formazione', scena: 'ambient', html: demo({
+    n: 9, kick: `Gabetti Talent · la formazione`, titolo: `La formazione parte`, em: `dove serve davvero`,
+    cosa: `Il nuovo assunto trova un percorso di inserimento costruito sui cassetti rimasti sotto il livello atteso nel questionario d'ingresso. Corsi brevi (inserimento in rete, acquisizione, normativa e antiriciclaggio, privacy, uso di HubAgency), lezioni di pochi minuti, quiz e attestato. La direzione assegna i percorsi obbligatori con scadenza, l'agenzia aggiunge i suoi.`,
+    vant: [['Agenzia', `Il nuovo agente è operativo prima.`], ['Agenzia', `Formazione obbligatoria tracciata, con attestati.`], ['Gabetti', `Stessi contenuti e stesso livello in tutte le agenzie.`]],
+    nota: `Contenuti dei corsi d'esempio, da far rivedere ai formatori della rete.`, url: DEMO.talentForm, img: 'demo-t-formazione.jpg', alt: `La mia formazione, vista dell'agente` }) },
+
+  { id: 'talent-gioco', nome: 'Talent · allenamento', scena: 'ambient', html: demo({
+    n: 10, kick: `Gabetti Talent · l'allenamento`, titolo: `Quattro minuti al giorno,`, em: `come un gioco`,
+    cosa: `Ogni giorno cinque case da vendere in un quartiere 3D: ogni casa è una domanda su quello che si è studiato, si risponde bene e compare il cartello VENDUTO. Le domande sbagliate tornano nei giorni dopo finché non sono imparate. Giorni di fila, punti, livelli e badge; in modalità immersiva si cammina nel quartiere col telefono. Leghe a squadre e sfide tra agenzie.`,
+    vant: [['Agenzia', `Quello che si impara in aula non si perde.`], ['Agenzia', `Un'abitudine quotidiana, non un corso una volta l'anno.`], ['Gabetti', `Sfide di rete che uniscono le agenzie.`]],
+    nota: `La classifica di rete la accende o la spegne la direzione.`, url: DEMO.talentGioco, img: 'demo-t-allenamento.jpg', alt: `Allenamento di oggi: cinque case da vendere` }) },
+
+  { id: 'talent-rete', nome: 'Talent · cruscotto', scena: 'ambient', html: demo({
+    n: 11, kick: `Gabetti Talent · la vista di Gabetti`, titolo: `Tutta la rete`, em: `in un cruscotto`,
+    cosa: `La direzione vede ricerche aperte, candidati in selezione, tempo medio di assunzione, formazione completata e chi si è allenato questa settimana. L'imbuto della selezione dice dove si perdono i candidati; le agenzie più attive e quelle da seguire compaiono da sole, con il motivo.`,
+    vant: [['Gabetti', `Si interviene sulle agenzie ferme prima che sia tardi.`], ['Gabetti', `Selezione e formazione misurate con gli stessi numeri.`], ['Agenzia', `Ogni agenzia vede solo i suoi dati.`]],
+    nota: `Dati della demo inventati su 12 agenzie dimostrative.`, url: DEMO.talentRete, img: 'demo-t-cruscotto.jpg', alt: `Cruscotto della rete` }) },
+
   { id: 'vantaggi', nome: 'Vantaggi per Gabetti', scena: 'ambient', html: `
     <div class="in stretta">
       <div class="kick r" style="--i:0">In sintesi</div>
@@ -99,19 +146,6 @@ const SLIDES = [
          ['A consumo', 'L\'agente attiva i servizi che usa; il modello si definisce insieme.']]
         .map((t, i) => `<div class="tile r" style="--i:${i + 3}"><i>${i + 1}</i><h3>${t[0]}</h3><p>${t[1]}</p></div>`).join('')}
     </div>` },
-
-  { id: 'sviluppi', nome: 'Nuove demo', scena: 'casa', off: 3.9, sc: .6, offY: -6.2, kStretto: .5, html: `
-    <div class="in lungo">
-      <div class="kick r" style="--i:0">Demo 5 e 6 di 6 · già pronte</div>
-      <h2 class="r" style="--i:1">Due strumenti in più, <em>già da provare</em></h2>
-      <div class="card r" style="--i:2"><h3>Quanto costerebbe ristrutturarlo</h3>
-        <p>Nel Dossier Immobile: tipo di lavori e finitura con un tocco, poi la stima a forchetta voce per voce, con le fonti dei prezzi. <b>Per Gabetti:</b> le case da sistemare si vendono prima.</p>
-        <div class="azioni" style="margin-top:10px"><a class="apri pe" style="padding:10px 26px" href="${DEMO.ristruttura}" target="_blank" rel="noopener">Apri la demo <span aria-hidden="true">&#8599;</span></a></div></div>
-      <div class="card r" style="--i:3"><h3>Gabetti Talent</h3>
-        <p><b>Ricerca del personale</b> per Gabetti e per le agenzie: profilo ideale per ruolo, questionari mirati, punteggio come proposta, annunci per i portali. <b>Formazione continua</b> con quiz, allenamento quotidiano e sfide tra agenzie.</p>
-        <div class="azioni" style="margin-top:10px"><a class="apri pe" style="padding:10px 26px" href="${DEMO.talent}" target="_blank" rel="noopener">Apri la demo <span aria-hidden="true">&#8599;</span></a></div></div>
-    </div>
-    <div class="hint">Passa sulle stanze · ${ETI}</div>` },
 
   { id: 'chiusura', nome: 'Prossimo passo', scena: 'italia', off: 3.0, sc: .92, offY: -4.2, kStretto: .6, html: `
     <div class="in lungo">
