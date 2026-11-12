@@ -46,8 +46,8 @@ const SLIDES = [
       <h1 class="r" style="--i:1">HubAgency per la rete Gabetti: <em>strumenti che lavorano per l'agenzia</em></h1>
       <div class="av r" style="--i:2">
         <span>Alla cortese attenzione di</span>
-        <b>Alessio Parisi</b><small>Project Manager, Tree Re Srl</small>
         <b>Marco Speretta</b><small>Amministratore Delegato, Gruppo Gabetti</small>
+        <b>Alessio Parisi</b><small>Project Manager, Tree Re Srl</small>
       </div>
     </div>
     <div class="hint">Passa sulle agenzie · Frecce per avanzare · Punti generici, a scopo illustrativo</div>` },
