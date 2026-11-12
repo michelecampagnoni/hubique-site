@@ -98,7 +98,7 @@ const SLIDES = [
     n: 6, kick: `Gabetti Talent · il candidato giusto`, titolo: `Ogni ruolo,`, em: `le sue competenze`,
     cosa: `Per ogni posizione (agente junior e senior, acquisitore, segreteria, consulente mutui) si costruisce il profilo del candidato ideale aprendo solo i «cassetti» che servono: 24 questionari brevi, ognuno su una sola competenza, 14 di comportamento (negoziazione, controllo emotivo, gestione del rifiuto…) e 10 di mestiere (normativa, valutazione, strumenti digitali). Per ogni cassetto si sceglie peso e livello atteso.`,
     vant: [['Agenzia', `Un agente e una segretaria non si misurano con lo stesso test.`], ['Agenzia', `Profili già pronti per i ruoli tipici, modificabili.`], ['Gabetti', `Un metodo di selezione unico per tutta la rete.`]],
-    nota: `Questionari scritti da Hubique, da validare con uno psicometrista prima dell'uso reale. Nessun test clinico: misurano competenze e preferenze di lavoro.`, url: DEMO.talent, img: 'demo-t-cassetti.jpg', alt: `Catalogo dei cassetti di Gabetti Talent` }) },
+    nota: `Questionari scritti in collaborazione con uno psicometrista certificato. Nessun test clinico: misurano competenze e preferenze di lavoro.`, url: DEMO.talent, img: 'demo-t-cassetti.jpg', alt: `Catalogo dei cassetti di Gabetti Talent` }) },
 
   { id: 'talent-pipeline', nome: 'Talent · selezione', scena: 'ambient', html: demo({
     n: 7, kick: `Gabetti Talent · la selezione`, titolo: `Dal telefono del candidato`, em: `alla scelta del titolare`,
