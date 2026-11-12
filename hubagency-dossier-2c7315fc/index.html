@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HubAgency · dalla catastale alla casa 3D</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Satoshi,system-ui,sans-serif;color:#1d1d1f;background:#f6f3ef}
+header{height:64px;display:flex;align-items:center;gap:22px;padding:0 22px;background:#7A0623;color:#fff}
+.brand{font-family:'Cormorant Garamond',serif;font-size:24px;white-space:nowrap}
+.steps{display:flex;gap:6px;flex:1;justify-content:center}
+.st{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:30px;font-size:14px;color:rgba(255,255,255,.6);cursor:pointer;white-space:nowrap}
+.st .n{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-size:12px;font-weight:700}
+.st.on{background:#fff;color:#7A0623;font-weight:700}.st.fatto{color:#fff}.st.fatto .n{background:#fff;color:#7A0623;border-color:#fff}
+.nav{display:flex;gap:8px}.nav button{font:inherit;font-size:14px;padding:9px 16px;border-radius:9px;border:1px solid rgba(255,255,255,.5);background:none;color:#fff;cursor:pointer}
+.nav button.pri{background:#fff;color:#7A0623;border-color:#fff;font-weight:700}.nav button:disabled{opacity:.35;cursor:default}
+main{position:relative;height:calc(100% - 64px)}
+iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#eceae6}
+.cap{position:absolute;left:50%;top:86px;transform:translateX(-50%);background:#7A0623;color:#fff;padding:10px 18px;border-radius:10px;font-size:14px;max-width:760px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:5;pointer-events:none;transition:opacity .4s}
+#carica{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:30px}
+.box{background:#fff;border-radius:16px;box-shadow:0 2px 20px rgba(0,0,0,.08);padding:36px 40px;width:min(760px,100%);text-align:center}
+.box h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;margin:0 0 6px;color:#7A0623}
+.box p{margin:0 0 22px;opacity:.7}
+#drop{border:2px dashed #c9b9bd;border-radius:14px;padding:44px 20px;cursor:pointer;transition:.2s}
+#drop:hover,#drop.over{border-color:#B20933;background:#fbf4f6}
+#drop b{display:block;font-size:18px;margin-bottom:6px}#drop span{font-size:14px;opacity:.6}
+.es{margin-top:16px;font-size:14px}.es a{color:#B20933;cursor:pointer;font-weight:700}
+#prog{display:none}.bar{height:8px;background:#eee;border-radius:5px;overflow:hidden;margin:18px 0 10px}.bar i{display:block;height:100%;width:0;background:#B20933;transition:width .3s}
+#ok{display:none;text-align:left}#ok .r{display:flex;gap:24px;align-items:center}#ok img{width:230px;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+#ok dl{margin:0;font-size:15px;line-height:1.9}#ok dt{display:inline;opacity:.6}#ok dd{display:inline;margin:0 0 0 6px;font-weight:700}#ok dd:after{content:'';display:block}
+.go{margin-top:20px;font:inherit;font-size:16px;font-weight:700;padding:13px 26px;border-radius:10px;border:0;background:#B20933;color:#fff;cursor:pointer}
+.note{font-size:13px;opacity:.6;margin-top:10px}
+.altri{position:absolute;right:16px;bottom:14px;font-size:13px;z-index:4}.altri a{color:#7A0623}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">HubAgency</div>
+  <div class="steps" id="steps"></div>
+  <div class="nav"><button id="ind">← Indietro</button><button id="av" class="pri">Avanti →</button></div>
+</header>
+<main>
+  <section id="carica">
+    <div class="box">
+      <div id="sc">
+        <h1>Carica la planimetria</h1>
+        <p>La catastale dell'immobile, come PDF o immagine. Da qui in pochi minuti: casa 3D arredata, foto degli ambienti e dossier.</p>
+        <div id="drop"><b>Trascina qui la planimetria catastale</b><span>oppure clicca per sceglierla dal computer</span></div>
+        <input type="file" id="file" accept="image/*,application/pdf" hidden>
+        <div class="es">oppure <a id="esempio">usa la catastale d'esempio · Viale Sabotino 22, Milano</a></div>
+      </div>
+      <div id="prog"><h1>Carico la planimetria…</h1><div class="bar"><i id="bi"></i></div><div id="pt" class="note">Ricevo il file</div></div>
+      <div id="ok">
+        <div class="r"><img src="piante_test/catastale_viale_sabotino_22.png" alt="catastale">
+          <div><h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;margin:0 0 8px;color:#7A0623">Planimetria caricata</h1>
+          <dl><dt>Tipo</dt><dd>planimetria catastale</dd><dt>Indirizzo</dt><dd>Viale Sabotino 22, Milano</dd><dt>Piano</dt><dd>terzo, altezza 2,70 m</dd><dt>Scala</dt><dd>1:100</dd><dt>Schede</dt><dd>1</dd></dl>
+          <button class="go" id="vaiLettura">Avvia la lettura →</button>
+          <div class="note" id="nota" style="display:none">In questa demo il percorso usa la planimetria d'esempio.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <iframe id="f2" title="Lettura"></iframe>
+  <iframe id="f3" title="Casa 3D"></iframe>
+  <iframe id="f4" title="Foto"></iframe>
+  <iframe id="f5" title="Dossier"></iframe>
+  <div class="cap" id="cap"></div>
+  <div class="altri"><a href="panoramica.html">Altri esempi di planimetrie →</a></div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const PASSI = [
+  ['Carica la catastale', null, ''],
+  ['Lettura guidata', 'motore/lettura.html?p=sab', 'Il sistema legge scala, muri, porte, finestre e stanze. Se qualcosa non torna l\'agente lo corregge con pochi tocchi.'],
+  ['Casa 3D arredata', 'casa3d.html?passo=casa', 'Arredata in automatico: nessun mobile davanti alle porte, ogni stanza raggiungibile. I mobili si spostano, ruotano ed eliminano.'],
+  ['Foto degli ambienti', 'casa3d.html', 'Scegli gli ambienti e premi «Scatti cinematografici»: per ogni stanza il punto da cui si vede più spazio, poi la foto realistica.'],
+  ['Dossier', 'dossier.html', 'Il dossier dell\'immobile con i colori dell\'agenzia, da stampare o inviare con un link.']
+];
+let cur = 0, caricato = false;
+$('steps').innerHTML = PASSI.map((p, i) => `<div class="st" data-i="${i}"><span class="n">${i + 1}</span>${p[0]}</div>`).join('');
+document.querySelectorAll('.st').forEach(s => s.onclick = () => { const i = +s.dataset.i; if (i === 0 || caricato) go(i); });
+function go(i) {
+  cur = i;
+  document.querySelectorAll('.st').forEach((s, k) => { s.classList.toggle('on', k === i); s.classList.toggle('fatto', k < i); });
+  $('carica').style.display = i === 0 ? 'flex' : 'none';
+  [2, 3, 4, 5].forEach(k => { const f = $('f' + k); const on = k === i + 1; if (on && !f.src) f.src = PASSI[i][1]; f.style.display = on ? 'block' : 'none'; });
+  const c = $('cap'); c.textContent = PASSI[i][2]; c.style.display = PASSI[i][2] ? 'block' : 'none'; c.style.opacity = 1; clearTimeout(c._t); c._t = setTimeout(() => c.style.opacity = 0, 9000);
+  $('ind').disabled = i === 0; $('av').disabled = (i === 0 && !caricato) || i === PASSI.length - 1;
+  $('av').textContent = i === PASSI.length - 1 ? 'Fine' : 'Avanti →';
+}
+$('ind').onclick = () => cur > 0 && go(cur - 1);
+$('av').onclick = () => cur < PASSI.length - 1 && go(cur + 1);
+addEventListener('message', e => { if (e.data === 'avanti') go(cur + 1); });
+function carica(proprio) {
+  $('sc').style.display = 'none'; $('prog').style.display = 'block';
+  const fasi = [[25, 'Ricevo il file'], [55, 'Riconosco il foglio catastale'], [80, 'Leggo intestazione, scala e piano'], [100, 'Pronta']];
+  fasi.forEach(([p, t], k) => setTimeout(() => { $('bi').style.width = p + '%'; $('pt').textContent = t; }, 350 + k * 550));
+  setTimeout(() => { $('prog').style.display = 'none'; $('ok').style.display = 'block'; $('nota').style.display = proprio ? 'block' : 'none'; caricato = true; go(0); }, 2700);
+}
+$('drop').onclick = () => $('file').click();
+$('file').onchange = () => $('file').files.length && carica(true);
+$('esempio').onclick = () => carica(false);
+['dragover', 'dragenter'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.add('over'); }));
+$('drop').addEventListener('dragleave', () => $('drop').classList.remove('over'));
+$('drop').addEventListener('drop', e => { e.preventDefault(); $('drop').classList.remove('over'); carica(true); });
+$('vaiLettura').onclick = () => go(1);
+go(0);
+</script>
+</body>
+</html>

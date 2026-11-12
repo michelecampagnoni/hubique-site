@@ -1,0 +1,27 @@
+{
+ "id": "p4",
+ "fonte": "planimetria-catastale-600x849.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "stima",
+  "dettaglio": "nessuna quota ne scala leggibile; stimato 1 px dell'ingrandimento x4 = 0,0097 m (finestre ~1,4 m, locale principale ~11 m); ~0,039 m per px originale"
+ },
+ "stanze": 5,
+ "muri": 18,
+ "aperture": 10,
+ "superficie_calcolata_m2": 45.3,
+ "semaforo": "verde",
+ "auto": [],
+ "errori": [],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Scala stimata, errore possibile +-25%",
+  "Piccolo: scritta 'Sub 13' e H=3,00; giardino e vano scala/INT.3 esclusi",
+  "Porte non disegnate: dedotte",
+  "Atrio/Int.1 e disposizione dei locali a destra (camera) interpretati: separazione da muro non disegnato nell'atrio",
+  "Bagno e cucina hanno la parte superiore aperta sul locale principale, porte dedotte",
+  "Il locale a destra potrebbe essere parte del soggiorno",
+  "Muri inclinati/disegno storto raddrizzati; piccolo vano a sinistra dell'atrio (ripostiglio/scala) omesso"
+ ]
+}

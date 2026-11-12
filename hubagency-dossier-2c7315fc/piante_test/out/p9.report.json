@@ -1,0 +1,31 @@
+{
+ "id": "p9",
+ "fonte": "planimetria_catastale.png",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scala 1:200 dichiarata, formato A4 210 mm = 724 px => 1 px = 0,058 m (verificata: soggiorno 4,6 x 3,5 m, cucina 3,4 x 3,5 m, plausibili)"
+ },
+ "stanze": 10,
+ "muri": 28,
+ "aperture": 16,
+ "superficie_calcolata_m2": 71.5,
+ "semaforo": "giallo",
+ "auto": [],
+ "errori": [],
+ "avvisi": [
+  "Passaggio larga 0.45 m su m13: insolita"
+ ],
+ "dubbi_lettura": [
+  "Immagine a bassa risoluzione e sfocata: misure con errore stimato +-0,2 m",
+  "Scala 1:200 dichiarata ma l'immagine puo' essere stata ridimensionata; la barra '10 metri' a destra non e' coerente con 1:200, ignorata",
+  "Nessuna porta disegnata: tutte le porte interne e l'ingresso (dalla scala A, anta con arco) sono dedotti",
+  "Ingresso dedotto sul muro verso il vano scala A (arco di porta alla base del vano scala)",
+  "Stanza centrale senza nome a destra (6,3-9,2 m): ipotizzata studio/camera, aperta verso il corridoio",
+  "Scala interna verso il piano terzo (sottotetto, Rip.) modellata come locale 'altro' di 1 x 1,1 m; piano terzo non modellato",
+  "Balcone destro: contorno incerto, forse piu' stretto; balcone sinistro curvo semplificato con lato obliquo",
+  "Muri irregolari raddrizzati: corridoio e stanze con piccoli risalti omessi",
+  "Superficie totale dichiarata assente nel foglio"
+ ]
+}

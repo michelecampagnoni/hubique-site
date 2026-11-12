@@ -6,16 +6,16 @@ const r = (i) => `class="r" style="--i:${i}"`;
 const ETI = 'ESEMPIO DIMOSTRATIVO · DATI FITTIZI';
 const DEMO = {
   conti: 'https://hubique.it/hubagency-conti-agenzia-90eb5a71/',
-  sito: 'https://hubagency-sito-anteprima.vercel.app',
-  dossier: 'https://hubagency-casa3d.vercel.app',
-  arreda: 'https://arreda-demo.vercel.app',
-  ristruttura: 'https://hubagency-casa3d.vercel.app/dossier.html',
-  talent: 'https://gabetti-talent.vercel.app/#/ats/cassetti?come=franchisor',
-  talentPipe: 'https://gabetti-talent.vercel.app/#/ats/pipeline?come=franchisor',
-  talentAnnunci: 'https://gabetti-talent.vercel.app/#/annunci?come=franchisor',
-  talentForm: 'https://gabetti-talent.vercel.app/#/formazione?come=agente',
-  talentGioco: 'https://gabetti-talent.vercel.app/#/allenamento?come=agente',
-  talentRete: 'https://gabetti-talent.vercel.app/#/cruscotto?come=franchisor',
+  sito: 'https://hubique.it/hubagency-sito-d3741808/',
+  dossier: 'https://hubique.it/hubagency-dossier-2c7315fc/',
+  arreda: 'https://hubique.it/hubagency-arreda-a103ff50/',
+  ristruttura: 'https://hubique.it/hubagency-dossier-2c7315fc/dossier.html',
+  talent: 'https://hubique.it/gabetti-talent-e9b5519e/#/ats/cassetti?come=franchisor',
+  talentPipe: 'https://hubique.it/gabetti-talent-e9b5519e/#/ats/pipeline?come=franchisor',
+  talentAnnunci: 'https://hubique.it/gabetti-talent-e9b5519e/#/annunci?come=franchisor',
+  talentForm: 'https://hubique.it/gabetti-talent-e9b5519e/#/formazione?come=agente',
+  talentGioco: 'https://hubique.it/gabetti-talent-e9b5519e/#/allenamento?come=agente',
+  talentRete: 'https://hubique.it/gabetti-talent-e9b5519e/#/cruscotto?come=franchisor',
 };
 const host = u => u.replace(/^https:\/\//, '').replace(/[#?].*$/, '').replace(/\/$/, '');
 

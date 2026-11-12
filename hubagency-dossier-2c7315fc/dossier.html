@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier immobile · Viale Sabotino 22 · anteprima HubAgency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{
+  --p:#B20933; --p2:#7A0623; --tint:#FBF3F5; --line:#F0CED6; --ink:#1d1d1f; --mute:#6b6b70; --paper:#fffdfb;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Satoshi',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#d9d9dc;font-family:var(--sans);color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* barra strumenti dell'app (non stampata) */
+.bar{position:sticky;top:0;z-index:50;background:#0a0a0a;color:#fff;display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:12px 24px;font-size:13px}
+.bar b{font-weight:700;letter-spacing:.02em}
+.bar .grp{display:flex;gap:6px;align-items:center}
+.bar .lbl{color:#9a9aa0;margin-right:4px}
+.bar button{font:inherit;border:1px solid #333;background:#161616;color:#fff;padding:7px 12px;border-radius:8px;cursor:pointer}
+.bar button.on{background:var(--p);border-color:var(--p)}
+.bar .sp{flex:1}
+.bar .cta{background:#fff;color:#0a0a0a;border-color:#fff;font-weight:700}
+.nota{max-width:210mm;margin:18px auto 0;font-size:12.5px;color:#444;background:#fff;border-radius:10px;padding:12px 16px;line-height:1.5}
+
+/* pagina A4 */
+.page{width:210mm;height:297mm;margin:24px auto;background:var(--paper);box-shadow:0 10px 40px rgba(0,0,0,.18);position:relative;overflow:hidden;page-break-after:always;break-after:page}
+.inner{padding:20mm 18mm 26mm}
+.head{display:flex;justify-content:space-between;align-items:center;padding:9mm 18mm 0;font-size:9pt;color:var(--mute);letter-spacing:.14em;text-transform:uppercase}
+.foot{position:absolute;left:18mm;right:18mm;bottom:10mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--mute);border-top:.4pt solid var(--line);padding-top:3mm;letter-spacing:.04em}
+.foot .n{font-family:var(--serif);font-size:11pt;color:var(--p)}
+.wordmark{font-family:var(--sans);font-weight:700;letter-spacing:.02em;color:var(--p);font-size:13pt;text-transform:none}
+.wordmark small{display:block;font-weight:500;font-size:7pt;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
+
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.05}
+.kicker{font-size:8pt;letter-spacing:.28em;text-transform:uppercase;color:var(--p);font-weight:700;margin-bottom:4mm}
+h2{font-size:30pt;margin-bottom:6mm}
+h2 em{font-style:italic;color:var(--p)}
+p{font-size:10.2pt;line-height:1.62}
+.lead{font-family:var(--serif);font-size:15pt;line-height:1.4;font-style:italic;color:#333}
+.drop:first-letter{font-family:var(--serif);float:left;font-size:44pt;line-height:.85;padding:2mm 2.5mm 0 0;color:var(--p)}
+.rule{height:.6pt;background:var(--p);width:22mm;margin:6mm 0}
+.cols2{columns:2;column-gap:9mm}
+.cols2 p{margin-bottom:3mm}
+
+/* copertina */
+.cover{color:#fff}
+.cover .ph{position:absolute;inset:0;background:#3a2a2a center/cover no-repeat}
+.cover .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,0) 45%,rgba(0,0,0,.78) 100%)}
+.cover .top{position:absolute;top:14mm;left:18mm;right:18mm;display:flex;justify-content:space-between;align-items:flex-start}
+.cover .top .wordmark{color:#fff;font-size:17pt}
+.cover .top .wordmark small{color:rgba(255,255,255,.8)}
+.cover .ref{font-size:8pt;letter-spacing:.22em;text-transform:uppercase;text-align:right;line-height:1.7}
+.cover .txt{position:absolute;left:18mm;right:18mm;bottom:44mm}
+.cover h1{font-size:46pt;margin:3mm 0 5mm;max-width:150mm}
+.cover h1 em{font-style:italic}
+.cover .addr{font-size:10pt;letter-spacing:.16em;text-transform:uppercase}
+.cover .strip{position:absolute;left:0;right:0;bottom:0;height:30mm;background:var(--p);display:grid;grid-template-columns:1.4fr repeat(4,1fr);align-items:center;padding:0 18mm}
+.cover .strip div{font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;opacity:.92}
+.cover .strip div b{display:block;font-family:var(--serif);font-size:20pt;letter-spacing:0;text-transform:none;font-weight:500;margin-top:1mm;opacity:1}
+
+/* scheda tecnica */
+.spec{display:grid;grid-template-columns:1fr 1fr;column-gap:9mm;margin-top:4mm}
+.spec div{display:flex;justify-content:space-between;border-bottom:.4pt solid var(--line);padding:2.2mm 0;font-size:9.5pt}
+.spec span{color:var(--mute)}
+.spec b{font-weight:500}
+.energy{display:flex;gap:1.2mm;margin-top:5mm;align-items:flex-end}
+.energy i{flex:1;height:7mm;font-style:normal;font-size:8pt;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border-radius:1mm;opacity:.35}
+.energy i.on{opacity:1;height:11mm;font-size:11pt;box-shadow:0 0 0 1.2pt var(--ink)}
+.box{background:var(--tint);border-left:2pt solid var(--p);padding:5mm 6mm;margin-top:6mm}
+.box p{font-size:9.5pt}
+
+/* gallerie */
+.g{display:grid;gap:3mm}
+.g figure{position:relative;overflow:hidden;background:#ddd}
+.g img{width:100%;height:100%;object-fit:cover;display:block}
+.g figcaption{position:absolute;left:0;bottom:0;right:0;padding:6mm 4mm 2.5mm;font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.g1{grid-template-columns:2fr 1fr;grid-template-rows:66mm 66mm}
+.g1 figure:first-child{grid-row:span 2}
+.g2{grid-template-columns:1fr 1fr;grid-template-rows:56mm}
+.cap{font-family:var(--serif);font-style:italic;font-size:11pt;color:#444;margin-top:4mm}
+
+/* planimetria */
+.plan{border:.6pt solid var(--line);background:#fff;padding:6mm;margin-top:2mm}
+.plan svg{width:100%;height:auto;display:block}
+.dh{width:124%;margin:4mm 0 2mm -12%;display:block}
+.pl{width:100%;display:block;margin-top:-2mm}
+.tour{display:grid;grid-template-columns:34mm 1fr;gap:6mm;align-items:center;margin-top:7mm;background:var(--tint);padding:5mm}
+.tour img{width:34mm;height:34mm;background:#fff;padding:2mm}
+.tour h3{font-size:16pt;margin-bottom:1.5mm}
+
+/* catasto + storia */
+.cat{display:grid;grid-template-columns:repeat(4,1fr);border-top:.8pt solid var(--ink);border-bottom:.8pt solid var(--ink);margin:4mm 0 2mm}
+.cat div{padding:3.5mm 2mm;border-right:.4pt solid var(--line)}
+.cat div:nth-child(4n){border-right:0}
+.cat div:nth-child(-n+4){border-bottom:.4pt solid var(--line)}
+.cat span{display:block;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.cat b{font-family:var(--serif);font-size:16pt;font-weight:500}
+.src{font-size:7.5pt;color:var(--mute);font-style:italic}
+.tl{position:relative;margin-top:5mm;padding-left:22mm}
+.tl:before{content:"";position:absolute;left:16mm;top:2mm;bottom:2mm;width:.6pt;background:var(--p)}
+.tl div{position:relative;margin-bottom:4.5mm}
+.tl div:before{content:"";position:absolute;left:-7.6mm;top:1.6mm;width:2.4mm;height:2.4mm;border-radius:50%;background:var(--paper);border:1pt solid var(--p)}
+.tl .y{position:absolute;left:-22mm;top:-.5mm;font-family:var(--serif);font-size:13pt;color:var(--p)}
+.tl b{font-weight:700;font-size:9.5pt}
+.tl p{font-size:9.3pt;line-height:1.5}
+
+/* mercato */
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin:4mm 0 6mm}
+.kpi div{border-top:2pt solid var(--p);padding-top:3mm}
+.kpi span{font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.kpi b{display:block;font-family:var(--serif);font-size:24pt;font-weight:500;margin-top:1mm}
+.kpi small{font-size:8.5pt;color:var(--mute)}
+.bars{margin:3mm 0 6mm}
+.bars .r{display:grid;grid-template-columns:48mm 1fr 22mm;align-items:center;gap:3mm;font-size:9pt;margin-bottom:2.2mm}
+.bars .t{height:4mm;background:var(--tint);position:relative}
+.bars .t i{position:absolute;left:0;top:0;bottom:0;background:var(--line)}
+.bars .r.me .t i{background:var(--p)}
+.bars .r.me{font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:8.8pt}
+th{text-align:left;font-size:7pt;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:500;border-bottom:.8pt solid var(--ink);padding:2mm 1.5mm}
+td{border-bottom:.4pt solid var(--line);padding:2.3mm 1.5mm}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.range{position:relative;height:16mm;margin:8mm 4mm 4mm}
+.range .ln{position:absolute;top:7mm;left:0;right:0;height:2mm;background:linear-gradient(90deg,var(--line),var(--p),var(--line))}
+.range .m{position:absolute;top:0;transform:translateX(-50%);text-align:center;font-size:8pt}
+.range .m b{display:block;font-family:var(--serif);font-size:13pt;margin-top:8mm}
+.range .m:before{content:"";position:absolute;left:50%;top:5mm;width:.8pt;height:6mm;background:var(--ink)}
+.solo-proprietario{display:none}
+body.proprietario .solo-proprietario{display:block}
+body.proprietario .solo-acquirente{display:none}
+.kicker .solo-proprietario,.foot .solo-proprietario{display:none}
+body.proprietario .kicker .solo-proprietario,body.proprietario .foot .solo-proprietario{display:inline}
+
+/* quartiere + retro */
+#map{height:92mm;margin-top:3mm;filter:grayscale(.35)}
+.serv{display:grid;grid-template-columns:1fr 1fr;column-gap:9mm;margin-top:5mm}
+.serv div{display:flex;justify-content:space-between;border-bottom:.4pt solid var(--line);padding:2mm 0;font-size:9.3pt}
+.serv span{color:var(--mute)}
+.back{background:var(--p2);color:#fff}
+.back .inner{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:26mm 18mm 18mm}
+.back .wordmark{color:#fff;font-size:24pt}
+.back .wordmark small{color:rgba(255,255,255,.7)}
+.agent{display:grid;grid-template-columns:38mm 1fr;gap:7mm;align-items:center}
+.agent img{width:38mm;height:38mm;object-fit:cover;border-radius:50%;border:1.5pt solid rgba(255,255,255,.5)}
+.agent h3{font-size:24pt}
+.agent p{font-size:10pt;line-height:1.7;opacity:.9}
+.back .legal{font-size:7pt;line-height:1.6;opacity:.65;border-top:.4pt solid rgba(255,255,255,.3);padding-top:4mm}
+.back .q{font-family:var(--serif);font-style:italic;font-size:22pt;line-height:1.3;max-width:150mm}
+
+/* finestra invio */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:99}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:14px;width:560px;max-width:94vw;max-height:90vh;overflow:auto;padding:22px 24px;font-size:14px}
+.mbox h3{font-family:var(--sans);font-size:18px;font-weight:700;margin-bottom:12px}
+.mbox label{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #eee}
+.mbox label small{color:#888;margin-left:auto}
+.mbox textarea{width:100%;height:120px;margin-top:12px;font:inherit;font-size:13px;padding:10px;border:1px solid #ddd;border-radius:8px}
+.mbox .row{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.mbox button{font:inherit;padding:9px 14px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer}
+.mbox .go{background:var(--p);color:#fff;border-color:var(--p);font-weight:700}
+.mbox .link{background:#f6f6f7;border-radius:8px;padding:10px;font-family:monospace;font-size:12px;margin-top:10px;word-break:break-all}
+.esito{margin-top:10px;color:#1a7f37;font-weight:700;display:none}
+
+@media print{
+  body{background:none}
+  .bar,.nota,.modal{display:none!important}
+  .page{margin:0;box-shadow:none}
+  @page{size:A4;margin:0}
+}
+
+/* ristrutturazione (solo acquirente) */
+.rz-demo{position:absolute;top:9mm;left:50%;transform:translateX(-50%);font-size:7pt;letter-spacing:.22em;font-weight:700;color:#8a6d00;background:#fff6d6;border:.5pt solid #e7cf7a;padding:1.2mm 3mm;border-radius:1mm}
+.rz-dati{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin:0 0 4.5mm}
+.rz-dati div{border-top:2pt solid var(--p);padding-top:2.5mm}
+.rz-dati span{display:block;font-size:6.8pt;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.rz-dati b{display:block;font-family:var(--serif);font-size:15pt;font-weight:500;margin-top:.8mm}
+.rz-dati small{font-size:7.8pt;color:var(--mute)}
+.rz-q{background:var(--tint);padding:7mm 8mm;margin-top:2mm}
+.rz-q h3{font-size:22pt;margin:1mm 0 5mm}
+.rz-n{font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--p);font-weight:700}
+.rz-n a,.rz-sel a{color:var(--p);text-decoration:underline;cursor:pointer;text-transform:none;letter-spacing:0;font-weight:500}
+.rz-opt{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm}
+.rz-opt button{font:inherit;text-align:left;background:#fff;border:1pt solid var(--line);border-radius:2mm;padding:5mm 4.5mm;cursor:pointer;min-height:26mm;transition:.15s}
+.rz-opt button:hover{border-color:var(--p);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.rz-opt b{display:block;font-family:var(--serif);font-size:15pt;font-weight:500;color:var(--ink);margin-bottom:1.5mm}
+.rz-opt span{font-size:8.6pt;color:var(--mute);line-height:1.4}
+.rz-sel{font-size:9pt;color:var(--mute);margin-bottom:2mm}
+.rz-tot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:4mm;margin-bottom:4mm}
+.rz-tot div{background:var(--tint);padding:3.5mm 4mm}
+.rz-tot span{display:block;font-size:6.8pt;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.rz-tot b{display:block;font-family:var(--serif);font-size:16.5pt;font-weight:500;margin-top:1mm;color:var(--p2)}
+.rz-t{font-size:7.9pt}.rz-t td{padding:1.5mm 1.5mm;vertical-align:top;line-height:1.38}.rz-t td:first-child{width:30mm}.rz-t td.n{white-space:nowrap}
+.rz-f{display:block;color:var(--mute);font-size:7pt;margin-top:.5mm}
+.rz-avv{margin-top:4mm;border:1pt solid var(--p);color:var(--p2);font-weight:700;font-size:9.5pt;padding:3mm 4mm;text-align:center}
+.rz-fonti{font-size:6.6pt;color:var(--mute);line-height:1.45;margin-top:3mm}.rz-fonti a{color:var(--mute)}
+@media print{.rz-n a,.rz-sel a{display:none}}
+
+/* telefono: pagine A4 rimpicciolite, pagina della ristrutturazione a colonna */
+@media screen and (max-width:820px){
+  .bar{position:static;padding:10px 12px;gap:8px}
+  .nota{margin:10px 8px 0}
+  .page:not(#ristr){zoom:var(--z,1);margin:10px auto}
+  #ristr{width:auto;height:auto;margin:10px 8px;overflow:visible}
+  #ristr .head{padding:5mm 5mm 0}
+  #ristr .inner{padding:8mm 5mm 6mm}
+  #ristr .foot{position:static;margin:0 5mm;padding-bottom:4mm}
+  #ristr h2{font-size:26pt}
+  .rz-demo{position:static;transform:none;display:inline-block;margin-bottom:4mm}
+  .rz-dati{grid-template-columns:1fr 1fr;row-gap:4mm}
+  .rz-opt,.rz-tot{grid-template-columns:1fr}
+  .rz-opt button{min-height:0}
+  .rz-t{font-size:10pt}.rz-t thead{display:none}
+  .rz-t tr{display:grid;grid-template-columns:1fr auto auto;column-gap:3mm;border-bottom:.4pt solid var(--line);padding:2mm 0}
+  .rz-t td{border:0;padding:.5mm 0}
+  .rz-t td:nth-child(1){grid-column:1;grid-row:1}.rz-t td:nth-child(3){grid-column:2;grid-row:1}.rz-t td:nth-child(4){grid-column:3;grid-row:1}
+  .rz-t td:nth-child(2){grid-column:1/-1;grid-row:2;color:#444}
+  .rz-t td:first-child{width:auto}
+  .rz-fonti{font-size:8pt}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>HubAgency · Dossier immobile</b>
+  <div class="grp"><span class="lbl">Brand agenzia</span>
+    <button data-pal="gabetti" class="on">Gabetti</button>
+    <button data-pal="hubagency">HubAgency</button>
+    <button data-pal="classico">Blu e oro</button>
+  </div>
+  <div class="grp"><span class="lbl">Versione</span>
+    <button data-ver="acquirente" class="on">Acquirente</button>
+    <button data-ver="proprietario">Proprietario</button>
+  </div>
+  <span class="sp"></span>
+  <button onclick="window.open('casa3d.html?accent='+getComputedStyle(document.documentElement).getPropertyValue('--p').trim().slice(1))">Casa in 3D</button>
+  <button onclick="window.print()">Stampa / PDF</button>
+  <button class="cta" onclick="apri()">Invia ai contatti</button>
+</div>
+<div class="nota">Anteprima con dati di esempio: immobile, dati catastali, agente e comparabili sono inventati. Nel prodotto i dati arrivano dall'app (immobile, incarico, valutazione, foto, planimetria, rilievo 3D, visura), i testi in corsivo e i paragrafi descrittivi li scrive l'AI a partire da quei dati, i numeri non li tocca mai. Logo e colori sono quelli caricati dall'agenzia.</div>
+
+<!-- 1 COPERTINA -->
+<section class="page cover">
+  <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=80')"></div>
+  <div class="veil"></div>
+  <div class="top">
+    <div class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></div>
+    <div class="ref">Dossier riservato<br>Rif. MI-PR-0412<br>Novembre 2026</div>
+  </div>
+  <div class="txt">
+    <div class="addr">Viale Sabotino 22 · 20135 Milano</div>
+    <h1>Un attico di luce <em>sopra i tetti</em> di Porta Romana</h1>
+    <div class="addr" style="letter-spacing:.06em;text-transform:none;font-size:11pt;opacity:.9">Quattro locali, terrazzo abitabile di 45 m² e vista aperta verso il Duomo</div>
+  </div>
+  <div class="strip">
+    <div>Prezzo richiesto<b>€ 1.050.000</b></div>
+    <div>Superficie<b>128 m²</b></div>
+    <div>Locali<b>4</b></div>
+    <div>Piano<b>7° di 7</b></div>
+    <div>Classe<b>B</b></div>
+  </div>
+</section>
+
+<!-- 2 L'IMMOBILE -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>L'immobile</span></div>
+  <div class="inner">
+    <div class="kicker">01 · La casa</div>
+    <h2>Abitare <em>all'ultimo piano</em></h2>
+    <p class="lead">Una casa pensata per la luce: tre esposizioni, finestre a tutta altezza e un terrazzo che diventa la stanza più bella della casa da aprile a ottobre.</p>
+    <div class="rule"></div>
+    <div class="cols2">
+      <p class="drop">L'appartamento occupa l'intero settimo piano della scala B, in un edificio del 1962 con portineria e ascensore. Dall'ingresso si apre un living di 42 m² con cucina a vista, affacciato a sud-ovest sul terrazzo: il pavimento in rovere prosegue senza soglie fino alla vetrata.</p>
+      <p>La zona notte è raccolta sul lato opposto: una camera padronale con bagno privato e cabina armadio, una seconda camera matrimoniale e uno studio che può diventare la terza camera. Il secondo bagno, finestrato, serve la zona giorno.</p>
+      <p>La ristrutturazione completa del 2019 ha rifatto impianti, serramenti e isolamento del solaio: la casa oggi è in classe B, con riscaldamento autonomo a pavimento e raffrescamento canalizzato.</p>
+      <p>Completano la proprietà una cantina di 6 m² e un box auto singolo al piano interrato, con accesso diretto dall'ascensore.</p>
+    </div>
+
+    <div class="kicker" style="margin-top:8mm">Scheda tecnica</div>
+    <div class="spec">
+      <div><span>Tipologia</span><b>Attico</b></div>
+      <div><span>Superficie commerciale</span><b>128 m²</b></div>
+      <div><span>Locali</span><b>4</b></div>
+      <div><span>Camere da letto</span><b>2 + studio</b></div>
+      <div><span>Bagni</span><b>2</b></div>
+      <div><span>Piano</span><b>7° di 7, con ascensore</b></div>
+      <div><span>Terrazzo</span><b>45 m²</b></div>
+      <div><span>Box e cantina</span><b>Sì, 14 m² + 6 m²</b></div>
+      <div><span>Anno di costruzione</span><b>1962, ristrutturato 2019</b></div>
+      <div><span>Riscaldamento</span><b>Autonomo a pavimento</b></div>
+      <div><span>Spese condominiali</span><b>€ 260 / mese</b></div>
+      <div><span>Disponibilità</span><b>Al rogito</b></div>
+    </div>
+    <div class="energy">
+      <i style="background:#1a9850">A4</i><i style="background:#3fae55">A3</i><i style="background:#66bd63">A2</i><i style="background:#a6d96a">A1</i><i class="on" style="background:#d9ef8b;color:#333">B</i><i style="background:#fee08b;color:#333">C</i><i style="background:#fdae61">D</i><i style="background:#f46d43">E</i><i style="background:#d73027">F</i><i style="background:#a50026">G</i>
+    </div>
+    <p class="src" style="margin-top:2mm">Classe energetica B · IPE 68 kWh/m² anno · APE n. 15146-012345/26 valido fino al 2036</p>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">2</span></div>
+</section>
+
+<!-- 3 AMBIENTI -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>Gli ambienti</span></div>
+  <div class="inner">
+    <div class="kicker">02 · Gli ambienti</div>
+    <h2>Stanza per <em>stanza</em></h2>
+    <div class="g g1">
+      <figure><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400&q=80" alt=""><figcaption>Living · 42 m²</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80" alt=""><figcaption>Cucina a vista</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80" alt=""><figcaption>Camera padronale</figcaption></figure>
+    </div>
+    <div class="g g2" style="margin-top:3mm">
+      <figure><img src="https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=1000&q=80" alt=""><figcaption>Living verso il terrazzo</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1000&q=80" alt=""><figcaption>Bagno padronale</figcaption></figure>
+    </div>
+    <p class="cap">Il terrazzo corre lungo tutto il living: a sera la luce arriva da ovest e attraversa la casa fino alla cucina.</p>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">3</span></div>
+</section>
+
+<!-- 4 CASA IN 3D -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>La casa in 3D</span></div>
+  <div class="inner">
+    <div class="kicker">03 · La casa in 3D</div>
+    <h2>Dentro, <em>senza soffitto</em></h2>
+    <p class="lead" style="max-width:150mm">Il rilievo dell'appartamento ricostruito e arredato: si vede come le stanze si collegano e come il living si apre per tutta la sua lunghezza sul terrazzo.</p>
+    <a href="3d.html" target="_blank" title="Apri la casa in 3D"><img class="dh" src="img/casa_iso.jpg" alt="Spaccato 3D arredato"></a>
+    <div class="kpi" style="margin-top:2mm">
+      <div><span>Zona giorno</span><b>42 m²</b><small>living e cucina sul terrazzo</small></div>
+      <div><span>Zona notte</span><b>3 stanze</b><small>padronale con bagno e cabina, camera, studio</small></div>
+      <div><span>All'aperto</span><b>45 m²</b><small>terrazzo esposto a sud-ovest</small></div>
+    </div>
+    <p class="src">Ricostruzione 3D dal rilievo e dalla planimetria; arredi indicativi, a scopo illustrativo.</p>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">4</span></div>
+</section>
+
+<!-- 5 PIANTA ARREDATA -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>Pianta arredata</span></div>
+  <div class="inner">
+    <div class="kicker">04 · La pianta</div>
+    <h2>Come è <em>fatta</em></h2>
+    <img class="pl" src="img/casa_top.jpg" alt="Pianta arredata">
+    <p class="src" style="margin-top:1mm">Pianta indicativa, non in scala. Superfici calpestabili arrotondate; la superficie commerciale comprende i muri e il 30% del terrazzo.</p>
+    <div class="tour">
+      <a href="3d.html" target="_blank"><img src="img/qr_casa3d.png" alt="QR casa 3D"></a>
+      <div>
+        <div class="kicker" style="margin-bottom:2mm">La casa in 3D sul telefono</div>
+        <h3>Giratela come un plastico</h3>
+        <p>Inquadrate il codice con la fotocamera: si apre il modello 3D arredato dell'appartamento, da ruotare con un dito, vedere dall'alto stanza per stanza e appoggiare sul tavolo in realtà aumentata.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">5</span></div>
+</section>
+
+<!-- 6 CATASTO E STORIA -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>Dati catastali e storia</span></div>
+  <div class="inner">
+    <div class="kicker">05 · I documenti</div>
+    <h2>Dati <em>catastali</em></h2>
+    <div class="cat">
+      <div><span>Comune</span><b>Milano (F205)</b></div>
+      <div><span>Foglio</span><b>476</b></div>
+      <div><span>Particella</span><b>112</b></div>
+      <div><span>Subalterno</span><b>34 · 51</b></div>
+      <div><span>Categoria</span><b>A/2 · C/6</b></div>
+      <div><span>Classe</span><b>5 · 7</b></div>
+      <div><span>Consistenza</span><b>6,5 vani · 14 m²</b></div>
+      <div><span>Rendita (€)</span><b>1.762,15 · 198,32</b></div>
+    </div>
+    <p class="src">Fonte: visura catastale per immobile del 03/11/2026, letta dall'app e confermata dall'agente. Conformità urbanistica e catastale verificata dal tecnico incaricato.</p>
+
+    <div class="kicker" style="margin-top:10mm">06 · La storia</div>
+    <h2>Sessant'anni <em>di casa</em></h2>
+    <div class="tl">
+      <div><span class="y">1962</span><b>Costruzione</b><p>L'edificio nasce su progetto dello studio di Giovanni Romano, con struttura in cemento armato e facciata in klinker, tipica della Milano del boom.</p></div>
+      <div><span class="y">1988</span><b>Rifacimento della copertura</b><p>Il condominio rifà il tetto piano e impermeabilizza i terrazzi dell'ultimo piano.</p></div>
+      <div><span class="y">2011</span><b>Facciate e ascensore</b><p>Ripristino delle facciate e nuovo ascensore che scende fino ai box.</p></div>
+      <div><span class="y">2019</span><b>Ristrutturazione completa</b><p>Impianti nuovi, riscaldamento a pavimento, serramenti in legno-alluminio con vetro basso emissivo, isolamento del solaio: da classe F a classe B.</p></div>
+      <div><span class="y">2026</span><b>Oggi</b><p>Abitato dai proprietari, in ottimo stato: nessun lavoro necessario prima di entrare.</p></div>
+    </div>
+    <div class="box"><p><b>Documenti disponibili in agenzia:</b> visura e planimetria catastale, atto di provenienza, APE, certificazioni degli impianti 2019, regolamento di condominio, ultimi due bilanci condominiali e verbali di assemblea.</p></div>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">6</span></div>
+</section>
+
+<!-- 6 MERCATO / VALUTAZIONE -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span class="solo-acquirente">Il mercato</span><span class="solo-proprietario">Valutazione</span></div>
+  <div class="inner">
+    <div class="solo-acquirente">
+      <div class="kicker">07 · Il mercato</div>
+      <h2>Il prezzo <em>nel suo quartiere</em></h2>
+      <p class="lead">A Porta Romana gli attici ristrutturati con terrazzo sono pochi: negli ultimi dodici mesi ne sono stati venduti sei in un raggio di 800 metri.</p>
+      <div class="kpi">
+        <div><span>Prezzo al m²</span><b>€ 8.203</b><small>questo immobile</small></div>
+        <div><span>Media di zona</span><b>€ 7.450</b><small>usato, quotazioni OMI 1° sem. 2026</small></div>
+        <div><span>Attici con terrazzo</span><b>€ 8.600</b><small>media delle vendite simili</small></div>
+      </div>
+      <div class="bars">
+        <div class="r"><span>Usato in zona, stato medio</span><span class="t"><i style="width:62%"></i></span><span class="n">€ 6.200/m²</span></div>
+        <div class="r"><span>Media di zona</span><span class="t"><i style="width:74%"></i></span><span class="n">€ 7.450/m²</span></div>
+        <div class="r me"><span>Viale Sabotino 22</span><span class="t"><i style="width:82%"></i></span><span class="n">€ 8.203/m²</span></div>
+        <div class="r"><span>Attici con terrazzo</span><span class="t"><i style="width:86%"></i></span><span class="n">€ 8.600/m²</span></div>
+      </div>
+    </div>
+
+    <div class="solo-proprietario">
+      <div class="kicker">07 · Valutazione riservata al proprietario</div>
+      <h2>Quanto vale <em>la vostra casa</em></h2>
+      <p class="lead">La stima combina le quotazioni ufficiali di zona, sei vendite comparabili e le caratteristiche che rendono raro questo immobile: ultimo piano, terrazzo, classe B.</p>
+      <div class="range">
+        <div class="ln"></div>
+        <div class="m" style="left:0%">minimo<b>€ 960.000</b></div>
+        <div class="m" style="left:52%">stima<b>€ 1.010.000</b></div>
+        <div class="m" style="left:100%">massimo<b>€ 1.080.000</b></div>
+      </div>
+      <div class="kpi">
+        <div><span>Prezzo consigliato</span><b>€ 1.050.000</b><small>margine di trattativa 3-4%</small></div>
+        <div><span>Affidabilità</span><b>86%</b><small>6 comparabili entro 800 m</small></div>
+        <div><span>Tempo di vendita</span><b>75 giorni</b><small>mediana di zona, 2026</small></div>
+      </div>
+      <div class="box"><p><b>Nota dell'agente.</b> Proponiamo di partire da € 1.050.000: il terrazzo e la classe B giustificano il posizionamento sopra la media degli attici di zona. Se entro 45 giorni non arrivano proposte, rivediamo insieme il prezzo con i dati delle visite.</p></div>
+    </div>
+
+    <div class="kicker" style="margin-top:7mm">Vendite comparabili</div>
+    <table>
+      <tr><th>Indirizzo</th><th>Tipologia</th><th class="n">m²</th><th class="n">Prezzo</th><th class="n">€/m²</th><th class="n">Distanza</th></tr>
+      <tr><td>Via Bergamo</td><td>Attico, terrazzo</td><td class="n">115</td><td class="n">€ 995.000</td><td class="n">8.652</td><td class="n">350 m</td></tr>
+      <tr><td>Corso Lodi</td><td>Ultimo piano</td><td class="n">132</td><td class="n">€ 1.020.000</td><td class="n">7.727</td><td class="n">520 m</td></tr>
+      <tr><td>Via Crema</td><td>Attico, terrazzo</td><td class="n">140</td><td class="n">€ 1.240.000</td><td class="n">8.857</td><td class="n">610 m</td></tr>
+      <tr><td>Viale Sabotino</td><td>Quadrilocale</td><td class="n">120</td><td class="n">€ 870.000</td><td class="n">7.250</td><td class="n">180 m</td></tr>
+      <tr><td>Via Muratori</td><td>Attico</td><td class="n">105</td><td class="n">€ 910.000</td><td class="n">8.667</td><td class="n">700 m</td></tr>
+      <tr><td>Via Orti</td><td>Ultimo piano, terrazzo</td><td class="n">125</td><td class="n">€ 1.050.000</td><td class="n">8.400</td><td class="n">760 m</td></tr>
+    </table>
+    <p class="src" style="margin-top:2mm">Fonti: quotazioni OMI dell'Agenzia delle Entrate, vendite e annunci rilevati dall'agenzia negli ultimi 12 mesi.</p>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">7</span></div>
+</section>
+
+<!-- 8 RISTRUTTURAZIONE (solo acquirente) -->
+<section class="page solo-acquirente" id="ristr">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>Ristrutturare</span></div>
+  <div class="inner">
+    <div class="rz-demo">ESEMPIO DIMOSTRATIVO · DATI FITTIZI</div>
+    <div class="kicker">08 · Ristrutturare</div>
+    <h2>Quanto costerebbe <em>ristrutturarlo</em></h2>
+    <div class="rz-dati">
+      <div><span>Superficie interna</span><b>111 m²</b><small>terrazzo escluso</small></div>
+      <div><span>Ambienti</span><b>4 locali · 2 bagni</b><small>dalla pianta 3D</small></div>
+      <div><span>Serramenti</span><b>8 + 2</b><small>finestre e portefinestre</small></div>
+      <div><span>Stato</span><b>Buono</b><small>ristrutturato nel 2019</small></div>
+    </div>
+
+    <div class="rz-q" id="rzQ1">
+      <div class="rz-n">1 di 2</div>
+      <h3>Che lavori fareste?</h3>
+      <div class="rz-opt">
+        <button data-lav="rinfrescata"><b>Rinfrescata</b><span>pavimenti nuovi e tinteggiatura</span></button>
+        <button data-lav="parziale"><b>Ristrutturazione parziale</b><span>in più i due bagni e le porte</span></button>
+        <button data-lav="completa"><b>Ristrutturazione completa</b><span>in più impianti e serramenti</span></button>
+      </div>
+    </div>
+    <div class="rz-q" id="rzQ2" hidden>
+      <div class="rz-n">2 di 2 · <a id="rzBack1">cambia lavori</a></div>
+      <h3>Con che finiture?</h3>
+      <div class="rz-opt">
+        <button data-fin="base"><b>Base</b><span>gres, sanitari standard</span></button>
+        <button data-fin="media"><b>Media</b><span>parquet, bagni di buona gamma</span></button>
+        <button data-fin="alta"><b>Alta</b><span>pietra, bagni di pregio</span></button>
+      </div>
+    </div>
+    <div id="rzOut" hidden>
+      <div class="rz-sel"><span id="rzSel"></span> · <a id="rzBack2">cambia</a></div>
+      <div class="rz-tot">
+        <div><span>Spesa stimata</span><b id="rzTot"></b></div>
+        <div><span>Al metro quadro</span><b id="rzMq"></b></div>
+        <div><span>Durata del cantiere</span><b id="rzSett"></b></div>
+      </div>
+      <table class="rz-t"><thead><tr><th>Voce</th><th>Perché</th><th class="n">Da</th><th class="n">A</th></tr></thead><tbody id="rzRighe"></tbody></table>
+    </div>
+    <div class="rz-avv">Stima indicativa, non è un preventivo: serve un sopralluogo di un'impresa.</div>
+    <p class="rz-fonti" id="rzFonti"></p>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n">8</span></div>
+</section>
+
+<!-- 7 QUARTIERE -->
+<section class="page">
+  <div class="head"><span class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></span><span>Il quartiere</span></div>
+  <div class="inner">
+    <div class="kicker"><span class="solo-acquirente">09</span><span class="solo-proprietario">08</span> · Intorno a casa</div>
+    <h2>Porta Romana, <em>a piedi</em></h2>
+    <p>Tra i viali dei bastioni e la Fondazione Prada, Porta Romana è un quartiere di portinerie, mercati coperti e trattorie storiche, oggi rinnovato dal nuovo villaggio olimpico di Scalo Romana. Il centro si raggiunge in dieci minuti di metropolitana.</p>
+    <div id="map"></div>
+    <div class="serv">
+      <div><span>Metro M3 Porta Romana</span><b>4 min a piedi</b></div>
+      <div><span>Duomo</span><b>12 min in metro</b></div>
+      <div><span>Scuola primaria Ugo Foscolo</span><b>6 min</b></div>
+      <div><span>Parco Ravizza</span><b>8 min</b></div>
+      <div><span>Mercato comunale di Viale Monza</span><b>5 min</b></div>
+      <div><span>Fondazione Prada</span><b>14 min</b></div>
+      <div><span>Università Bocconi</span><b>15 min</b></div>
+      <div><span>Linate</span><b>18 min in auto</b></div>
+    </div>
+  </div>
+  <div class="foot"><span>Viale Sabotino 22 · Milano</span><span class="n"><span class="solo-acquirente">9</span><span class="solo-proprietario">8</span></span></div>
+</section>
+
+<!-- 8 RETRO -->
+<section class="page back">
+  <div class="inner">
+    <div class="wordmark js-brand">Gabetti<small class="js-sede">Milano · Porta Romana</small></div>
+    <p class="q">«Vi accompagno in ogni passo, dalla prima visita al rogito.»</p>
+    <div class="agent">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="">
+      <div>
+        <h3>Giulia Ferrari</h3>
+        <p>Consulente immobiliare<br>+39 02 5501 2299 · +39 347 000 0000<br>giulia.ferrari@agenzia-esempio.it</p>
+        <p style="margin-top:3mm">Visite su appuntamento, anche il sabato.</p>
+      </div>
+    </div>
+    <div class="legal js-legal">Gabetti Milano Porta Romana · agenzia di esempio · Corso Lodi 12, 20135 Milano · P.IVA 00000000000 · iscrizione REA MI-0000000. Le informazioni di questo dossier sono fornite a scopo informativo e non costituiscono proposta contrattuale; superfici e misure sono indicative. Documento generato con HubAgency.</div>
+  </div>
+</section>
+
+<!-- finestra invio -->
+<div class="modal" id="modal">
+  <div class="mbox">
+    <h3>Invia il dossier ai contatti</h3>
+    <div style="color:#666;margin-bottom:6px">Richieste compatibili dal CRM (attico o 4 locali, Porta Romana, budget oltre 900.000 €)</div>
+    <label><input type="checkbox" checked> Marco Bianchi <small>budget 1,1 mln · mail</small></label>
+    <label><input type="checkbox" checked> Laura e Paolo Conti <small>budget 1,0 mln · WhatsApp</small></label>
+    <label><input type="checkbox"> Andrea Rinaldi <small>budget 950k · mail</small></label>
+    <label><input type="checkbox"> Studio Ferraresi (relocation) <small>mail</small></label>
+    <textarea>Buongiorno, le invio il dossier dell'attico di Viale Sabotino 22, che corrisponde a quanto mi aveva chiesto: quattro locali, terrazzo di 45 m², classe B. Dentro trova foto, pianta, tour 3D e i prezzi di zona. Se le interessa, organizzo una visita anche sabato.
+Giulia Ferrari</textarea>
+    <div class="link">hubagency.it/d/MI-PR-0412-k7Qx · valido 30 giorni · aperture tracciate</div>
+    <div class="row"><button onclick="chiudi()">Annulla</button><button class="go" onclick="invia()">Invia a 2 contatti</button></div>
+    <div class="esito" id="esito">Anteprima: in questa demo non parte nessun messaggio. Nel prodotto l'agente vede chi apre il dossier e quando.</div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const PAL={
+  gabetti:{p:'#B20933',p2:'#7A0623',tint:'#FBF3F5',line:'#F0CED6',brand:'Gabetti',sede:'Milano · Porta Romana'},
+  hubagency:{p:'#c1121f',p2:'#0a0a0a',tint:'#f5f5f5',line:'#e4e4e7',brand:'HubAgency',sede:'Agenzia demo · Milano'},
+  classico:{p:'#1f3a5f',p2:'#0f1f33',tint:'#f3f5f8',line:'#d6dde8',brand:'Immobiliare Sforza',sede:'Dal 1978 · Milano'}
+};
+function setPal(k){
+  const v=PAL[k],r=document.documentElement.style;
+  r.setProperty('--p',v.p);r.setProperty('--p2',v.p2);r.setProperty('--tint',v.tint);r.setProperty('--line',v.line);
+  document.querySelectorAll('.js-brand').forEach(e=>e.firstChild.nodeValue=v.brand);
+  document.querySelectorAll('.js-sede').forEach(e=>e.textContent=v.sede);
+  document.querySelectorAll('[data-pal]').forEach(b=>b.classList.toggle('on',b.dataset.pal===k));
+  if(window.mk) mk.setStyle({color:v.p,fillColor:v.p});
+}
+document.querySelectorAll('[data-pal]').forEach(b=>b.onclick=()=>setPal(b.dataset.pal));
+document.querySelectorAll('[data-ver]').forEach(b=>b.onclick=()=>{
+  document.body.classList.toggle('proprietario',b.dataset.ver==='proprietario');
+  document.querySelectorAll('[data-ver]').forEach(x=>x.classList.toggle('on',x===b));
+});
+function apri(){document.getElementById('modal').classList.add('on');document.getElementById('esito').style.display='none'}
+function chiudi(){document.getElementById('modal').classList.remove('on')}
+function invia(){document.getElementById('esito').style.display='block'}
+document.querySelectorAll('img').forEach(i=>i.onerror=()=>{i.style.visibility='hidden';i.parentNode.style.background='linear-gradient(135deg,var(--tint),var(--line))'});
+const map=L.map('map',{zoomControl:false,attributionControl:true,scrollWheelZoom:false}).setView([45.4512,9.2045],15);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · CARTO'}).addTo(map);
+window.mk=L.circleMarker([45.4512,9.2045],{radius:11,color:'#B20933',fillColor:'#B20933',fillOpacity:.9,weight:3}).addTo(map);
+L.circleMarker([45.4523,9.2033],{radius:5,color:'#1d1d1f',fillOpacity:1}).addTo(map).bindTooltip('M3 Porta Romana',{permanent:true,direction:'right',className:''});
+</script>
+<script>
+/* «Quanto costerebbe ristrutturarlo» — calcolo a regole, nessuna AI.
+   Prezzi: solo da fonti pubbliche citate (FONTI). Quantità: regole del computo della sessione 109
+   (rivestimento bagno = perimetro × 2,0 m; tinteggiatura = perimetro × altezza − rivestimenti + soffitto;
+   punti acqua = wc + 2 × (bidet, lavabo, doccia) + lavello e lavatrice; punti elettrici per ambiente). */
+(() => {
+  const FONTI = {
+    F2: { n: 'Cose di Casa, prezzi del Prezzario Opere Edili CCIAA Milano Monza Brianza Lodi (2024)', u: 'https://www.cosedicasa.com/ristrutturare/progetti-ristrutturazione/quanto-costa-ristrutturare-69615' },
+    F3: { n: 'Il Giorno, «Quanto costa ristrutturare una casa a Milano» (2025)', u: 'https://www.ilgiorno.it/milano/economia/sch-ristrutturare-casa-2025-edilizia-pe8w6t26/quanto-costa-ristrutturare-una-casa-a-milano-le-diverse-stime-anche-per-zona' },
+    F4: { n: 'Studio Madera, «Costi ristrutturazione casa al metro quadro 2026»', u: 'https://studiomadera.it/news/73-costo-ristrutturazione-prezzo' },
+    F5: { n: 'Studio Madera, «Quanto tempo occorre per una ristrutturazione» (2026)', u: 'https://studiomadera.it/news/282-tempi-ristrutturazione' },
+    F6: { n: 'Money.it, «Quanto costa ristrutturare casa» (2025)', u: 'https://www.money.it/quanto-costa-ristrutturare-casa-bonus-tempi' },
+    F7: { n: 'Idealista News, «Quanto costa rifare un bagno» (2024)', u: 'https://www.idealista.it/news/immobiliare/residenziale/2024/03/12/179831-quanto-costa-rifare-un-bagno-variabili-da-considerare-e-tabelle-indicative' }
+  };
+  // fasce complessive €/m² per tipo di lavoro (la finitura sceglie la parte bassa, tutta o la parte alta della fascia)
+  const FASCE = {
+    completa: { base: [700, 800], media: [950, 1300], alta: [1500, 2000], f: { base: 'F3', media: 'F3, F4', alta: 'F2' }, d: 'ristrutturazione completa a Milano' }
+  };
+  // prezzi unitari
+  const P = {
+    demol: [10, 15, 'F4'], tint: [7.4, 8, 'F2, F4'], serr: [400, 600], elettMq: 70, puntoLuce: [50, 80], riscMq: 70, puntoAcqua: [160, 250],
+    pav: { base: [15, 40, 'F4', 'gres'], media: [30, 50, 'F2', 'parquet'], alta: [93, 93, 'F2', 'pietra'] },
+    bagno: [5600, 12000], porta: [300, 1000]
+  };
+  // casa d'esempio (dalla pianta 3D di Viale Sabotino): [nome, tipo, m², perimetro]
+  const STANZE = [['Bagno', 'bagno', 7.8, 11.2], ['Ingresso', 'corridoio', 7.8, 11.2], ['Studio', 'studio', 9.6, 12.4], ['Living e cucina', 'soggiorno_cucina', 42, 26.8],
+    ['Camera', 'camera', 12.24, 14], ['Bagno padronale', 'bagno', 6.8, 10.8], ['Disimpegno', 'corridoio', 3.12, 7.6], ['Cabina armadio', 'accessorio', 3.6, 8.4], ['Camera padronale', 'camera', 18.48, 18]];
+  const H = 2.7, SERR_MQ = 38.2; // 8 finestre (10,8 m × 1,45 m) + 2 portefinestre (9,0 m × 2,5 m)
+  const A = STANZE.reduce((s, r) => s + r[2], 0), PER = STANZE.reduce((s, r) => s + r[3], 0);
+  const bagni = STANZE.filter(r => r[1] === 'bagno'), A_BAGNI = bagni.reduce((s, r) => s + r[2], 0);
+  const RIV = bagni.reduce((s, r) => s + r[3] * 2.0, 0);
+  const A_PAV = A - A_BAGNI, TINT = PER * H - RIV + A;
+  const PUNTI_ACQUA = bagni.length * (1 + 2 * 3) + 2 + 1; // per bagno wc + 2×(bidet, lavabo, doccia); lavello; lavatrice
+  const PUNTI_EL = STANZE.reduce((s, [, t, a, p]) => {
+    if (t === 'bagno') return s + 4;
+    if (t === 'corridoio') return s + (p / 2 > 5 ? 2 : 1) + 1;
+    if (t === 'accessorio') return s + 1 + (a >= 4 ? 1 : 0);
+    let n = (a > 12 ? 2 : 1) + (a > 20 ? 6 : a > 12 ? 5 : a > 8 ? 4 : 2) + 1 + (/soggiorno|studio/.test(t) ? 1 : 0);
+    if (t === 'soggiorno_cucina') n += 2 + 5;
+    return s + n;
+  }, 0);
+
+  // durata: giorni lavorativi (8 ore) dalle rese di F5; min = bagni in parallelo, max = tutto in sequenza
+  const GIORNI = lav => {
+    const g = { demol: A_PAV / 7 / 8, pav: A_PAV / 15 * 4 / 8, tint: 3 * A / 100 };   // massetto 7 m²/ora, gres 15 m²/4 ore, imbiancatura 3 giorni/100 m²
+    let min = g.demol + g.pav + g.tint, max = min;
+    if (lav !== 'rinfrescata') { min += 10; max += 10 * bagni.length; }               // rifacimento bagno 10 giorni
+    if (lav === 'completa') { const x = 3 * A / 100 + 2 * A / 100 + 10 * 2 / 8; min += x; max += x; } // elettrico 3 g/100 m², radiatori 2 g/100 m², infissi 1 ogni 2 ore
+    return [Math.ceil(min / 5), Math.ceil(max / 5)];
+  };
+  const f = (x, d = 0) => x.toLocaleString('it-IT', { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: 'always' });
+  const eur = x => '€ ' + f(Math.round(x / 100) * 100);
+  const $ = id => document.getElementById(id);
+
+  // la finitura sceglie la parte bassa, tutta o la parte alta della forchetta della fonte
+  const parte = (r, fin) => { const m = (r[0] + r[1]) / 2; return fin === 'base' ? [r[0], m] : fin === 'alta' ? [m, r[1]] : [r[0], r[1]]; };
+  const N_PORTE = 6; // porte interne della pianta: bagno, studio, disimpegno, camera, bagno padronale, camera padronale
+  function calcola(lav, fin) {
+    const righe = [], incl = { rinfrescata: 1, parziale: 2, completa: 3 }[lav];
+    const pv = P.pav[fin];
+    const demQ = A_PAV + (incl >= 2 ? A_BAGNI + RIV : 0);
+    righe.push(['Demolizioni e smaltimento', `${f(demQ)} m² di pavimenti${incl >= 2 ? ' e rivestimenti dei bagni' : ''} × ${f(P.demol[0])}-${f(P.demol[1])} €/m²`, P.demol[2], demQ * P.demol[0], demQ * P.demol[1]]);
+    righe.push(['Pavimenti', `${f(A_PAV)} m² fuori dai bagni, ${pv[3]} × ${pv[0] === pv[1] ? f(pv[0]) : f(pv[0]) + '-' + f(pv[1])} €/m²${pv[2] === 'F2' ? ' (posa, materiale escluso)' : ''}`, pv[2], A_PAV * pv[0], A_PAV * pv[1]]);
+    if (incl >= 2) { const b = parte(P.bagno, fin); righe.push(['Bagni', `${bagni.length} bagni completi di circa ${f(A_BAGNI / bagni.length)} m² (rivestimenti ${f(RIV)} m²) × ${f(b[0])}-${f(b[1])} € a bagno, fascia 7-10 m²`, 'F7', bagni.length * b[0], bagni.length * b[1]]); }
+    if (incl >= 3) {
+      righe.push(['Impianto elettrico', `${PUNTI_EL} punti tra luci e prese × ${P.puntoLuce[0]}-${P.puntoLuce[1]} € (F2), fino a rifacimento completo ${P.elettMq} €/m² × ${f(A)} m² (F4)`, 'F2, F4', PUNTI_EL * P.puntoLuce[0], A * P.elettMq]);
+      righe.push(['Impianto idraulico e riscaldamento', `${PUNTI_ACQUA} punti acqua × ${P.puntoAcqua[0]}-${P.puntoAcqua[1]} € (F6, F2) + riscaldamento a radiatori ${P.riscMq} €/m² × ${f(A)} m² (F4)`, 'F2, F4, F6', PUNTI_ACQUA * P.puntoAcqua[0] + A * P.riscMq, PUNTI_ACQUA * P.puntoAcqua[1] + A * P.riscMq]);
+    }
+    if (incl >= 2) { const pt = parte(P.porta, fin), sr = parte(P.serr, fin);
+      if (incl >= 3) righe.push(['Serramenti e porte', `${f(SERR_MQ, 1)} m² di finestre e portefinestre × ${f(sr[0])}-${f(sr[1])} €/m² + ${N_PORTE} porte interne × ${f(pt[0])}-${f(pt[1])} €`, 'F4', SERR_MQ * sr[0] + N_PORTE * pt[0], SERR_MQ * sr[1] + N_PORTE * pt[1]]);
+      else righe.push(['Porte interne', `${N_PORTE} porte × ${f(pt[0])}-${f(pt[1])} €, fornitura e posa`, 'F4', N_PORTE * pt[0], N_PORTE * pt[1]]);
+    }
+    righe.push(['Tinteggiatura', `${f(TINT)} m² di pareti e soffitti (pareti ${f(PER, 1)} m × ${f(H, 1)} m, meno rivestimenti, più soffitti) × ${f(P.tint[0], 2)}-${f(P.tint[1])} €/m²`, P.tint[2], TINT * P.tint[0], TINT * P.tint[1]]);
+    const somma = [righe.reduce((s, x) => s + x[3], 0), righe.reduce((s, x) => s + x[4], 0)];
+    let T = somma;
+    if (lav === 'completa') { // a Milano le fonti danno una fascia €/m² per la ristrutturazione completa: il totale la segue
+      const r = FASCE.completa[fin], tot = [A * r[0], A * r[1]];
+      const resto = [tot[0] - somma[0], tot[1] - somma[1]].map(x => Math.max(0, x)).sort((a, b) => a - b);
+      if (resto[1] > 0) righe.push(['Opere non dettagliate', `massetti, spostamento di muri, climatizzazione, finiture di pregio, assistenze: differenza tra la fascia per la ristrutturazione completa (${f(r[0])}-${f(r[1])} €/m²) e le voci sopra`, FASCE.completa.f[fin], resto[0], resto[1]]);
+      T = [Math.max(tot[0], somma[0]), Math.max(tot[1], somma[1])];
+    }
+    return { righe, T };
+  }
+
+  let lav = null, fin = null;
+  const NOMI = { rinfrescata: 'Rinfrescata', parziale: 'Ristrutturazione parziale', completa: 'Ristrutturazione completa', base: 'finiture base', media: 'finiture medie', alta: 'finiture alte' };
+  function mostra() {
+    $('rzQ1').hidden = !!lav; $('rzQ2').hidden = !lav || !!fin; $('rzOut').hidden = !(lav && fin);
+    if (!(lav && fin)) return;
+    const { righe, T } = calcola(lav, fin);
+    $('rzSel').textContent = NOMI[lav] + ', ' + NOMI[fin];
+    $('rzTot').textContent = eur(T[0]) + ' – ' + eur(T[1]).replace('€ ', '');
+    $('rzMq').textContent = f(T[0] / A) + ' – ' + f(T[1] / A) + ' €/m²';
+    { const w = GIORNI(lav); $('rzSett').textContent = (w[0] === w[1] ? 'circa ' + w[0] : w[0] + '–' + w[1]) + ' settimane'; }
+    $('rzRighe').innerHTML = righe.map(([v, p, fo, a, b]) => `<tr><td><b>${v}</b></td><td>${p}<span class="rz-f">fonte ${fo}</span></td><td class="n">${eur(a)}</td><td class="n">${eur(b)}</td></tr>`).join('');
+  }
+  document.querySelectorAll('#ristr [data-lav]').forEach(b => b.onclick = () => { lav = b.dataset.lav; fin = null; mostra(); });
+  document.querySelectorAll('#ristr [data-fin]').forEach(b => b.onclick = () => { fin = b.dataset.fin; mostra(); });
+  $('rzBack1').onclick = () => { lav = null; fin = null; mostra(); };
+  $('rzBack2').onclick = () => { fin = null; mostra(); };
+  $('rzFonti').innerHTML = 'Durata: giorni di lavoro sommati dalle rese di cantiere di F5 (bagni in parallelo o uno dopo l\'altro), senza attese di materiali e pratiche edilizie. Prezzi F4 comprensivi di fornitura e posa. Rinfrescata e parziale: somma delle voci. Completa: fascia €/m² delle fonti per Milano. La finitura sceglie la parte bassa, tutta o la parte alta della forchetta di ogni fonte. Escluse cucina e arredi. Prezzi come riportati dalle fonti, IVA non sempre indicata. Fonti: ' +
+    Object.entries(FONTI).map(([k, v]) => `<b>${k}</b> <a href="${v.u}" target="_blank" rel="noopener">${v.n}</a>`).join(' · ') + '.';
+  mostra();
+  window.__ristr = calcola; // per le prove
+})();
+</script>
+<script>
+(function(){const z=()=>document.documentElement.style.setProperty('--z',Math.min(1,(Math.min(innerWidth,screen.width)-16)/794));z();addEventListener('resize',z);})();
+</script>
+</body>
+</html>

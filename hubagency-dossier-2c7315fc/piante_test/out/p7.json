@@ -1,0 +1,397 @@
+{
+ "fonte": "planimetriadatiprotetti.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "media",
+ "piano_scelto": "PIANO TERRA (H=2.70)",
+ "altri_piani": [],
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "Scala 1:200 dichiarata su foglio A4 (210 mm = 1000 px): 1 px = 0,042 m; non verificata con quote"
+ },
+ "superficie_dichiarata_m2": null,
+ "muri": [
+  {
+   "id": "m1",
+   "p1": [
+    0,
+    0
+   ],
+   "p2": [
+    4.5,
+    0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m2",
+   "p1": [
+    4.5,
+    0
+   ],
+   "p2": [
+    4.5,
+    6.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m3",
+   "p1": [
+    4.5,
+    6.0
+   ],
+   "p2": [
+    8.09,
+    6.0
+   ],
+   "spessore": 0.28,
+   "esterno": true
+  },
+  {
+   "id": "m4",
+   "p1": [
+    8.09,
+    6.0
+   ],
+   "p2": [
+    8.09,
+    9.44
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m5",
+   "p1": [
+    8.09,
+    9.44
+   ],
+   "p2": [
+    0,
+    9.44
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m6",
+   "p1": [
+    0,
+    9.44
+   ],
+   "p2": [
+    0,
+    0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m7",
+   "p1": [
+    0,
+    4.72
+   ],
+   "p2": [
+    3.09,
+    4.72
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m8",
+   "p1": [
+    3.09,
+    4.72
+   ],
+   "p2": [
+    3.09,
+    6.03
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m9",
+   "p1": [
+    3.09,
+    6.03
+   ],
+   "p2": [
+    1.94,
+    6.03
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m10",
+   "p1": [
+    1.94,
+    6.03
+   ],
+   "p2": [
+    1.94,
+    6.56
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m11",
+   "p1": [
+    1.94,
+    6.56
+   ],
+   "p2": [
+    0,
+    6.56
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m12",
+   "p1": [
+    2.99,
+    6.92
+   ],
+   "p2": [
+    4.14,
+    6.92
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m13",
+   "p1": [
+    4.2,
+    6.0
+   ],
+   "p2": [
+    4.2,
+    9.44
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "m1",
+   "da": 3.2,
+   "a": 4.1,
+   "tipo": "ingresso",
+   "dedotta": true
+  },
+  {
+   "muro": "m6",
+   "da": 0.52,
+   "a": 1.62,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 3.09,
+   "a": 4.25,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 6.98,
+   "a": 8.34,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m4",
+   "da": 1.08,
+   "a": 2.24,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m8",
+   "da": 0.5,
+   "a": 1.2,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m13",
+   "da": 0.14,
+   "a": 0.92,
+   "tipo": "passaggio",
+   "dedotta": true
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "soggiorno_cucina",
+   "nome": "Soggiorno - Pranzo",
+   "poligono": [
+    [
+     0.15,
+     0.15
+    ],
+    [
+     4.35,
+     0.15
+    ],
+    [
+     4.35,
+     5.98
+    ],
+    [
+     3.14,
+     5.98
+    ],
+    [
+     3.14,
+     4.67
+    ],
+    [
+     0.15,
+     4.67
+    ]
+   ],
+   "h": 2.7
+  },
+  {
+   "id": "s2",
+   "tipo": "bagno",
+   "nome": "Bagno",
+   "poligono": [
+    [
+     0.15,
+     4.77
+    ],
+    [
+     3.04,
+     4.77
+    ],
+    [
+     3.04,
+     5.98
+    ],
+    [
+     1.89,
+     5.98
+    ],
+    [
+     1.89,
+     6.51
+    ],
+    [
+     0.15,
+     6.51
+    ]
+   ],
+   "h": 2.7
+  },
+  {
+   "id": "s3",
+   "tipo": "disimpegno",
+   "nome": "Dis",
+   "poligono": [
+    [
+     3.14,
+     5.98
+    ],
+    [
+     4.14,
+     5.98
+    ],
+    [
+     4.14,
+     6.87
+    ],
+    [
+     1.99,
+     6.87
+    ],
+    [
+     1.99,
+     6.08
+    ],
+    [
+     3.14,
+     6.08
+    ]
+   ],
+   "h": 2.7
+  },
+  {
+   "id": "s4",
+   "tipo": "camera",
+   "nome": "Camera",
+   "poligono": [
+    [
+     0.15,
+     6.61
+    ],
+    [
+     1.99,
+     6.61
+    ],
+    [
+     1.99,
+     6.87
+    ],
+    [
+     4.14,
+     6.87
+    ],
+    [
+     4.14,
+     9.29
+    ],
+    [
+     0.15,
+     9.29
+    ]
+   ],
+   "h": 2.7
+  },
+  {
+   "id": "s5",
+   "tipo": "camera",
+   "nome": "Camera",
+   "poligono": [
+    [
+     4.26,
+     6.14
+    ],
+    [
+     7.94,
+     6.14
+    ],
+    [
+     7.94,
+     9.29
+    ],
+    [
+     4.26,
+     9.29
+    ]
+   ],
+   "h": 2.7
+  }
+ ],
+ "dubbi": [
+  "Scala 1:200 assunta A4 piena larghezza; ~48,5 m2 calpestabili, plausibile per mini-appartamento",
+  "Muro ovest obliquo nel disegno, raddrizzato; profilo nord a gradini semplificato",
+  "Porte non disegnate: ingresso (lato nord, vicino all'Ingresso Carraio Comune), porta bagno e passaggi dedotti",
+  "Bagno a L: lato destro (verso soggiorno) dedotto come muro con porta",
+  "Varco tra disimpegno e camera sinistra senza muro (x 1,9-3,0) interpretato come passaggio aperto",
+  "Finestre dai tratti spessi sui muri ovest e est",
+  "Escluse A.U.I. e corte esclusiva mappale 510"
+ ]
+}

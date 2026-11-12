@@ -1,0 +1,470 @@
+{
+ "fonte": "planimetria-castale-online-731x1024-1.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "media",
+ "piano_scelto": "PIANO TERRA",
+ "altri_piani": [],
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scala 1:200 su A4 (731 px = 210 mm => 1 px = 0,0575 m); riscontro con barra '10 metri' sul bordo destro (~177 px) => 0,0565 m/px; ritaglio ingrandito x5 => 0,0113 m per px ingrandito"
+ },
+ "superficie_dichiarata_m2": null,
+ "muri": [
+  {
+   "id": "m1",
+   "p1": [
+    0.28,
+    0.23
+   ],
+   "p2": [
+    12.24,
+    0.23
+   ],
+   "spessore": 0.5,
+   "esterno": true
+  },
+  {
+   "id": "m2",
+   "p1": [
+    12.24,
+    0.23
+   ],
+   "p2": [
+    12.24,
+    9.27
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m3",
+   "p1": [
+    9.16,
+    9.27
+   ],
+   "p2": [
+    12.24,
+    9.27
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m4",
+   "p1": [
+    9.16,
+    0.23
+   ],
+   "p2": [
+    9.16,
+    7.89
+   ],
+   "spessore": 0.45,
+   "esterno": false
+  },
+  {
+   "id": "m5",
+   "p1": [
+    9.16,
+    7.89
+   ],
+   "p2": [
+    9.16,
+    9.27
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m6",
+   "p1": [
+    0.28,
+    7.89
+   ],
+   "p2": [
+    9.16,
+    7.89
+   ],
+   "spessore": 0.5,
+   "esterno": true
+  },
+  {
+   "id": "m7",
+   "p1": [
+    0.28,
+    0.23
+   ],
+   "p2": [
+    0.28,
+    7.89
+   ],
+   "spessore": 0.5,
+   "esterno": true
+  },
+  {
+   "id": "m8",
+   "p1": [
+    4.86,
+    0.23
+   ],
+   "p2": [
+    4.86,
+    7.89
+   ],
+   "spessore": 0.45,
+   "esterno": false
+  },
+  {
+   "id": "m9",
+   "p1": [
+    0.28,
+    3.47
+   ],
+   "p2": [
+    4.86,
+    3.47
+   ],
+   "spessore": 0.25,
+   "esterno": false
+  },
+  {
+   "id": "m10",
+   "p1": [
+    4.86,
+    4.42
+   ],
+   "p2": [
+    9.16,
+    4.42
+   ],
+   "spessore": 0.25,
+   "esterno": false
+  },
+  {
+   "id": "m11",
+   "p1": [
+    9.16,
+    2.62
+   ],
+   "p2": [
+    12.24,
+    2.62
+   ],
+   "spessore": 0.15,
+   "esterno": false
+  },
+  {
+   "id": "m12",
+   "p1": [
+    9.16,
+    4.42
+   ],
+   "p2": [
+    12.24,
+    4.33
+   ],
+   "spessore": 0.15,
+   "esterno": false
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "m1",
+   "da": 1.99,
+   "a": 2.97,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m1",
+   "da": 6.11,
+   "a": 7.1,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m2",
+   "da": 0.88,
+   "a": 1.5,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m2",
+   "da": 2.92,
+   "a": 3.57,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 0.85,
+   "a": 1.75,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 2.69,
+   "a": 3.73,
+   "tipo": "portafinestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 5.36,
+   "a": 6.34,
+   "tipo": "ingresso",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 7.3,
+   "a": 8.2,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m3",
+   "da": 0.98,
+   "a": 2.11,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m9",
+   "da": 2.2,
+   "a": 3.18,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m8",
+   "da": 4.61,
+   "a": 5.44,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m10",
+   "da": 2.21,
+   "a": 3.16,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m4",
+   "da": 2.8,
+   "a": 3.76,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m4",
+   "da": 4.75,
+   "a": 5.54,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m11",
+   "da": 0.5,
+   "a": 1.47,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m12",
+   "da": 0.5,
+   "a": 1.47,
+   "tipo": "porta",
+   "dedotta": true
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "camera",
+   "nome": "letto",
+   "poligono": [
+    [
+     0.56,
+     0.45
+    ],
+    [
+     4.63,
+     0.45
+    ],
+    [
+     4.63,
+     3.34
+    ],
+    [
+     0.56,
+     3.34
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 11.76
+  },
+  {
+   "id": "s2",
+   "tipo": "camera",
+   "nome": "letto",
+   "poligono": [
+    [
+     5.08,
+     0.45
+    ],
+    [
+     8.88,
+     0.45
+    ],
+    [
+     8.88,
+     4.27
+    ],
+    [
+     5.08,
+     4.27
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 14.52
+  },
+  {
+   "id": "s3",
+   "tipo": "bagno",
+   "nome": "W.C.",
+   "poligono": [
+    [
+     9.45,
+     0.45
+    ],
+    [
+     12.1,
+     0.45
+    ],
+    [
+     12.1,
+     2.52
+    ],
+    [
+     9.45,
+     2.52
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 5.49
+  },
+  {
+   "id": "s4",
+   "tipo": "disimpegno",
+   "nome": "Dis.",
+   "poligono": [
+    [
+     9.45,
+     2.72
+    ],
+    [
+     12.1,
+     2.72
+    ],
+    [
+     12.1,
+     4.25
+    ],
+    [
+     9.45,
+     4.25
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 4.05
+  },
+  {
+   "id": "s5",
+   "tipo": "soggiorno",
+   "nome": "Sogg.",
+   "poligono": [
+    [
+     0.56,
+     3.59
+    ],
+    [
+     4.63,
+     3.59
+    ],
+    [
+     4.63,
+     7.63
+    ],
+    [
+     0.56,
+     7.63
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 16.44
+  },
+  {
+   "id": "s6",
+   "tipo": "soggiorno",
+   "nome": "Pranzo",
+   "poligono": [
+    [
+     5.08,
+     4.58
+    ],
+    [
+     8.88,
+     4.58
+    ],
+    [
+     8.88,
+     7.63
+    ],
+    [
+     5.08,
+     7.63
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 11.59
+  },
+  {
+   "id": "s7",
+   "tipo": "cucina",
+   "nome": "Cucina",
+   "poligono": [
+    [
+     9.45,
+     4.41
+    ],
+    [
+     12.1,
+     4.41
+    ],
+    [
+     12.1,
+     9.19
+    ],
+    [
+     9.45,
+     9.19
+    ]
+   ],
+   "h": 3.8,
+   "area_m2": 12.67
+  }
+ ],
+ "dubbi": [
+  "Altezza Hmed=3.80 m dichiarata, usata per tutte le stanze",
+  "Scala ricavata da 1:200 su immagine ridotta: errore possibile +-5%",
+  "Porte interne non disegnate come battenti: dedotte da varchi nei muri (segni a croce)",
+  "Ingresso dedotto sul varco del Pranzo (lato sud); Sogg. ha portafinestra a sud, Cucina porta a sud dedotta",
+  "Muri esterni molto spessi (~0,55 m) come da disegno; nomi 'letto' due camere; Pranzo tipizzato cucina->usare soggiorno_cucina se serve",
+  "Pranzo e Cucina tipizzati cucina: Pranzo potrebbe essere soggiorno"
+ ],
+ "superficie_calcolata_m2": 76.5
+}

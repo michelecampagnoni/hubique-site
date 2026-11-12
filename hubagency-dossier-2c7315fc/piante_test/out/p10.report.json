@@ -1,0 +1,33 @@
+{
+ "id": "p10",
+ "fonte": "nuove/c10.png",
+ "tipo_disegno": "catastale",
+ "qualita_input": "media",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda 1:200 su foglio A4 (210 mm) reso a 2480 px di larghezza => 1 px = 0,017 m (0,0169); coordinate misurate sul PNG 2480x3509"
+ },
+ "stanze": 10,
+ "muri": 29,
+ "aperture": 13,
+ "superficie_calcolata_m2": 71.0,
+ "semaforo": "rosso",
+ "auto": [
+  "Uniti 2 estremi di muri staccati di pochi centimetri",
+  "Aggiunti 1 muri mancanti per chiudere le stanze (da confermare)"
+ ],
+ "errori": [
+  "«Studio» non è raggiungibile dall'ingresso",
+  "«W.C.» non è raggiungibile dall'ingresso"
+ ],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Scala 1:200 dichiarata nell'intestazione ma l'immagine e' un'impaginazione di guida (la pagina A4 contiene la scheda ridotta): metri per pixel stimati dalla larghezza A4, margine di errore 5-10%.",
+  "Altezza H=2,70 m dichiarata in pianta.",
+  "Porte quasi tutte non disegnate (solo i simboli dell'ingresso): dedotte dai varchi nei muri.",
+  "Il W.C. in basso a sinistra si raggiunge dallo studio: varco senza porta dedotto, non e' chiaro.",
+  "Il passaggio corridoio-soggiorno e corridoio-studio e' un varco aperto (muri interrotti), non muro con porta.",
+  "Disegno a bassa risoluzione (immagine incorporata in PDF e ingrandita): spessori muri incerti.",
+  "Pianerottolo scala e 'altra U.I.' a destra esclusi."
+ ]
+}

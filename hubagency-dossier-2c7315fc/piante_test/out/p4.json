@@ -1,0 +1,475 @@
+{
+ "fonte": "planimetria-catastale-600x849.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "piano_scelto": "PIANO SEMINTERRATO (sub 13, H=3,00)",
+ "altri_piani": [],
+ "scala": {
+  "metodo": "stima",
+  "dettaglio": "nessuna quota ne scala leggibile; stimato 1 px dell'ingrandimento x4 = 0,0097 m (finestre ~1,4 m, locale principale ~11 m); ~0,039 m per px originale"
+ },
+ "superficie_dichiarata_m2": null,
+ "muri": [
+  {
+   "id": "m1",
+   "p1": [
+    0,
+    1.4
+   ],
+   "p2": [
+    4.5,
+    1.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m2",
+   "p1": [
+    4.5,
+    1.4
+   ],
+   "p2": [
+    8.35,
+    1.4
+   ],
+   "spessore": 0.15,
+   "esterno": false
+  },
+  {
+   "id": "m3",
+   "p1": [
+    4.5,
+    1.4
+   ],
+   "p2": [
+    4.5,
+    0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m4",
+   "p1": [
+    4.5,
+    0
+   ],
+   "p2": [
+    10.8,
+    0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m5",
+   "p1": [
+    10.8,
+    0
+   ],
+   "p2": [
+    10.8,
+    4.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m6",
+   "p1": [
+    10.8,
+    4.4
+   ],
+   "p2": [
+    8.35,
+    4.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m7",
+   "p1": [
+    8.35,
+    4.4
+   ],
+   "p2": [
+    7.4,
+    4.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m8",
+   "p1": [
+    7.4,
+    4.4
+   ],
+   "p2": [
+    7.4,
+    5.3
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m9",
+   "p1": [
+    7.4,
+    5.3
+   ],
+   "p2": [
+    3.1,
+    5.3
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m10",
+   "p1": [
+    3.1,
+    5.3
+   ],
+   "p2": [
+    3.1,
+    2.3
+   ],
+   "spessore": 0.15,
+   "esterno": false
+  },
+  {
+   "id": "m11",
+   "p1": [
+    0,
+    4.46
+   ],
+   "p2": [
+    3.1,
+    4.46
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m12",
+   "p1": [
+    0,
+    4.46
+   ],
+   "p2": [
+    0,
+    1.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m13",
+   "p1": [
+    8.35,
+    1.4
+   ],
+   "p2": [
+    8.35,
+    4.4
+   ],
+   "spessore": 0.15,
+   "esterno": false
+  },
+  {
+   "id": "m14",
+   "p1": [
+    8.35,
+    1.4
+   ],
+   "p2": [
+    10.8,
+    1.4
+   ],
+   "spessore": 0.15,
+   "esterno": false
+  },
+  {
+   "id": "m16",
+   "p1": [
+    4.2,
+    2.3
+   ],
+   "p2": [
+    4.2,
+    5.3
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m17",
+   "p1": [
+    5.9,
+    2.3
+   ],
+   "p2": [
+    5.9,
+    5.3
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m18",
+   "p1": [
+    3.1,
+    2.3
+   ],
+   "p2": [
+    4.2,
+    2.3
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m19",
+   "p1": [
+    4.2,
+    2.3
+   ],
+   "p2": [
+    5.9,
+    2.3
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "m4",
+   "da": 1.08,
+   "a": 1.94,
+   "tipo": "ingresso",
+   "dedotta": false
+  },
+  {
+   "muro": "m2",
+   "da": 0.2,
+   "a": 1.1,
+   "tipo": "passaggio",
+   "dedotta": false
+  },
+  {
+   "muro": "m13",
+   "da": 1.0,
+   "a": 1.9,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m14",
+   "da": 0.5,
+   "a": 1.7,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m18",
+   "da": 0.3,
+   "a": 1.0,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m19",
+   "da": 0.7,
+   "a": 1.2,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m9",
+   "da": 0.03,
+   "a": 1.4,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m9",
+   "da": 2.4,
+   "a": 3.7,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m11",
+   "da": 0.97,
+   "a": 2.33,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m6",
+   "da": 0.7,
+   "a": 2.0,
+   "tipo": "finestra",
+   "dedotta": false
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "ingresso",
+   "nome": "Atrio",
+   "poligono": [
+    [
+     4.5,
+     0
+    ],
+    [
+     10.8,
+     0
+    ],
+    [
+     10.8,
+     1.4
+    ],
+    [
+     4.5,
+     1.4
+    ]
+   ],
+   "h": 3.0
+  },
+  {
+   "id": "s2",
+   "tipo": "soggiorno",
+   "nome": "Locale principale (soggiorno)",
+   "poligono": [
+    [
+     0,
+     1.4
+    ],
+    [
+     8.35,
+     1.4
+    ],
+    [
+     8.35,
+     4.4
+    ],
+    [
+     7.4,
+     4.4
+    ],
+    [
+     7.4,
+     5.3
+    ],
+    [
+     5.9,
+     5.3
+    ],
+    [
+     5.9,
+     2.3
+    ],
+    [
+     3.1,
+     2.3
+    ],
+    [
+     3.1,
+     4.46
+    ],
+    [
+     0,
+     4.46
+    ]
+   ],
+   "h": 3.0
+  },
+  {
+   "id": "s3",
+   "tipo": "camera",
+   "nome": "Locale (camera)",
+   "poligono": [
+    [
+     8.35,
+     1.4
+    ],
+    [
+     10.8,
+     1.4
+    ],
+    [
+     10.8,
+     4.4
+    ],
+    [
+     8.35,
+     4.4
+    ]
+   ],
+   "h": 3.0
+  },
+  {
+   "id": "s4",
+   "tipo": "bagno",
+   "nome": "Bagno",
+   "poligono": [
+    [
+     3.1,
+     2.3
+    ],
+    [
+     4.2,
+     2.3
+    ],
+    [
+     4.2,
+     5.3
+    ],
+    [
+     3.1,
+     5.3
+    ]
+   ],
+   "h": 3.0
+  },
+  {
+   "id": "s5",
+   "tipo": "cucina",
+   "nome": "Cucina",
+   "poligono": [
+    [
+     4.2,
+     2.3
+    ],
+    [
+     5.9,
+     2.3
+    ],
+    [
+     5.9,
+     5.3
+    ],
+    [
+     4.2,
+     5.3
+    ]
+   ],
+   "h": 3.0
+  }
+ ],
+ "dubbi": [
+  "Scala stimata, errore possibile +-25%",
+  "Piccolo: scritta 'Sub 13' e H=3,00; giardino e vano scala/INT.3 esclusi",
+  "Porte non disegnate: dedotte",
+  "Atrio/Int.1 e disposizione dei locali a destra (camera) interpretati: separazione da muro non disegnato nell'atrio",
+  "Bagno e cucina hanno la parte superiore aperta sul locale principale, porte dedotte",
+  "Il locale a destra potrebbe essere parte del soggiorno",
+  "Muri inclinati/disegno storto raddrizzati; piccolo vano a sinistra dell'atrio (ripostiglio/scala) omesso"
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "id": "p3",
+ "fonte": "planimetria-catastale (1).jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scala 1:500 dichiarata; foglio assunto A4 orizzontale (297 mm = 840 px) => 1 px originale = 0,177 m; coordinate lette su ingrandimento x3 (1 px ingrandito = 0,059 m)"
+ },
+ "stanze": 18,
+ "muri": 67,
+ "aperture": 18,
+ "superficie_calcolata_m2": 2462.8,
+ "semaforo": "rosso",
+ "auto": [],
+ "errori": [
+  "«Servizi est basso» non è raggiungibile dall'ingresso",
+  "«Magazzino est» non è raggiungibile dall'ingresso",
+  "«Locale est estremo» non è raggiungibile dall'ingresso",
+  "Superficie interna 2463 m²: inverosimile, scala sbagliata"
+ ],
+ "avvisi": [
+  "«Locali sx alto» (ripostiglio) di 25.06 m²: fuori dal normale (0.5-10 m²), scala da verificare",
+  "«Disimpegno est» (disimpegno) di 43.86 m²: fuori dal normale (0.8-15 m²), scala da verificare",
+  "Ingresso larga 2.20 m su m39: insolita"
+ ],
+ "dubbi_lettura": [
+  "Immagine 840x560 px molto sgranata: etichette dei locali illegibili, nomi generici.",
+  "Scala 1:500 ma formato reale del foglio ignoto: se fosse A3 le misure sarebbero x1,41. Il capannone risulta lungo ~86 m e largo ~35 m: plausibile per uso commerciale/industriale.",
+  "Non è un appartamento: grande locale commerciale/magazzino con uffici e servizi; arredo da definire a mano.",
+  "Porte non disegnate: tutte dedotte (una per stanza verso l'area principale); ingresso posto a caso sul lato sud (x ~ 35-40 m).",
+  "Semplificati: muri obliqui dei locali a sinistra (ala inclinata), locali interni alla sala (quadrati al centro), pilastri, partizioni minori.",
+  "Esclusi i due piccoli corpi scollegati a sinistra, il piano primo e la cartiglio.",
+  "Il corpo nord (due locali) ha bordo sinistro con rientranza ignorata.",
+  "Altezze ipotizzate: 4 m sala/depositi, 3 m locali minori."
+ ]
+}

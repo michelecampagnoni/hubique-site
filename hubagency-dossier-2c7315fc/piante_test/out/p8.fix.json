@@ -1,0 +1,522 @@
+{
+ "fonte": "planimetria-catastale.png",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "piano_scelto": "PIANO SECONDO (h 2,75)",
+ "altri_piani": [
+  "PIANO CANTINE (h 2,15)"
+ ],
+ "scala": {
+  "metodo": "stima_arredi",
+  "dettaglio": "Immagine 200x283 px senza quote leggibili; bagno stimato ~2x3 m (1 px originale ~0,2 m circa, ~4,6 px/m); altre misure per proporzione"
+ },
+ "superficie_dichiarata_m2": null,
+ "muri": [
+  {
+   "id": "m1",
+   "p1": [
+    1.8,
+    1.8
+   ],
+   "p2": [
+    14.1,
+    1.8
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m2",
+   "p1": [
+    14.1,
+    1.8
+   ],
+   "p2": [
+    14.1,
+    4.2
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m3",
+   "p1": [
+    14.1,
+    4.2
+   ],
+   "p2": [
+    11.8,
+    4.2
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m4",
+   "p1": [
+    11.8,
+    4.2
+   ],
+   "p2": [
+    11.8,
+    7.2
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m5",
+   "p1": [
+    11.8,
+    7.2
+   ],
+   "p2": [
+    6.1,
+    7.2
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m6",
+   "p1": [
+    6.1,
+    7.2
+   ],
+   "p2": [
+    6.1,
+    9.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m7",
+   "p1": [
+    6.1,
+    9.4
+   ],
+   "p2": [
+    1.8,
+    9.4
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m8",
+   "p1": [
+    1.8,
+    9.4
+   ],
+   "p2": [
+    1.8,
+    1.8
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m9",
+   "p1": [
+    6.1,
+    1.8
+   ],
+   "p2": [
+    6.1,
+    7.2
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m10",
+   "p1": [
+    1.8,
+    6.0
+   ],
+   "p2": [
+    6.1,
+    6.0
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m11",
+   "p1": [
+    8.1,
+    1.8
+   ],
+   "p2": [
+    8.1,
+    7.2
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m12",
+   "p1": [
+    6.1,
+    5.1
+   ],
+   "p2": [
+    8.1,
+    5.1
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m13",
+   "p1": [
+    2.3,
+    0.2
+   ],
+   "p2": [
+    14.1,
+    0.2
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "m14",
+   "p1": [
+    2.3,
+    1.8
+   ],
+   "p2": [
+    2.3,
+    0.2
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "m15",
+   "p1": [
+    14.1,
+    0.2
+   ],
+   "p2": [
+    14.1,
+    1.8
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "m16",
+   "p1": [
+    0.2,
+    6.4
+   ],
+   "p2": [
+    1.8,
+    6.4
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "m17",
+   "p1": [
+    0.2,
+    6.4
+   ],
+   "p2": [
+    0.2,
+    9.2
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "m18",
+   "p1": [
+    0.2,
+    9.2
+   ],
+   "p2": [
+    1.8,
+    9.2
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "m4",
+   "da": 0.9,
+   "a": 1.8,
+   "tipo": "ingresso",
+   "dedotta": true
+  },
+  {
+   "muro": "m9",
+   "da": 3.4,
+   "a": 4.1,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m9",
+   "da": 4.6,
+   "a": 5.3,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m12",
+   "da": 0.6,
+   "a": 1.4,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m11",
+   "da": 3.6,
+   "a": 5.2,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m1",
+   "da": 1.2,
+   "a": 2.4,
+   "tipo": "portafinestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m1",
+   "da": 7.0,
+   "a": 8.4,
+   "tipo": "portafinestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m1",
+   "da": 9.0,
+   "a": 10.2,
+   "tipo": "finestra",
+   "dedotta": true
+  },
+  {
+   "muro": "m1",
+   "da": 4.8,
+   "a": 5.6,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m8",
+   "da": 1.0,
+   "a": 2.4,
+   "tipo": "portafinestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m7",
+   "da": 1.5,
+   "a": 2.7,
+   "tipo": "finestra",
+   "dedotta": true
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "camera",
+   "nome": "Camera",
+   "poligono": [
+    [
+     1.9,
+     1.9
+    ],
+    [
+     6.0,
+     1.9
+    ],
+    [
+     6.0,
+     5.9
+    ],
+    [
+     1.9,
+     5.9
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 16.4
+  },
+  {
+   "id": "s2",
+   "tipo": "bagno",
+   "nome": "Bagno",
+   "poligono": [
+    [
+     6.2,
+     1.9
+    ],
+    [
+     8.0,
+     1.9
+    ],
+    [
+     8.0,
+     5.0
+    ],
+    [
+     6.2,
+     5.0
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 5.58
+  },
+  {
+   "id": "s3",
+   "tipo": "soggiorno",
+   "nome": "Soggiorno",
+   "poligono": [
+    [
+     8.2,
+     1.9
+    ],
+    [
+     14.0,
+     1.9
+    ],
+    [
+     14.0,
+     4.1
+    ],
+    [
+     11.7,
+     4.1
+    ],
+    [
+     11.7,
+     7.1
+    ],
+    [
+     8.2,
+     7.1
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 23.26
+  },
+  {
+   "id": "s4",
+   "tipo": "disimpegno",
+   "nome": "Disimpegno",
+   "poligono": [
+    [
+     6.2,
+     5.2
+    ],
+    [
+     8.0,
+     5.2
+    ],
+    [
+     8.0,
+     7.1
+    ],
+    [
+     6.2,
+     7.1
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 3.42
+  },
+  {
+   "id": "s5",
+   "tipo": "studio",
+   "nome": "Studio",
+   "poligono": [
+    [
+     1.9,
+     6.1
+    ],
+    [
+     6.0,
+     6.1
+    ],
+    [
+     6.0,
+     9.3
+    ],
+    [
+     1.9,
+     9.3
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 13.12
+  },
+  {
+   "id": "s6",
+   "tipo": "balcone",
+   "nome": "Balcone",
+   "poligono": [
+    [
+     2.3,
+     0.3
+    ],
+    [
+     14.0,
+     0.3
+    ],
+    [
+     14.0,
+     1.7
+    ],
+    [
+     2.3,
+     1.7
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 16.38
+  },
+  {
+   "id": "s7",
+   "tipo": "balcone",
+   "nome": "Balcone studio",
+   "poligono": [
+    [
+     0.3,
+     6.5
+    ],
+    [
+     1.7,
+     6.5
+    ],
+    [
+     1.7,
+     9.1
+    ],
+    [
+     0.3,
+     9.1
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 3.64
+  }
+ ],
+ "dubbi": [
+  "Immagine minuscola e sfocata: tutte le dimensioni sono stime di proporzione, errore possibile 20-30%",
+  "Scala non ricavabile da quote; stimata dal bagno",
+  "Porte dedotte dalla logica; ingresso ipotizzato dal vano scale sul muro destro del soggiorno",
+  "Forma L del soggiorno e posizione di bagno/disimpegno incerte",
+  "Piano Cantine non incluso; elementi nel vano scale (cerchio) ignorati"
+ ],
+ "superficie_calcolata_m2": 61.8
+}

@@ -1,0 +1,907 @@
+{
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "piano_scelto": "PIANO SECONDO (Bologna, Catasto Fabbricati recente)",
+ "altri_piani": [
+  "PIANO INTERRATO (cantina)"
+ ],
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda 1:200 su foglio A3, barra grafica '10 metri' misurata 126 px sull'immagine 1100x777 => 1 px = 0,079 m; coordinate misurate su ritaglio ingrandito 4x (x=420..720, y=290..640 dell'originale) => 1 px del ritaglio = 0,020 m"
+ },
+ "superficie_dichiarata_m2": null,
+ "fonte": "nuove/c11.png",
+ "muri": [
+  {
+   "id": "l1",
+   "p1": [
+    1.65,
+    18.84
+   ],
+   "p2": [
+    1.65,
+    0.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "t1",
+   "p1": [
+    1.65,
+    0.0
+   ],
+   "p2": [
+    5.96,
+    0.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "t2",
+   "p1": [
+    5.96,
+    0.0
+   ],
+   "p2": [
+    5.96,
+    0.2
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "t3",
+   "p1": [
+    5.96,
+    0.2
+   ],
+   "p2": [
+    7.21,
+    0.2
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "r1",
+   "p1": [
+    7.21,
+    0.2
+   ],
+   "p2": [
+    7.21,
+    2.76
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "r2",
+   "p1": [
+    7.21,
+    2.76
+   ],
+   "p2": [
+    7.86,
+    2.76
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "t4",
+   "p1": [
+    7.86,
+    2.76
+   ],
+   "p2": [
+    12.64,
+    2.76
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "r3",
+   "p1": [
+    12.64,
+    2.76
+   ],
+   "p2": [
+    12.64,
+    18.84
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "b1",
+   "p1": [
+    12.64,
+    18.84
+   ],
+   "p2": [
+    1.65,
+    18.84
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "c1",
+   "p1": [
+    7.86,
+    2.76
+   ],
+   "p2": [
+    7.86,
+    4.7
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "w1",
+   "p1": [
+    1.79,
+    2.72
+   ],
+   "p2": [
+    5.86,
+    2.72
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w2",
+   "p1": [
+    5.76,
+    2.72
+   ],
+   "p2": [
+    5.76,
+    4.8
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w3",
+   "p1": [
+    1.79,
+    6.39
+   ],
+   "p2": [
+    5.76,
+    6.39
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w4",
+   "p1": [
+    5.76,
+    6.43
+   ],
+   "p2": [
+    5.76,
+    11.79
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w5",
+   "p1": [
+    1.79,
+    8.28
+   ],
+   "p2": [
+    4.76,
+    8.28
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w8",
+   "p1": [
+    1.79,
+    10.2
+   ],
+   "p2": [
+    5.86,
+    10.2
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w7",
+   "p1": [
+    1.79,
+    11.79
+   ],
+   "p2": [
+    5.86,
+    11.79
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w9",
+   "p1": [
+    2.58,
+    14.63
+   ],
+   "p2": [
+    7.21,
+    14.63
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w10",
+   "p1": [
+    1.65,
+    16.67
+   ],
+   "p2": [
+    7.3,
+    16.67
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w11",
+   "p1": [
+    5.9,
+    14.63
+   ],
+   "p2": [
+    5.9,
+    16.67
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w12",
+   "p1": [
+    7.3,
+    10.1
+   ],
+   "p2": [
+    7.3,
+    16.91
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w13",
+   "p1": [
+    7.86,
+    5.84
+   ],
+   "p2": [
+    12.64,
+    5.84
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w14",
+   "p1": [
+    7.27,
+    7.82
+   ],
+   "p2": [
+    12.64,
+    7.82
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "w15",
+   "p1": [
+    7.27,
+    5.84
+   ],
+   "p2": [
+    7.27,
+    8.48
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "v1",
+   "p1": [
+    0.1,
+    14.53
+   ],
+   "p2": [
+    0.1,
+    11.85
+   ],
+   "spessore": 0.2,
+   "esterno": true
+  },
+  {
+   "id": "v2",
+   "p1": [
+    0.1,
+    11.85
+   ],
+   "p2": [
+    1.65,
+    11.85
+   ],
+   "spessore": 0.2,
+   "esterno": true
+  },
+  {
+   "id": "v3",
+   "p1": [
+    0.1,
+    14.53
+   ],
+   "p2": [
+    1.65,
+    14.53
+   ],
+   "spessore": 0.2,
+   "esterno": true
+  },
+  {
+   "id": "bb1",
+   "p1": [
+    12.64,
+    11.65
+   ],
+   "p2": [
+    13.7,
+    11.65
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "bb2",
+   "p1": [
+    13.7,
+    11.65
+   ],
+   "p2": [
+    13.7,
+    13.93
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  },
+  {
+   "id": "bb3",
+   "p1": [
+    13.7,
+    13.93
+   ],
+   "p2": [
+    12.64,
+    13.93
+   ],
+   "spessore": 0.1,
+   "esterno": true
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "l1",
+   "da": 0.54,
+   "a": 2.12,
+   "tipo": "ingresso",
+   "dedotta": false
+  },
+  {
+   "muro": "l1",
+   "da": 16.81,
+   "a": 18.0,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "l1",
+   "da": 14.33,
+   "a": 15.42,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "l1",
+   "da": 11.75,
+   "a": 12.84,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "l1",
+   "da": 9.47,
+   "a": 10.16,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "l1",
+   "da": 7.78,
+   "a": 8.38,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "l1",
+   "da": 5.4,
+   "a": 6.59,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "r3",
+   "da": 1.35,
+   "a": 2.54,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "r3",
+   "da": 5.52,
+   "a": 6.51,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "r3",
+   "da": 8.99,
+   "a": 11.08,
+   "tipo": "portafinestra",
+   "dedotta": false
+  },
+  {
+   "muro": "r3",
+   "da": 13.66,
+   "a": 14.75,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "w2",
+   "da": 1.09,
+   "a": 1.98,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "w4",
+   "da": 0.66,
+   "a": 1.45,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "w4",
+   "da": 2.24,
+   "a": 2.94,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "w4",
+   "da": 4.47,
+   "a": 5.32,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "w9",
+   "da": 4.07,
+   "a": 4.57,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "w15",
+   "da": 0.0,
+   "a": 0.75,
+   "tipo": "porta",
+   "dedotta": true
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "camera",
+   "nome": "Camera",
+   "poligono": [
+    [
+     1.79,
+     0.04
+    ],
+    [
+     7.15,
+     0.04
+    ],
+    [
+     7.15,
+     2.72
+    ],
+    [
+     1.79,
+     2.72
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s2",
+   "tipo": "camera",
+   "nome": "Camera",
+   "poligono": [
+    [
+     1.79,
+     2.76
+    ],
+    [
+     5.76,
+     2.76
+    ],
+    [
+     5.76,
+     6.39
+    ],
+    [
+     1.79,
+     6.39
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s3",
+   "tipo": "bagno",
+   "nome": "Bagno",
+   "poligono": [
+    [
+     1.79,
+     6.43
+    ],
+    [
+     5.76,
+     6.43
+    ],
+    [
+     5.76,
+     8.24
+    ],
+    [
+     1.79,
+     8.24
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s4",
+   "tipo": "bagno",
+   "nome": "Bagno",
+   "poligono": [
+    [
+     1.79,
+     8.32
+    ],
+    [
+     5.76,
+     8.32
+    ],
+    [
+     5.76,
+     10.1
+    ],
+    [
+     1.79,
+     10.1
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s5",
+   "tipo": "lavanderia",
+   "nome": "Lavanderia",
+   "poligono": [
+    [
+     1.79,
+     10.22
+    ],
+    [
+     5.86,
+     10.22
+    ],
+    [
+     5.86,
+     11.75
+    ],
+    [
+     1.79,
+     11.75
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s6",
+   "tipo": "soggiorno_cucina",
+   "nome": "Tinello",
+   "poligono": [
+    [
+     1.79,
+     11.85
+    ],
+    [
+     7.21,
+     11.85
+    ],
+    [
+     7.21,
+     14.63
+    ],
+    [
+     2.58,
+     14.63
+    ],
+    [
+     2.58,
+     16.61
+    ],
+    [
+     1.79,
+     16.61
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s7",
+   "tipo": "cucina",
+   "nome": "Cucina",
+   "poligono": [
+    [
+     2.58,
+     14.63
+    ],
+    [
+     5.86,
+     14.63
+    ],
+    [
+     5.86,
+     16.61
+    ],
+    [
+     2.58,
+     16.61
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s8",
+   "tipo": "ripostiglio",
+   "nome": "Rip.",
+   "poligono": [
+    [
+     5.96,
+     14.63
+    ],
+    [
+     7.21,
+     14.63
+    ],
+    [
+     7.21,
+     16.61
+    ],
+    [
+     5.96,
+     16.61
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s9",
+   "tipo": "altro",
+   "nome": "Veranda",
+   "poligono": [
+    [
+     0.1,
+     11.85
+    ],
+    [
+     1.59,
+     11.85
+    ],
+    [
+     1.59,
+     14.53
+    ],
+    [
+     0.1,
+     14.53
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s10",
+   "tipo": "disimpegno",
+   "nome": "Dis. (disimpegno)",
+   "poligono": [
+    [
+     5.92,
+     2.82
+    ],
+    [
+     7.21,
+     2.82
+    ],
+    [
+     7.21,
+     4.7
+    ],
+    [
+     7.86,
+     4.7
+    ],
+    [
+     7.86,
+     5.84
+    ],
+    [
+     7.27,
+     5.84
+    ],
+    [
+     7.27,
+     11.85
+    ],
+    [
+     5.92,
+     11.85
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s11",
+   "tipo": "camera",
+   "nome": "Camera",
+   "poligono": [
+    [
+     7.86,
+     2.76
+    ],
+    [
+     12.6,
+     2.76
+    ],
+    [
+     12.6,
+     5.8
+    ],
+    [
+     7.86,
+     5.8
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s12",
+   "tipo": "altro",
+   "nome": "Guardaroba",
+   "poligono": [
+    [
+     7.44,
+     5.84
+    ],
+    [
+     12.6,
+     5.84
+    ],
+    [
+     12.6,
+     7.82
+    ],
+    [
+     7.44,
+     7.82
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s13",
+   "tipo": "soggiorno",
+   "nome": "Salotto - Ingresso",
+   "poligono": [
+    [
+     7.3,
+     7.88
+    ],
+    [
+     12.6,
+     7.88
+    ],
+    [
+     12.6,
+     18.8
+    ],
+    [
+     1.79,
+     18.8
+    ],
+    [
+     1.79,
+     16.71
+    ],
+    [
+     7.3,
+     16.71
+    ]
+   ],
+   "h": 3.1
+  },
+  {
+   "id": "s14",
+   "tipo": "balcone",
+   "nome": "Balcone",
+   "poligono": [
+    [
+     12.64,
+     11.65
+    ],
+    [
+     13.7,
+     11.65
+    ],
+    [
+     13.7,
+     13.93
+    ],
+    [
+     12.64,
+     13.93
+    ]
+   ],
+   "h": 3.1
+  }
+ ],
+ "dubbi": [
+  "Immagine a bassa risoluzione (1100x777): il disegno dell'unita' e' ~140x240 px, misure con errore di 0,2-0,4 m.",
+  "Muri doppi/spessi sul lato nord (x ~800-835 nel ritaglio) interpretati come muro verso altra U.I.; geometria dell'angolo nord-est incerta.",
+  "Porte quasi tutte non disegnate: dedotte; camera nord e camera centrale si aprono sul disimpegno (varchi senza muro).",
+  "Salotto e ingresso sono un unico spazio ad L (nessun muro tra i due), H=3,10 m scritta sul salotto.",
+  "Bagni (due, uno sopra l'altro) con tramezzi parziali: confini dei bagni incerti.",
+  "Veranda a sinistra del muro, con parete obliqua verso la chiostrina: modellata come rettangolo; passaggio dedotto dal tinello.",
+  "Ingresso dal pianerottolo a sinistra in basso: la porta e' dedotta dai simboli freccia.",
+  "Cantina del piano interrato esclusa."
+ ]
+}

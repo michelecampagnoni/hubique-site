@@ -1,0 +1,30 @@
+{
+ "id": "p1",
+ "fonte": "planimetria (1).jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda 1:100 su A4 (297 mm di altezza = ~585 px) => 1 px immagine = ~0,051 m; misure prese su ritaglio x4 (1 px ritaglio = 0,0127 m)"
+ },
+ "stanze": 9,
+ "muri": 26,
+ "aperture": 12,
+ "superficie_calcolata_m2": 100.3,
+ "semaforo": "giallo",
+ "auto": [
+  "Uniti 3 estremi di muri staccati di pochi centimetri"
+ ],
+ "errori": [],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Immagine a bassa risoluzione, etichette stanze illeggibili: tipi di stanza dedotti dalla forma e dai sanitari",
+  "Locale destro e Camera C potrebbero essere cucina/studio o camere: tipo incerto",
+  "Soggiorno e parte sinistra (probabile cucina) uniti in un unico spazio",
+  "Porta del bagno 2 (verso Camera C) dedotta",
+  "Camera C: due archi porta sul disegno, ne e' stata usata una sola (sul muro con il soggiorno)",
+  "Terrazzo curvo semplificato a poligono ortogonale; accesso dal locale destro e portafinestra dal soggiorno",
+  "Spessore e quote ricavati dalla scala 1:100 dichiarata, non da quote scritte",
+  "Mancano finestre sui muri esterni dei lati sinistro, destro e basso (non disegnate)"
+ ]
+}
