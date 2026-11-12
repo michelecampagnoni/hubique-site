@@ -55,12 +55,11 @@ const SLIDES = [
   { id: 'obiettivi', nome: 'Obiettivi', scena: 'italia', off: 3.0, sc: .92, offY: -4.2, kStretto: .6, html: `
     <div class="in">
       <div class="kick r" style="--i:0">Gli obiettivi della rete</div>
-      <h2 class="r" style="--i:1">Quattro obiettivi, <em>emersi dal confronto con Tree Re</em></h2>
+      <h2 class="r" style="--i:1">Tre obiettivi, <em>emersi dal confronto con Tree Re</em></h2>
       <ol class="obi">
         ${[['Una rete più produttiva', 'Strumenti che fanno risparmiare tempo all\'agenzia e portano contatti.'],
            ['Strumenti che gli agenti usano davvero', 'Pochi passaggi, risultato subito visibile.'],
-           ['Pochi fornitori, nessun doppione', 'Servizi mirati, accanto a quelli che la rete ha già.'],
-           ['Servizi a consumo per gli agenti', 'Ogni agenzia attiva quello che le serve.']]
+           ['Pochi fornitori, nessun doppione', 'Servizi mirati, accanto a quelli che la rete ha già.']]
           .map((p, i) => `<li ${r(i + 2)}><i>${i + 1}</i><div><b>${p[0]}</b><span>${p[1]}</span></div></li>`).join('')}
       </ol>
     </div>` },
@@ -143,7 +142,7 @@ const SLIDES = [
          ['Immagine di rete uniforme', 'Siti e dossier con lo stesso stile e lo stesso marchio.'],
          ['Contatti dagli annunci', 'La prova dell\'arredo porta alle agenzie visitatori interessati.'],
          ['Dati confrontabili', 'I conti delle agenzie letti con gli stessi criteri.'],
-         ['A consumo', 'L\'agente attiva i servizi che usa; il modello si definisce insieme.']]
+         ['Persone scelte e formate con un metodo', 'Selezione, formazione e allenamento uguali in tutta la rete.']]
         .map((t, i) => `<div class="tile r" style="--i:${i + 3}"><i>${i + 1}</i><h3>${t[0]}</h3><p>${t[1]}</p></div>`).join('')}
     </div>` },
 
