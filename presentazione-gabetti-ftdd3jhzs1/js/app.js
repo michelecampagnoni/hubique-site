@@ -17,13 +17,13 @@ const DEMO = {
   talentGioco: 'https://hubique.it/gabetti-talent-e9b5519e/#/allenamento?come=agente',
   talentRete: 'https://hubique.it/gabetti-talent-e9b5519e/#/cruscotto?come=franchisor',
 };
-const host = u => u.replace(/^https:\/\//, '').replace(/[#?].*$/, '').replace(/\/$/, '');
+const host = u => u.replace(/^https:\/\//, '').replace(/[#?].*$/, '').replace(/\/[^/]*\.html$/, '').replace(/\/$/, '');
 
 // una slide per demo: cosa fa, tre vantaggi, schermata, pulsante
 function demo({ n, kick, titolo, em, cosa, vant, nota, url, img, alt, eti = ETI }) {
   return `
     <div class="in demo-t">
-      <div class="kick r" style="--i:0">Demo ${n} di 11 · ${kick}</div>
+      <div class="kick r" style="--i:0">Demo ${n} di 6 · ${kick}</div>
       <h2 class="r" style="--i:1">${titolo} <em>${em}</em></h2>
       <p class="lead r" style="--i:2">${cosa}</p>
       <ul class="vant">
@@ -94,41 +94,11 @@ const SLIDES = [
     vant: [['Agenzia', `L'obiezione «ma quanto devo spenderci?» trova risposta subito.`], ['Agenzia', `Le case da ristrutturare si propongono con numeri, non con impressioni.`], ['Gabetti', `Uno strumento in più che i portali non danno.`]],
     nota: `Stima indicativa con fonti dichiarate, non è un preventivo: serve sempre il sopralluogo di un'impresa. Nella versione per il proprietario non compare.`, url: DEMO.ristruttura, img: 'demo-ristr.jpg', alt: `Pagina «Quanto costerebbe ristrutturarlo» del dossier` }) },
 
-  { id: 'talent-cassetti', nome: 'Talent · profili', scena: 'ambient', html: demo({
-    n: 6, kick: `Gabetti Talent · il candidato giusto`, titolo: `Ogni ruolo,`, em: `le sue competenze`,
-    cosa: `Per ogni posizione (agente junior e senior, acquisitore, segreteria, consulente mutui) si costruisce il profilo del candidato ideale aprendo solo i «cassetti» che servono: 24 questionari brevi, ognuno su una sola competenza, 14 di comportamento (negoziazione, controllo emotivo, gestione del rifiuto…) e 10 di mestiere (normativa, valutazione, strumenti digitali). Per ogni cassetto si sceglie peso e livello atteso.`,
-    vant: [['Agenzia', `Un agente e una segretaria non si misurano con lo stesso test.`], ['Agenzia', `Profili già pronti per i ruoli tipici, modificabili.`], ['Gabetti', `Un metodo di selezione unico per tutta la rete.`]],
-    nota: `Questionari scritti in collaborazione con uno psicometrista certificato. Nessun test clinico: misurano competenze e preferenze di lavoro.`, url: DEMO.talent, img: 'demo-t-cassetti.jpg', alt: `Catalogo dei cassetti di Gabetti Talent` }) },
-
-  { id: 'talent-pipeline', nome: 'Talent · selezione', scena: 'ambient', html: demo({
-    n: 7, kick: `Gabetti Talent · la selezione`, titolo: `Dal questionario del candidato`, em: `alla scelta del titolare`,
-    cosa: `Il candidato riceve un link e risponde da qualsiasi dispositivo, telefono, tablet o computer, alle domande dei soli cassetti del suo profilo, dopo informativa e consenso. Il punteggio, calcolato con regole fisse dalle risposte, arriva come proposta interna: per ogni competenza il valore contro il livello atteso e la spiegazione. Il titolare sposta i candidati tra le colonne, li confronta, corregge un punteggio con una nota: tutto resta nel registro delle decisioni.`,
-    vant: [['Agenzia', `Meno colloqui a vuoto: si incontra chi ha il profilo.`], ['Agenzia', `Si vede subito dove la persona è forte e dove va formata.`], ['Gabetti', `Tempi e qualità delle assunzioni misurati agenzia per agenzia.`]],
-    nota: `La piattaforma suggerisce, decide sempre una persona. Nessuno scarto automatico.`, url: DEMO.talentPipe, img: 'demo-t-pipeline.jpg', alt: `Pipeline dei candidati di un'agenzia` }) },
-
-  { id: 'talent-annunci', nome: 'Talent · annunci', scena: 'ambient', html: demo({
-    n: 8, kick: `Gabetti Talent · gli annunci`, titolo: `L'annuncio di lavoro`, em: `nasce dal profilo`,
-    cosa: `L'annuncio si scrive da solo partendo dal profilo a cassetti della posizione; si può riscrivere con un tono diverso e si vede l'anteprima per Indeed, LinkedIn, InfoJobs, Subito Lavoro e la pagina «Lavora con noi». Per ogni ricerca si segue lo stato su ogni portale. I file per Google for Jobs e il feed Indeed sono reali e scaricabili.`,
-    vant: [['Agenzia', `Un annuncio fatto bene in un minuto, su tutti i portali.`], ['Agenzia', `Le candidature entrano già nella pipeline giusta.`], ['Gabetti', `Annunci con lo stesso stile e lo stesso marchio in tutta la rete.`]],
-    nota: `Nella demo la pubblicazione sui portali è simulata: nessun annuncio esce davvero.`, url: DEMO.talentAnnunci, img: 'demo-t-annunci.jpg', alt: `Annunci di lavoro con lo stato per portale` }) },
-
-  { id: 'talent-formazione', nome: 'Talent · formazione', scena: 'ambient', html: demo({
-    n: 9, kick: `Gabetti Talent · la formazione`, titolo: `La formazione parte`, em: `dove serve davvero`,
-    cosa: `Il nuovo assunto trova un percorso di inserimento costruito sui cassetti rimasti sotto il livello atteso nel questionario d'ingresso. Corsi brevi (inserimento in rete, acquisizione, normativa e antiriciclaggio, privacy, uso di HubAgency), lezioni di pochi minuti, quiz e attestato. La direzione assegna i percorsi obbligatori con scadenza, l'agenzia aggiunge i suoi.`,
-    vant: [['Agenzia', `Il nuovo agente è operativo prima.`], ['Agenzia', `Formazione obbligatoria tracciata, con attestati.`], ['Gabetti', `Stessi contenuti e stesso livello in tutte le agenzie.`]],
-    nota: `Contenuti dei corsi d'esempio, da far rivedere ai formatori della rete.`, url: DEMO.talentForm, img: 'demo-t-formazione.jpg', alt: `La mia formazione, vista dell'agente` }) },
-
-  { id: 'talent-gioco', nome: 'Talent · allenamento', scena: 'ambient', html: demo({
-    n: 10, kick: `Gabetti Talent · l'allenamento`, titolo: `Quattro minuti al giorno,`, em: `come un gioco`,
-    cosa: `Ogni giorno cinque case da vendere in un quartiere 3D: ogni casa è una domanda su quello che si è studiato, si risponde bene e compare il cartello VENDUTO. Le domande sbagliate tornano nei giorni dopo finché non sono imparate. Giorni di fila, punti, livelli e badge; in modalità immersiva si cammina nel quartiere col telefono. Leghe a squadre e sfide tra agenzie.`,
-    vant: [['Agenzia', `Quello che si impara in aula non si perde.`], ['Agenzia', `Un'abitudine quotidiana, non un corso una volta l'anno.`], ['Gabetti', `Sfide di rete che uniscono le agenzie.`]],
-    nota: `La classifica di rete la accende o la spegne la direzione.`, url: DEMO.talentGioco, img: 'demo-t-allenamento.jpg', alt: `Allenamento di oggi: cinque case da vendere` }) },
-
-  { id: 'talent-rete', nome: 'Talent · cruscotto', scena: 'ambient', html: demo({
-    n: 11, kick: `Gabetti Talent · la vista di Gabetti`, titolo: `Tutta la rete`, em: `in un cruscotto`,
-    cosa: `La direzione vede ricerche aperte, candidati in selezione, tempo medio di assunzione, formazione completata e chi si è allenato questa settimana. L'imbuto della selezione dice dove si perdono i candidati; le agenzie più attive e quelle da seguire compaiono da sole, con il motivo.`,
-    vant: [['Gabetti', `Si interviene sulle agenzie ferme prima che sia tardi.`], ['Gabetti', `Selezione e formazione misurate con gli stessi numeri.`], ['Agenzia', `Ogni agenzia vede solo i suoi dati.`]],
-    nota: `Dati della demo inventati su 12 agenzie dimostrative.`, url: DEMO.talentRete, img: 'demo-t-cruscotto.jpg', alt: `Cruscotto della rete` }) },
+  { id: 'talent', nome: 'Gabetti Talent', scena: 'ambient', html: demo({
+    n: 6, kick: `Gabetti Talent`, titolo: `Selezione e formazione`, em: `per tutta la rete`,
+    cosa: `Il profilo del candidato ideale per ogni ruolo, costruito con questionari mirati su ogni competenza; il candidato risponde da qualsiasi dispositivo e il punteggio arriva al titolare come proposta, con la spiegazione. Annunci pronti per tutti i portali, percorsi di formazione costruiti sulle lacune di ognuno, allenamento quotidiano a gioco e un cruscotto per la direzione.`,
+    vant: [['Agenzia', `Meno colloqui a vuoto e nuovi agenti operativi prima.`], ['Agenzia', `Quello che si impara non si perde, con pochi minuti al giorno.`], ['Gabetti', `Un metodo unico di selezione e formazione in tutta la rete.`]],
+    nota: `Questionari scritti in collaborazione con uno psicometrista certificato. La presentazione dedicata racconta tutte le funzioni: <a class="pe" href="https://hubique.it/presentazione-gabetti-talent-681147c31c/" target="_blank" rel="noopener" style="color:var(--rosso)">apri la presentazione di Gabetti Talent</a>.`, url: DEMO.talentRete, img: 'demo-t-cruscotto.jpg', alt: `Cruscotto della rete di Gabetti Talent` }) },
 
   { id: 'vantaggi', nome: 'Vantaggi per Gabetti', scena: 'ambient', html: `
     <div class="in stretta">
@@ -157,6 +127,7 @@ const SLIDES = [
         <div class="leg">Hubique S.r.l. · Via Ennio 6A, 20137 Milano · P.IVA 12588200969</div>
       </div>
     </div>` },
+
 ];
 
 // ---------- costruzione ----------
