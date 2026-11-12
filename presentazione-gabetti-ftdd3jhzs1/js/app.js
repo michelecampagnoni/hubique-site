@@ -9,6 +9,8 @@ const DEMO = {
   sito: 'https://hubagency-sito-anteprima.vercel.app',
   dossier: 'https://hubagency-casa3d.vercel.app',
   arreda: 'https://arreda-demo.vercel.app',
+  ristruttura: 'https://hubagency-casa3d.vercel.app/dossier.html',
+  talent: 'https://gabetti-talent.vercel.app',
 };
 const host = u => u.replace(/^https:\/\//, '').replace(/\/$/, '');
 
@@ -16,7 +18,7 @@ const host = u => u.replace(/^https:\/\//, '').replace(/\/$/, '');
 function demo({ n, kick, titolo, em, cosa, vant, nota, url, img, alt, eti = ETI }) {
   return `
     <div class="in demo-t">
-      <div class="kick r" style="--i:0">Demo ${n} di 4 · ${kick}</div>
+      <div class="kick r" style="--i:0">Demo ${n} di 6 · ${kick}</div>
       <h2 class="r" style="--i:1">${titolo} <em>${em}</em></h2>
       <p class="lead r" style="--i:2">${cosa}</p>
       <ul class="vant">
@@ -86,10 +88,10 @@ const SLIDES = [
     <div class="in stretta">
       <div class="kick r" style="--i:0">In sintesi</div>
       <h2 class="r" style="--i:1">I vantaggi <em>per Gabetti</em></h2>
-      <p class="lead r" style="--i:2">Quattro strumenti, un solo partner, già nella rete con HubAgency.</p>
+      <p class="lead r" style="--i:2">Sei strumenti, un solo partner, già nella rete con HubAgency.</p>
     </div>
     <div class="tiles">
-      ${[['Un fornitore, più strumenti', 'Conti, sito, dossier e arredo da un solo partner.'],
+      ${[['Un fornitore, più strumenti', 'Conti, sito, dossier, arredo, ristrutturazione e persone da un solo partner.'],
          ['Nessun doppione', 'Ogni strumento risponde a un bisogno preciso, accanto a quelli della rete.'],
          ['Immagine di rete uniforme', 'Siti e dossier con lo stesso stile e lo stesso marchio.'],
          ['Contatti dagli annunci', 'La prova dell\'arredo porta alle agenzie visitatori interessati.'],
@@ -98,16 +100,16 @@ const SLIDES = [
         .map((t, i) => `<div class="tile r" style="--i:${i + 3}"><i>${i + 1}</i><h3>${t[0]}</h3><p>${t[1]}</p></div>`).join('')}
     </div>` },
 
-  { id: 'sviluppi', nome: 'Prossimi sviluppi', scena: 'casa', off: 3.9, sc: .6, offY: -6.2, kStretto: .5, html: `
+  { id: 'sviluppi', nome: 'Nuove demo', scena: 'casa', off: 3.9, sc: .6, offY: -6.2, kStretto: .5, html: `
     <div class="in lungo">
-      <div class="kick r" style="--i:0">Prossimi sviluppi · prototipi in costruzione</div>
-      <h2 class="r" style="--i:1">Quello che <em>stiamo costruendo</em></h2>
-      <div class="card r" style="--i:2"><h3>Calcola ristrutturazione</h3>
-        <p>Dentro il Dossier Immobile: una stima a forchetta dei costi di ristrutturazione, per l'acquirente.</p></div>
-      <div class="card r" style="--i:3"><h3>HubAgency People</h3>
-        <p><b>Ricerca del personale</b>, per Gabetti e per le agenzie: profilo del candidato ideale con competenze tecniche e personali, questionari con punteggio spiegato, decisione sempre di una persona, annunci sui portali.</p>
-        <p><b>Formazione continua</b>: corsi, quiz e allenamento quotidiano, con punti, badge e sfide tra agenzie.</p></div>
-      <p class="nota r" style="--i:4">Prototipi in costruzione: tempi e contenuti si decidono insieme.</p>
+      <div class="kick r" style="--i:0">Demo 5 e 6 di 6 · già pronte</div>
+      <h2 class="r" style="--i:1">Due strumenti in più, <em>già da provare</em></h2>
+      <div class="card r" style="--i:2"><h3>Quanto costerebbe ristrutturarlo</h3>
+        <p>Nel Dossier Immobile: tipo di lavori e finitura con un tocco, poi la stima a forchetta voce per voce, con le fonti dei prezzi. <b>Per Gabetti:</b> le case da sistemare si vendono prima.</p>
+        <div class="azioni" style="margin-top:10px"><a class="apri pe" style="padding:10px 26px" href="${DEMO.ristruttura}" target="_blank" rel="noopener">Apri la demo <span aria-hidden="true">&#8599;</span></a></div></div>
+      <div class="card r" style="--i:3"><h3>Gabetti Talent</h3>
+        <p><b>Ricerca del personale</b> per Gabetti e per le agenzie: profilo ideale per ruolo, questionari mirati, punteggio come proposta, annunci per i portali. <b>Formazione continua</b> con quiz, allenamento quotidiano e sfide tra agenzie.</p>
+        <div class="azioni" style="margin-top:10px"><a class="apri pe" style="padding:10px 26px" href="${DEMO.talent}" target="_blank" rel="noopener">Apri la demo <span aria-hidden="true">&#8599;</span></a></div></div>
     </div>
     <div class="hint">Passa sulle stanze · ${ETI}</div>` },
 
