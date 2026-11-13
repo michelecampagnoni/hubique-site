@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lettura guidata della planimetria</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+  :root{--acc:#B20933}
+  html,body{margin:0;height:100%;background:#eceae6;font-family:'Satoshi',system-ui,sans-serif;overflow:hidden;color:#1d1d1f}
+  canvas{display:block;touch-action:none}
+  .side{position:fixed;left:18px;top:18px;bottom:18px;width:330px;background:rgba(255,255,255,.96);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.14);padding:18px 18px 14px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+  .side h1{font-size:18px;margin:0}
+  .side .sub{font-size:12px;color:#777;margin-top:-6px}
+  .steps{list-style:none;margin:0;padding:0;font-size:13.5px}
+  .steps li{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;color:#999}
+  .steps li i{font-style:normal;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;background:#eee;color:#999;flex:none}
+  .steps li.run{color:#1d1d1f;font-weight:700} .steps li.run i{background:var(--acc);color:#fff;animation:pulse 1s infinite}
+  .steps li.ok{color:#1d1d1f} .steps li.ok i{background:#1a7f37;color:#fff}
+  .steps li.ask{color:#1d1d1f;font-weight:700} .steps li.ask i{background:#e9a100;color:#fff}
+  .steps li small{margin-left:auto;font-weight:500;color:#888}
+  @keyframes pulse{50%{opacity:.5}}
+  .status{font-size:13px;color:#444;min-height:36px}
+  .ask{background:#fff7e6;border:1px solid #f3d38a;border-radius:12px;padding:12px;font-size:13.5px;display:none}
+  .ask.on{display:block}
+  .ask > b{display:block;margin-bottom:6px}
+  .ask .btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  button{font:inherit;font-size:13px;border:1px solid #ddd;background:#fff;border-radius:9px;padding:8px 11px;cursor:pointer}
+  button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700}
+  button.on{background:#1d1d1f;color:#fff;border-color:#1d1d1f}
+  .tools{display:flex;gap:6px;flex-wrap:wrap}
+  .meter{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .meter div{background:#f6f6f7;border-radius:10px;padding:8px 10px;font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.08em}
+  .meter b{display:block;font-size:20px;color:#1d1d1f;letter-spacing:0;text-transform:none}
+  .legend{font-size:11.5px;color:#666;line-height:1.7}
+  .legend span{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+  .hint{font-size:11.5px;color:#888}
+  .pick{position:fixed;right:18px;top:18px;background:rgba(255,255,255,.95);border-radius:12px;padding:8px;display:flex;gap:6px;box-shadow:0 6px 20px rgba(0,0,0,.1)}
+  .guida{position:fixed;left:calc(50% + 175px);bottom:22px;transform:translateX(-50%);background:#fff;border-radius:14px;padding:12px 18px;font-size:14px;box-shadow:0 6px 24px rgba(0,0,0,.14);max-width:640px;text-align:center}
+  .guida b{color:var(--acc)}
+  .tools.t2 button{flex:1}
+  .topbar{position:fixed;left:calc(50% + 175px);top:84px;transform:translateX(-50%);display:flex;gap:8px;background:rgba(255,255,255,.96);padding:8px;border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.14);z-index:5}
+  .topbar button{font-size:15px;padding:10px 16px;font-weight:700}
+  .topbar .sep{width:1px;background:#e3e3e3;margin:0 4px}
+  #lente{position:fixed;width:220px;height:220px;border-radius:50%;box-shadow:0 0 0 3px #fff,0 8px 28px rgba(0,0,0,.3);pointer-events:none;display:none;z-index:9;background:#fff}
+  .pick select{font:inherit;font-size:14px;padding:8px 10px;border-radius:9px;border:1px solid #ddd;background:#fff}
+  .topbar{top:18px!important}
+  .pick{top:auto!important;bottom:22px;right:18px}
+  .mark{position:fixed;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:3px solid #B20933;pointer-events:none;z-index:8}
+  button:disabled{opacity:.35;cursor:default}
+  .toast{position:fixed;left:calc(50% + 175px);bottom:84px;transform:translateX(-50%);background:#1d1d1f;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.3s}
+  .toast.on{opacity:.92}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+}}
+</script>
+</head>
+<body>
+<div id="esempio-dimostrativo" style="position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:2147483000;pointer-events:none;background:#111;color:#fde047;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;padding:5px 12px;border-radius:0 0 7px 7px;white-space:nowrap">ESEMPIO DIMOSTRATIVO · DATI FITTIZI</div><script>if(window.self!==window.top){var e=document.getElementById("esempio-dimostrativo");e&&e.remove()}</script>
+
+<div class="side">
+  <h1>Lettura della planimetria</h1>
+  <div class="sub" id="fonte">…</div>
+  <ul class="steps" id="steps"></ul>
+  <div class="status" id="status">Preparo il disegno…</div>
+  <div class="ask" id="ask"><b id="askT"></b><div id="askD"></div><div class="btns" id="askB"></div></div>
+  <div class="meter"><div>Fedeltà al disegno<b id="fed">–</b></div><div>Superficie letta<b id="sup">–</b></div></div>
+  <div class="tools">
+    <button id="pausa">⏸ Pausa</button>
+    <button id="restart" title="Ricomincia la lettura da capo">⟲ Da capo</button>
+  </div>
+  <div class="tools t2">
+    <button id="tMuro"><b>+</b> Muro</button>
+    <button id="tVertice"><b>+</b> Vertice</button>
+    <button id="tPorta"><b>+</b> Porta</button>
+    <button id="tCanc">✕ Cancella</button>
+  </div>
+  <div class="hint"><b>Angolo</b>: trascina un pallino nero. <b>Muro</b>: trascinalo e si sposta parallelo. <b>Scalino a L</b>: «+ Vertice» due volte sul muro, poi trascina il pezzo in mezzo. Sbagliato? «← Indietro» in alto. Alt = senza calamite.</div>
+  <div class="legend"><span style="background:#1a9e57"></span>muro trovato nel disegno <span style="background:#e9a100;margin-left:8px"></span>incerto <span style="background:#d62839;margin-left:8px"></span>non trovato<br>
+  <span style="background:#7a4a2b"></span>porta <span style="background:#e9a100;margin-left:8px"></span>porta dedotta <span style="background:#2b8fd6;margin-left:8px"></span>finestra</div>
+</div>
+<div class="pick" id="pick"></div>
+<div class="topbar"><button id="undo" title="Torna allo stato prima dell’ultima azione (Cmd+Z)">← Indietro</button><button id="redo" title="Rifai l’azione annullata (Maiusc+Cmd+Z)">Avanti →</button><span class="sep"></span><button id="zOut" title="Rimpicciolisci (−)">−</button><button id="zFit" title="Adatta allo schermo (0)">Adatta</button><button id="zIn" title="Ingrandisci (+)">+</button></div>
+<canvas id="lente" width="220" height="220"></canvas>
+<div class="guida" id="guida"></div>
+<div class="toast" id="toast"></div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const Q = new URLSearchParams(location.search), ID = Q.get('p') || 'p7', OUT = '../piante_test/out/';
+const $ = id => document.getElementById(id), P = Math.PI;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+let paused = false; const waitRun = async () => { while (paused) await sleep(100); };
+function toast(t) { const e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 2200); }
+
+/* ---------- dati: lettura del modello (fatta prima) + immagine ---------- */
+const elenco = Object.fromEntries((await (await fetch(OUT + 'elenco.txt')).text()).trim().split('\n').map(l => l.split('|')));
+const NOMI_P = { p7: 'Senza porte', p2: 'Catastale media', p1: 'Roma 1:100', p5: 'Del 1953, ruotata', p6: 'Progetto CAD', p9: 'Due piani', p4: 'Seminterrato', p8: 'Minuscola' };
+Object.keys(elenco).filter(k => k !== 'p3' && !NOMI_P[k]).forEach(k => NOMI_P[k] = 'Nuova ' + k);
+{ const sel = document.createElement('select'); sel.innerHTML = Object.keys(NOMI_P).map(k => `<option value="${k}" ${k === ID ? 'selected' : ''}>Pianta: ${NOMI_P[k]}</option>`).join(''); sel.onchange = () => location.search = '?p=' + sel.value; $('pick').appendChild(sel); if (ID === 'sab') $('pick').style.display = 'none'; }
+const raw = await (await fetch(OUT + ID + '.json')).json();
+const plan = JSON.parse(JSON.stringify(raw));
+$('fonte').textContent = elenco[ID] + ' · ' + (plan.piano_scelto || '');
+const img = await new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = '../piante_test/' + elenco[ID].split('/').map(encodeURIComponent).join('/'); });
+const IW = img.naturalWidth, IH = img.naturalHeight;
+// inchiostro e tabella delle somme (per misurare quanto muro cade sul disegno)
+const cv = document.createElement('canvas'); cv.width = IW; cv.height = IH; const cx = cv.getContext('2d'); cx.drawImage(img, 0, 0);
+const px = cx.getImageData(0, 0, IW, IH).data, SAT = new Uint32Array((IW + 1) * (IH + 1));
+for (let y = 0; y < IH; y++) { let row = 0; for (let x = 0; x < IW; x++) { const k = (y * IW + x) * 4, g = (px[k] * .3 + px[k + 1] * .59 + px[k + 2] * .11); const ink = g < 150 && Math.abs(px[k] - px[k + 2]) < 60 ? 1 : 0; row += ink; SAT[(y + 1) * (IW + 1) + x + 1] = SAT[y * (IW + 1) + x + 1] + row; } }
+const boxSum = (x0, y0, x1, y1) => { x0 = Math.max(0, x0 | 0); y0 = Math.max(0, y0 | 0); x1 = Math.min(IW, x1 | 0); y1 = Math.min(IH, y1 | 0); if (x1 <= x0 || y1 <= y0) return 0; const W = IW + 1; return SAT[y1 * W + x1] - SAT[y0 * W + x1] - SAT[y1 * W + x0] + SAT[y0 * W + x0]; };
+
+/* ---------- trasformazione metri <-> pixel ---------- */
+const m = /1\s*px[^=≈~\d]{0,15}[=≈~]+\s*~?\s*([0-9]+[.,][0-9]+)/.exec(plan.scala?.dettaglio || '') || /([0-9]+[.,][0-9]+)\s*m\s*\/\s*px/.exec(plan.scala?.dettaglio || '');
+let T = { s: m ? parseFloat(m[1].replace(',', '.')) : .05, ox: 0, oy: 0 }; // pixel = metri / s + o
+const toPx = (x, y) => [x / T.s + T.ox, y / T.s + T.oy];
+
+/* ---------- scena three.js ---------- */
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true; renderer.toneMapping = THREE.ACESFilmicToneMapping; document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#eceae6');
+scene.add(new THREE.HemisphereLight('#fff', '#d8cfc2', 1.2)); const sun = new THREE.DirectionalLight('#fff3e2', 2.2); sun.position.set(-5, 20, 15); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -15, right: 15, top: 15, bottom: -15 }); scene.add(sun);
+const tex = new THREE.Texture(img); tex.colorSpace = THREE.SRGBColorSpace; tex.needsUpdate = true; tex.anisotropy = 8;
+const sheet = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: tex, toneMapped: false, transparent: true }));
+sheet.rotation.x = -P / 2; scene.add(sheet);
+function placeSheet() { const w = IW * T.s, h = IH * T.s; sheet.scale.set(w, h, 1); sheet.position.set((IW / 2 - T.ox) * T.s, -.01, (IH / 2 - T.oy) * T.s); }
+const ortho = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 200); ortho.up.set(0, 0, -1);
+let cam = ortho, view = { cx: 0, cz: 0, h: 20 };
+function frame(cx0, cz0, h) { view = { cx: cx0, cz: cz0, h }; const a = innerWidth / innerHeight; Object.assign(ortho, { left: -h * a / 2, right: h * a / 2, top: h / 2, bottom: -h / 2 }); ortho.position.set(cx0 - h * a * .14, 50, cz0); ortho.lookAt(cx0 - h * a * .14, 0, cz0); ortho.updateProjectionMatrix(); }
+const persp = new THREE.PerspectiveCamera(30, innerWidth / innerHeight, .1, 500);
+const layer = { rooms: new THREE.Group(), walls: new THREE.Group(), open: new THREE.Group(), handles: new THREE.Group() }; Object.values(layer).forEach(g => scene.add(g));
+
+/* ---------- muri, aperture, stanze ---------- */
+const walls = plan.muri; walls.forEach(w => { w.t = w.spessore || .15; w.st = 'nuovo'; });
+const opens = plan.aperture;
+const wid = id => walls.find(w => w.id === id);
+const L = w => Math.hypot(w.p2[0] - w.p1[0], w.p2[1] - w.p1[1]);
+const ACC = ['porta', 'ingresso', 'portafinestra', 'passaggio'];
+function coverage(w, R) { // quota di muro che cade sull'inchiostro (escluse le porte)
+  const len = L(w); if (len < .05) return 0; const u = [(w.p2[0] - w.p1[0]) / len, (w.p2[1] - w.p1[1]) / len];
+  const sp = opens.filter(o => o.muro === w.id && ACC.includes(o.tipo)).map(o => [o.da, o.a]);
+  const r = R ?? Math.max(3, (w.t / 2) / T.s + 2); let n = 0, hit = 0;
+  for (let t = .05; t < len - .05; t += .1) { if (sp.some(([a, b]) => t > a - .05 && t < b + .05)) continue; n++; const [x, y] = toPx(w.p1[0] + u[0] * t, w.p1[1] + u[1] * t); if (boxSum(x - r, y - r, x + r + 1, y + r + 1) > 0) hit++; }
+  return n ? hit / n : 1;
+}
+const colOf = c => c >= .7 ? '#1a9e57' : c >= .45 ? '#e9a100' : '#d62839';
+function drawWall(w) {
+  if (w.mesh) layer.walls.remove(w.mesh);
+  const len = L(w); if (len < .02) return; const g = new THREE.Mesh(new THREE.BoxGeometry(len, .06, Math.max(w.t * .55, .06)), new THREE.MeshBasicMaterial({ color: colOf(w.cov ?? 1), transparent: true, opacity: .6, toneMapped: false }));
+  g.position.set((w.p1[0] + w.p2[0]) / 2, .05, (w.p1[1] + w.p2[1]) / 2); g.rotation.y = Math.atan2(-(w.p2[1] - w.p1[1]), w.p2[0] - w.p1[0]); g.userData.wall = w; w.mesh = g; layer.walls.add(g);
+}
+function drawOpen(o) {
+  if (o.mesh) layer.open.remove(o.mesh); const w = wid(o.muro); if (!w) return; const len = L(w), u = [(w.p2[0] - w.p1[0]) / len, (w.p2[1] - w.p1[1]) / len], t = (o.da + o.a) / 2;
+  const c = o.tipo === 'finestra' ? '#2b8fd6' : o.dedotta ? '#e9a100' : o.tipo === 'ingresso' ? '#B20933' : '#7a4a2b';
+  const g = new THREE.Mesh(new THREE.BoxGeometry(o.a - o.da, .1, Math.max(w.t, .08) + .14), new THREE.MeshBasicMaterial({ color: c, toneMapped: false }));
+  g.position.set(w.p1[0] + u[0] * t, .09, w.p1[1] + u[1] * t); g.rotation.y = w.mesh?.rotation.y ?? Math.atan2(-u[1], u[0]); g.userData.open = o; o.mesh = g; layer.open.add(g);
+}
+const roomCol = { bagno: '#9fd3e6', cucina: '#f1c27d', soggiorno: '#f4d9a6', soggiorno_cucina: '#f4d9a6', camera: '#d9c3e8', cameretta: '#d9c3e8', disimpegno: '#e3e3e3', ingresso: '#e3e3e3', studio: '#cde3c4' };
+function drawRooms() {
+  layer.rooms.clear();
+  plan.stanze.forEach(r => {
+    const sh = new THREE.Shape(r.poligono.map(([x, y]) => new THREE.Vector2(x, -y)));
+    const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), new THREE.MeshBasicMaterial({ color: roomCol[r.tipo] || '#ddd', transparent: true, opacity: .55, depthWrite: false, toneMapped: false }));
+    m.rotation.x = -P / 2; m.position.y = .02; layer.rooms.add(m);
+    const c = document.createElement('canvas'); c.width = 512; c.height = 128; const g = c.getContext('2d'); g.fillStyle = r.bad ? '#d62839' : '#1d1d1f'; g.textAlign = 'center'; g.font = '700 54px Satoshi, Helvetica'; g.fillText((r.nome || r.tipo).toUpperCase(), 256, 60); g.font = '500 40px Satoshi, Helvetica'; g.fillStyle = '#555'; g.fillText(area(r.poligono).toFixed(1) + ' m²', 256, 112);
+    const xs = r.poligono.map(p => p[0]), ys = r.poligono.map(p => p[1]), w = Math.min(2.4, Math.max(1.1, Math.sqrt(area(r.poligono)) * .6));
+    const lab = new THREE.Mesh(new THREE.PlaneGeometry(w, w / 4), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false, toneMapped: false }));
+    lab.rotation.x = -P / 2; lab.position.set(xs.reduce((a, b) => a + b) / xs.length, .12, ys.reduce((a, b) => a + b) / ys.length); layer.rooms.add(lab);
+  });
+  $('sup').textContent = plan.stanze.filter(r => !['balcone', 'terrazzo'].includes(r.tipo)).reduce((a, r) => a + area(r.poligono), 0).toFixed(1) + ' m²';
+}
+function area(p) { let a = 0; for (let i = 0; i < p.length; i++) { const [x1, y1] = p[i], [x2, y2] = p[(i + 1) % p.length]; a += x1 * y2 - x2 * y1; } return Math.abs(a / 2); }
+// pallini sugli angoli: un punto condiviso da più muri
+let pts = [];
+function buildHandles() {
+  layer.handles.clear(); pts = [];
+  walls.filter(w => w.mesh).forEach(w => ['p1', 'p2'].forEach(k => { let p = pts.find(q => Math.hypot(q.x - w[k][0], q.y - w[k][1]) < .06); if (!p) { p = { x: w[k][0], y: w[k][1], refs: [] }; pts.push(p); } p.refs.push([w, k]); }));
+  pts.forEach(p => { const h = new THREE.Mesh(new THREE.CircleGeometry(.13, 20), new THREE.MeshBasicMaterial({ color: '#1d1d1f', toneMapped: false })); h.rotation.x = -P / 2; h.position.set(p.x, .15, p.y); h.userData.pt = p; p.mesh = h; layer.handles.add(h); });
+}
+function fidelity() { const ws = walls.filter(w => w.mesh); if (!ws.length) return 0; let tot = 0, ok = 0; ws.forEach(w => { const l = L(w); tot += l; ok += l * (w.cov ?? 0); }); const f = ok / tot; $('fed').textContent = Math.round(f * 100) + '%'; return f; }
+function refresh(w) { w.cov = coverage(w); drawWall(w); opens.filter(o => o.muro === w.id).forEach(drawOpen); }
+
+
+/* ---------- rifinitura: ogni muro sulla linea disegnata più vicina ---------- */
+function refineWalls() {
+  walls.forEach(w => { const dx = w.p2[0] - w.p1[0], dy = w.p2[1] - w.p1[1]; if (Math.abs(dy) < Math.abs(dx) * .06) { const y = (w.p1[1] + w.p2[1]) / 2; w.p1[1] = w.p2[1] = y; } else if (Math.abs(dx) < Math.abs(dy) * .06) { const x = (w.p1[0] + w.p2[0]) / 2; w.p1[0] = w.p2[0] = x; } });
+  const R = Math.max(10, Math.round(.45 / T.s)); let moved = 0;
+  const kindOf = w => w.p1[0] === w.p2[0] ? 'v' : w.p1[1] === w.p2[1] ? 'h' : null;
+  const sorted = [...walls].sort((a, b) => L(b) - L(a)); // prima i muri lunghi, più affidabili
+  for (const w of sorted) {
+    const k = kindOf(w); if (!k || L(w) < .4) continue;
+    const ax = k === 'v' ? 0 : 1, c = w.p1[ax], lo = Math.min(w.p1[1 - ax], w.p2[1 - ax]) + .15, hi = Math.max(w.p1[1 - ax], w.p2[1 - ax]) - .15;
+    const prof = [];
+    for (let d = -R; d <= R; d++) { let n = 0, h = 0; for (let t = lo; t < hi; t += T.s * 2) { const P = k === 'v' ? toPx(c, t) : toPx(t, c); const X = Math.round(P[0] + (k === 'v' ? d : 0)), Y = Math.round(P[1] + (k === 'h' ? d : 0)); n++; if (boxSum(X, Y, X + 1, Y + 1)) h++; } prof.push(n ? h / n : 0); }
+    if (Q.has('debug')) console.log('PROF', w.id, k, Math.max(...prof).toFixed(2), prof.map(v => Math.round(v * 9)).join(''));
+    const peaks = []; for (let i = 0; i < prof.length; i++) if (prof[i] >= .3 && (i === 0 || prof[i] >= prof[i - 1]) && (i === prof.length - 1 || prof[i] >= prof[i + 1])) peaks.push(i);
+    if (!peaks.length) continue;
+    const tp = (w.spessore || .15) / T.s; let best = null;
+    for (let a = 0; a < peaks.length; a++) for (let b = a + 1; b < peaks.length; b++) { const gap = peaks[b] - peaks[a]; if (gap < 2 || Math.abs(gap - tp) > Math.max(3, tp * .7)) continue; const off = (peaks[a] + peaks[b]) / 2 - R, sc = prof[peaks[a]] + prof[peaks[b]] - Math.abs(off) * .01; if (!best || sc > best.sc) best = { off, sc }; }
+    if (!best) for (const i of peaks) { const off = i - R, sc = prof[i] - Math.abs(off) * .01; if (!best || sc > best.sc) best = { off, sc }; }
+    if (!best || Math.abs(best.off) < 1) continue;
+    const delta = best.off * T.s, segD = (q) => { const a0 = w.p1, b0 = w.p2, dx = b0[0] - a0[0], dy = b0[1] - a0[1], l2 = dx * dx + dy * dy || 1, t = Math.max(0, Math.min(1, ((q[0] - a0[0]) * dx + (q[1] - a0[1]) * dy) / l2)); return Math.hypot(q[0] - a0[0] - t * dx, q[1] - a0[1] - t * dy); };
+    // i capi degli altri muri che toccano questo muro lo seguono
+    walls.forEach(o => { if (o === w) return; ['p1', 'p2'].forEach(kk => { if (segD(o[kk]) < .08) o[kk] = ax === 0 ? [o[kk][0] + delta, o[kk][1]] : [o[kk][0], o[kk][1] + delta]; }); });
+    plan.stanze.forEach(r => r.poligono.forEach(v => { if (segD(v) < (w.spessore || .15) / 2 + .2) v[ax] += delta; }));
+    w.p1 = ax === 0 ? [w.p1[0] + delta, w.p1[1]] : [w.p1[0], w.p1[1] + delta]; w.p2 = ax === 0 ? [w.p2[0] + delta, w.p2[1]] : [w.p2[0], w.p2[1] + delta];
+    moved++;
+  }
+  return moved;
+}
+/* ---------- regola: ogni stanza raggiungibile ---------- */
+function inside(pt, poly) { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i], [xj, yj] = poly[j]; if ((yi > pt[1]) !== (yj > pt[1]) && pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi + 1e-12) + xi) c = !c; } return c; }
+const roomAt = p => plan.stanze.findIndex(r => inside(p, r.poligono));
+function reach() {
+  const g = plan.stanze.map(() => new Set()), ext = new Set(); let start = new Set();
+  opens.filter(o => ACC.includes(o.tipo)).forEach(o => { const w = wid(o.muro); if (!w) return; const len = L(w), u = [(w.p2[0] - w.p1[0]) / len, (w.p2[1] - w.p1[1]) / len], n = [-u[1], u[0]], t = (o.da + o.a) / 2, d = w.t / 2 + .3, c = [w.p1[0] + u[0] * t, w.p1[1] + u[1] * t];
+    const a = roomAt([c[0] + n[0] * d, c[1] + n[1] * d]), b = roomAt([c[0] - n[0] * d, c[1] - n[1] * d]);
+    if (a >= 0 && b >= 0) { g[a].add(b); g[b].add(a); } else if (o.tipo === 'ingresso' || a < 0 || b < 0) { [a, b].filter(x => x >= 0).forEach(x => start.add(x)); } });
+  if (!start.size) start = new Set(plan.stanze.map((r, i) => i).filter(i => /sogg|ingresso|disimp/.test(plan.stanze[i].tipo)).slice(0, 1));
+  const vis = new Set(start), q = [...start]; while (q.length) { const k = q.pop(); g[k].forEach(j => { if (!vis.has(j)) { vis.add(j); q.push(j); } }); }
+  return plan.stanze.map((r, i) => i).filter(i => !vis.has(i) && !['balcone', 'terrazzo', 'cantina', 'box'].includes(plan.stanze[i].tipo));
+}
+
+/* ---------- domande all'utente ---------- */
+function ask(title, desc, buttons) {
+  return new Promise(res => { $('ask').classList.add('on'); $('askT').textContent = title; $('askD').innerHTML = desc; $('askB').innerHTML = '';
+    if (Q.has('prova')) { console.log('DOMANDA', title); setTimeout(() => { $('ask').classList.remove('on'); res(buttons[0][1]); }, +(Q.get('attesa') || 400)); }
+    buttons.forEach(([t, v, pri]) => { const b = document.createElement('button'); b.textContent = t; if (pri) b.className = 'pri'; b.onclick = () => { $('ask').classList.remove('on'); setPaused(false); res(v); }; $('askB').appendChild(b); }); });
+}
+const STEPS = ['Scala e posizione', 'Perimetro', 'Muri interni', 'Porte e finestre', 'Stanze', 'Regole', 'Alzo i muri e arredo'];
+$('steps').innerHTML = STEPS.map((s, i) => `<li id="st${i}"><i>${i + 1}</i>${s}<small></small></li>`).join('');
+const stepSet = (i, cls, note = '') => { const li = $('st' + i); li.className = cls; li.querySelector('small').textContent = note; if (cls === 'ok') li.querySelector('i').textContent = '✓'; };
+const say = t => $('status').textContent = t;
+
+/* ---------- modifica manuale (sempre attiva) ---------- */
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), hit = new THREE.Vector3();
+let wallDrag = null, tool = null, dragPt = null, wallStart = null, wallSeq = 0, hoverH = null, roomsShown = false;
+const GUIDE = {
+  null: 'Trascina un <b>pallino nero</b> = sposti l’angolo · trascina un <b>muro</b> = lo sposti parallelo (crea gli scalini) · <b>rotella</b> = zoom · trascina lo sfondo per spostarti · Alt = senza calamite',
+  tMuro: '<b>RICALCO A MANO</b> · come fa la macchina: clic sull’inizio del muro disegnato, poi su ogni angolo · la lente ti mostra dove sei · Esc per finire',
+  tVertice: '<b>NUOVO VERTICE</b> · premi sul muro e trascina: l’angolo nasce e lo sposti subito · <b>scalino a L</b>: metti due vertici, poi trascina il pezzo di muro in mezzo · Esc per uscire',
+  tPorta: '<b>NUOVA PORTA</b> · clic sul muro nel punto dove c’è la porta · Esc per uscire',
+  tCanc: '<b>CANCELLA</b> · clic su un muro, una porta, oppure su un pallino per togliere il vertice · Esc per uscire'
+};
+const TOOLS = ['tMuro', 'tVertice', 'tPorta', 'tCanc'];
+const preview = new THREE.Mesh(new THREE.BoxGeometry(1, .07, .1), new THREE.MeshBasicMaterial({ color: '#B20933', transparent: true, opacity: .7, toneMapped: false })); preview.visible = false; scene.add(preview);
+function setTool(t, keep) { tool = keep ? t : ((t && tool !== t) ? t : null); wallStart = null; preview.visible = false; TOOLS.forEach(k => $(k).classList.toggle('on', tool === k)); if (!tool && window.__hideLente) window.__hideLente(); $('guida').innerHTML = GUIDE[tool]; renderer.domElement.style.cursor = tool ? 'crosshair' : 'default'; }
+TOOLS.forEach(id => $(id).onclick = () => setTool(id)); setTool(null);
+function setPaused(v, msg) { paused = v; $('pausa').textContent = paused ? '▶ Continua la lettura' : '⏸ Pausa'; $('pausa').classList.toggle('pri', paused); if (msg) say(msg); if (paused) $('guida').innerHTML = '<b>IN PAUSA</b> · correggi con calma · quando hai finito premi <b>▶ Continua la lettura</b> a sinistra'; else setTool(tool, true); }
+$('pausa').onclick = () => setPaused(!paused, !paused ? 'Riprendo la lettura.' : 'In pausa: correggi pure, poi «Riprendi».');
+$('restart').onclick = () => location.reload();
+
+// annulla / ripeti: fotografia dello stato prima di ogni correzione
+const hist = [], redoS = [];
+const snap = () => JSON.stringify({ T: { ...T }, w: walls.map(({ mesh, ...w }) => ({ ...w, shown: !!mesh })), o: opens.map(({ mesh, ...o }) => ({ ...o, shown: !!mesh })), r: plan.stanze.map(({ bad, ...r }) => r) });
+function updUndo() { $('undo').disabled = !hist.length; $('redo').disabled = !redoS.length; }
+function save() { hist.push(snap()); if (hist.length > 100) hist.shift(); redoS.length = 0; updUndo(); if (!paused && !$('ask').classList.contains('on')) setPaused(true, 'In pausa mentre correggi: quando hai finito premi «Riprendi».'); }
+function restore(str) {
+  const d = JSON.parse(str);
+  if (d.T) { T = { ...d.T }; placeSheet(); }
+  walls.forEach(w => w.mesh && layer.walls.remove(w.mesh)); opens.forEach(o => o.mesh && layer.open.remove(o.mesh));
+  walls.length = 0; d.w.forEach(({ shown, ...w }) => { walls.push(w); if (shown) refresh(w); });
+  opens.length = 0; d.o.forEach(({ shown, ...o }) => { opens.push(o); if (shown) drawOpen(o); });
+  plan.stanze.length = 0; d.r.forEach(r => plan.stanze.push(r));
+  buildHandles(); if (roomsShown) drawRooms(); fidelity(); recheck();
+}
+function undo() { if (!hist.length) return toast('Niente da annullare'); redoS.push(snap()); restore(hist.pop()); updUndo(); toast('Annullato'); }
+function redo() { if (!redoS.length) return toast('Niente da ripetere'); hist.push(snap()); restore(redoS.pop()); updUndo(); toast('Ripetuto'); }
+$('undo').onclick = undo; $('redo').onclick = redo; updUndo();
+addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); }
+  if (e.key === 'Escape') setTool(null);
+});
+
+function setPtr(e) { const r = renderer.domElement.getBoundingClientRect(); ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ptr, cam); ray.ray.intersectPlane(plane, hit); }
+function snapInk(x, y) { // aggancio all'inchiostro: il punto con più tratto nel raggio di 6 pixel
+  const [px0, py0] = toPx(x, y); let best = [px0, py0], bs = -1;
+  for (let dy = -6; dy <= 6; dy++) for (let dx = -6; dx <= 6; dx++) { const s = boxSum(px0 + dx - 2, py0 + dy - 2, px0 + dx + 3, py0 + dy + 3) - Math.hypot(dx, dy) * .15; if (s > bs) { bs = s; best = [px0 + dx, py0 + dy]; } }
+  return bs > 2 ? [(best[0] - T.ox) * T.s, (best[1] - T.oy) * T.s] : [x, y];
+}
+function snapPt(x, y, free) { // stesse calamite dei vertici; il punto di partenza fa da muro collegato
+  const fake = wallStart ? { refs: [[{ p1: wallStart, p2: [x, y] }, 'p2']] } : null; return magnet(x, y, fake, free);
+}
+
+/* ---------- calamite per i vertici ---------- */
+const guideMat = new THREE.MeshBasicMaterial({ color: '#B20933', transparent: true, opacity: .55, toneMapped: false });
+const guides = new THREE.Group(); scene.add(guides);
+const misura = document.createElement('div'); misura.style.cssText = 'position:fixed;pointer-events:none;background:#1d1d1f;color:#fff;font:600 12px Satoshi,sans-serif;padding:4px 8px;border-radius:8px;display:none;z-index:9'; document.body.appendChild(misura);
+function guideLine(ax, v) { const g = new THREE.Mesh(new THREE.BoxGeometry(ax === 'x' ? .03 : 400, .02, ax === 'x' ? 400 : .03), guideMat); g.position.set(ax === 'x' ? v : 0, .25, ax === 'x' ? 0 : v); guides.add(g); }
+function inkCentre(x, y) { // baricentro dell'inchiostro vicino: sui muri a doppia linea cade a metà spessore
+  const [px0, py0] = toPx(x, y), R = 6; let n = 0, sx = 0, sy = 0;
+  for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) { const X = Math.round(px0 + dx), Y = Math.round(py0 + dy); if (X < 0 || Y < 0 || X >= IW || Y >= IH) continue; if (boxSum(X, Y, X + 1, Y + 1)) { n++; sx += X; sy += Y; } }
+  return n >= 5 ? [(sx / n - T.ox) * T.s, (sy / n - T.oy) * T.s] : null;
+}
+function magnet(x, y, p, free) {
+  guides.clear(); if (free) return [x, y];
+  const mpx = view.h / innerHeight; // metri per pixel di schermo: le calamite valgono uguale a ogni zoom
+  // 1. un altro vertice entro 10 pixel: si uniscono
+  const other = pts.find(q => q !== p && Math.hypot(q.x - x, q.y - y) < 10 * mpx);
+  if (other) return [other.x, other.y];
+  let lx = null, ly = null;
+  // 2. muro collegato quasi dritto (entro 6 pixel): lo raddrizzo
+  (p?.refs || []).forEach(([w, k]) => { const o = w[k === 'p1' ? 'p2' : 'p1']; if (lx === null && Math.abs(x - o[0]) < 6 * mpx) lx = o[0]; if (ly === null && Math.abs(y - o[1]) < 6 * mpx) ly = o[1]; });
+  if (lx !== null) { x = lx; guideLine('x', lx); } if (ly !== null) { y = ly; guideLine('z', ly); }
+  return [x, y];
+}
+const uOf = w => { const l = L(w); return [(w.p2[0] - w.p1[0]) / l, (w.p2[1] - w.p1[1]) / l]; };
+function openWorld(o, w) { const u = uOf(w); return [[w.p1[0] + u[0] * o.da, w.p1[1] + u[1] * o.da], [w.p1[0] + u[0] * o.a, w.p1[1] + u[1] * o.a]]; }
+function projectOpen(o, A, B, w) { const u = uOf(w), ta = (A[0] - w.p1[0]) * u[0] + (A[1] - w.p1[1]) * u[1], tb = (B[0] - w.p1[0]) * u[0] + (B[1] - w.p1[1]) * u[1]; o.muro = w.id; o.da = Math.max(0, Math.min(ta, tb)); o.a = Math.min(L(w), Math.max(ta, tb)); }
+function splitWall(w, x, z) {
+  const len = L(w), u = uOf(w), t = Math.max(.15, Math.min(len - .15, (x - w.p1[0]) * u[0] + (z - w.p1[1]) * u[1]));
+  const pnt = [w.p1[0] + u[0] * t, w.p1[1] + u[1] * t];
+  const w2 = { ...w, id: w.id + 'v' + (++wallSeq), p1: pnt, p2: [...w.p2] }; delete w2.mesh;
+  const mine = opens.filter(o => o.muro === w.id).map(o => [o, ...openWorld(o, w)]);
+  w.p2 = pnt; walls.splice(walls.indexOf(w) + 1, 0, w2);
+  mine.forEach(([o, A, B]) => { const tm = ((A[0] + B[0]) / 2 - w.p1[0]) * u[0] + ((A[1] + B[1]) / 2 - w.p1[1]) * u[1]; projectOpen(o, A, B, tm > t ? w2 : w); drawOpen(o); });
+  refresh(w); refresh(w2); buildHandles(); fidelity(); toast('Vertice aggiunto'); return pts.find(q => Math.hypot(q.x - pnt[0], q.y - pnt[1]) < 1e-6);
+}
+function removeVertex(p) {
+  if (p.refs.length !== 2) return toast(p.refs.length < 2 ? 'Questo è un capo di muro: per toglierlo cancella il muro' : 'Qui si incontrano più muri: togli prima uno dei muri');
+  const [[A, ka], [B, kb]] = p.refs, oa = A[ka === 'p1' ? 'p2' : 'p1'], ob = B[kb === 'p1' ? 'p2' : 'p1'];
+  const keep = [...opens.filter(o => o.muro === A.id).map(o => [o, ...openWorld(o, A)]), ...opens.filter(o => o.muro === B.id).map(o => [o, ...openWorld(o, B)])];
+  A.p1 = [...oa]; A.p2 = [...ob]; layer.walls.remove(B.mesh); walls.splice(walls.indexOf(B), 1);
+  keep.forEach(([o, X, Y]) => { projectOpen(o, X, Y, A); drawOpen(o); });
+  refresh(A); buildHandles(); fidelity(); toast('Vertice tolto: i due muri ora sono uno');
+}
+renderer.domElement.addEventListener('pointerdown', e => {
+  if (cam !== ortho) return; setPtr(e);
+  if (tool === 'tMuro') {
+    const p = snapPt(hit.x, hit.z, e.altKey); guides.clear();
+    if (!wallStart) { wallStart = p; toast('Ora clic sul punto di arrivo'); }
+    else { save(); const w = { id: 'u' + (++wallSeq), p1: wallStart, p2: p, spessore: .12, esterno: false, t: .12, st: 'utente' }; walls.push(w); refresh(w); buildHandles(); fidelity(); wallStart = p; toast('Muro aggiunto · continua dal punto di arrivo, Esc per finire'); recheck(); }
+    return;
+  }
+  const hits = ray.intersectObjects([...layer.handles.children, ...layer.open.children, ...layer.walls.children], false);
+  const h = hits[0]; if (!h) return;
+  const ud = h.object.userData;
+  if (tool === 'tCanc') {
+    save();
+    if (ud.pt) removeVertex(ud.pt);
+    else if (ud.open) { const o = ud.open; opens.splice(opens.indexOf(o), 1); layer.open.remove(o.mesh); toast('Porta tolta'); }
+    else if (ud.wall) { const w = ud.wall; walls.splice(walls.indexOf(w), 1); layer.walls.remove(w.mesh); w.mesh = null; opens.filter(o => o.muro === w.id).forEach(o => { layer.open.remove(o.mesh); opens.splice(opens.indexOf(o), 1); }); buildHandles(); fidelity(); toast('Muro tolto'); }
+    recheck(); return;
+  }
+  const startDrag = (pt) => { dragPt = pt; renderer.domElement.style.cursor = 'grabbing'; try { renderer.domElement.setPointerCapture(e.pointerId); } catch (_) { } };
+  if (ud.pt && tool !== 'tMuro') { save(); startDrag(ud.pt); return; }
+  const wallHit = hits.find(x => x.object.userData.wall);
+  if (tool === 'tVertice' && wallHit) { save(); const np = splitWall(wallHit.object.userData.wall, hit.x, hit.z); if (np) startDrag(np); return; }
+  if (tool === 'tPorta' && wallHit) { save(); const w = wallHit.object.userData.wall, len = L(w), u = uOf(w), t = (hit.x - w.p1[0]) * u[0] + (hit.z - w.p1[1]) * u[1]; const o = { muro: w.id, da: Math.max(0, t - .4), a: Math.min(len, t + .4), tipo: 'porta', dedotta: false, utente: true }; opens.push(o); refresh(w); toast('Porta aggiunta'); recheck(); return; }
+  if (!tool && wallHit) { save(); startWallDrag(wallHit.object.userData.wall); try { renderer.domElement.setPointerCapture(e.pointerId); } catch (_) { } }
+});
+// spostamento parallelo di un muro: i muri perpendicolari si allungano, quelli in linea ricevono un raccordo (lo scalino)
+function startWallDrag(w) {
+  const u = uOf(w), n = [-u[1], u[0]], ends = {};
+  ['p1', 'p2'].forEach(k => {
+    const P0 = [...w[k]], others = walls.filter(o => o !== w && ['p1', 'p2'].some(kk => Math.hypot(o[kk][0] - P0[0], o[kk][1] - P0[1]) < .03));
+    const inLinea = others.filter(o => { const v = uOf(o); return Math.abs(v[0] * u[1] - v[1] * u[0]) < .05; });
+    let conn = null;
+    if (inLinea.length) { conn = { id: 'r' + (++wallSeq), p1: [...P0], p2: [...P0], spessore: w.spessore, esterno: w.esterno, t: w.t, st: 'utente' }; walls.push(conn); }
+    const segue = others.filter(o => !inLinea.includes(o)).map(o => [o, ['p1', 'p2'].find(kk => Math.hypot(o[kk][0] - P0[0], o[kk][1] - P0[1]) < .03)]);
+    ends[k] = { P0, conn, segue };
+  });
+  wallDrag = { w, n, start: [hit.x, hit.z], ends };
+}
+function moveWallDrag(e) {
+  const { w, n, start, ends } = wallDrag; let d = (hit.x - start[0]) * n[0] + (hit.z - start[1]) * n[1];
+  guides.clear();
+  if (!e.altKey) { // calamita: la nuova linea si allinea agli angoli vicini
+    const mpx = view.h / innerHeight, c0 = ends.p1.P0[0] * n[0] + ends.p1.P0[1] * n[1];
+    let best = null; pts.forEach(q => { if ([ends.p1.P0, ends.p2.P0].some(P => Math.hypot(P[0] - q.x, P[1] - q.y) < .03)) return; const dq = q.x * n[0] + q.y * n[1] - c0; if (Math.abs(dq - d) < 8 * mpx && (!best || Math.abs(dq - d) < Math.abs(best - d))) best = dq; });
+    if (best !== null) { d = best; if (Math.abs(n[0]) > .9) guideLine('x', ends.p1.P0[0] + n[0] * d); else if (Math.abs(n[1]) > .9) guideLine('z', ends.p1.P0[1] + n[1] * d); }
+  }
+  ['p1', 'p2'].forEach(k => { const { P0, conn, segue } = ends[k], N = [P0[0] + n[0] * d, P0[1] + n[1] * d]; w[k] = N; if (conn) conn.p2 = [...N]; segue.forEach(([o, kk]) => o[kk] = [...N]); });
+  [w, ends.p1.conn, ends.p2.conn, ...ends.p1.segue.map(x => x[0]), ...ends.p2.segue.map(x => x[0])].filter(Boolean).forEach(x => refresh(x));
+  buildHandles(); fidelity(); showLente(e, (w.p1[0] + w.p2[0]) / 2, (w.p1[1] + w.p2[1]) / 2);
+  misura.style.display = 'block'; misura.style.left = (e.clientX + 16) + 'px'; misura.style.top = (e.clientY + 14) + 'px'; misura.textContent = 'spostato di ' + Math.abs(d * 100).toFixed(0) + ' cm';
+}
+function endWallDrag() {
+  const { ends } = wallDrag; ['p1', 'p2'].forEach(k => { const c = ends[k].conn; if (c && L(c) < .03) { walls.splice(walls.indexOf(c), 1); if (c.mesh) layer.walls.remove(c.mesh); } });
+  wallDrag = null; guides.clear(); misura.style.display = 'none'; hideLente(); buildHandles(); fidelity(); recheck();
+}
+renderer.domElement.addEventListener('dblclick', e => { if (cam !== ortho || tool) return; setPtr(e); const h = ray.intersectObjects(layer.walls.children, false)[0]; if (h) { save(); splitWall(h.object.userData.wall, hit.x, hit.z); } });
+renderer.domElement.addEventListener('pointermove', e => {
+  if (cam !== ortho) return; setPtr(e);
+  if (tool === 'tMuro' && !wallStart) { const p = snapPt(hit.x, hit.z, e.altKey); showLente(e, p[0], p[1]); return; }
+  if (tool === 'tMuro' && wallStart) { const p = snapPt(hit.x, hit.z, e.altKey), dx = p[0] - wallStart[0], dz = p[1] - wallStart[1], l = Math.hypot(dx, dz); if (l > .02) { preview.visible = true; preview.scale.set(l, 1, 1); preview.position.set(wallStart[0] + dx / 2, .2, wallStart[1] + dz / 2); preview.rotation.y = Math.atan2(-dz, dx); } showLente(e, p[0], p[1]); return; }
+  if (wallDrag) { moveWallDrag(e); return; }
+  if (dragPt) { const [x, y] = magnet(hit.x, hit.z, dragPt, e.altKey), ox = dragPt.x, oy = dragPt.y; dragPt.x = x; dragPt.y = y; dragPt.mesh.position.set(x, .15, y);
+    dragPt.refs.forEach(([w, k]) => { w[k] = [x, y]; refresh(w); }); plan.stanze.forEach(r => r.poligono.forEach(v => { if (Math.hypot(v[0] - ox, v[1] - oy) < .3) { v[0] += x - ox; v[1] += y - oy; } })); if (roomsShown) drawRooms(); fidelity();
+    showLente(e, x, y); misura.style.display = 'block'; misura.style.left = (e.clientX + 16) + 'px'; misura.style.top = (e.clientY + 14) + 'px'; misura.textContent = dragPt.refs.map(([w]) => L(w).toFixed(2).replace('.', ',') + ' m').join(' · ') + (e.altKey ? ' · libero' : ''); return; }
+  // evidenzio ciò che sta sotto il puntatore
+  const h = ray.intersectObjects([...layer.handles.children, ...layer.walls.children, ...layer.open.children], false)[0];
+  if (hoverH && hoverH !== h?.object) { hoverH.scale.setScalar(1); hoverH = null; }
+  if (h?.object.userData.pt) { hoverH = h.object; hoverH.scale.setScalar(1.6); renderer.domElement.style.cursor = tool === 'tCanc' ? 'not-allowed' : 'grab'; }
+  else renderer.domElement.style.cursor = tool ? (h ? 'pointer' : 'crosshair') : (h?.object.userData.wall ? 'move' : 'default');
+});
+renderer.domElement.addEventListener('pointerleave', () => window.__hideLente && window.__hideLente());
+renderer.domElement.addEventListener('pointerup', () => { if (wallDrag) endWallDrag(); if (dragPt) { dragPt = null; guides.clear(); misura.style.display = 'none'; hideLente(); renderer.domElement.style.cursor = 'grab'; recheck(); } });
+
+/* ---------- zoom e spostamento della vista ---------- */
+let aligning = false, pan = null;
+function worldAt(e) { setPtr(e); return [hit.x, hit.z]; }
+renderer.domElement.addEventListener('wheel', e => { if (aligning || cam !== ortho) return; e.preventDefault(); const [x0, z0] = worldAt(e); const k = e.deltaY > 0 ? 1.12 : 1 / 1.12; frame(view.cx, view.cz, Math.max(1.5, Math.min(80, view.h * k))); const [x1, z1] = worldAt(e); frame(view.cx + x0 - x1, view.cz + z0 - z1, view.h); }, { passive: false });
+renderer.domElement.addEventListener('pointerdown', e => { if (aligning || cam !== ortho || tool || dragPt || wallDrag) return; setPtr(e); if (ray.intersectObjects(layer.walls.children, false).length) return; setPtr(e); if (ray.intersectObjects([...layer.handles.children], false).length) return; pan = { x: e.clientX, y: e.clientY, cx: view.cx, cz: view.cz }; renderer.domElement.style.cursor = 'move'; });
+addEventListener('pointermove', e => { if (!pan) return; const mpx = view.h / innerHeight; frame(pan.cx - (e.clientX - pan.x) * mpx, pan.cz - (e.clientY - pan.y) * mpx, view.h); });
+addEventListener('pointerup', () => { if (pan) { pan = null; renderer.domElement.style.cursor = tool ? 'crosshair' : 'default'; } });
+
+function zoomBy(k) { frame(view.cx, view.cz, Math.max(1.5, Math.min(80, view.h * k))); }
+$('zIn').onclick = () => zoomBy(1 / 1.3); $('zOut').onclick = () => zoomBy(1.3); $('zFit').onclick = () => frame(PC[0], PC[1], PS * 1.45);
+addEventListener('keydown', e => { if (e.target.tagName === 'INPUT') return; if (e.key === '+' || e.key === '=') zoomBy(1 / 1.3); if (e.key === '-') zoomBy(1.3); if (e.key === '0') frame(PC[0], PC[1], PS * 1.45); });
+
+/* ---------- lente d'ingrandimento accanto al cursore ---------- */
+const lente = $('lente'), lc = lente.getContext('2d');
+function showLente(e, wx, wz) {
+  const Z = 4, S = 220, [px0, py0] = toPx(wx, wz), half = S / 2 / Z;
+  lc.save(); lc.clearRect(0, 0, S, S); lc.beginPath(); lc.arc(S / 2, S / 2, S / 2, 0, P * 2); lc.clip();
+  lc.fillStyle = '#fff'; lc.fillRect(0, 0, S, S); lc.imageSmoothingEnabled = false;
+  lc.drawImage(img, px0 - half, py0 - half, half * 2, half * 2, 0, 0, S, S);
+  const map = (x, y) => { const [a, b] = toPx(x, y); return [(a - px0) * Z + S / 2, (b - py0) * Z + S / 2]; };
+  walls.filter(w => w.mesh).forEach(w => { const [x1, y1] = map(...w.p1), [x2, y2] = map(...w.p2); lc.strokeStyle = colOf(w.cov ?? 1); lc.globalAlpha = .55; lc.lineWidth = Math.max(3, w.t * .55 / T.s * Z); lc.beginPath(); lc.moveTo(x1, y1); lc.lineTo(x2, y2); lc.stroke(); });
+  lc.globalAlpha = 1; pts.forEach(q => { const [a, b] = map(q.x, q.y); lc.fillStyle = '#1d1d1f'; lc.beginPath(); lc.arc(a, b, 5, 0, P * 2); lc.fill(); });
+  if (wallStart) { const [a, b] = map(...wallStart); lc.strokeStyle = '#B20933'; lc.lineWidth = 4; lc.beginPath(); lc.moveTo(a, b); lc.lineTo(S / 2, S / 2); lc.stroke(); }
+  lc.strokeStyle = '#B20933'; lc.lineWidth = 1.5; lc.beginPath(); lc.moveTo(S / 2, 0); lc.lineTo(S / 2, S); lc.moveTo(0, S / 2); lc.lineTo(S, S / 2); lc.stroke();
+  lc.restore();
+  lente.style.display = 'block'; const lx = e.clientX + 36 + S > innerWidth ? e.clientX - S - 36 : e.clientX + 36, ly = Math.max(10, e.clientY - S - 20);
+  lente.style.left = lx + 'px'; lente.style.top = ly + 'px';
+}
+const hideLente = () => lente.style.display = 'none';
+window.__hideLente = hideLente;
+let recheck = () => { };
+
+/* ---------- il ciclo di lettura ---------- */
+addEventListener('resize', () => { renderer.setSize(innerWidth, innerHeight); persp.aspect = innerWidth / innerHeight; persp.updateProjectionMatrix(); frame(view.cx, view.cz, view.h); });
+renderer.setAnimationLoop(() => renderer.render(scene, cam));
+const xs = walls.flatMap(w => [w.p1[0], w.p2[0]]), ys = walls.flatMap(w => [w.p1[1], w.p2[1]]);
+const BB = { x1: Math.min(...xs), x2: Math.max(...xs), y1: Math.min(...ys), y2: Math.max(...ys) };
+const PC = [(BB.x1 + BB.x2) / 2, (BB.y1 + BB.y2) / 2], PS = Math.max(BB.x2 - BB.x1, BB.y2 - BB.y1);
+// all'inizio: tutto il foglio
+T.ox = IW / 2 - PC[0] / T.s; T.oy = IH / 2 - PC[1] / T.s; placeSheet(); frame(PC[0], PC[1], IH * T.s * 1.05);
+await sleep(900);
+
+
+async function traceWall(w) { // il muro cresce dall'inizio alla fine, con la «penna»
+  refresh(w); const m = w.mesh; if (!m) return; const len = L(w), u = uOf(w);
+  pen.visible = true;
+  for (let i = 1; i <= 8; i++) { const k = i / 8; m.scale.x = k; m.position.set(w.p1[0] + u[0] * len * k / 2, .05, w.p1[1] + u[1] * len * k / 2); pen.position.set(w.p1[0] + u[0] * len * k, .3, w.p1[1] + u[1] * len * k); await sleep(22); }
+  m.scale.x = 1; m.position.set((w.p1[0] + w.p2[0]) / 2, .05, (w.p1[1] + w.p2[1]) / 2); pen.visible = false;
+}
+const pen = new THREE.Mesh(new THREE.CircleGeometry(.18, 24), new THREE.MeshBasicMaterial({ color: '#B20933', toneMapped: false })); pen.rotation.x = -P / 2; pen.visible = false; scene.add(pen);
+// inquadra un muro e lo fa lampeggiare
+function focusWall(w) {
+  const from = { ...view }, to = { cx: (w.p1[0] + w.p2[0]) / 2 + view.h * innerWidth / innerHeight * 0 , cz: (w.p1[1] + w.p2[1]) / 2, h: Math.max(3.2, L(w) * 2.4) };
+  let k = 0; const an = setInterval(() => { k = Math.min(1, k + .1); const e = 1 - Math.pow(1 - k, 3); frame(from.cx + (to.cx - from.cx) * e, from.cz + (to.cz - from.cz) * e, from.h + (to.h - from.h) * e); if (k >= 1) clearInterval(an); }, 25);
+  layer.walls.children.forEach(m => { if (m !== w.mesh) m.material.opacity = .22; });
+  let on = true; const bl = setInterval(() => { if (w.mesh) { w.mesh.material.opacity = on ? 1 : .35; w.mesh.scale.z = on ? 1.8 : 1.2; } on = !on; }, 380);
+  return () => { clearInterval(bl); clearInterval(an); layer.walls.children.forEach(m => m.material.opacity = .6); if (w.mesh) w.mesh.scale.z = 1; frame(PC[0], PC[1], PS * 1.45); };
+}
+async function run() {
+  // 1. scala e posizione: cerco dove la pianta letta combacia col disegno
+  stepSet(0, 'run'); say('Cerco la pianta sul foglio e controllo la scala…');
+  const samples = []; walls.forEach(w => { const len = L(w), u = [(w.p2[0] - w.p1[0]) / len, (w.p2[1] - w.p1[1]) / len]; for (let t = .1; t < len - .1; t += .25) samples.push([w.p1[0] + u[0] * t, w.p1[1] + u[1] * t]); });
+  // punti dentro le stanze, lontani dai muri: nel disegno vero lì è bianco (nel cartiglio e nelle scritte no)
+  const dSeg = (p, a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy || 1, t = Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2)); return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy); };
+  const voids = []; plan.stanze.forEach(r => { const xs = r.poligono.map(p => p[0]), ys = r.poligono.map(p => p[1]);
+    for (let x = Math.min(...xs); x <= Math.max(...xs); x += .3) for (let y = Math.min(...ys); y <= Math.max(...ys); y += .3) { if (!inside([x, y], r.poligono)) continue; if (walls.some(w => dSeg([x, y], w.p1, w.p2) < .45)) continue; voids.push([x, y]); } });
+  const score = (s, ox, oy, r) => { let h = 0, e = 0; for (const [x, y] of samples) { const X = x / s + ox, Y = y / s + oy; if (boxSum(X - r, Y - r, X + r + 1, Y + r + 1) > 0) h++; }
+    for (const [x, y] of voids) { const X = x / s + ox, Y = y / s + oy; if (boxSum(X - 1, Y - 1, X + 2, Y + 2) === 0) e++; }
+    const cov = h / samples.length, emp = voids.length ? e / voids.length : 1; return { f: cov * emp * emp, cov, emp }; };
+  let best = { f: -1 };
+  for (const k of [.9, .95, 1, 1.05, 1.1]) { const s = T.s * k, r = Math.max(2, .12 / s);
+    for (let ox = -BB.x1 / s; ox < IW - BB.x2 / s; ox += 4) for (let oy = -BB.y1 / s; oy < IH - BB.y2 / s; oy += 4) { const v = score(s, ox, oy, r); if (v.f > best.f) best = { ...v, s, ox, oy }; }
+    await sleep(0); }
+  for (let ds = -.03; ds <= .03; ds += .005) for (let dx = -4; dx <= 4; dx++) for (let dy = -4; dy <= 4; dy++) { const s = best.s * (1 + ds), v = score(s, best.ox + dx, best.oy + dy, Math.max(2, .12 / s)); if (v.f > best.f) best = { ...v, s, ox: best.ox + dx, oy: best.oy + dy }; }
+  // animazione: il foglio scorre fino a combaciare
+  const from = { ...T }; for (let i = 1; i <= 30; i++) { const k = i / 30, e = 1 - Math.pow(1 - k, 3); T.s = from.s + (best.s - from.s) * e; T.ox = from.ox + (best.ox - from.ox) * e; T.oy = from.oy + (best.oy - from.oy) * e; placeSheet(); frame(PC[0], PC[1], (IH * from.s * 1.05) * (1 - e) + PS * 1.45 * e); await sleep(25); }
+  T = { s: best.s, ox: best.ox, oy: best.oy }; placeSheet();
+  say('Rifinisco muro per muro sulle linee del disegno…'); const mossi = refineWalls();
+  walls.forEach(w => refresh(w)); const fed1 = fidelity(); best.cov = Math.max(best.cov, fed1); // anteprima del ricalco sul disegno
+  console.log('RIFINITURA', JSON.stringify({ mossi, fedelta: fed1 }));
+  console.log('AGGANCIO', JSON.stringify(best));
+  const ok1 = best.cov >= .6 && best.emp >= .85;
+  if (ok1) { stepSet(0, 'ok', `1 px = ${(T.s * 100).toFixed(1)} cm`); say(`Pianta agganciata: ${Math.round(best.cov * 100)}% dei muri sull'inchiostro, stanze libere al ${Math.round(best.emp * 100)}%.`); }
+  else {
+    stepSet(0, 'ask');
+    // allineamento a mano: trascina il foglio, rotella per la scala
+    let dragS = null; const dom = renderer.domElement;
+    const dn = e => { if (tool || e.button !== 0 || two) return; setPtr(e); save(); if (ray.intersectObjects(layer.handles.children).length) return; dragS = { x: hit.x, z: hit.z, ox: T.ox, oy: T.oy }; };
+    const mv = e => { if (!dragS) return; setPtr(e); T.ox = dragS.ox + (hit.x - dragS.x) / T.s; T.oy = dragS.oy + (hit.z - dragS.z) / T.s; placeSheet(); };
+    const up = () => { if (dragS) { dragS = null; walls.forEach(w => refresh(w)); fidelity(); } };
+    const wh = e => { e.preventDefault(); setPtr(e); const k = e.deltaY > 0 ? 1.01 : 1 / 1.01, px0 = hit.x / T.s + T.ox, py0 = hit.z / T.s + T.oy; T.s *= k; T.ox = px0 - hit.x / T.s; T.oy = py0 - hit.z / T.s; placeSheet(); clearTimeout(wh._t); wh._t = setTimeout(() => { walls.forEach(w => refresh(w)); fidelity(); }, 150); };
+    let two = null; const marks = [];
+    const mark = (cx0, cy0) => { const m = document.createElement('div'); m.className = 'mark'; m.style.left = cx0 + 'px'; m.style.top = cy0 + 'px'; document.body.appendChild(m); marks.push(m); };
+    const clearMarks = () => { marks.forEach(m => m.remove()); marks.length = 0; };
+    const twoClick = e => { if (!two) return; e.stopImmediatePropagation(); setPtr(e);
+      if (two.step % 2 === 0) { // punto del ricalco: l'angolo più vicino
+        let bp = null, bd = 1e9; walls.forEach(w => [w.p1, w.p2].forEach(q => { const d = Math.hypot(q[0] - hit.x, q[1] - hit.z); if (d < bd) { bd = d; bp = q; } })); two.m.push([...bp]);
+        $('guida').innerHTML = `<b>ALLINEA CON 2 PUNTI</b> · ora clic sullo <b>stesso angolo nel disegno</b> (${two.step / 2 + 1} di 2)`;
+      } else { two.d.push([hit.x / T.s + T.ox, hit.z / T.s + T.oy]); $('guida').innerHTML = two.step < 3 ? '<b>ALLINEA CON 2 PUNTI</b> · clic su un <b>secondo angolo del ricalco</b>, lontano dal primo' : ''; }
+      mark(e.clientX, e.clientY); two.step++; showLente(e, hit.x, hit.z); setTimeout(hideLente, 700);
+      if (two.step === 4) { const [A, B] = two.m, [a2, b2] = two.d, dm = Math.hypot(A[0] - B[0], A[1] - B[1]), dp = Math.hypot(a2[0] - b2[0], a2[1] - b2[1]);
+        if (dm > .5 && dp > 5) { save(); T.s = dm / dp; T.ox = ((a2[0] - A[0] / T.s) + (b2[0] - B[0] / T.s)) / 2; T.oy = ((a2[1] - A[1] / T.s) + (b2[1] - B[1] / T.s)) / 2; placeSheet(); refineWalls(); walls.forEach(w => refresh(w)); fidelity(); toast('Allineata con due punti e rifinita'); } else toast('Punti troppo vicini: riprova');
+        two = null; setTimeout(clearMarks, 900); setTool(null); }
+    };
+    const keys = e => { const st = e.shiftKey ? 10 : 1; let ch = true; if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '[', ']'].includes(e.key) && !keys._s) { save(); keys._s = 1; clearTimeout(keys._r); } keys._r = setTimeout(() => keys._s = 0, 900);
+      if (e.key === 'ArrowLeft') T.ox += st; else if (e.key === 'ArrowRight') T.ox -= st; else if (e.key === 'ArrowUp') T.oy += st; else if (e.key === 'ArrowDown') T.oy -= st;
+      else if (e.key === ']' || e.key === '[') { const k = e.key === ']' ? 1.002 : 1 / 1.002, cx0 = PC[0] / T.s + T.ox, cy0 = PC[1] / T.s + T.oy; T.s *= k; T.ox = cx0 - PC[0] / T.s; T.oy = cy0 - PC[1] / T.s; } else ch = false;
+      if (ch) { e.preventDefault(); placeSheet(); clearTimeout(keys._t); keys._t = setTimeout(() => { walls.forEach(w => refresh(w)); fidelity(); }, 120); } };
+    dom.addEventListener('pointerdown', twoClick, true); addEventListener('keydown', keys);
+    aligning = true; dom.addEventListener('pointerdown', dn); dom.addEventListener('pointermove', mv); dom.addEventListener('pointerup', up); dom.addEventListener('wheel', wh, { passive: false });
+    setTimeout(() => { const b2 = document.createElement('button'); b2.textContent = 'Allinea con 2 punti'; b2.onclick = () => { two = { step: 0, m: [], d: [] }; $('guida').innerHTML = '<b>ALLINEA CON 2 PUNTI</b> · clic su un <b>angolo del ricalco</b> (rosso/verde), poi sullo stesso angolo nel disegno'; }; $('askB').insertBefore(b2, $('askB').firstChild); }, 0);
+    const v = await ask('Non sono sicuro di aver trovato la pianta sul foglio', `Muri sull'inchiostro ${Math.round(best.cov * 100)}%, stanze libere ${Math.round(best.emp * 100)}%. Il modo più preciso: «Allinea con 2 punti». Oppure trascina il disegno, frecce = 1 pixel (Maiusc = 10), [ e ] = scala fine, rotella = scala.`, [['Fatto, continua', 1, true], ['Mi fermo qui', 0]]);
+    dom.removeEventListener('pointerdown', twoClick, true); removeEventListener('keydown', keys); clearMarks();
+    aligning = false; dom.removeEventListener('pointerdown', dn); dom.removeEventListener('pointermove', mv); dom.removeEventListener('pointerup', up); dom.removeEventListener('wheel', wh);
+    if (!v) { say('Lettura fermata.'); return; } stepSet(0, 'ok', 'allineata a mano');
+  }
+  walls.forEach(w => { if (w.mesh) { layer.walls.remove(w.mesh); w.mesh = null; } }); $('fed').textContent = '–';
+  await sleep(600); await waitRun();
+
+  // 2-3. muri: prima il perimetro, poi gli interni, uno alla volta
+  for (const [si, est] of [[1, true], [2, false]]) {
+    stepSet(si, 'run'); say(est ? 'Ricalco il perimetro…' : 'Ricalco i muri interni…');
+    const ws = walls.filter(w => !!w.esterno === est);
+    let nn = 0; for (const w0 of ws) { await waitRun(); const w = walls.find(x => x.id === w0.id); if (!w) continue; say(`${est ? 'Ricalco il perimetro' : 'Ricalco i muri interni'}: ${++nn} di ${ws.length}`); await traceWall(w); buildHandles(); fidelity(); await sleep(60); }
+    const bad = ws.filter(w => w.cov < .45).map(w => w.id);
+    if (bad.length > 3) {
+      stepSet(si, 'ask'); bad.forEach(id => { const w = walls.find(x => x.id === id); if (w?.mesh) w.mesh.material.opacity = 1; });
+      const v = await ask(`${bad.length} muri non combaciano col disegno`, `Sono quelli in rosso. Con così tanti muri sbagliati di solito la pianta è spostata o la scala è sbagliata: conviene ricominciare e allinearla a mano. Altrimenti correggi tu i muri rossi e poi continua.`, [['Li correggo io', 'fix', true], ['Vado avanti così', 'ok'], ['Ricomincio da capo', 'restart']]);
+      if (v === 'restart') { location.reload(); return; }
+      if (v === 'fix') { setPaused(true, 'Correggi i muri rossi, poi «Riprendi».'); await waitRun(); }
+      bad.length = 0;
+    }
+    let kk = 0; const tot = bad.filter(id => walls.find(x => x.id === id && x.mesh && x.cov < .45)).length;
+    for (const bid of bad) {
+      const w = walls.find(x => x.id === bid); if (!w || !w.mesh || w.cov >= .45) continue;
+      stepSet(si, 'ask'); const stop = focusWall(w);
+      const v = await ask(`${est ? 'Muro esterno' : 'Muro interno'} da controllare · ${++kk} di ${tot}`, `Il muro che <b>lampeggia</b> dovrebbe stare sopra una linea nera del disegno, ma non la trovo.<br><br>• È spostato? Trascina i suoi due <b>pallini neri</b> sopra la linea giusta (la lente ti aiuta), poi «Fatto».<br>• Nel disegno non c'è? «Toglilo».<br>• Va bene così? «Lascialo».`, [['Fatto', 'fix', true], ['Toglilo', 'del'], ['Lascialo', 'ok']]);
+      stop();
+      if (v === 'del') { save(); walls.splice(walls.indexOf(w), 1); layer.walls.remove(w.mesh); w.mesh = null; opens.filter(o => o.muro === w.id).forEach(o => { layer.open.remove(o.mesh); opens.splice(opens.indexOf(o), 1); }); buildHandles(); }
+      if (v === 'ok') { w.confermato = true; }
+      if (v === 'fix') refresh(w);
+      fidelity();
+    }
+    const f = fidelity(); stepSet(si, 'ok', `${ws.length} muri`); say(`${ws.length} muri ${est ? 'esterni' : 'interni'} ricalcati. Fedeltà ${Math.round(f * 100)}%.`); await sleep(500);
+  }
+
+  // 4. porte e finestre: le dedotte si confermano tutte insieme
+  stepSet(3, 'run'); say('Cerco porte e finestre…');
+  for (const o of [...opens]) { await waitRun(); if (opens.includes(o)) drawOpen(o); await sleep(110); }
+  const ded = opens.filter(o => o.dedotta);
+  if (ded.length) {
+    stepSet(3, 'ask'); ded.forEach(o => o.mesh && o.mesh.scale.set(1, 1, 1.6));
+    const v = await ask(`Ho dedotto ${ded.length} ${ded.length === 1 ? 'porta' : 'porte'} (in giallo)`, 'Nel disegno non sono segnate: le ho messe dove ci sono varchi nei muri o dove serve un accesso. Se una è sbagliata, «Cancella» e clic sulla porta; per aggiungerne una, «+ Porta».', [['Vanno bene', 1, true], ['Le controllo io', 0]]);
+    if (!v) { paused = true; $('pausa').textContent = 'Riprendi'; $('pausa').classList.add('on'); say('Sistema le porte, poi «Riprendi».'); await waitRun(); }
+    ded.forEach(o => o.mesh && o.mesh.scale.set(1, 1, 1));
+  }
+  stepSet(3, 'ok', `${opens.filter(o => ACC.includes(o.tipo)).length} accessi, ${opens.filter(o => o.tipo === 'finestra').length} finestre`); await sleep(500);
+
+  // 5. stanze
+  stepSet(4, 'run'); say('Riconosco le stanze…'); roomsShown = true; drawRooms(); await sleep(700); stepSet(4, 'ok', `${plan.stanze.length} ambienti`);
+
+  // 6. regole: ogni stanza deve essere raggiungibile
+  stepSet(5, 'run'); say('Controllo che ogni stanza abbia un accesso…');
+  let bad = reach();
+  while (bad.length) {
+    plan.stanze.forEach((r, i) => r.bad = bad.includes(i)); drawRooms(); stepSet(5, 'ask');
+    tool = 'tPorta'; $('tPorta').classList.add('on');
+    const v = await new Promise(res => { recheck = () => { const b = reach(); plan.stanze.forEach((r, i) => r.bad = b.includes(i)); drawRooms(); if (!b.length) res('ok'); };
+      ask(`${bad.length === 1 ? 'Una stanza non ha' : bad.length + ' stanze non hanno'} un accesso`, `${bad.map(i => '«' + (plan.stanze[i].nome || plan.stanze[i].tipo) + '»').join(', ')} (in rosso). Clic sul muro dove c'è la porta: lo strumento «+ Porta» è già acceso.`, [['Lascia così', 'skip']]).then(res); });
+    recheck = () => { }; tool = null; $('tPorta').classList.remove('on'); $('ask').classList.remove('on');
+    if (v === 'skip') break; bad = reach();
+  }
+  plan.stanze.forEach(r => r.bad = false); drawRooms();
+  const f = fidelity(); stepSet(5, 'ok', reach().length ? 'con eccezioni' : 'tutte raggiungibili');
+  say(`Pianta completa: fedeltà ${Math.round(f * 100)}%, ${plan.stanze.length} ambienti.`); await sleep(800);
+
+  // 7. estrusione animata e poi arredo
+  stepSet(6, 'run'); say('Alzo i muri…');
+  layer.handles.visible = false; layer.open.visible = false;
+  const a = innerWidth / innerHeight, hh = view.h; persp.position.set(ortho.position.x, (hh / 2) / Math.tan(15 * P / 180), PC[1] + .001); persp.lookAt(ortho.position.x, 0, PC[1]); cam = persp;
+  const tall = walls.filter(w => w.mesh).map(w => { const len = L(w); const m = new THREE.Mesh(new THREE.BoxGeometry(len, 2.7, Math.max(w.t, .1)), new THREE.MeshStandardMaterial({ color: '#f3efe9', roughness: .9 })); m.userData.k = (w.t ?? .2) <= .1 ? 1.1 / 2.7 : 1; m.castShadow = m.receiveShadow = true; m.position.set((w.p1[0] + w.p2[0]) / 2, 0, (w.p1[1] + w.p2[1]) / 2); m.rotation.y = w.mesh.rotation.y; m.scale.y = .001; scene.add(m); return m; });
+  const p0 = persp.position.clone(), p1 = new THREE.Vector3(PC[0] - PS * .1, PS * 2.3, PC[1] + PS * 1.9);
+  for (let i = 1; i <= 60; i++) { const k = i / 60, e = k * k * (3 - 2 * k); tall.forEach(m => { m.scale.y = Math.max(.001, e * m.userData.k); m.position.y = 1.35 * e * m.userData.k; }); layer.walls.children.forEach(m => m.material.opacity = .78 * (1 - e)); sheet.material.opacity = 1 - e * .75; persp.position.lerpVectors(p0, p1, e); persp.lookAt(PC[0], 0, PC[1]); await sleep(30); }
+  stepSet(6, 'ok'); say('Muri alzati. Apro la casa arredata…');
+  // consegna al motore della casa 3D
+  plan.muri = walls.filter(w => w.mesh || w.st === 'utente').map(({ mesh, cov, st, t, ...w }) => w);
+  plan.aperture = opens.map(({ mesh, ...o }) => o); plan.stanze = plan.stanze.map(({ bad, ...r }) => r);
+  plan.superficie_calcolata_m2 = +plan.stanze.filter(r => !['balcone', 'terrazzo'].includes(r.tipo)).reduce((s, r) => s + area(r.poligono), 0).toFixed(1);
+  localStorage.setItem('pianta-guidata', JSON.stringify(plan));
+  localStorage.setItem('pianta-guidata-report', JSON.stringify({ semaforo: reach().length ? 'giallo' : 'verde', auto: [`Lettura guidata: fedeltà al disegno ${Math.round(f * 100)}%`], errori: [], avvisi: [] }));
+  const b = document.createElement('button'); b.className = 'pri'; b.textContent = ID === 'sab' ? 'Vai alla casa arredata →' : 'Apri la casa arredata'; b.onclick = () => ID === 'sab' ? (parent !== window ? parent.postMessage('avanti', '*') : location.href = '../casa3d.html') : location.href = 'casa_auto.html?p=guidata'; $('askB').innerHTML = ''; $('ask').classList.add('on'); $('askT').textContent = 'Pianta pronta'; $('askD').textContent = 'Estrusione fatta. Il motore ora arreda con le regole delle porte.'; $('askB').appendChild(b);
+  console.log('FINE', JSON.stringify({ fedelta: f, muri: plan.muri.length, porte: plan.aperture.length }));
+  if (Q.has('auto')) setTimeout(() => location.href = 'casa_auto.html?p=guidata', 1500);
+}
+if (Q.has('prova')) { window.ask = ask; }
+if (Q.has('test')) {
+  const W = walls[0]; walls.forEach(w => refresh(w)); opens.forEach(drawOpen); buildHandles();
+  const n0 = walls.length, r = [];
+  save(); splitWall(W, (W.p1[0] + W.p2[0]) / 2, (W.p1[1] + W.p2[1]) / 2); r.push(['vertice aggiunto', walls.length === n0 + 1]);
+  const np = pts.find(p => p.refs.length === 2 && p.refs.some(([w]) => w.id.includes('v')));
+  save(); removeVertex(np); r.push(['vertice tolto', walls.length === n0]);
+  undo(); r.push(['annulla toglie-vertice', walls.length === n0 + 1]);
+  undo(); r.push(['annulla aggiungi-vertice', walls.length === n0]);
+  redo(); r.push(['ripeti', walls.length === n0 + 1]);
+  const len0 = walls.reduce((a, w) => a + L(w), 0);
+  save(); const w9 = walls[3]; walls.splice(3, 1); layer.walls.remove(w9.mesh); buildHandles(); r.push(['muro cancellato', walls.length === n0]);
+  undo(); r.push(['annulla cancella', walls.length === n0 + 1 && Math.abs(walls.reduce((a, w) => a + L(w), 0) - len0) < 1e-6]);
+  buildHandles(); const pp = pts.find(q => q.refs.length >= 1), [w0, k0] = pp.refs[0], o = w0[k0 === 'p1' ? 'p2' : 'p1'];
+  const m1 = magnet(o[0] + .12, pp.y + .6, pp, false); r.push(['calamita raddrizza il muro', Math.abs(m1[0] - o[0]) < 1e-9 || Math.abs(m1[1] - o[1]) < 1e-9]);
+  const q = pts.find(x => x !== pp); const m2 = magnet(q.x + .12, q.y - .1, pp, false); r.push(['calamita unisce al vertice vicino', m2[0] === q.x && m2[1] === q.y]);
+  const m3 = magnet(q.x + .12, q.y - .1, pp, true); r.push(['Alt = libero', Math.abs(m3[0] - q.x - .12) < 1e-9]);
+  { // scalino a L: due vertici su un muro esterno lungo, poi sposto il pezzo in mezzo
+    const lw = [...walls].filter(w => w.esterno && w.mesh).sort((a, b) => L(b) - L(a))[0], u = uOf(lw), l0 = L(lw), n0 = walls.length;
+    const pA = splitWall(lw, lw.p1[0] + u[0] * l0 * .35, lw.p1[1] + u[1] * l0 * .35);
+    const mid = walls.find(w => Math.hypot(w.p1[0] - pA.x, w.p1[1] - pA.y) < 1e-6 && w !== lw) || walls[walls.length - 1];
+    const lm = L(mid), um = uOf(mid); splitWall(mid, mid.p1[0] + um[0] * lm * .45, mid.p1[1] + um[1] * lm * .45);
+    const seg = mid; hit.x = (seg.p1[0] + seg.p2[0]) / 2; hit.z = (seg.p1[1] + seg.p2[1]) / 2; startWallDrag(seg);
+    const nn = [-uOf(seg)[1], uOf(seg)[0]]; hit.x += nn[0] * .8; hit.z += nn[1] * .8; moveWallDrag({ altKey: true, clientX: 300, clientY: 300 }); endWallDrag();
+    const con = walls.filter(w => w.id.startsWith('r'));
+    r.push(['scalino a L: 2 vertici + 2 raccordi', walls.length === n0 + 4 && con.length === 2 && con.every(c => Math.abs(L(c) - .8) < 1e-6)]);
+  }
+  console.log('TEST', JSON.stringify(r));
+} else run();
+</script>
+</body>
+</html>

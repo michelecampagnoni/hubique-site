@@ -1,0 +1,33 @@
+{
+ "id": "p12",
+ "fonte": "nuove/c12.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda dichiarata 1:200; larghezza foglio ~210 mm su 711 px => 1 px = 0,059 m dell'immagine originale; coordinate misurate su ritaglio ingrandito 4x (x=250..520, y=270..520) => 1 px del ritaglio = 0,015 m"
+ },
+ "stanze": 11,
+ "muri": 28,
+ "aperture": 16,
+ "superficie_calcolata_m2": 63.4,
+ "semaforo": "giallo",
+ "auto": [
+  "Uniti 4 estremi di muri staccati di pochi centimetri",
+  "Apertura su i9 riportata dentro il muro"
+ ],
+ "errori": [],
+ "avvisi": [
+  "Portafinestra larga 0.38 m su e2: insolita",
+  "Apertura di -0.10 m su i9: troppo stretta, tolta"
+ ],
+ "dubbi_lettura": [
+  "Scansione vecchia (NCEU, scritta a mano) a bassa risoluzione 711x909: il disegno e' ~70x130 px, errore 0,2-0,4 m.",
+  "Scala '1:200' scritta sul foglio ma dimensione reale del foglio ignota: 1 px = 0,059 m ricavato assumendo 210 mm di larghezza.",
+  "Nessuna quota; solo h 3,00 nella prima camera: altezza 3,0 m usata per tutte le stanze.",
+  "Tutte le porte tranne quelle con simbolo sono dedotte; ingresso dell'unita' incerto: ipotizzato dalla scala in basso a destra.",
+  "Le stanze senza nome (camera centrale, vano in basso) sono camere dedotte; il piccolo vano 'rip.' (5.p) e' un ripostiglio.",
+  "Il vano scale (collegamento al piano terreno) e' incluso come 'Scala'; il piano terreno e' escluso.",
+  "Interpretazione dei doppi muri a destra (con terrazzo) approssimata."
+ ]
+}

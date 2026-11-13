@@ -1,0 +1,28 @@
+{
+ "id": "p2",
+ "fonte": "planimetria-castale-online-731x1024-1.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "media",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scala 1:200 su A4 (731 px = 210 mm => 1 px = 0,0575 m); riscontro con barra '10 metri' sul bordo destro (~177 px) => 0,0565 m/px; ritaglio ingrandito x5 => 0,0113 m per px ingrandito"
+ },
+ "stanze": 7,
+ "muri": 12,
+ "aperture": 16,
+ "superficie_calcolata_m2": 76.5,
+ "semaforo": "giallo",
+ "auto": [
+  "Uniti 1 estremi di muri staccati di pochi centimetri"
+ ],
+ "errori": [],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Altezza Hmed=3.80 m dichiarata, usata per tutte le stanze",
+  "Scala ricavata da 1:200 su immagine ridotta: errore possibile +-5%",
+  "Porte interne non disegnate come battenti: dedotte da varchi nei muri (segni a croce)",
+  "Ingresso dedotto sul varco del Pranzo (lato sud); Sogg. ha portafinestra a sud, Cucina porta a sud dedotta",
+  "Muri esterni molto spessi (~0,55 m) come da disegno; nomi 'letto' due camere; Pranzo tipizzato cucina->usare soggiorno_cucina se serve",
+  "Pranzo e Cucina tipizzati cucina: Pranzo potrebbe essere soggiorno"
+ ]
+}

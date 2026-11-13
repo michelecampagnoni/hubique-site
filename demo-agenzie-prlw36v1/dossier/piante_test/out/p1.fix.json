@@ -1,0 +1,708 @@
+{
+ "fonte": "planimetria (1).jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "piano_scelto": "Piano Quinto int. 16",
+ "altri_piani": [],
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda 1:100 su A4 (297 mm di altezza = ~585 px) => 1 px immagine = ~0,051 m; misure prese su ritaglio x4 (1 px ritaglio = 0,0127 m)"
+ },
+ "superficie_dichiarata_m2": null,
+ "muri": [
+  {
+   "id": "m1",
+   "p1": [
+    0.0,
+    0.0
+   ],
+   "p2": [
+    8.13,
+    0.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m2",
+   "p1": [
+    0.0,
+    0.0
+   ],
+   "p2": [
+    0.0,
+    11.68
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m3",
+   "p1": [
+    0.0,
+    11.68
+   ],
+   "p2": [
+    3.75,
+    11.68
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m4",
+   "p1": [
+    3.75,
+    8.57
+   ],
+   "p2": [
+    3.75,
+    11.68
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m5",
+   "p1": [
+    3.75,
+    10.67
+   ],
+   "p2": [
+    6.16,
+    10.67
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m6",
+   "p1": [
+    6.16,
+    8.57
+   ],
+   "p2": [
+    6.16,
+    10.67
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m7",
+   "p1": [
+    6.16,
+    8.57
+   ],
+   "p2": [
+    12.29,
+    8.57
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m8",
+   "p1": [
+    12.29,
+    3.37
+   ],
+   "p2": [
+    12.29,
+    8.57
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m9",
+   "p1": [
+    10.03,
+    3.37
+   ],
+   "p2": [
+    12.29,
+    3.37
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m10",
+   "p1": [
+    10.03,
+    3.37
+   ],
+   "p2": [
+    10.03,
+    8.57
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m11",
+   "p1": [
+    8.13,
+    0.0
+   ],
+   "p2": [
+    8.13,
+    3.77
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m12",
+   "p1": [
+    0.0,
+    3.77
+   ],
+   "p2": [
+    3.21,
+    3.77
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m13",
+   "p1": [
+    5.14,
+    3.77
+   ],
+   "p2": [
+    8.13,
+    3.77
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m14",
+   "p1": [
+    8.13,
+    3.77
+   ],
+   "p2": [
+    10.03,
+    3.77
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m15",
+   "p1": [
+    3.21,
+    0.0
+   ],
+   "p2": [
+    3.21,
+    3.77
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m16",
+   "p1": [
+    5.14,
+    0.0
+   ],
+   "p2": [
+    5.14,
+    3.77
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m17",
+   "p1": [
+    3.21,
+    2.1
+   ],
+   "p2": [
+    5.14,
+    2.1
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m18",
+   "p1": [
+    0.0,
+    7.49
+   ],
+   "p2": [
+    3.17,
+    7.49
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m19",
+   "p1": [
+    3.17,
+    7.49
+   ],
+   "p2": [
+    3.17,
+    8.57
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m20",
+   "p1": [
+    3.17,
+    8.57
+   ],
+   "p2": [
+    6.16,
+    8.57
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  },
+  {
+   "id": "m21",
+   "p1": [
+    8.13,
+    0.0
+   ],
+   "p2": [
+    9.78,
+    0.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m22",
+   "p1": [
+    9.78,
+    0.0
+   ],
+   "p2": [
+    9.78,
+    2.1
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m23",
+   "p1": [
+    9.78,
+    2.1
+   ],
+   "p2": [
+    12.29,
+    2.1
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m24",
+   "p1": [
+    12.29,
+    2.1
+   ],
+   "p2": [
+    12.29,
+    3.37
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m26",
+   "p1": [
+    10.03,
+    3.37
+   ],
+   "p2": [
+    10.03,
+    3.77
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m27",
+   "p1": [
+    3.21,
+    3.77
+   ],
+   "p2": [
+    5.14,
+    3.77
+   ],
+   "spessore": 0.1,
+   "esterno": false
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "m1",
+   "da": 1.46,
+   "a": 2.35,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m1",
+   "da": 6.29,
+   "a": 7.11,
+   "tipo": "finestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m15",
+   "da": 2.16,
+   "a": 3.05,
+   "tipo": "porta",
+   "dedotta": false
+  },
+  {
+   "muro": "m16",
+   "da": 2.16,
+   "a": 3.11,
+   "tipo": "porta",
+   "dedotta": false
+  },
+  {
+   "muro": "m17",
+   "da": 0.85,
+   "a": 1.74,
+   "tipo": "porta",
+   "dedotta": false
+  },
+  {
+   "muro": "m14",
+   "da": 0.06,
+   "a": 1.71,
+   "tipo": "portafinestra",
+   "dedotta": false
+  },
+  {
+   "muro": "m10",
+   "da": 3.62,
+   "a": 4.38,
+   "tipo": "porta",
+   "dedotta": false
+  },
+  {
+   "muro": "m9",
+   "da": 0.7,
+   "a": 1.46,
+   "tipo": "porta",
+   "dedotta": false
+  },
+  {
+   "muro": "m7",
+   "da": 0.38,
+   "a": 1.33,
+   "tipo": "ingresso",
+   "dedotta": false
+  },
+  {
+   "muro": "m18",
+   "da": 0.89,
+   "a": 1.78,
+   "tipo": "porta",
+   "dedotta": false
+  },
+  {
+   "muro": "m4",
+   "da": 1.08,
+   "a": 1.97,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m27",
+   "da": 0.19,
+   "a": 1.71,
+   "tipo": "passaggio",
+   "dedotta": false
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "camera",
+   "nome": "Camera A",
+   "poligono": [
+    [
+     0.06,
+     0.06
+    ],
+    [
+     3.15,
+     0.06
+    ],
+    [
+     3.15,
+     3.71
+    ],
+    [
+     0.06,
+     3.71
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 11.28
+  },
+  {
+   "id": "s2",
+   "tipo": "bagno",
+   "nome": "Bagno",
+   "poligono": [
+    [
+     3.28,
+     0.06
+    ],
+    [
+     5.08,
+     0.06
+    ],
+    [
+     5.08,
+     2.03
+    ],
+    [
+     3.28,
+     2.03
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 3.55
+  },
+  {
+   "id": "s3",
+   "tipo": "camera",
+   "nome": "Camera B",
+   "poligono": [
+    [
+     5.21,
+     0.06
+    ],
+    [
+     8.06,
+     0.06
+    ],
+    [
+     8.06,
+     3.71
+    ],
+    [
+     5.21,
+     3.71
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 10.4
+  },
+  {
+   "id": "s4",
+   "tipo": "disimpegno",
+   "nome": "Disimpegno",
+   "poligono": [
+    [
+     3.28,
+     2.16
+    ],
+    [
+     5.08,
+     2.16
+    ],
+    [
+     5.08,
+     3.71
+    ],
+    [
+     3.28,
+     3.71
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 2.79
+  },
+  {
+   "id": "s5",
+   "tipo": "soggiorno",
+   "nome": "Soggiorno - Cucina",
+   "poligono": [
+    [
+     0.06,
+     3.84
+    ],
+    [
+     9.97,
+     3.84
+    ],
+    [
+     9.97,
+     8.51
+    ],
+    [
+     3.24,
+     8.51
+    ],
+    [
+     3.24,
+     7.43
+    ],
+    [
+     0.06,
+     7.43
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 42.85
+  },
+  {
+   "id": "s6",
+   "tipo": "studio",
+   "nome": "Locale destro",
+   "poligono": [
+    [
+     10.1,
+     3.43
+    ],
+    [
+     12.23,
+     3.43
+    ],
+    [
+     12.23,
+     8.51
+    ],
+    [
+     10.1,
+     8.51
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 10.82
+  },
+  {
+   "id": "s7",
+   "tipo": "camera",
+   "nome": "Camera C",
+   "poligono": [
+    [
+     0.06,
+     7.56
+    ],
+    [
+     3.11,
+     7.56
+    ],
+    [
+     3.11,
+     8.51
+    ],
+    [
+     3.68,
+     8.51
+    ],
+    [
+     3.68,
+     11.62
+    ],
+    [
+     0.06,
+     11.62
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 14.16
+  },
+  {
+   "id": "s8",
+   "tipo": "bagno",
+   "nome": "Bagno 2",
+   "poligono": [
+    [
+     3.81,
+     8.64
+    ],
+    [
+     6.1,
+     8.64
+    ],
+    [
+     6.1,
+     10.6
+    ],
+    [
+     3.81,
+     10.6
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 4.49
+  },
+  {
+   "id": "s9",
+   "tipo": "terrazzo",
+   "nome": "Terrazzo",
+   "poligono": [
+    [
+     8.25,
+     0.06
+    ],
+    [
+     9.72,
+     0.06
+    ],
+    [
+     9.72,
+     2.16
+    ],
+    [
+     12.23,
+     2.16
+    ],
+    [
+     12.23,
+     3.3
+    ],
+    [
+     9.97,
+     3.3
+    ],
+    [
+     9.97,
+     3.71
+    ],
+    [
+     8.25,
+     3.71
+    ]
+   ],
+   "h": 2.7,
+   "area_m2": 8.33
+  }
+ ],
+ "dubbi": [
+  "Immagine a bassa risoluzione, etichette stanze illeggibili: tipi di stanza dedotti dalla forma e dai sanitari",
+  "Locale destro e Camera C potrebbero essere cucina/studio o camere: tipo incerto",
+  "Soggiorno e parte sinistra (probabile cucina) uniti in un unico spazio",
+  "Porta del bagno 2 (verso Camera C) dedotta",
+  "Camera C: due archi porta sul disegno, ne e' stata usata una sola (sul muro con il soggiorno)",
+  "Terrazzo curvo semplificato a poligono ortogonale; accesso dal locale destro e portafinestra dal soggiorno",
+  "Spessore e quote ricavati dalla scala 1:100 dichiarata, non da quote scritte",
+  "Mancano finestre sui muri esterni dei lati sinistro, destro e basso (non disegnate)"
+ ],
+ "superficie_calcolata_m2": 100.3
+}

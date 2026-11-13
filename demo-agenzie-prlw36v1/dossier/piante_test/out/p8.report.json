@@ -1,0 +1,25 @@
+{
+ "id": "p8",
+ "fonte": "planimetria-catastale.png",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "stima_arredi",
+  "dettaglio": "Immagine 200x283 px senza quote leggibili; bagno stimato ~2x3 m (1 px originale ~0,2 m circa, ~4,6 px/m); altre misure per proporzione"
+ },
+ "stanze": 7,
+ "muri": 18,
+ "aperture": 11,
+ "superficie_calcolata_m2": 61.8,
+ "semaforo": "verde",
+ "auto": [],
+ "errori": [],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Immagine minuscola e sfocata: tutte le dimensioni sono stime di proporzione, errore possibile 20-30%",
+  "Scala non ricavabile da quote; stimata dal bagno",
+  "Porte dedotte dalla logica; ingresso ipotizzato dal vano scale sul muro destro del soggiorno",
+  "Forma L del soggiorno e posizione di bagno/disimpegno incerte",
+  "Piano Cantine non incluso; elementi nel vano scale (cerchio) ignorati"
+ ]
+}

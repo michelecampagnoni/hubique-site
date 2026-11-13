@@ -1,0 +1,46 @@
+{
+ "id": "p11",
+ "fonte": "nuove/c11.png",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda 1:200 su foglio A3, barra grafica '10 metri' misurata 126 px sull'immagine 1100x777 => 1 px = 0,079 m; coordinate misurate su ritaglio ingrandito 4x (x=420..720, y=290..640 dell'originale) => 1 px del ritaglio = 0,020 m"
+ },
+ "stanze": 14,
+ "muri": 34,
+ "aperture": 20,
+ "superficie_calcolata_m2": 185.6,
+ "semaforo": "rosso",
+ "auto": [
+  "Uniti 3 estremi di muri staccati di pochi centimetri",
+  "Aggiunti 4 muri mancanti per chiudere le stanze (da confermare)",
+  "Porte aggiunte dove mancava un accesso: «Camera» → «Dis. (disimpegno)»; «Cucina» → «Salotto - Ingresso»; «Camera» → «Guardaroba»"
+ ],
+ "errori": [
+  "«Camera» non è raggiungibile dall'ingresso",
+  "«Camera» non è raggiungibile dall'ingresso",
+  "«Bagno» non è raggiungibile dall'ingresso",
+  "«Bagno» non è raggiungibile dall'ingresso",
+  "«Lavanderia» non è raggiungibile dall'ingresso",
+  "«Tinello» non è raggiungibile dall'ingresso",
+  "«Rip.» non è raggiungibile dall'ingresso",
+  "«Veranda» non è raggiungibile dall'ingresso",
+  "«Dis. (disimpegno)» non è raggiungibile dall'ingresso",
+  "«Camera» non è raggiungibile dall'ingresso",
+  "«Guardaroba» non è raggiungibile dall'ingresso"
+ ],
+ "avvisi": [
+  "Porta larga 0.50 m su w9: insolita"
+ ],
+ "dubbi_lettura": [
+  "Immagine a bassa risoluzione (1100x777): il disegno dell'unita' e' ~140x240 px, misure con errore di 0,2-0,4 m.",
+  "Muri doppi/spessi sul lato nord (x ~800-835 nel ritaglio) interpretati come muro verso altra U.I.; geometria dell'angolo nord-est incerta.",
+  "Porte quasi tutte non disegnate: dedotte; camera nord e camera centrale si aprono sul disimpegno (varchi senza muro).",
+  "Salotto e ingresso sono un unico spazio ad L (nessun muro tra i due), H=3,10 m scritta sul salotto.",
+  "Bagni (due, uno sopra l'altro) con tramezzi parziali: confini dei bagni incerti.",
+  "Veranda a sinistra del muro, con parete obliqua verso la chiostrina: modellata come rettangolo; passaggio dedotto dal tinello.",
+  "Ingresso dal pianerottolo a sinistra in basso: la porta e' dedotta dai simboli freccia.",
+  "Cantina del piano interrato esclusa."
+ ]
+}

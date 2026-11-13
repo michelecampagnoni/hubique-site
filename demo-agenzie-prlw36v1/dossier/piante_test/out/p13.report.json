@@ -1,0 +1,37 @@
+{
+ "id": "p13",
+ "fonte": "nuove/c13.png",
+ "tipo_disegno": "catastale",
+ "qualita_input": "media",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scheda 1:200 su foglio A4 (210 mm) reso a 2480 px di larghezza => 1 px = 0,017 m (0,0169); coordinate misurate sul PNG 2480x3509"
+ },
+ "stanze": 8,
+ "muri": 22,
+ "aperture": 13,
+ "superficie_calcolata_m2": 74.0,
+ "semaforo": "rosso",
+ "auto": [
+  "Uniti 2 estremi di muri staccati di pochi centimetri"
+ ],
+ "errori": [
+  "«Camera» non è raggiungibile dall'ingresso",
+  "«W.C.» non è raggiungibile dall'ingresso",
+  "«Camera» non è raggiungibile dall'ingresso",
+  "«Studio» non è raggiungibile dall'ingresso",
+  "«Corridoio» non è raggiungibile dall'ingresso",
+  "«K (cucina)» non è raggiungibile dall'ingresso",
+  "«W.C.» non è raggiungibile dall'ingresso"
+ ],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Scala 1:200 dichiarata ma pagina A4 di guida con la scheda ridotta: metri per pixel stimati dalla larghezza A4, errore 5-10%.",
+  "Stessa distribuzione, speculare, del piano primo (c10): corte esclusiva al posto dei balconi.",
+  "Corti esclusive (nord e sud) non modellate: non sono pavimento interno; nessun muro di recinzione disegnato.",
+  "Altezza H=2,70 m dichiarata.",
+  "Porte non disegnate tranne l'ingresso (simbolo a sinistra): dedotte dai varchi; W.C. in basso si raggiunge dallo studio (dedotto).",
+  "Corridoio-soggiorno e corridoio-studio sono varchi aperti.",
+  "Qualita' bassa (immagine incorporata ingrandita)."
+ ]
+}

@@ -1,0 +1,129 @@
+<!doctype html><html lang="it"><head><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prova i tuoi mobili in questa casa · HubAgency</title>
+<link rel="icon" href="../img/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafafa;--card:#fff;--fg:#171717;--muted:#737373;--border:#e5e5e5;--soft:#f5f5f5;--primary:#c1121f;--primary-dark:#8b0000;--primary-soft:#fdecee;--dark:#0a0a0a;--r:10px}
+*{box-sizing:border-box}body{margin:0;font-family:Geist,system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+header{background:var(--dark);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:12px}header img{height:26px}header a{color:#fff;opacity:.75;font-size:13px;margin-left:auto;text-decoration:none}
+main{max-width:860px;margin:0 auto;padding:18px}
+h1{font-size:24px;margin:6px 0 4px}p.sub{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.step{font-size:12px;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.room{border:2px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;background:var(--soft)}
+.room img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}.room div{font-size:13px;padding:6px 8px}
+.room.sel{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+.room.add{display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--muted);font-size:13px;min-height:90px;text-align:center}
+.drop{border:2px dashed #d4d4d4;border-radius:var(--r);padding:22px;text-align:center;cursor:pointer;background:var(--soft)}
+.drop.over{border-color:var(--primary);background:var(--primary-soft)}.drop img{max-height:220px;max-width:100%;border-radius:8px}
+button{font-family:inherit;font-size:16px;font-weight:600;border:0;border-radius:var(--r);padding:13px 20px;cursor:pointer}
+.btn{background:var(--primary);color:#fff;width:100%}.btn:disabled{background:#e5a3a8;cursor:not-allowed}.btn2{background:var(--dark);color:#fff;width:100%}.link{background:none;color:var(--muted);font-size:13px;text-decoration:underline;padding:6px}
+.cnt{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
+.wait{text-align:center;padding:26px}.bar{height:8px;background:var(--soft);border-radius:8px;overflow:hidden;margin:14px 0}.bar i{display:block;height:100%;width:0;background:var(--primary);transition:width 1s linear}
+.wait img{max-width:100%;border-radius:8px;filter:blur(6px) grayscale(.3);opacity:.6}
+.ba{position:relative;border-radius:var(--r);overflow:hidden;user-select:none;touch-action:none;background:#000}.ba>img{display:block;width:100%}
+.ba .top{position:absolute;inset:0;overflow:hidden;width:50%}.ba .top img{height:100%;max-width:none;display:block}
+.ba .h{position:absolute;top:0;bottom:0;width:3px;background:#fff;left:50%;box-shadow:0 0 6px rgba(0,0,0,.4)}
+.ba .h:after{content:"⇆";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.tag{position:absolute;top:10px;font-size:12px;background:rgba(0,0,0,.65);color:#fff;padding:3px 8px;border-radius:20px}
+.err{background:var(--primary-soft);color:var(--primary-dark);border-radius:var(--r);padding:12px;margin-top:10px;display:none}
+.row{display:flex;gap:10px;margin-top:12px}.row>*{flex:1}
+.gate input[type=email],.gate input[type=tel]{width:100%;font:inherit;padding:11px;border:1px solid var(--border);border-radius:8px;margin:6px 0}
+.gate label{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;margin:8px 0}
+.hide{display:none}.note{font-size:12px;color:var(--muted);margin-top:8px}
+.tips{font-size:13px;color:var(--muted);margin:10px 0 0;padding-left:18px}
+@media(max-width:640px){.rooms{grid-template-columns:repeat(2,1fr)}h1{font-size:20px}}
+</style></head><body>
+<div id="esempio-dimostrativo" style="position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:2147483000;pointer-events:none;background:#111;color:#fde047;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;padding:5px 12px;border-radius:0 0 7px 7px;white-space:nowrap">ESEMPIO DIMOSTRATIVO · DATI FITTIZI</div><script>if(window.self!==window.top){var e=document.getElementById("esempio-dimostrativo");e&&e.remove()}</script>
+
+<header><img src="../img/logo.png" alt="HubAgency"><b>Bilocale · Milano</b><a href="/">← Presentazione</a></header>
+<main>
+<h1>Prova i tuoi mobili in questa casa</h1>
+<p class="sub">Carica una foto del tuo salotto o della tua camera: in meno di un minuto vedi la stanza con i tuoi mobili.</p>
+
+<div id="form">
+<div class="card"><div class="step">1 · Scegli la stanza</div>
+<div class="rooms">
+<div class="room sel" data-src="../img/1-immobile-vuoto.jpg"><img src="../img/1-immobile-vuoto.jpg" alt=""><div>Soggiorno</div></div>
+<div class="room" data-src="../img/B1-camera-vuota.jpg"><img src="../img/B1-camera-vuota.jpg" alt=""><div>Camera</div></div>
+<div class="room" data-src="../img/C1-soggiorno-arredato.jpg"><img src="../img/C1-soggiorno-arredato.jpg" alt=""><div>Soggiorno arredato</div></div>
+<div class="room add" id="addroom"><b style="font-size:22px">+</b>Carica tu<br>la stanza</div>
+</div><input type="file" id="fileroom" accept="image/*" class="hide"></div>
+
+<div class="card"><div class="step">2 · La foto dei tuoi mobili</div>
+<div class="drop" id="drop"><div id="droptxt"><b>Tocca per scegliere o scattare una foto</b><br><span class="note">oppure trascinala qui</span></div></div>
+<input type="file" id="filemob" accept="image/*" class="hide">
+<ul class="tips"><li>Di giorno, con i mobili ben visibili e senza persone davanti.</li><li>I mobili coperti o fuori dalla foto il sistema non li può vedere.</li></ul>
+<div class="err" id="err"></div>
+<div style="margin-top:14px"><button class="btn" id="go" disabled>Mostrami i miei mobili in questa casa</button></div>
+<div class="cnt" id="cnt"></div></div>
+</div>
+
+<div class="card gate hide" id="gate"><div class="step">Hai usato le 2 prove gratuite</div>
+<p>Lascia la tua email per altre prove: l'agenzia potrà ricontattarti per questa casa.</p>
+<input id="email" type="email" placeholder="La tua email"><input id="tel" type="tel" placeholder="Telefono (facoltativo)">
+<label><input type="checkbox" id="priv"> Ho letto l'informativa privacy e accetto di essere ricontattato dall'agenzia per questo immobile.</label>
+<button class="btn" id="sblocca">Sblocca altre prove</button><div class="err" id="gerr"></div>
+<p class="note">Versione dimostrativa: la mail resta su questo dispositivo e non viene inviata a nessuno.</p></div>
+
+<div class="card wait hide" id="wait"><div class="step">Stiamo arredando la stanza con i tuoi mobili</div><div class="bar"><i id="bar"></i></div><div id="sec" class="note">circa 40 secondi</div><img id="waitimg" alt=""></div>
+
+<div class="card hide" id="res"><div class="step">Ecco la casa con i tuoi mobili</div>
+<div class="ba" id="ba"><img id="after" alt=""><div class="top" id="top"><img id="before" alt=""></div><div class="h" id="h"></div><span class="tag" style="left:10px">Prima</span><span class="tag" style="right:10px">Con i tuoi mobili</span></div>
+<p class="note">Immagine indicativa generata al computer: misure e proporzioni non sono garantite.</p>
+<div class="row"><a id="dl" download="casa-con-i-miei-mobili.jpg"><button class="btn2">Scarica</button></a><button class="btn" id="again">Prova un'altra foto</button></div>
+<p class="note" id="info"></p></div>
+
+<p style="text-align:center"><button class="link" id="reset">Azzera il contatore (solo per la demo)</button></p>
+</main>
+<script>
+const $=s=>document.querySelector(s);let stanzaSrc="../img/1-immobile-vuoto.jpg",stanzaFile=null,mobiliFile=null;
+const LIM=2,EXTRA=5;const prove=()=>+localStorage.arredaProve||0,sbloccato=()=>!!localStorage.arredaEmail;
+function aggiorna(){const max=sbloccato()?LIM+EXTRA:LIM;$("#cnt").textContent=`Prove usate: ${prove()} di ${max}`;$("#go").disabled=!mobiliFile;}
+function errore(t,el="#err"){const e=$(el);e.textContent=t||"";e.style.display=t?"block":"none";}
+// riduce qualsiasi immagine (anche da fotocamera) a JPEG max 1024 px, orientamento corretto
+async function riduci(src,lato=1024){let bmp;
+ if(src instanceof Blob){try{bmp=await createImageBitmap(src,{imageOrientation:"from-image"});}catch(e){bmp=await new Promise((ok,ko)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=()=>ko(new Error("Formato della foto non leggibile da questo browser: prova a scattarla di nuovo o a usare una foto JPEG."));i.src=URL.createObjectURL(src);});}}
+ else{const b=await (await fetch(src)).blob();bmp=await createImageBitmap(b);}
+ const w=bmp.width,h=bmp.height,k=Math.min(1,lato/Math.max(w,h));const c=document.createElement("canvas");c.width=Math.round(w*k);c.height=Math.round(h*k);
+ c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);return {url:c.toDataURL("image/jpeg",.85),w:c.width,h:c.height};}
+function filigrana(dataUrl){return new Promise(ok=>{const i=new Image();i.onload=()=>{const c=document.createElement("canvas");c.width=i.width;c.height=i.height;const g=c.getContext("2d");g.drawImage(i,0,0);
+ const t="Immagine indicativa · HubAgency",fs=Math.max(16,Math.round(i.width/48));g.font=`600 ${fs}px Geist, Helvetica, sans-serif`;const tw=g.measureText(t).width,p=fs*.6;
+ const x=i.width-tw-3*p,y=i.height-fs-3*p;g.fillStyle="rgba(0,0,0,.75)";g.fillRect(x-p,y-p,tw+2*p,fs+2*p);g.fillStyle="#fff";g.textBaseline="top";g.fillText(t,x,y);ok(c.toDataURL("image/jpeg",.9));};i.src=dataUrl;});}
+document.querySelectorAll(".room[data-src]").forEach(r=>r.onclick=()=>{document.querySelectorAll(".room").forEach(x=>x.classList.remove("sel"));r.classList.add("sel");stanzaSrc=r.dataset.src;stanzaFile=null;});
+$("#addroom").onclick=()=>$("#fileroom").click();
+$("#fileroom").onchange=e=>{const f=e.target.files[0];if(!f)return;stanzaFile=f;const u=URL.createObjectURL(f);document.querySelectorAll(".room").forEach(x=>x.classList.remove("sel"));const a=$("#addroom");a.classList.add("sel");a.innerHTML=`<img src="${u}"><div>La tua stanza</div>`;};
+const drop=$("#drop");drop.onclick=()=>$("#filemob").click();
+$("#filemob").onchange=e=>setMob(e.target.files[0]);
+drop.ondragover=e=>{e.preventDefault();drop.classList.add("over")};drop.ondragleave=()=>drop.classList.remove("over");
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove("over");setMob(e.dataTransfer.files[0])};
+document.addEventListener("paste",e=>{const f=[...e.clipboardData.files][0];if(f)setMob(f)});
+function setMob(f){if(!f)return;if(f.type&&!f.type.startsWith("image/"))return errore("Il file non è un'immagine.");if(f.size>25e6)return errore("Foto troppo pesante (oltre 25 MB).");
+ mobiliFile=f;$("#droptxt").innerHTML=`<img src="${URL.createObjectURL(f)}"><div class="note">Tocca per cambiare foto</div>`;errore("");aggiorna();}
+$("#go").onclick=()=>{const max=sbloccato()?LIM+EXTRA:LIM;if(prove()>=max){if(!sbloccato()){$("#gate").classList.remove("hide");$("#gate").scrollIntoView({behavior:"smooth"});}else errore("Hai finito le prove disponibili per questa casa.");return;}genera();};
+$("#sblocca").onclick=()=>{const m=$("#email").value.trim();if(!/^\S+@\S+\.\S+$/.test(m))return errore("Scrivi un'email valida.","#gerr");if(!$("#priv").checked)return errore("Serve il consenso per essere ricontattato.","#gerr");localStorage.arredaEmail=m;errore("","#gerr");$("#gate").classList.add("hide");aggiorna();genera();};
+async function genera(){errore("");$("#go").disabled=true;
+ let st,mo;try{st=await riduci(stanzaFile||stanzaSrc);mo=await riduci(mobiliFile);}catch(e){$("#go").disabled=false;return errore(e.message);}
+ const ratio=st.w/st.h,orient=ratio>1.15?"orizzontale":ratio<0.87?"verticale":"quadrata";
+ $("#form").classList.add("hide");$("#res").classList.add("hide");$("#wait").classList.remove("hide");$("#waitimg").src=st.url;window.scrollTo({top:0,behavior:"smooth"});
+ let t=0;const bar=$("#bar");bar.style.width="0";const iv=setInterval(()=>{t++;bar.style.width=Math.min(95,t/45*100)+"%";$("#sec").textContent=t<45?`ancora circa ${45-t} secondi`:"quasi pronto…";},1000);
+ try{const r=await fetch("https://arreda-demo.vercel.app/api/genera",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({stanza:st.url,mobili:mo.url,orientamento:orient})});
+  let j;try{j=await r.json();}catch(e){throw new Error("Il servizio non ha risposto in tempo.");}
+  if(!r.ok)throw new Error(j.errore||"Errore");localStorage.arredaProve=prove()+1;
+  const fin=await filigrana(j.immagine);$("#after").src=fin;$("#before").src=st.url;$("#dl").href=fin;$("#info").textContent=`Pronta in ${j.secondi} secondi.`;
+  $("#after").onload=()=>{$("#top img").style.width=$("#ba").clientWidth+"px";};$("#res").classList.remove("hide");
+ }catch(e){$("#form").classList.remove("hide");errore("Non è riuscita: "+e.message+" La prova non è stata conteggiata.");
+  const ex=ESEMPI[stanzaFile?"":stanzaSrc];if(ex){const b=document.createElement("button");b.className="btn2";b.style.marginTop="10px";b.textContent="Mostra un esempio già pronto per questa stanza";b.onclick=()=>mostraEsempio(ex);$("#err").appendChild(document.createElement("br"));$("#err").appendChild(b);}}
+ finally{clearInterval(iv);$("#wait").classList.add("hide");aggiorna();}}
+const ESEMPI={"../img/1-immobile-vuoto.jpg":{r:"../img/A-gpt-low.jpg",m:"../img/2-mobili-cliente.jpg"},"../img/B1-camera-vuota.jpg":{r:"../img/B-gpt-low.jpg",m:"../img/B2-camera-cliente.jpg"},"../img/C1-soggiorno-arredato.jpg":{r:"../img/C-gpt-low.jpg",m:"../img/C2-salotto-cliente.jpg"}};
+async function mostraEsempio(ex){errore("");const st=await riduci(stanzaSrc,1400);const b=await (await fetch(ex.r)).blob();const fr=new FileReader();fr.onload=async()=>{const fin=await filigrana(fr.result);
+ $("#after").src=fin;$("#before").src=st.url;$("#dl").href=fin;$("#info").innerHTML=`Esempio già pronto, fatto con <a href="${ex.m}" target="_blank">questa foto di un cliente</a>.`;$("#after").onload=()=>{$("#top img").style.width=$("#ba").clientWidth+"px";};
+ $("#form").classList.add("hide");$("#res").classList.remove("hide");};fr.readAsDataURL(b);}
+$("#again").onclick=()=>{$("#res").classList.add("hide");$("#form").classList.remove("hide");};
+const ba=$("#ba");function mv(x){const b=ba.getBoundingClientRect();const p=Math.max(0,Math.min(1,(x-b.left)/b.width))*100;$("#top").style.width=p+"%";$("#h").style.left=p+"%";}
+ba.addEventListener("pointerdown",e=>{mv(e.clientX);ba.setPointerCapture(e.pointerId);ba.onpointermove=ev=>mv(ev.clientX);});ba.addEventListener("pointerup",()=>ba.onpointermove=null);
+window.onresize=()=>{$("#top img").style.width=ba.clientWidth+"px"};
+$("#reset").onclick=()=>{localStorage.removeItem("arredaProve");localStorage.removeItem("arredaEmail");aggiorna();};
+aggiorna();
+</script></body></html>

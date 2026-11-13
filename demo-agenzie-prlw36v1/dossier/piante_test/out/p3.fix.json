@@ -1,0 +1,1528 @@
+{
+ "fonte": "planimetria-catastale (1).jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "piano_scelto": "PIANO TERRA (fabbricato principale, scheda 1 di 2)",
+ "altri_piani": [
+  "PIANO TERRA (piccolo corpo in alto a sinistra, scollegato)",
+  "PIANO TERRA (piccolo corpo in basso a sinistra)",
+  "PIANO PRIMO (piccolo blocco in basso, scheda 1)"
+ ],
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "scala 1:500 dichiarata; foglio assunto A4 orizzontale (297 mm = 840 px) => 1 px originale = 0,177 m; coordinate lette su ingrandimento x3 (1 px ingrandito = 0,059 m)"
+ },
+ "superficie_dichiarata_m2": null,
+ "muri": [
+  {
+   "id": "m1",
+   "p1": [
+    0.0,
+    31.86
+   ],
+   "p2": [
+    0.0,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m2",
+   "p1": [
+    0.0,
+    31.86
+   ],
+   "p2": [
+    2.06,
+    31.86
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m3",
+   "p1": [
+    0.0,
+    36.11
+   ],
+   "p2": [
+    20.06,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m4",
+   "p1": [
+    2.06,
+    15.04
+   ],
+   "p2": [
+    2.06,
+    31.86
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m5",
+   "p1": [
+    2.06,
+    15.04
+   ],
+   "p2": [
+    2.36,
+    15.04
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m6",
+   "p1": [
+    2.06,
+    31.86
+   ],
+   "p2": [
+    11.8,
+    31.86
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m7",
+   "p1": [
+    2.36,
+    7.96
+   ],
+   "p2": [
+    2.36,
+    15.04
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m8",
+   "p1": [
+    2.36,
+    7.96
+   ],
+   "p2": [
+    5.6,
+    7.96
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m9",
+   "p1": [
+    2.36,
+    15.04
+   ],
+   "p2": [
+    5.9,
+    15.04
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m10",
+   "p1": [
+    5.6,
+    0.0
+   ],
+   "p2": [
+    5.6,
+    7.96
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m11",
+   "p1": [
+    5.6,
+    0.0
+   ],
+   "p2": [
+    13.16,
+    0.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m12",
+   "p1": [
+    5.6,
+    7.96
+   ],
+   "p2": [
+    5.9,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m13",
+   "p1": [
+    5.9,
+    7.96
+   ],
+   "p2": [
+    5.9,
+    15.04
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m14",
+   "p1": [
+    5.9,
+    7.96
+   ],
+   "p2": [
+    13.16,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m15",
+   "p1": [
+    5.9,
+    15.04
+   ],
+   "p2": [
+    11.8,
+    15.04
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m16",
+   "p1": [
+    11.8,
+    15.04
+   ],
+   "p2": [
+    11.8,
+    31.86
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m17",
+   "p1": [
+    11.8,
+    31.86
+   ],
+   "p2": [
+    20.06,
+    31.86
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m18",
+   "p1": [
+    13.16,
+    0.0
+   ],
+   "p2": [
+    13.16,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m19",
+   "p1": [
+    13.16,
+    0.0
+   ],
+   "p2": [
+    34.52,
+    0.0
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m20",
+   "p1": [
+    13.16,
+    7.96
+   ],
+   "p2": [
+    34.52,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m21",
+   "p1": [
+    20.06,
+    31.86
+   ],
+   "p2": [
+    20.06,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m22",
+   "p1": [
+    20.06,
+    36.11
+   ],
+   "p2": [
+    32.63,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m23",
+   "p1": [
+    32.63,
+    25.37
+   ],
+   "p2": [
+    32.63,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m24",
+   "p1": [
+    32.63,
+    25.37
+   ],
+   "p2": [
+    48.38,
+    25.37
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m25",
+   "p1": [
+    32.63,
+    36.11
+   ],
+   "p2": [
+    48.38,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m26",
+   "p1": [
+    34.52,
+    0.0
+   ],
+   "p2": [
+    34.52,
+    5.9
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m27",
+   "p1": [
+    34.52,
+    5.9
+   ],
+   "p2": [
+    34.52,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m28",
+   "p1": [
+    34.52,
+    5.9
+   ],
+   "p2": [
+    51.92,
+    5.9
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m29",
+   "p1": [
+    34.52,
+    7.96
+   ],
+   "p2": [
+    51.92,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m30",
+   "p1": [
+    48.38,
+    25.37
+   ],
+   "p2": [
+    48.38,
+    29.03
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m31",
+   "p1": [
+    48.38,
+    29.03
+   ],
+   "p2": [
+    48.38,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m32",
+   "p1": [
+    48.38,
+    29.03
+   ],
+   "p2": [
+    55.46,
+    29.03
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m33",
+   "p1": [
+    48.38,
+    36.11
+   ],
+   "p2": [
+    55.46,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m34",
+   "p1": [
+    51.92,
+    5.9
+   ],
+   "p2": [
+    51.92,
+    7.96
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m35",
+   "p1": [
+    51.92,
+    5.9
+   ],
+   "p2": [
+    66.08,
+    5.9
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m36",
+   "p1": [
+    51.92,
+    7.96
+   ],
+   "p2": [
+    51.92,
+    11.5
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m37",
+   "p1": [
+    51.92,
+    11.5
+   ],
+   "p2": [
+    66.08,
+    11.5
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m38",
+   "p1": [
+    55.46,
+    29.03
+   ],
+   "p2": [
+    55.46,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m39",
+   "p1": [
+    55.46,
+    36.11
+   ],
+   "p2": [
+    66.08,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m40",
+   "p1": [
+    66.08,
+    5.9
+   ],
+   "p2": [
+    66.08,
+    11.5
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m41",
+   "p1": [
+    66.08,
+    11.5
+   ],
+   "p2": [
+    66.08,
+    15.04
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m42",
+   "p1": [
+    66.08,
+    15.04
+   ],
+   "p2": [
+    66.08,
+    22.12
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m43",
+   "p1": [
+    66.08,
+    15.04
+   ],
+   "p2": [
+    73.16,
+    15.04
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m44",
+   "p1": [
+    66.08,
+    22.12
+   ],
+   "p2": [
+    66.08,
+    26.25
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m45",
+   "p1": [
+    66.08,
+    22.12
+   ],
+   "p2": [
+    73.16,
+    22.12
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m46",
+   "p1": [
+    66.08,
+    26.25
+   ],
+   "p2": [
+    66.08,
+    32.45
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m47",
+   "p1": [
+    66.08,
+    26.25
+   ],
+   "p2": [
+    73.16,
+    26.25
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m48",
+   "p1": [
+    66.08,
+    32.45
+   ],
+   "p2": [
+    66.08,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m49",
+   "p1": [
+    66.08,
+    32.45
+   ],
+   "p2": [
+    73.16,
+    32.45
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m50",
+   "p1": [
+    66.08,
+    36.11
+   ],
+   "p2": [
+    73.16,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m51",
+   "p1": [
+    73.16,
+    15.04
+   ],
+   "p2": [
+    73.16,
+    22.12
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m52",
+   "p1": [
+    73.16,
+    22.12
+   ],
+   "p2": [
+    76.7,
+    22.12
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m53",
+   "p1": [
+    73.16,
+    26.25
+   ],
+   "p2": [
+    73.16,
+    32.45
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m54",
+   "p1": [
+    73.16,
+    26.25
+   ],
+   "p2": [
+    76.7,
+    26.25
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m55",
+   "p1": [
+    73.16,
+    32.45
+   ],
+   "p2": [
+    73.16,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m56",
+   "p1": [
+    73.16,
+    36.11
+   ],
+   "p2": [
+    80.24,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m57",
+   "p1": [
+    76.7,
+    22.12
+   ],
+   "p2": [
+    76.7,
+    26.25
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m58",
+   "p1": [
+    76.7,
+    22.12
+   ],
+   "p2": [
+    80.24,
+    22.12
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m59",
+   "p1": [
+    76.7,
+    26.25
+   ],
+   "p2": [
+    80.24,
+    26.25
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m60",
+   "p1": [
+    80.24,
+    22.12
+   ],
+   "p2": [
+    80.24,
+    26.25
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m61",
+   "p1": [
+    80.24,
+    26.25
+   ],
+   "p2": [
+    80.24,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m62",
+   "p1": [
+    80.24,
+    26.25
+   ],
+   "p2": [
+    88.2,
+    26.25
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m63",
+   "p1": [
+    80.24,
+    36.11
+   ],
+   "p2": [
+    88.2,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m64",
+   "p1": [
+    88.2,
+    26.25
+   ],
+   "p2": [
+    88.2,
+    36.11
+   ],
+   "spessore": 0.12,
+   "esterno": false
+  },
+  {
+   "id": "m65",
+   "p1": [
+    88.2,
+    26.25
+   ],
+   "p2": [
+    91.45,
+    26.25
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m66",
+   "p1": [
+    88.2,
+    36.11
+   ],
+   "p2": [
+    91.45,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  },
+  {
+   "id": "m67",
+   "p1": [
+    91.45,
+    26.25
+   ],
+   "p2": [
+    91.45,
+    36.11
+   ],
+   "spessore": 0.3,
+   "esterno": true
+  }
+ ],
+ "aperture": [
+  {
+   "muro": "m14",
+   "da": 2.63,
+   "a": 4.63,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m20",
+   "da": 9.68,
+   "a": 11.68,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m29",
+   "da": 7.7,
+   "a": 9.7,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m37",
+   "da": 6.08,
+   "a": 8.08,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m13",
+   "da": 2.54,
+   "a": 4.54,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m16",
+   "da": 7.41,
+   "a": 9.41,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m17",
+   "da": 3.13,
+   "a": 5.13,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m24",
+   "da": 6.88,
+   "a": 8.88,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m38",
+   "da": 2.54,
+   "a": 4.54,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m42",
+   "da": 2.54,
+   "a": 4.54,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m44",
+   "da": 1.56,
+   "a": 2.56,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m46",
+   "da": 2.1,
+   "a": 4.1,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m48",
+   "da": 1.33,
+   "a": 2.33,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m57",
+   "da": 1.56,
+   "a": 2.56,
+   "tipo": "porta",
+   "dedotta": true
+  },
+  {
+   "muro": "m61",
+   "da": 3.93,
+   "a": 5.93,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m61",
+   "da": 3.93,
+   "a": 5.93,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m64",
+   "da": 3.93,
+   "a": 5.93,
+   "tipo": "passaggio",
+   "dedotta": true
+  },
+  {
+   "muro": "m39",
+   "da": 4.21,
+   "a": 6.41,
+   "tipo": "ingresso",
+   "dedotta": true
+  }
+ ],
+ "stanze": [
+  {
+   "id": "s1",
+   "tipo": "altro",
+   "nome": "Locale nord sx",
+   "poligono": [
+    [
+     5.6,
+     0.0
+    ],
+    [
+     13.16,
+     0.0
+    ],
+    [
+     13.16,
+     7.96
+    ],
+    [
+     5.6,
+     7.96
+    ]
+   ],
+   "h": 4.0,
+   "area_m2": 60.18
+  },
+  {
+   "id": "s2",
+   "tipo": "altro",
+   "nome": "Deposito nord",
+   "poligono": [
+    [
+     13.16,
+     0.0
+    ],
+    [
+     34.52,
+     0.0
+    ],
+    [
+     34.52,
+     7.96
+    ],
+    [
+     13.16,
+     7.96
+    ]
+   ],
+   "h": 4.0,
+   "area_m2": 170.03
+  },
+  {
+   "id": "s3",
+   "tipo": "altro",
+   "nome": "Area vendita / magazzino",
+   "poligono": [
+    [
+     5.9,
+     7.96
+    ],
+    [
+     51.92,
+     7.96
+    ],
+    [
+     51.92,
+     11.5
+    ],
+    [
+     66.08,
+     11.5
+    ],
+    [
+     66.08,
+     36.11
+    ],
+    [
+     55.46,
+     36.11
+    ],
+    [
+     55.46,
+     29.03
+    ],
+    [
+     48.38,
+     29.03
+    ],
+    [
+     48.38,
+     25.37
+    ],
+    [
+     32.63,
+     25.37
+    ],
+    [
+     32.63,
+     36.11
+    ],
+    [
+     20.06,
+     36.11
+    ],
+    [
+     20.06,
+     31.86
+    ],
+    [
+     11.8,
+     31.86
+    ],
+    [
+     11.8,
+     15.04
+    ],
+    [
+     5.9,
+     15.04
+    ]
+   ],
+   "h": 4.0,
+   "area_m2": 1265.24
+  },
+  {
+   "id": "s4",
+   "tipo": "altro",
+   "nome": "Locali tecnici nord",
+   "poligono": [
+    [
+     34.52,
+     5.9
+    ],
+    [
+     51.92,
+     5.9
+    ],
+    [
+     51.92,
+     7.96
+    ],
+    [
+     34.52,
+     7.96
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 35.84
+  },
+  {
+   "id": "s5",
+   "tipo": "altro",
+   "nome": "Locali nord-est",
+   "poligono": [
+    [
+     51.92,
+     5.9
+    ],
+    [
+     66.08,
+     5.9
+    ],
+    [
+     66.08,
+     11.5
+    ],
+    [
+     51.92,
+     11.5
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 79.3
+  },
+  {
+   "id": "s6",
+   "tipo": "ripostiglio",
+   "nome": "Locali sx alto",
+   "poligono": [
+    [
+     2.36,
+     7.96
+    ],
+    [
+     5.9,
+     7.96
+    ],
+    [
+     5.9,
+     15.04
+    ],
+    [
+     2.36,
+     15.04
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 25.06
+  },
+  {
+   "id": "s7",
+   "tipo": "altro",
+   "nome": "Uffici e servizi sx",
+   "poligono": [
+    [
+     2.06,
+     15.04
+    ],
+    [
+     11.8,
+     15.04
+    ],
+    [
+     11.8,
+     31.86
+    ],
+    [
+     2.06,
+     31.86
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 163.83
+  },
+  {
+   "id": "s8",
+   "tipo": "altro",
+   "nome": "Locali sx basso",
+   "poligono": [
+    [
+     0.0,
+     31.86
+    ],
+    [
+     20.06,
+     31.86
+    ],
+    [
+     20.06,
+     36.11
+    ],
+    [
+     0.0,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 85.25
+  },
+  {
+   "id": "s9",
+   "tipo": "altro",
+   "nome": "Locale centrale basso",
+   "poligono": [
+    [
+     32.63,
+     25.37
+    ],
+    [
+     48.38,
+     25.37
+    ],
+    [
+     48.38,
+     36.11
+    ],
+    [
+     32.63,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 169.15
+  },
+  {
+   "id": "s10",
+   "tipo": "altro",
+   "nome": "Locale tecnico basso",
+   "poligono": [
+    [
+     48.38,
+     29.03
+    ],
+    [
+     55.46,
+     29.03
+    ],
+    [
+     55.46,
+     36.11
+    ],
+    [
+     48.38,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 50.13
+  },
+  {
+   "id": "s11",
+   "tipo": "altro",
+   "nome": "Locale chiuso est",
+   "poligono": [
+    [
+     66.08,
+     15.04
+    ],
+    [
+     73.16,
+     15.04
+    ],
+    [
+     73.16,
+     22.12
+    ],
+    [
+     66.08,
+     22.12
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 50.13
+  },
+  {
+   "id": "s12",
+   "tipo": "disimpegno",
+   "nome": "Disimpegno est",
+   "poligono": [
+    [
+     66.08,
+     22.12
+    ],
+    [
+     76.7,
+     22.12
+    ],
+    [
+     76.7,
+     26.25
+    ],
+    [
+     66.08,
+     26.25
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 43.86
+  },
+  {
+   "id": "s13",
+   "tipo": "altro",
+   "nome": "Locale est 1",
+   "poligono": [
+    [
+     66.08,
+     26.25
+    ],
+    [
+     73.16,
+     26.25
+    ],
+    [
+     73.16,
+     32.45
+    ],
+    [
+     66.08,
+     32.45
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 43.9
+  },
+  {
+   "id": "s14",
+   "tipo": "altro",
+   "nome": "Locali est 2",
+   "poligono": [
+    [
+     66.08,
+     32.45
+    ],
+    [
+     73.16,
+     32.45
+    ],
+    [
+     73.16,
+     36.11
+    ],
+    [
+     66.08,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 25.91
+  },
+  {
+   "id": "s15",
+   "tipo": "bagno",
+   "nome": "Servizi est",
+   "poligono": [
+    [
+     76.7,
+     22.12
+    ],
+    [
+     80.24,
+     22.12
+    ],
+    [
+     80.24,
+     26.25
+    ],
+    [
+     76.7,
+     26.25
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 14.62
+  },
+  {
+   "id": "s16",
+   "tipo": "altro",
+   "nome": "Servizi est basso",
+   "poligono": [
+    [
+     73.16,
+     26.25
+    ],
+    [
+     80.24,
+     26.25
+    ],
+    [
+     80.24,
+     36.11
+    ],
+    [
+     73.16,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 69.81
+  },
+  {
+   "id": "s17",
+   "tipo": "altro",
+   "nome": "Magazzino est",
+   "poligono": [
+    [
+     80.24,
+     26.25
+    ],
+    [
+     88.2,
+     26.25
+    ],
+    [
+     88.2,
+     36.11
+    ],
+    [
+     80.24,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 78.49
+  },
+  {
+   "id": "s18",
+   "tipo": "altro",
+   "nome": "Locale est estremo",
+   "poligono": [
+    [
+     88.2,
+     26.25
+    ],
+    [
+     91.45,
+     26.25
+    ],
+    [
+     91.45,
+     36.11
+    ],
+    [
+     88.2,
+     36.11
+    ]
+   ],
+   "h": 3.0,
+   "area_m2": 32.05
+  }
+ ],
+ "dubbi": [
+  "Immagine 840x560 px molto sgranata: etichette dei locali illegibili, nomi generici.",
+  "Scala 1:500 ma formato reale del foglio ignoto: se fosse A3 le misure sarebbero x1,41. Il capannone risulta lungo ~86 m e largo ~35 m: plausibile per uso commerciale/industriale.",
+  "Non è un appartamento: grande locale commerciale/magazzino con uffici e servizi; arredo da definire a mano.",
+  "Porte non disegnate: tutte dedotte (una per stanza verso l'area principale); ingresso posto a caso sul lato sud (x ~ 35-40 m).",
+  "Semplificati: muri obliqui dei locali a sinistra (ala inclinata), locali interni alla sala (quadrati al centro), pilastri, partizioni minori.",
+  "Esclusi i due piccoli corpi scollegati a sinistra, il piano primo e la cartiglio.",
+  "Il corpo nord (due locali) ha bordo sinistro con rientranza ignorata.",
+  "Altezze ipotizzate: 4 m sala/depositi, 3 m locali minori."
+ ],
+ "superficie_calcolata_m2": 2462.8
+}

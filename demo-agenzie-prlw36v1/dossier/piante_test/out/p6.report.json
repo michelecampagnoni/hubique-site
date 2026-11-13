@@ -1,0 +1,25 @@
+{
+ "id": "p6",
+ "fonte": "planimetria.jpg",
+ "tipo_disegno": "progetto",
+ "qualita_input": "media",
+ "scala": {
+  "metodo": "stima_arredi",
+  "dettaglio": "nessuna quota: porta ingresso ~30 px = 0,9 m => 1 px = 0,03 m (immagine ~512 px)"
+ },
+ "stanze": 7,
+ "muri": 15,
+ "aperture": 12,
+ "superficie_calcolata_m2": 102.2,
+ "semaforo": "verde",
+ "auto": [],
+ "errori": [],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Scala stimata dalla porta d'ingresso (0,9 m): errore possibile +-15%",
+  "Scala a sinistra (a.c.) trattata come parte del soggiorno, senza gradini",
+  "Porte di camere e bagno 2 dedotte dagli archi di apertura",
+  "Portico incluso come terrazzo, lato aperto con parapetto",
+  "Posizione esatta di alcune finestre approssimata"
+ ]
+}

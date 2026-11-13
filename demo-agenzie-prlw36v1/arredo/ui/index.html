@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="it">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HubAgency · Prova i tuoi mobili nella casa nuova · mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Mockup statico. Token grafici HubAgency presi dal CSS di hubagency.it (gli stessi del modulo Conti Agenzia, 05/11/2026) */
+:root{
+  --bg:#fafafa; --card:#fff; --fg:#171717; --muted:#737373; --border:#e5e5e5; --soft:#f5f5f5;
+  --primary:#c1121f; --primary-dark:#8b0000; --primary-soft:#fdecee; --sidebar:#0a0a0a;
+  --ok:#16a34a; --ok-soft:#e9f8ef; --warn:#d97706; --warn-soft:#fff7e6; --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 "Geist",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+input{font:inherit}
+img{display:block;max-width:100%}
+
+/* ===== barra del mockup (non fa parte del prodotto) ===== */
+.mk{position:sticky;top:0;z-index:80;background:var(--sidebar);color:#e5e5e5;display:flex;align-items:center;gap:14px;padding:8px 16px;flex-wrap:wrap}
+.mk img{height:34px;width:34px;object-fit:cover;object-position:50% 40%;transform:scale(1.6)}
+.mk .t{font-weight:600;font-size:14px;color:#fff;margin-right:6px}
+.mk nav{display:flex;gap:4px;flex-wrap:wrap}
+.mk nav button{all:unset;cursor:pointer;padding:6px 11px;border-radius:8px;font-size:13px;color:#d4d4d4}
+.mk nav button:hover{background:#1a1a1a;color:#fff}
+.mk nav button.on{background:var(--primary);color:#fff;font-weight:600}
+.mk .sp{flex:1}
+.mk .reset{all:unset;cursor:pointer;font-size:12px;color:#a3a3a3;border:1px solid #333;border-radius:8px;padding:4px 10px}
+.mk .reset:hover{color:#fff;border-color:#555}
+@media(max-width:820px){.mk{gap:8px;padding:8px 10px}.mk .t{display:none}.mk nav{flex-wrap:nowrap;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}.mk nav button{white-space:nowrap;padding:6px 9px}.mk .sp{display:none}}
+
+.vista{display:none}.vista.on{display:block}
+
+/* ===== impaginazione desktop: telefono + note ===== */
+.stage{display:flex;gap:32px;justify-content:center;align-items:flex-start;padding:28px 20px 60px}
+.phone{width:392px;flex:none;background:#fff;border:10px solid #0a0a0a;border-radius:38px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18);position:relative}
+.phone .scr{height:780px;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none}
+.phone .scr::-webkit-scrollbar{display:none}
+.notes{width:340px;flex:none;font-size:14px}
+.notes h2{font-size:18px;margin:0 0 6px;letter-spacing:-.01em}
+.notes p{margin:0 0 10px;color:#404040}
+.notes .n{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
+.notes .n b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--primary);margin-bottom:4px}
+.notes .sim{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+@media(max-width:820px){
+  .stage{padding:0;display:block}
+  .phone{width:100%;border:0;border-radius:0;box-shadow:none}
+  .phone .scr{height:auto;min-height:calc(100vh - 52px)}
+  .notes{width:auto;padding:16px}
+}
+
+/* ===== componenti comuni ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15px;padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--fg);text-decoration:none;min-height:46px}
+.btn:hover{background:var(--soft)}
+.btn.pri{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn.pri:hover{background:var(--primary-dark)}
+.btn.dark{background:#171717;border-color:#171717;color:#fff}
+.btn.block{width:100%}
+.btn.sm{white-space:nowrap;font-size:13px;padding:6px 11px;min-height:0;border-radius:8px;font-weight:500}
+.btn:disabled{opacity:.4;cursor:default}
+.lnk{all:unset;cursor:pointer;color:var(--primary);font-weight:500;font-size:14px}
+.mini{font-size:12.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary)}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.grey{background:var(--soft);color:var(--muted)}
+.ico{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== (a) annuncio sul sito agenzia ===== */
+.ag-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:5}
+.ag-logo{width:30px;height:30px;border-radius:8px;background:#1f2937;color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.ag-head b{font-size:14px}.ag-head small{display:block;font-size:11.5px;color:var(--muted);line-height:1.2}
+.hero{position:relative}
+.hero img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero .cnt{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:3px 8px;border-radius:6px}
+.ann{padding:14px 16px}
+.ann .prezzo{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.ann h1{font-size:17px;margin:2px 0 4px;font-weight:600}
+.ann .feat{display:flex;gap:14px;font-size:13px;color:var(--muted);margin:8px 0 2px;flex-wrap:wrap}
+
+.prova-box{margin:6px 16px 16px;border:1px solid #f5c2c6;background:linear-gradient(180deg,#fff 0%,#fff8f8 100%);border-radius:14px;overflow:hidden}
+.prova-box .pv{display:grid;grid-template-columns:1fr 1fr;height:118px;position:relative}
+.prova-box .pv img{width:100%;height:118px;object-fit:cover}
+.prova-box .pv:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff}
+.prova-box .pv span{position:absolute;bottom:6px;font-size:10.5px;font-weight:600;background:rgba(0,0,0,.55);color:#fff;padding:2px 7px;border-radius:5px}
+.prova-box .in{padding:12px 14px 14px}
+.prova-box h3{margin:0 0 4px;font-size:16px;letter-spacing:-.01em}
+.prova-box p{margin:0 0 12px;font-size:13.5px;color:#404040}
+.ann-desc{padding:0 16px 20px;font-size:14px;color:#404040}
+.ann-desc h4{margin:0 0 4px;font-size:14px;color:var(--fg)}
+
+/* ===== (b) pagina pubblica di prova ===== */
+.pp-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:5}
+.pp-head .back{all:unset;cursor:pointer;width:32px;height:32px;display:grid;place-items:center;border-radius:8px}
+.pp-head .back:hover{background:var(--soft)}
+.pp-head .ttl{flex:1;min-width:0}
+.pp-head .ttl b{display:block;font-size:14px}
+.pp-head .ttl small{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps{display:flex;gap:6px;padding:12px 14px 4px}
+.steps div{flex:1}
+.steps i{display:block;height:4px;border-radius:2px;background:var(--border)}
+.steps div.on i,.steps div.done i{background:var(--primary)}
+.steps span{display:block;font-size:11.5px;color:var(--muted);margin-top:5px}
+.steps div.on span{color:var(--fg);font-weight:600}
+.body{padding:10px 14px 24px}
+.body h2{font-size:19px;margin:6px 0 4px;letter-spacing:-.015em}
+.body .lead{margin:0 0 14px;font-size:14px;color:#404040}
+.cnt-prove{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin:2px 0 12px}
+.cnt-prove .dots{display:flex;gap:4px}.cnt-prove .dots i{width:8px;height:8px;border-radius:50%;background:var(--border)}
+.cnt-prove .dots i.u{background:var(--primary)}
+
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.room{all:unset;cursor:pointer;position:relative;border-radius:10px;overflow:hidden;border:2px solid transparent;background:var(--soft)}
+.room img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.room .lb{position:absolute;left:6px;bottom:6px;font-size:11.5px;font-weight:600;background:rgba(255,255,255,.92);padding:2px 7px;border-radius:5px}
+.room .sug{position:absolute;left:6px;top:6px}
+.room.sel{border-color:var(--primary)}
+.room.sel:after{content:"✓";position:absolute;right:6px;top:6px;width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center}
+.room.no{cursor:not-allowed}
+.room.no img{filter:grayscale(1) brightness(.85)}
+.room.no .why{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:10px;font-size:12px;font-weight:600;color:#fff;background:rgba(0,0,0,.45)}
+
+.upl{border:2px dashed #d4d4d4;border-radius:14px;padding:22px 16px;text-align:center;background:#fff}
+.upl .big{width:52px;height:52px;border-radius:50%;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;margin:0 auto 10px}
+.upl .big .ico{width:26px;height:26px}
+.upl b{display:block;font-size:15px;margin-bottom:2px}
+.tips{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.tips li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#404040}
+.tips li .ico{color:var(--ok);margin-top:2px}
+.chosen{display:flex;gap:10px;align-items:center;padding:8px;border:1px solid var(--border);border-radius:10px;background:#fff;margin-bottom:14px}
+.chosen img{width:64px;height:48px;object-fit:cover;border-radius:6px}
+.chosen div{flex:1;font-size:13px;line-height:1.3}
+.chosen div b{display:block}
+.prev{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.prev img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.prev.dark img{filter:brightness(.28) saturate(.6)}
+.prev.empty img{filter:blur(1px)}
+.chk{margin:12px 0 4px;display:grid;gap:6px}
+.chk .row{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
+.chk .row .ico{margin-top:2px}
+.chk .ok{color:var(--ok)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.chips span{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--soft);border:1px solid var(--border)}
+.err{display:grid;grid-template-columns:22px 1fr;gap:8px;padding:12px;border-radius:10px;background:var(--warn-soft);border:1px solid #f6d7a7;font-size:13.5px;margin:12px 0}
+.err .ico{color:var(--warn);margin-top:1px}
+.err b{display:block;margin-bottom:2px}
+.err .act{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.privacy-note{display:flex;gap:8px;font-size:12px;color:var(--muted);margin-top:12px}
+.privacy-note .ico{width:15px;height:15px;margin-top:2px}
+.foot-cta{position:sticky;bottom:0;background:linear-gradient(180deg,rgba(255,255,255,0) 0,#fff 18px);padding:18px 14px 14px;z-index:4}
+
+/* attesa */
+.wait{text-align:center;padding-top:10px}
+.wait .pair{display:flex;gap:8px;justify-content:center;align-items:center;margin:8px 0 18px}
+.wait .pair img{width:120px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+.wait .pair .plus{font-weight:700;color:var(--muted)}
+.bar{height:8px;border-radius:4px;background:var(--soft);overflow:hidden;margin:14px 0 6px}
+.bar i{display:block;height:100%;width:0;background:var(--primary);border-radius:4px;transition:width .4s linear}
+.fasi{list-style:none;margin:16px 0 0;padding:0;text-align:left;display:grid;gap:10px}
+.fasi li{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--muted)}
+.fasi li i{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex:none;display:grid;place-items:center;font-style:normal;font-size:11px}
+.fasi li.on{color:var(--fg);font-weight:600}
+.fasi li.on i{border-color:var(--primary);border-top-color:transparent;animation:gira .8s linear infinite}
+.fasi li.done{color:var(--fg)}
+.fasi li.done i{border-color:var(--ok);background:var(--ok);color:#fff}
+.fasi li.done i:before{content:"✓"}
+@keyframes gira{to{transform:rotate(360deg)}}
+.skel{position:relative;border-radius:12px;overflow:hidden;margin-top:18px}
+.skel img{width:100%;aspect-ratio:3/2;object-fit:cover;filter:blur(8px) grayscale(.4);transform:scale(1.05)}
+.skel:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);background-size:200% 100%;animation:luce 1.6s linear infinite}
+@keyframes luce{from{background-position:150% 0}to{background-position:-50% 0}}
+
+/* prima / dopo */
+.ba{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/2;background:#000;user-select:none;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba .before{clip-path:inset(0 50% 0 0)}
+.ba .line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;transform:translateX(-1px);pointer-events:none}
+.ba .knob{position:absolute;top:50%;left:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.35);display:grid;place-items:center;pointer-events:none;font-weight:700;color:var(--fg);font-size:14px;letter-spacing:-2px}
+.ba .lbl{position:absolute;top:8px;font-size:11px;font-weight:600;background:rgba(0,0,0,.55);color:#fff;padding:2px 8px;border-radius:5px;pointer-events:none}
+.ba .lbl.l{left:8px}.ba .lbl.r{right:8px}
+.ba .wm{position:absolute;right:8px;bottom:8px;font-size:11px;font-weight:600;color:#fff;background:rgba(0,0,0,.5);padding:3px 8px;border-radius:5px;pointer-events:none;letter-spacing:.02em}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.res-act{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.disclaimer{font-size:12px;color:var(--muted);margin:4px 0 14px}
+.agcard{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:12px;background:#fff;margin-top:10px}
+.agcard .av{flex:none;width:42px;height:42px;border-radius:50%;background:#e5e5e5;display:grid;place-items:center;font-weight:700;color:#525252}
+.agcard>div:not(.av){flex:1;font-size:13px;line-height:1.35}
+.agcard>div:not(.av) b{display:block;font-size:14px}
+.rate{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:14px 0 0}
+.rate button{all:unset;cursor:pointer;border:1px solid var(--border);border-radius:8px;padding:4px 10px;font-size:13px;color:var(--fg);background:#fff}
+.rate button.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+
+/* (c) terza prova */
+.gate .lockimg{position:relative;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.gate .lockimg img{width:100%;aspect-ratio:3/1.4;object-fit:cover;filter:blur(3px) brightness(.85)}
+.gate .lockimg div{position:absolute;inset:0;display:grid;place-items:center}
+.gate .lockimg div span{background:#fff;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.fld label small{font-weight:400;color:var(--muted)}
+.fld input[type=email],.fld input[type=tel],.fld input[type=text]{width:100%;font-size:16px;padding:11px 12px;border:1px solid #d4d4d4;border-radius:10px;background:#fff;color:var(--fg)}
+.fld input:focus{outline:2px solid var(--primary);outline-offset:-1px;border-color:var(--primary)}
+.fld.bad input{border-color:var(--primary);background:#fff8f8}
+.fld .e{display:none;font-size:12.5px;color:var(--primary);margin-top:4px}
+.fld.bad .e{display:block}
+.cb{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#404040;margin-bottom:10px}
+.cb input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--primary);flex:none}
+.cb a{color:var(--primary)}
+.cb.bad{color:var(--primary)}
+.why-box{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:13px;color:#404040;margin-bottom:14px}
+.why-box ul{margin:4px 0 0;padding-left:18px}
+.done-box{text-align:center;padding:20px 6px}
+.done-box .big{width:56px;height:56px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;margin:0 auto 10px}
+.done-box .big .ico{width:28px;height:28px}
+
+.ha-foot{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--border);background:#fff}
+.ha-foot b{color:var(--fg)}
+
+/* ===== (d) area agente ===== */
+.ha{display:flex;min-height:calc(100vh - 50px)}
+.side{width:236px;flex:none;background:var(--sidebar);color:#f5f5f5;display:flex;flex-direction:column;padding:18px 14px}
+.side .lg{width:120px;margin:0 0 14px 6px}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.side nav a{padding:9px 12px;border-radius:8px;font-size:14px;color:#d4d4d4;text-decoration:none}
+.side nav a.on{background:var(--primary);color:#fff;font-weight:600}
+.side nav a.nw:after{content:"nuovo";margin-left:8px;font-size:10px;font-weight:700;padding:1px 6px;border-radius:999px;background:#fff;color:var(--primary)}
+.side .ft{margin-top:auto;font-size:11.5px;color:#737373;padding:0 8px}
+main.wrap{flex:1;min-width:0;padding:22px 30px 60px;max-width:1240px}
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.topbar h1{font-size:22px;margin:0;font-weight:600;letter-spacing:-.02em}
+.topbar .sp{flex:1}
+.pgsub{color:var(--muted);margin:0 0 18px;font-size:14px}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.kpi .k{font-size:13px;color:var(--muted)}
+.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:2px 0}
+.kpi .d{font-size:12.5px;color:var(--muted)}
+.kpi.red .v{color:var(--primary)}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.panel .label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:12px}
+.panel .label .sp{flex:1}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{font-size:12px;font-weight:500;color:var(--muted);text-align:left;padding:8px;border-bottom:1px solid var(--border);background:var(--soft)}
+table.t td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+table.t td.n,table.t th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.t tr.off td{color:var(--muted)}
+.lst{display:flex;gap:10px;align-items:center}
+.lst img{width:56px;height:40px;object-fit:cover;border-radius:6px}
+.lst b{display:block;font-size:13.5px;line-height:1.25}
+.lst small{color:var(--muted);font-size:12px}
+.sw{position:relative;width:40px;height:22px;flex:none;display:inline-block}
+.sw input{opacity:0;width:0;height:0}
+.sw span{position:absolute;inset:0;border-radius:999px;background:#d4d4d4;transition:.15s;cursor:pointer}
+.sw span:before{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.sw input:checked+span{background:var(--primary)}
+.sw input:checked+span:before{transform:translateX(18px)}
+.ld{display:grid;grid-template-columns:80px 1fr;column-gap:12px;row-gap:8px;align-items:start;padding:12px 0;border-bottom:1px solid var(--border)}
+.ld:last-child{border-bottom:0}
+.ld .th{display:flex;width:80px}.ld>div:nth-child(2){min-width:0}
+.ld .th img{max-width:none;width:44px;height:33px;object-fit:cover;border-radius:5px;border:2px solid #fff;margin-left:-10px}
+.ld .th img:first-child{margin-left:0}
+.ld b{font-size:14px}
+.ld .meta{font-size:12.5px;color:var(--muted);line-height:1.4}
+.ld .acts{display:flex;gap:6px;grid-column:2}
+.uso{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);margin-top:14px}
+.uso .bar{flex:1;margin:0}
+@media(max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.side{display:none}main.wrap{padding:18px 14px 40px}}
+@media(max-width:640px){table.t .hm{display:none}}
+
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;width:max-content;max-width:92vw}
+#toast div{background:#171717;color:#fff;border-radius:10px;padding:10px 14px;font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.25);border-left:3px solid var(--primary)}
+</style>
+</head>
+<body>
+<div id="esempio-dimostrativo" style="position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:2147483000;pointer-events:none;background:#111;color:#fde047;font:600 10.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;padding:5px 12px;border-radius:0 0 7px 7px;white-space:nowrap">ESEMPIO DIMOSTRATIVO · DATI FITTIZI</div><script>if(window.self!==window.top){var e=document.getElementById("esempio-dimostrativo");e&&e.remove()}</script>
+
+
+<!-- ========= barra del mockup ========= -->
+<div class="mk">
+  <img src="../img/logo.png" alt="HubAgency">
+  <span class="t">Prova i tuoi mobili · mockup</span>
+  <nav id="mknav">
+    <button data-v="annuncio" class="on">a · Annuncio</button>
+    <button data-v="prova">b · Pagina di prova</button>
+    <button data-v="terza">c · Terza prova</button>
+    <button data-v="agente">d · Area agente</button>
+  </nav>
+  <span class="sp"></span>
+  <button class="reset" id="reset">Ricomincia demo</button>
+</div>
+
+<!-- ======================= (a) ANNUNCIO ======================= -->
+<section class="vista on" id="v-annuncio">
+<div class="stage">
+  <div class="phone"><div class="scr">
+    <div class="ag-head">
+      <div class="ag-logo">IC</div>
+      <div><b>Immobiliare Città Studi</b><small>Milano · sito dell'agenzia</small></div>
+    </div>
+    <div class="hero">
+      <img src="../img/1-immobile-vuoto.jpg" alt="Soggiorno dell'immobile">
+      <span class="cnt">1 / 12</span>
+    </div>
+    <div class="ann">
+      <div class="prezzo">€ 385.000</div>
+      <h1>Trilocale luminoso con balcone</h1>
+      <div class="mini">Via Pascoli, Milano · Città Studi</div>
+      <div class="feat"><span>85 m²</span><span>3 locali</span><span>1 bagno</span><span>2° piano</span><span>Classe C</span></div>
+    </div>
+
+    <div class="prova-box" id="box-annuncio">
+      <div class="pv">
+        <img src="../img/1-immobile-vuoto.jpg" alt=""><img src="../img/3-risultato-gpt.jpg" alt="">
+        <span style="left:6px">Oggi</span><span style="right:6px">Con i tuoi mobili</span>
+      </div>
+      <div class="in">
+        <h3>Prova i tuoi mobili in questa casa</h3>
+        <p>Fotografa il tuo salotto: in circa 30 secondi vedi questa stanza arredata con i tuoi mobili. Gratis, senza registrazione.</p>
+        <button class="btn pri block" data-go="prova">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Prova ora
+        </button>
+      </div>
+    </div>
+
+    <div class="ann-desc">
+      <h4>Descrizione</h4>
+      Trilocale di 85 m² al secondo piano con ascensore, soggiorno con due finestre esposte a sud, cucina abitabile, due camere e bagno finestrato. Parquet in tutta la casa, riscaldamento centralizzato con valvole.
+    </div>
+    <div class="ha-foot">Sito realizzato con <b>HubAgency</b></div>
+  </div></div>
+
+  <div class="notes">
+    <h2>(a) Riquadro sull'annuncio</h2>
+    <div class="n"><b>Dove compare</b><p>Sotto prezzo e caratteristiche, sopra la descrizione: è la zona che si legge sul telefono senza scorrere molto. Compare solo se l'agente ha acceso «Prova arredo» su questo annuncio.</p></div>
+    <div class="n"><b>Perché così</b><p>L'anteprima prima/dopo spiega la funzione senza leggere. Una sola azione («Prova ora»), con le tre cose che tolgono il dubbio: quanto ci vuole, gratis, niente registrazione.</p></div>
+    <div class="n"><b>Sui portali</b><p>Sui portali (Immobiliare.it, Idealista) non possiamo inserire un riquadro: si mette il link alla pagina di prova nel testo dell'annuncio o un QR sulle foto. Vedi dubbi aperti.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ======================= (b) PAGINA DI PROVA ======================= -->
+<section class="vista" id="v-prova">
+<div class="stage">
+  <div class="phone"><div class="scr" id="scr-prova">
+    <div class="pp-head">
+      <button class="back" id="back" aria-label="Indietro"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="ttl"><b>Prova i tuoi mobili</b><small>Trilocale con balcone · Via Pascoli, Milano</small></div>
+      <div class="ag-logo" title="Immobiliare Città Studi">IC</div>
+    </div>
+    <div class="steps" id="steps">
+      <div data-s="1"><i></i><span>1 · Stanza</span></div>
+      <div data-s="2"><i></i><span>2 · La tua foto</span></div>
+      <div data-s="3"><i></i><span>3 · Risultato</span></div>
+    </div>
+
+    <!-- passo 1 -->
+    <div class="body pst" id="p1">
+      <h2>Quale stanza vuoi arredare?</h2>
+      <p class="lead">Ti abbiamo già selezionato la più adatta. Tocca un'altra foto per cambiarla.</p>
+      <div class="cnt-prove" id="cnt1"></div>
+      <div class="rooms" id="rooms"></div>
+    </div>
+
+    <!-- passo 2 -->
+    <div class="body pst" id="p2" style="display:none">
+      <div class="chosen">
+        <img src="../img/1-immobile-vuoto.jpg" alt="" id="chosen-img">
+        <div><b id="chosen-name">Soggiorno</b>stanza da arredare</div>
+        <button class="lnk" data-step="1">Cambia</button>
+      </div>
+      <h2>Fotografa il tuo salotto</h2>
+      <p class="lead">Una foto della stanza di casa tua con i mobili che vuoi portare.</p>
+
+      <div id="upl-empty">
+        <label class="upl" for="file" style="display:block;cursor:pointer">
+          <div class="big"><svg class="ico" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+          <b>Scatta o scegli una foto</b>
+          <span class="mini">JPG o PNG dal telefono, fino a 15 MB</span>
+        </label>
+        <input type="file" id="file" accept="image/*" hidden>
+        <ul class="tips">
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Inquadra la stanza intera, in orizzontale</li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Di giorno o con le luci accese</li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Si devono vedere bene divano, tavolo, mobili</li>
+        </ul>
+      </div>
+
+      <div id="upl-done" style="display:none">
+        <div class="prev" id="prev"><img src="../img/2-mobili-cliente.jpg" alt="La tua foto"></div>
+        <div id="check"></div>
+        <button class="lnk" id="cambia-foto" style="margin-top:6px">Usa un'altra foto</button>
+      </div>
+
+      <div class="privacy-note"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>La tua foto serve solo per questa prova: non la vede nessuno e viene cancellata dopo 30 giorni.</span></div>
+      <div style="height:70px"></div>
+    </div>
+
+    <!-- passo 3a: attesa -->
+    <div class="body pst" id="p3w" style="display:none">
+      <div class="wait">
+        <h2>Stiamo arredando la stanza</h2>
+        <p class="lead" style="margin:0">Ci vogliono circa 30 secondi. Resta su questa pagina.</p>
+        <div class="bar"><i id="wbar"></i></div>
+        <div class="mini" id="wtime">circa 30 secondi</div>
+        <ul class="fasi" id="fasi">
+          <li><i></i>Leggo la stanza della casa</li>
+          <li><i></i>Riconosco i tuoi mobili</li>
+          <li><i></i>Li sistemo nella stanza</li>
+          <li><i></i>Controllo luci e proporzioni</li>
+        </ul>
+        <div class="skel"><img src="../img/1-immobile-vuoto.jpg" alt=""></div>
+        <p class="mini" style="margin-top:10px">Mockup: l'attesa è accorciata a 6 secondi. <button class="lnk" id="skip" style="font-size:12.5px">Salta</button> · <button class="lnk" id="fail" style="font-size:12.5px">Simula errore</button></p>
+      </div>
+    </div>
+
+    <!-- passo 3b: risultato -->
+    <div class="body pst" id="p3r" style="display:none">
+      <h2>Ecco la stanza con i tuoi mobili</h2>
+      <p class="lead">Trascina il cursore per confrontare.</p>
+      <div class="ba" id="ba">
+        <img src="../img/3-risultato-gpt.jpg" alt="Con i tuoi mobili">
+        <img src="../img/1-immobile-vuoto.jpg" alt="Oggi" class="before" id="ba-before">
+        <span class="lbl l">Oggi</span><span class="lbl r">Con i tuoi mobili</span>
+        <span class="wm">Immagine indicativa</span>
+        <div class="line" id="ba-line"></div><div class="knob" id="ba-knob">‹ ›</div>
+        <input type="range" min="0" max="100" value="50" id="ba-range" aria-label="Confronta prima e dopo">
+      </div>
+      <p class="disclaimer">Immagine indicativa generata al computer: misure e proporzioni dei mobili non sono garantite.</p>
+      <div class="res-act">
+        <button class="btn" id="dl"><svg class="ico" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Scarica</button>
+        <button class="btn" id="share"><svg class="ico" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Condividi</button>
+      </div>
+      <button class="btn pri block" id="ancora">Prova un'altra stanza</button>
+      <div class="cnt-prove" id="cnt3" style="justify-content:center;margin-top:8px"></div>
+      <div class="rate">Il risultato ti è utile?
+        <button data-r="si">Sì</button><button data-r="no">Non molto</button></div>
+      <div class="agcard">
+        <div class="av">LM</div>
+        <div><b>Laura Moretti</b>Immobiliare Città Studi · ti mostra la casa dal vivo</div>
+        <a class="btn sm" href="#" id="contatta">Contatta</a>
+      </div>
+    </div>
+
+    <!-- errore generazione -->
+    <div class="body pst" id="p3e" style="display:none">
+      <h2>Non siamo riusciti a creare l'immagine</h2>
+      <div class="err"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <div><b>Il servizio è momentaneamente occupato.</b>Questa prova non viene conteggiata. Riprova tra qualche secondo: la tua foto è ancora caricata.
+        <div class="act"><button class="btn pri sm" id="riprova">Riprova</button><button class="btn sm" data-step="2">Cambia foto</button></div></div></div>
+    </div>
+
+    <div class="foot-cta" id="foot2" style="display:none">
+      <button class="btn pri block" id="genera" disabled>Arreda la stanza</button>
+    </div>
+    <div class="foot-cta" id="foot1">
+      <button class="btn pri block" data-step="2">Continua</button>
+    </div>
+    <div class="ha-foot">Immobiliare Città Studi · con <b>HubAgency</b></div>
+  </div></div>
+
+  <div class="notes" id="notes-prova">
+    <h2>(b) Pagina pubblica di prova</h2>
+    <div class="n"><b>Simula la foto caricata</b>
+      <p>Nel mockup il pulsante di caricamento accetta qualsiasi file e mostra sempre la stessa foto di prova. Per vedere gli errori:</p>
+      <div class="sim">
+        <button class="btn sm" data-sim="ok">Foto buona</button>
+        <button class="btn sm" data-sim="buia">Foto buia</button>
+        <button class="btn sm" data-sim="vuota">Foto senza mobili</button>
+      </div></div>
+    <div class="n"><b>Meno passi</b><p>Stanza già scelta (la più adatta, indicata dall'agente o riconosciuta in automatico), così il visitatore va dritto alla foto. Nessun account. Il controllo della foto avviene subito al caricamento, prima di far aspettare 30 secondi.</p></div>
+    <div class="n"><b>Attesa</b><p>Barra con tempo stimato, quattro fasi che si spuntano, le due foto di partenza visibili: chi aspetta sa cosa sta succedendo. Se fallisce, la prova non si conta.</p></div>
+    <div class="n"><b>Risultato</b><p>Prima/dopo con cursore trascinabile col dito. «Immagine indicativa» stampata sull'immagine, anche in quella scaricata. Il contatto con l'agente è visibile ma non obbligatorio.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ======================= (c) TERZA PROVA ======================= -->
+<section class="vista" id="v-terza">
+<div class="stage">
+  <div class="phone"><div class="scr">
+    <div class="pp-head">
+      <button class="back" data-go="prova" aria-label="Indietro"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="ttl"><b>Prova i tuoi mobili</b><small>Trilocale con balcone · Via Pascoli, Milano</small></div>
+      <div class="ag-logo">IC</div>
+    </div>
+
+    <div class="body gate" id="gate-form">
+      <div class="lockimg"><img src="../img/3-risultato-gpt.jpg" alt=""><div><span>Hai usato le 2 prove gratuite</span></div></div>
+      <h2>Vuoi continuare a provare?</h2>
+      <p class="lead">Lasciaci la tua email: sblocchi altre 5 prove e ricevi le immagini anche per posta. L'agenzia potrà ricontattarti per questa casa.</p>
+
+      <div class="fld" id="f-mail">
+        <label for="mail">Email</label>
+        <input type="email" id="mail" placeholder="nome@esempio.it" autocomplete="email" inputmode="email">
+        <div class="e">Controlla l'indirizzo: sembra incompleto (es. nome@esempio.it).</div>
+      </div>
+      <div class="fld" id="f-tel">
+        <label for="tel">Telefono <small>· facoltativo</small></label>
+        <input type="tel" id="tel" placeholder="Per essere richiamato più in fretta" autocomplete="tel" inputmode="tel">
+        <div class="e">Il numero sembra incompleto. Puoi anche lasciarlo vuoto.</div>
+      </div>
+      <label class="cb" id="cb-priv"><input type="checkbox" id="priv"><span>Ho letto l'<a href="#" onclick="return false">informativa privacy</a> e accetto che Immobiliare Città Studi mi ricontatti per questo immobile.</span></label>
+      <label class="cb"><input type="checkbox" id="mkt"><span>Voglio ricevere anche altre proposte di case simili. <span class="mini">(facoltativo)</span></span></label>
+
+      <button class="btn pri block" id="sblocca" style="margin-top:6px">Continua a provare</button>
+      <p class="mini" style="text-align:center;margin-top:10px">Niente password, niente app da scaricare.</p>
+    </div>
+
+    <div class="body done-box" id="gate-ok" style="display:none">
+      <div class="big"><svg class="ico" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Fatto, puoi continuare</h2>
+      <p class="lead">Ti abbiamo mandato le immagini create finora a <b id="mail-ok"></b>. Laura di Immobiliare Città Studi ti scriverà per la visita, se vuoi.</p>
+      <button class="btn pri block" id="vai-terza">Fai la terza prova</button>
+    </div>
+    <div class="ha-foot">Immobiliare Città Studi · con <b>HubAgency</b></div>
+  </div></div>
+
+  <div class="notes">
+    <h2>(c) Terza prova: richiesta contatto</h2>
+    <div class="n"><b>Quando compare</b><p>Al tocco su «Prova un'altra stanza» dopo due prove riuscite (le prove fallite non contano). Il conteggio è per visitatore e per annuncio (cookie + impronta del dispositivo).</p></div>
+    <div class="n"><b>Cosa si chiede</b><p>Solo email obbligatoria. Telefono facoltativo, detto chiaramente. Consenso privacy non già spuntato; consenso marketing separato e facoltativo, come chiede il GDPR.</p></div>
+    <div class="n"><b>Cosa ottiene il visitatore</b><p>Altre prove e le immagini via email: uno scambio esplicito, non un muro. La mail con le immagini conferma anche che l'indirizzo è vero.</p></div>
+    <div class="n"><b>Prova gli errori</b><p>Premi «Continua a provare» con il modulo vuoto o con una mail tipo «mario@».</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ======================= (d) AREA AGENTE ======================= -->
+<section class="vista" id="v-agente">
+<div class="ha">
+  <aside class="side">
+    <img src="../img/logo.png" alt="HubAgency" class="lg">
+    <nav>
+      <a href="#">Bacheca</a>
+      <a href="#">Immobili</a>
+      <a href="#">Clienti</a>
+      <a href="#">Agenda</a>
+      <a href="#">AI Studio</a>
+      <a href="#" class="on nw">Prova arredo</a>
+      <a href="#">Impostazioni</a>
+    </nav>
+    <div class="ft">Agenzia demo · Milano Città Studi</div>
+  </aside>
+  <main class="wrap">
+    <div class="topbar">
+      <h1>Prova arredo</h1>
+      <span class="tag">ULTIMI 30 GIORNI</span>
+      <span class="sp"></span>
+      <button class="btn sm" onclick="toast('Nel prodotto: esporta i lead in CSV')">Esporta lead</button>
+    </div>
+    <p class="pgsub">I visitatori dei tuoi annunci provano i loro mobili nelle stanze. Dalla terza prova lasciano email e telefono: li trovi qui e in Clienti.</p>
+
+    <div class="grid g4">
+      <div class="kpi"><div class="k">Prove fatte</div><div class="v" id="k-prove">148</div><div class="d">da 71 visitatori</div></div>
+      <div class="kpi red"><div class="k">Lead ricevuti</div><div class="v" id="k-lead">9</div><div class="d">3 nuovi da richiamare</div></div>
+      <div class="kpi"><div class="k">Visitatori diventati lead</div><div class="v">13%</div><div class="d">9 su 71</div></div>
+      <div class="kpi"><div class="k">Annunci con prova attiva</div><div class="v" id="k-att">3</div><div class="d">su 5 pubblicati</div></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="panel">
+        <div class="label">Annunci<span class="sp"></span><span class="mini">Prova arredo attiva</span></div>
+        <table class="t" id="tab-ann">
+          <thead><tr><th>Immobile</th><th class="n hm">Prove</th><th class="n">Lead</th><th class="n">Attiva</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="uso"><span>Prove del piano usate</span><div class="bar"><i style="width:37%"></i></div><span><b style="color:var(--fg)">148</b> / 400 al mese</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="label">Lead dalla prova arredo<span class="sp"></span><span class="tag" id="nuovi">3 nuovi</span></div>
+        <div id="leads"></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px">
+      <div class="label">Impostazioni della prova</div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
+        <div><div class="mini">Prove gratuite prima della richiesta email</div><b>2</b></div>
+        <div><div class="mini">Prove in più dopo l'email</div><b>5</b></div>
+        <div><div class="mini">Chi riceve gli avvisi dei lead</div><b>L'agente dell'annuncio</b></div>
+        <div><div class="mini">Scritta sulle immagini</div><b>Immagine indicativa</b> <span class="mini">(non modificabile)</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+</section>
+
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function toast(t){const d=document.createElement('div');d.textContent=t;$('#toast').appendChild(d);setTimeout(()=>d.remove(),3200)}
+
+/* ---------- stato ---------- */
+const LIBERE=2, EXTRA=5;
+let S={prove:0, sbloccato:false, stanza:0, foto:null, step:1};
+
+/* ---------- navigazione viste ---------- */
+function vai(v){
+  $$('.vista').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+  $$('#mknav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  window.scrollTo(0,0);
+  if(v==='terza'){ $('#gate-form').style.display='';$('#gate-ok').style.display='none'; }
+}
+$$('#mknav button').forEach(b=>b.onclick=()=>vai(b.dataset.v));
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]'); if(g){ if(g.dataset.go==='prova') step(S.foto?2:1); vai(g.dataset.go); }
+  const s=e.target.closest('[data-step]'); if(s) step(+s.dataset.step);
+});
+
+/* ---------- contatore prove ---------- */
+function cntHtml(){
+  const tot=S.sbloccato?LIBERE+EXTRA:LIBERE, rest=Math.max(0,tot-S.prove);
+  let d='';for(let i=0;i<tot;i++)d+=`<i class="${i<S.prove?'u':''}"></i>`;
+  const txt=S.sbloccato?`${rest} prove rimaste`:(rest>0?`${rest} ${rest===1?'prova gratuita rimasta':'prove gratuite rimaste'}`:'Prove gratuite finite');
+  return `<span class="dots">${d}</span>${txt}`;
+}
+function aggCnt(){ $('#cnt1').innerHTML=cntHtml(); $('#cnt3').innerHTML=cntHtml(); }
+
+/* ---------- passo 1: stanze ---------- */
+const STANZE=[
+  {n:'Soggiorno',img:'../img/1-immobile-vuoto.jpg',f:'',sug:true},
+  {n:'Camera',img:'../img/1-immobile-vuoto.jpg',f:'hue-rotate(-12deg) saturate(.8)',pos:'30% 50%'},
+  {n:'Cucina',img:'../img/1-immobile-vuoto.jpg',f:'sepia(.25)',pos:'80% 50%'},
+  {n:'Camera 2',img:'../img/3-risultato-gpt.jpg',f:'',pos:'60% 50%',nota:'arredata: i mobili attuali vengono sostituiti'},
+  {n:'Facciata',img:'../img/1-immobile-vuoto.jpg',f:'',no:'Foto esterna: scegli una stanza',pos:'10% 10%'},
+  {n:'Planimetria',img:'../img/1-immobile-vuoto.jpg',f:'',no:'Planimetria: non si può arredare',pos:'90% 90%'}
+];
+function disegnaStanze(){
+  $('#rooms').innerHTML=STANZE.map((r,i)=>`<button class="room ${r.no?'no':''} ${i===S.stanza?'sel':''}" data-i="${i}" ${r.no?'aria-disabled="true"':''}>
+    <img src="${r.img}" style="filter:${r.f};object-position:${r.pos||'50% 50%'}" alt="">
+    ${r.sug?'<span class="sug tag ok">Consigliata</span>':''}
+    <span class="lb">${r.n}</span>${r.no?`<span class="why">${r.no}</span>`:''}</button>`).join('');
+  $$('#rooms .room').forEach(b=>b.onclick=()=>{const r=STANZE[+b.dataset.i];
+    if(r.no){toast(r.no);return}
+    S.stanza=+b.dataset.i;disegnaStanze();
+    if(r.nota)toast('Stanza '+r.nota);});
+}
+
+/* ---------- passi ---------- */
+function step(n){
+  S.step=n;
+  ['p1','p2','p3w','p3r','p3e'].forEach(id=>$('#'+id).style.display='none');
+  const vis={1:'p1',2:'p2',3:'p3w',4:'p3r',5:'p3e'}[n];
+  $('#'+vis).style.display='';
+  $('#foot1').style.display=n===1?'':'none';
+  $('#foot2').style.display=n===2?'':'none';
+  const sv=n>=3?3:n;
+  $$('#steps div').forEach(d=>{const k=+d.dataset.s;d.className=k===sv?'on':(k<sv?'done':'')});
+  if(n===2){const r=STANZE[S.stanza];$('#chosen-img').src=r.img;$('#chosen-img').style.filter=r.f;$('#chosen-name').textContent=r.n;}
+  $('#scr-prova').scrollTop=0;
+  aggCnt();
+}
+$('#back').onclick=()=>{ if(S.step===1||S.step===4) vai('annuncio'); else if(S.step===2) step(1); else if(S.step===5) step(2); };
+
+/* ---------- passo 2: foto ---------- */
+const ICO_OK='<svg class="ico" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>';
+const ICO_W='<svg class="ico" viewBox="0 0 24 24"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>';
+function foto(tipo){
+  S.foto=tipo;
+  $('#upl-empty').style.display='none';$('#upl-done').style.display='';
+  const p=$('#prev');p.className='prev'+(tipo==='buia'?' dark':'')+(tipo==='vuota'?' empty':'');
+  p.querySelector('img').src=tipo==='vuota'?'../img/1-immobile-vuoto.jpg':'../img/2-mobili-cliente.jpg';
+  let h='';
+  if(tipo==='ok'){
+    h=`<div class="chk"><div class="row ok">${ICO_OK}<span>Foto chiara e ben inquadrata</span></div>
+       <div class="row ok">${ICO_OK}<span>Abbiamo riconosciuto 6 mobili da portare:</span></div></div>
+       <div class="chips"><span>Divano giallo</span><span>Poltrona verde</span><span>Madia in legno</span><span>Tavolino in marmo</span><span>Lampada ad arco</span><span>Tappeto</span></div>
+       <div class="mini">Giochi, TV e soprammobili vengono lasciati fuori.</div>`;
+  }else if(tipo==='buia'){
+    h=`<div class="err">${ICO_W}<div><b>La foto è troppo buia.</b>Non riusciamo a distinguere i mobili. Accendi le luci o apri le tende e scattane un'altra.
+       <div class="act"><label for="file" class="btn pri sm">Scatta un'altra foto</label></div></div></div>`;
+  }else{
+    h=`<div class="err">${ICO_W}<div><b>In questa foto non vediamo mobili.</b>Sembra una stanza vuota. Fotografa il salotto o la camera di casa tua, con divano, letto o tavolo ben visibili.
+       <div class="act"><label for="file" class="btn pri sm">Scegli un'altra foto</label></div></div></div>`;
+  }
+  $('#check').innerHTML=h;
+  $('#genera').disabled=tipo!=='ok';
+}
+function svuotaFoto(){S.foto=null;$('#upl-empty').style.display='';$('#upl-done').style.display='none';$('#genera').disabled=true;}
+$('#file').onchange=e=>{ if(e.target.files.length){ $('#scr-prova').querySelector('#check').innerHTML='<div class="mini" style="margin-top:10px">Controllo la foto…</div>'; foto('ok'); e.target.value=''; } };
+$('#cambia-foto').onclick=svuotaFoto;
+$$('[data-sim]').forEach(b=>b.onclick=()=>{ vai('prova'); step(2); foto(b.dataset.sim); });
+
+/* ---------- passo 3: attesa ---------- */
+let timer=null;
+function genera(fallisci){
+  step(3);
+  const li=$$('#fasi li');li.forEach(l=>l.className='');
+  let t=0;const DUR=6000, TICK=200;
+  clearInterval(timer);
+  timer=setInterval(()=>{
+    t+=TICK;const p=Math.min(1,t/DUR);
+    $('#wbar').style.width=(p*100)+'%';
+    const sec=Math.max(1,Math.round(30*(1-p)));
+    $('#wtime').textContent=p<1?`circa ${sec} secondi`:'quasi pronto…';
+    const f=Math.min(3,Math.floor(p*4));
+    li.forEach((l,i)=>l.className=i<f?'done':(i===f?'on':''));
+    if(fallisci && p>.55){clearInterval(timer);step(5);return}
+    if(p>=1){clearInterval(timer);fine();}
+  },TICK);
+}
+function fine(){ S.prove++; step(4); setBA(50); }
+$('#genera').onclick=()=>genera(false);
+$('#skip').onclick=()=>{clearInterval(timer);fine();};
+$('#fail').onclick=()=>genera(true);
+$('#riprova').onclick=()=>genera(false);
+
+/* ---------- risultato: prima/dopo ---------- */
+function setBA(v){ $('#ba-before').style.clipPath=`inset(0 ${100-v}% 0 0)`; $('#ba-line').style.left=v+'%'; $('#ba-knob').style.left=v+'%'; $('#ba-range').value=v; }
+$('#ba-range').oninput=e=>setBA(+e.target.value);
+$('#dl').onclick=()=>{ const a=document.createElement('a');a.href='../img/3-risultato-gpt.jpg';a.download='casa-via-pascoli-con-i-miei-mobili.png';a.click();
+  toast('Nel prodotto: JPG con scritta «Immagine indicativa» e logo dell\'agenzia'); };
+$('#share').onclick=async()=>{ if(navigator.share){try{await navigator.share({title:'La casa in Via Pascoli con i miei mobili',url:location.href})}catch(e){}} else toast('Nel prodotto: WhatsApp, link da copiare, email'); };
+$('#ancora').onclick=()=>{
+  const tot=S.sbloccato?LIBERE+EXTRA:LIBERE;
+  if(S.prove>=tot && !S.sbloccato){ vai('terza'); return; }
+  if(S.prove>=tot){ toast('Hai usato tutte le prove: l\'agenzia ti ricontatterà'); return; }
+  S.stanza=(S.stanza+1)%3; step(1);
+};
+$$('.rate button').forEach(b=>b.onclick=()=>{$$('.rate button').forEach(x=>x.classList.remove('on'));b.classList.add('on');toast(b.dataset.r==='si'?'Grazie!':'Grazie, ci aiuta a migliorare');});
+$('#contatta').onclick=e=>{e.preventDefault();toast('Apre WhatsApp o il modulo contatti dell\'agenzia');};
+
+/* ---------- terza prova ---------- */
+$('#sblocca').onclick=()=>{
+  const m=$('#mail').value.trim(), t=$('#tel').value.replace(/\s/g,''), pv=$('#priv').checked;
+  const okM=/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(m), okT=!t||/^\+?\d{8,13}$/.test(t);
+  $('#f-mail').classList.toggle('bad',!okM);
+  $('#f-mail .e').textContent=m?'Controlla l\'indirizzo: sembra incompleto (es. nome@esempio.it).':'Scrivi la tua email per continuare.';
+  $('#f-tel').classList.toggle('bad',!okT);
+  $('#cb-priv').classList.toggle('bad',!pv);
+  if(!pv) toast('Serve il consenso privacy per essere ricontattato');
+  if(!(okM&&okT&&pv)) return;
+  S.sbloccato=true;
+  $('#mail-ok').textContent=m;
+  $('#gate-form').style.display='none';$('#gate-ok').style.display='';
+  LEADS.unshift({n:m,tel:t||'—',ann:0,prove:S.prove||2,quando:'adesso',nuovo:true});
+  $('#k-lead').textContent=+$('#k-lead').textContent+1;
+  disegnaLead();
+};
+$('#vai-terza').onclick=()=>{ S.stanza=(S.stanza+1)%3; vai('prova'); step(1); };
+
+/* ---------- area agente ---------- */
+const ANN=[
+  {t:'Trilocale con balcone',a:'Via Pascoli · € 385.000',img:'../img/1-immobile-vuoto.jpg',p:64,l:5,on:true},
+  {t:'Bilocale ristrutturato',a:'Via Ampère · € 249.000',img:'../img/1-immobile-vuoto.jpg',f:'sepia(.3)',p:51,l:3,on:true},
+  {t:'Quadrilocale con terrazzo',a:'Piazza Leonardo · € 690.000',img:'../img/3-risultato-gpt.jpg',p:33,l:1,on:true},
+  {t:'Monolocale per investimento',a:'Via Celoria · € 158.000',img:'../img/1-immobile-vuoto.jpg',f:'grayscale(.5)',p:0,l:0,on:false},
+  {t:'Box auto',a:'Via Golgi · € 35.000',img:'../img/1-immobile-vuoto.jpg',f:'grayscale(1)',p:0,l:0,on:false,na:true}
+];
+let LEADS=[
+  {n:'Giulia Ferri',mail:'giulia.ferri@gmail.com',tel:'+39 347 221 8890',ann:0,prove:3,quando:'oggi 11:42',nuovo:true},
+  {n:'Marco Riva',mail:'m.riva@libero.it',tel:'—',ann:1,prove:4,quando:'ieri 21:05',nuovo:true},
+  {n:'Sara e Luca Conti',mail:'saraconti85@gmail.com',tel:'+39 333 908 1172',ann:0,prove:3,quando:'03/11/2026',nuovo:true},
+  {n:'Paolo Bassi',mail:'paolo.bassi@outlook.it',tel:'+39 340 551 2004',ann:2,prove:5,quando:'01/11/2026',nuovo:false}
+];
+function disegnaAnn(){
+  $('#tab-ann tbody').innerHTML=ANN.map((a,i)=>`<tr class="${a.on?'':'off'}">
+    <td><div class="lst"><img src="${a.img}" style="filter:${a.f||''}" alt=""><div><b>${a.t}</b><small>${a.a}</small></div></div></td>
+    <td class="n hm">${a.p}</td><td class="n">${a.l}</td>
+    <td class="n">${a.na?'<span class="mini" title="Nessuna stanza da arredare">non adatto</span>':`<label class="sw"><input type="checkbox" data-a="${i}" ${a.on?'checked':''}><span></span></label>`}</td></tr>`).join('');
+  $$('#tab-ann input[data-a]').forEach(c=>c.onchange=()=>{const a=ANN[+c.dataset.a];a.on=c.checked;disegnaAnn();
+    $('#k-att').textContent=ANN.filter(x=>x.on).length;
+    toast(c.checked?`Prova arredo attiva su «${a.t}»: il riquadro compare sull'annuncio`:`Prova arredo spenta su «${a.t}»`);});
+}
+function disegnaLead(){
+  $('#leads').innerHTML=LEADS.map((l,i)=>`<div class="ld">
+    <div class="th"><img src="../img/2-mobili-cliente.jpg" alt=""><img src="../img/3-risultato-gpt.jpg" alt=""></div>
+    <div><b>${l.n}</b> ${l.nuovo?'<span class="tag">nuovo</span>':''}
+      <div class="meta">${[l.mail,l.tel!=='—'?l.tel:''].filter(Boolean).join(' · ')}<br>${ANN[l.ann].t} · ${l.prove} prove · ${l.quando}</div></div>
+    <div class="acts"><button class="btn sm" data-l="${i}" data-x="vedi">Vedi prove</button>${l.tel!=='—'?`<button class="btn sm pri" data-l="${i}" data-x="chiama" style="background:var(--primary);color:#fff;border-color:var(--primary)">Chiama</button>`:''}</div>
+  </div>`).join('');
+  const n=LEADS.filter(l=>l.nuovo).length;$('#nuovi').textContent=n+' nuovi';
+  $$('#leads [data-x]').forEach(b=>b.onclick=()=>{const l=LEADS[+b.dataset.l];l.nuovo=false;disegnaLead();
+    toast(b.dataset.x==='vedi'?`Mostra le foto caricate da ${l.n} e i risultati: utile per capire che arredamento ha`:`Chiama ${l.tel}: il lead passa a «contattato» in Clienti`);});
+}
+
+/* ---------- avvio / reset ---------- */
+function reset(){
+  S={prove:0,sbloccato:false,stanza:0,foto:null,step:1};
+  svuotaFoto();disegnaStanze();step(1);
+  $('#mail').value='';$('#tel').value='';$('#priv').checked=false;$('#mkt').checked=false;
+  $$('.fld,.cb').forEach(x=>x.classList.remove('bad'));
+  vai('annuncio');
+}
+$('#reset').onclick=reset;
+disegnaStanze();step(1);disegnaAnn();disegnaLead();
+</script>
+</body>
+</html>

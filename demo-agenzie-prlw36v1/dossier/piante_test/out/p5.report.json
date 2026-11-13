@@ -1,0 +1,26 @@
+{
+ "id": "p5",
+ "fonte": "planimetria-catastale.jpg",
+ "tipo_disegno": "catastale",
+ "qualita_input": "bassa",
+ "scala": {
+  "metodo": "scala_dichiarata",
+  "dettaglio": "Scala 1:100 dichiarata, foglio A3 ridotto a stampa A4 (x0,707 => ~1:141); immagine 600 px = 210 mm => 1 px ~ 0,049 m (0,0247 m per px nel ritaglio x2). Piano ruotato di ~43 gradi, raddrizzato; controllo con porte ~0,8 m."
+ },
+ "stanze": 11,
+ "muri": 21,
+ "aperture": 21,
+ "superficie_calcolata_m2": 117.3,
+ "semaforo": "verde",
+ "auto": [],
+ "errori": [],
+ "avvisi": [],
+ "dubbi_lettura": [
+  "Scansione a bassa risoluzione (600x841 px), pianta ruotata di ~43 gradi: misure con errore di circa 0,3-0,5 m.",
+  "Layout raddrizzato e semplificato: i muri reali sono lievemente non ortogonali (facciata inclinata di ~4 gradi).",
+  "Nessuna etichetta di destinazione d'uso leggibile oltre a K, C, 1, 5 e quote h=2,80/2,90: tipi stanza dedotti (C=cucina probabile).",
+  "Quasi tutte le porte non leggibili o dedotte; le aperture di finestre dedotte dai segni sui muri esterni.",
+  "Fascia sul lato SO (balcone/ringhiera lungo la facciata) non modellata; vano bagni/servizi a destra molto fitto di sanitari, semplificato in 3 locali.",
+  "Cantina in alto a sinistra esclusa; vano scala e ascensore esclusi (parti comuni)."
+ ]
+}
