@@ -10,6 +10,7 @@ const DEMO = {
   dossier: 'https://hubique.it/demo-agenzie-prlw36v1/dossier/',
   arreda: 'https://hubique.it/demo-agenzie-prlw36v1/arredo/',
   ristruttura: 'https://hubique.it/demo-agenzie-prlw36v1/dossier/dossier.html',
+  talent: 'https://hubique.it/demo-agenzie-prlw36v1/talent/#/cruscotto?come=franchisor',
 };
 const host = u => u.replace(/^https:\/\//, '').replace(/[#?].*$/, '').replace(/\/[^/]*\.html$/, '').replace(/\/$/, '');
 
@@ -17,7 +18,7 @@ const host = u => u.replace(/^https:\/\//, '').replace(/[#?].*$/, '').replace(/\
 function demo({ n, kick, titolo, em, cosa, vant, nota, url, img, alt, eti = ETI }) {
   return `
     <div class="in demo-t">
-      <div class="kick r" style="--i:0">Demo ${n} di 5 · ${kick}</div>
+      <div class="kick r" style="--i:0">Demo ${n} di 6 · ${kick}</div>
       <h2 class="r" style="--i:1">${titolo} <em>${em}</em></h2>
       <p class="lead r" style="--i:2">${cosa}</p>
       <ul class="vant">
@@ -38,7 +39,7 @@ const SLIDES = [
     <div class="in">
       <div class="kick r" style="--i:0">Proposta Hubique · Agenzie immobiliari</div>
       <h1 class="r" style="--i:1">HubAgency: <em>strumenti che lavorano per l'agenzia</em></h1>
-      <p class="lead r" style="--i:2">Conti, sito, dossier, arredo e ristrutturazione: cinque strumenti per le agenzie e le reti immobiliari.</p>
+      <p class="lead r" style="--i:2">Conti, sito, dossier, arredo, ristrutturazione e persone: sei strumenti per le agenzie e le reti immobiliari.</p>
     </div>
     <div class="hint">Passa sui punti della mappa · Frecce per avanzare · Punti generici, a scopo illustrativo</div>` },
 
@@ -84,19 +85,25 @@ const SLIDES = [
     vant: [['Agenzia', `L'obiezione «ma quanto devo spenderci?» trova risposta subito.`], ['Agenzia', `Le case da ristrutturare si propongono con numeri, non con impressioni.`], ['Rete', `Uno strumento in più che i portali non danno.`]],
     nota: `Stima indicativa con fonti dichiarate, non è un preventivo: serve sempre il sopralluogo di un'impresa. Nella versione per il proprietario non compare.`, url: DEMO.ristruttura, img: 'demo-ristr.jpg', alt: `Pagina «Quanto costerebbe ristrutturarlo» del dossier` }) },
 
+  { id: 'talent', nome: 'HubAgency Talent', scena: 'ambient', html: demo({
+    n: 6, kick: `HubAgency Talent`, titolo: `Selezione e formazione`, em: `per tutta la rete`,
+    cosa: `Il profilo del candidato ideale per ogni ruolo, costruito con questionari mirati su ogni competenza; il candidato risponde da qualsiasi dispositivo e il punteggio, calcolato con regole fisse, arriva al titolare come proposta interna, con la spiegazione. Annunci pronti per tutti i portali, percorsi di formazione costruiti sulle lacune di ognuno, allenamento quotidiano a gioco e un cruscotto per la direzione.`,
+    vant: [['Agenzia', `Meno colloqui a vuoto e nuovi agenti operativi prima.`], ['Agenzia', `Quello che si impara non si perde, con pochi minuti al giorno.`], ['Rete', `Un metodo unico di selezione e formazione in tutta la rete.`]],
+    nota: `Questionari scritti in collaborazione con uno psicometrista certificato; decide sempre una persona. Tutte le funzioni nella <a class="pe" href="https://hubique.it/presentazione-agenzie-talent-g576uba0ak/" target="_blank" rel="noopener" style="color:var(--viola)">presentazione di HubAgency Talent</a>.`, url: DEMO.talent, img: 'demo-t-cruscotto.jpg', alt: `Cruscotto della rete di HubAgency Talent` }) },
+
   { id: 'vantaggi', nome: 'Vantaggi per la rete', scena: 'ambient', html: `
     <div class="in stretta">
       <div class="kick r" style="--i:0">In sintesi</div>
       <h2 class="r" style="--i:1">I vantaggi <em>per la rete</em></h2>
-      <p class="lead r" style="--i:2">Cinque strumenti, un solo partner.</p>
+      <p class="lead r" style="--i:2">Sei strumenti, un solo partner.</p>
     </div>
     <div class="tiles">
-      ${[['Un fornitore, più strumenti', 'Conti, sito, dossier, arredo e ristrutturazione da un solo partner.'],
+      ${[['Un fornitore, più strumenti', 'Conti, sito, dossier, arredo, ristrutturazione e persone da un solo partner.'],
          ['Nessun doppione', 'Ogni strumento risponde a un bisogno preciso, accanto a quelli che la rete ha già.'],
          ['Immagine di rete uniforme', 'Siti e dossier con lo stesso stile e lo stesso marchio.'],
-         ['Contatti dagli annunci', 'La prova dell\'arredo porta alle agenzie visitatori interessati.'],
+         ['Contatti e argomenti per vendere', 'Arredo, casa 3D, dossier e conto dei lavori portano contatti e aiutano a chiudere.'],
          ['Dati confrontabili', 'I conti delle agenzie letti con gli stessi criteri.'],
-         ['Argomenti per vendere', 'Casa 3D, dossier e conto dei lavori aiutano ad acquisire e a chiudere.']]
+         ['Persone scelte e formate con un metodo unico', 'Selezione, formazione e allenamento uguali in tutta la rete.']]
         .map((t, i) => `<div class="tile r" style="--i:${i + 3}"><i>${i + 1}</i><h3>${t[0]}</h3><p>${t[1]}</p></div>`).join('')}
     </div>` },
 
