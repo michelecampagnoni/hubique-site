@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Presentazione riservata · Hubique</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/per-assets/css/stile.css">
+<style>
+#gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(15,25,45,.94);padding:20px}
+#gate .box{max-width:460px;background:#fff;padding:34px 32px;border-top:4px solid var(--red,#ff5a1f);font-family:'Chakra Petch',system-ui,sans-serif;color:#13203a}
+#gate h2{margin:0 0 6px;font-size:22px}
+#gate .k{font:600 11px 'Chakra Petch',sans-serif;letter-spacing:.28em;color:#ff5a1f;margin-bottom:14px}
+#gate p{font-size:15px;line-height:1.5;margin:10px 0}
+#gate input{font:700 28px 'Chakra Petch',monospace;letter-spacing:.35em;text-align:center;width:100%;padding:10px;border:2px solid #13203a;margin-top:8px;box-sizing:border-box}
+#gate button{margin-top:14px;width:100%;padding:12px;background:#13203a;color:#fff;border:0;font:700 14px 'Chakra Petch',sans-serif;letter-spacing:.2em;cursor:pointer}
+#gate .err{color:#c0392b;font-size:14px;min-height:20px;margin-top:8px}
+.demo-cta{margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.demo-btn{display:inline-block;background:#ff5a1f;color:#fff!important;padding:11px 20px;font:700 13px 'Chakra Petch',sans-serif;letter-spacing:.18em;text-decoration:none;border:0}
+.demo-btn:hover{background:#13203a}
+.demo-cta span{font-size:13px;color:#46526b}
+</style>
+</head>
+<body>
+<div id="gate"><div class="box">
+  <div class="k">PRESENTAZIONE RISERVATA</div>
+  <h2>DE.FI.</h2>
+  <p>Questa presentazione è stata preparata apposta per voi. <b>Non è pubblica</b> e non compare sui motori di ricerca.</p>
+  <p>Si apre solo con il codice a cinque cifre riportato sulla lettera che vi abbiamo inviato.</p>
+  <input id="cod" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="•••••" autofocus>
+  <div class="err" id="err"></div>
+  <button id="ok">APRI LA PRESENTAZIONE</button>
+</div></div>
+<div id="bg"><div class="bgimg" id="bgA"></div><div class="bgimg" id="bgB"></div><div id="grid"></div></div>
+<canvas id="gl"></canvas>
+<header id="top">
+  <span class="logo"><b>HUBIQUE</b><i></i><span class="sub">PER DE.FI.</span></span>
+  <span id="count">01 / 10</span>
+</header>
+<main id="deck"></main>
+<footer id="bottom">
+  <nav id="dots"></nav>
+  <span class="arrows"><button id="prev" aria-label="Indietro">&#8592;</button><button id="next" aria-label="Avanti">&#8594;</button></span>
+</footer>
+<div id="bar"></div>
+<div id="tip"></div>
+<div id="lb"><figure><img alt=""><figcaption></figcaption></figure><button class="x" aria-label="Chiudi">&#215;</button></div>
+<noscript><p style="padding:40px">La presentazione richiede JavaScript.</p></noscript>
+<script type="importmap">
+{ "imports": { "three": "/per-assets/vendor/three/three.module.js", "three/addons/": "/per-assets/vendor/three/addons/" } }
+</script>
+<script>window.PER = {"slug": "defi", "azienda": "DE.FI.", "para": "Se i Vostri lavori sono pochi e di grande importo, ci piacerebbe proporvi un tool che permette di eseguire il computo metrico dalla pianta DWG e di realizzare in pochi minuti offerte tecnico-commerciali, con i prezzi dei vostri listini; se invece i volumi salgono e il margine di ogni commessa non Vi è chiaro finché i lavori non finiscono, allora Vi servirebbe vedere il margine reale di ogni commessa mentre i lavori sono ancora in corso, non a cantiere chiuso. Sono soluzioni che abbiamo già adottato con alcune imprese che progettano, realizzano e mantengono impianti tecnologici per industria e terziario, che hanno così reso il risultato di fine anno molto meno imprevedibile.", "bullets": ["Rapportini di intervento dettati a voce dal tecnico, con foto e firma del cliente — per quando interventi e assistenza restano su carta o in furgone.", "Bolle e DDT letti da una foto e confrontati con le fatture dei fornitori — per quando il margine sfugge sui materiali: prezzi sopra listino e merce non fatturata saltano fuori subito."], "kits": ["MARG", "RAP", "DDT"], "main": "MARG"};</script>
+<script type="module">
+const H = "b37a198bbe34c0a30e168c50aea1c146fbbfbc72ae06350ac23d61ecf60e6299", S = "defi";
+const gate = document.getElementById('gate'), inp = document.getElementById('cod'), err = document.getElementById('err');
+async function sha(t) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); }
+async function apri() { gate.remove(); sessionStorage.setItem('per-' + S, H); await import('/per-assets/js/app.js'); }
+async function prova() {
+  const v = inp.value.replace(/\D/g, '');
+  if (v.length !== 5) { err.textContent = 'Il codice ha cinque cifre.'; return; }
+  if (await sha(S + ':' + v) === H) apri(); else { err.textContent = 'Codice non corretto. Lo trova sulla lettera.'; inp.select(); }
+}
+document.getElementById('ok').onclick = prova;
+inp.addEventListener('keydown', e => { if (e.key === 'Enter') prova(); });
+if (sessionStorage.getItem('per-' + S) === H) apri();
+</script>
+</body>
+</html>

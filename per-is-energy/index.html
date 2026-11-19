@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Presentazione riservata · Hubique</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/per-assets/css/stile.css">
+<style>
+#gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(15,25,45,.94);padding:20px}
+#gate .box{max-width:460px;background:#fff;padding:34px 32px;border-top:4px solid var(--red,#ff5a1f);font-family:'Chakra Petch',system-ui,sans-serif;color:#13203a}
+#gate h2{margin:0 0 6px;font-size:22px}
+#gate .k{font:600 11px 'Chakra Petch',sans-serif;letter-spacing:.28em;color:#ff5a1f;margin-bottom:14px}
+#gate p{font-size:15px;line-height:1.5;margin:10px 0}
+#gate input{font:700 28px 'Chakra Petch',monospace;letter-spacing:.35em;text-align:center;width:100%;padding:10px;border:2px solid #13203a;margin-top:8px;box-sizing:border-box}
+#gate button{margin-top:14px;width:100%;padding:12px;background:#13203a;color:#fff;border:0;font:700 14px 'Chakra Petch',sans-serif;letter-spacing:.2em;cursor:pointer}
+#gate .err{color:#c0392b;font-size:14px;min-height:20px;margin-top:8px}
+.demo-cta{margin-top:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.demo-btn{display:inline-block;background:#ff5a1f;color:#fff!important;padding:11px 20px;font:700 13px 'Chakra Petch',sans-serif;letter-spacing:.18em;text-decoration:none;border:0}
+.demo-btn:hover{background:#13203a}
+.demo-cta span{font-size:13px;color:#46526b}
+</style>
+</head>
+<body>
+<div id="gate"><div class="box">
+  <div class="k">PRESENTAZIONE RISERVATA</div>
+  <h2>iS Energy</h2>
+  <p>Questa presentazione è stata preparata apposta per voi. <b>Non è pubblica</b> e non compare sui motori di ricerca.</p>
+  <p>Si apre solo con il codice a cinque cifre riportato sulla lettera che vi abbiamo inviato.</p>
+  <input id="cod" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="•••••" autofocus>
+  <div class="err" id="err"></div>
+  <button id="ok">APRI LA PRESENTAZIONE</button>
+</div></div>
+<div id="bg"><div class="bgimg" id="bgA"></div><div class="bgimg" id="bgB"></div><div id="grid"></div></div>
+<canvas id="gl"></canvas>
+<header id="top">
+  <span class="logo"><b>HUBIQUE</b><i></i><span class="sub">PER IS ENERGY</span></span>
+  <span id="count">01 / 10</span>
+</header>
+<main id="deck"></main>
+<footer id="bottom">
+  <nav id="dots"></nav>
+  <span class="arrows"><button id="prev" aria-label="Indietro">&#8592;</button><button id="next" aria-label="Avanti">&#8594;</button></span>
+</footer>
+<div id="bar"></div>
+<div id="tip"></div>
+<div id="lb"><figure><img alt=""><figcaption></figcaption></figure><button class="x" aria-label="Chiudi">&#215;</button></div>
+<noscript><p style="padding:40px">La presentazione richiede JavaScript.</p></noscript>
+<script type="importmap">
+{ "imports": { "three": "/per-assets/vendor/three/three.module.js", "three/addons/": "/per-assets/vendor/three/addons/" } }
+</script>
+<script>window.PER = {"slug": "is-energy", "azienda": "iS Energy", "para": "Se le richieste dei Vostri clienti privati sono numerose, ci piacerebbe proporvi un tool che permette di richiamare in automatico le offerte inviate, così nessun preventivo resta senza risposta; se invece, con una squadra che cresce, non Vi è chiaro quali commesse assorbono più ore del previsto, allora Vi servirebbe vedere il margine reale di ogni commessa mentre i lavori sono ancora in corso, non a cantiere chiuso. Sono soluzioni che abbiamo già adottato con alcune aziende che progettano e installano fotovoltaico, pompe di calore e sistemi energetici, che hanno così capito per tempo dove il lavoro costava più di quanto rendesse.", "bullets": ["Computo metrico e offerta dalla pianta DWG, con listini e ore di manodopera — per rendere le offerte più rapide e costruite tutte allo stesso modo.", "Rapportini di intervento dettati a voce dal tecnico, con foto e firma del cliente — per quando interventi e assistenza restano su carta o in furgone."], "kits": ["MARG", "DWG", "RAP"], "main": "MARG"};</script>
+<script type="module">
+const H = "855b0803fca836f60a2c4961946de596d3ca87e739f8be526aa0a3f2c646157b", S = "is-energy";
+const gate = document.getElementById('gate'), inp = document.getElementById('cod'), err = document.getElementById('err');
+async function sha(t) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); }
+async function apri() { gate.remove(); sessionStorage.setItem('per-' + S, H); await import('/per-assets/js/app.js'); }
+async function prova() {
+  const v = inp.value.replace(/\D/g, '');
+  if (v.length !== 5) { err.textContent = 'Il codice ha cinque cifre.'; return; }
+  if (await sha(S + ':' + v) === H) apri(); else { err.textContent = 'Codice non corretto. Lo trova sulla lettera.'; inp.select(); }
+}
+document.getElementById('ok').onclick = prova;
+inp.addEventListener('keydown', e => { if (e.key === 'Enter') prova(); });
+if (sessionStorage.getItem('per-' + S) === H) apri();
+</script>
+</body>
+</html>
