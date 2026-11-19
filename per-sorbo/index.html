@@ -31,6 +31,7 @@
   <input id="cod" inputmode="numeric" maxlength="5" autocomplete="off" placeholder="•••••" autofocus>
   <div class="err" id="err"></div>
   <button id="ok">APRI LA PRESENTAZIONE</button>
+  <p style="font-size:11px;color:#667;margin-top:12px">Per migliorare il servizio registriamo in forma anonima le schermate viste e i tempi di lettura.</p>
 </div></div>
 <div id="bg"><div class="bgimg" id="bgA"></div><div class="bgimg" id="bgB"></div><div id="grid"></div></div>
 <canvas id="gl"></canvas>
@@ -53,13 +54,26 @@
 <script>window.PER = {"slug": "sorbo", "azienda": "Sorbo", "para": "Se i Vostri lavori si moltiplicano, ci piacerebbe proporvi un tool che permette di eseguire il computo metrico dalla pianta DWG e di realizzare in pochi minuti offerte tecnico-commerciali, con i prezzi dei vostri listini; se invece, con molti cantieri aperti, vedete il margine perdersi tra preventivi e materiali, allora Vi servirebbe vedere il margine reale di ogni commessa mentre i lavori sono ancora in corso, non a cantiere chiuso. Sono soluzioni che abbiamo già adottato con alcune imprese di impianti termoidraulici e di climatizzazione in forte crescita, che hanno così smesso di scoprire a fine lavori quali commesse non rendevano.", "bullets": ["Bolle e DDT letti da una foto e confrontati con le fatture dei fornitori — per quando il margine sfugge sui materiali: prezzi sopra listino e merce non fatturata saltano fuori subito.", "Rapportini di intervento dettati a voce dal tecnico, con foto e firma del cliente — per quando interventi e assistenza restano su carta o in furgone."], "kits": ["MARG", "DDT", "RAP"], "main": "MARG"};</script>
 <script type="module">
 const H = "307bd78e2d71cf46e009690b4b56e7024e6309afc4ba666d58b15dee171e6a16", S = "sorbo";
+// statistiche anonime di lettura (19/11/2026): solo schermate viste, tempi e clic; nessun dato personale, nessun cookie
+const TK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhrc3N5c2pxcnB5YXVoYnF4ZWhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3NzIzNzksImV4cCI6MjEwNjM0ODM3OX0._woCceI21bHx87r-8ZpO18vv404meWCdvxAh5TsYfpA', TU = 'https://hkssysjqrpyauhbqxehr.supabase.co/rest/v1/presentazione_eventi';
+let sess = sessionStorage.getItem('pt-sess'); if (!sess) { sess = Math.random().toString(36).slice(2, 14); sessionStorage.setItem('pt-sess', sess); }
+window.PT = (evento, o = {}) => { try { fetch(TU, { method: 'POST', keepalive: true, headers: { apikey: TK, Authorization: 'Bearer ' + TK, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+  body: JSON.stringify({ slug: S, evento, sess, schermo: innerWidth + 'x' + innerHeight, lingua: (navigator.language || '').slice(0, 10), ...o }) }).catch(() => { }); } catch (e) { } };
+let vis = 0, t0 = document.hidden ? 0 : Date.now(), uscita = false;
+const conta = () => { if (t0) { vis += Date.now() - t0; t0 = 0; } };
+document.addEventListener('visibilitychange', () => { if (document.hidden) { conta(); if (window.__slide) PT('uscita', { ms: vis, slide: window.__slide }); } else t0 = Date.now(); });
+addEventListener('pagehide', () => { conta(); if (window.__slide && document.visibilityState !== 'hidden') PT('uscita', { ms: vis, slide: window.__slide }); });
+document.addEventListener('click', e => { const a = e.target.closest('a,.scr'); if (!a) return;
+  if (a.classList.contains('demo-btn')) PT('clic_demo', { slide: window.__slide }); else if ((a.getAttribute && a.getAttribute('href') || '').startsWith('tel:')) PT('clic_tel', { slide: window.__slide });
+  else if ((a.getAttribute && a.getAttribute('href') || '').startsWith('mailto:')) PT('clic_mail', { slide: window.__slide }); else if (a.classList.contains('scr')) PT('zoom', { slide: window.__slide }); });
+PT('apertura');
 const gate = document.getElementById('gate'), inp = document.getElementById('cod'), err = document.getElementById('err');
 async function sha(t) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); }
-async function apri() { gate.remove(); sessionStorage.setItem('per-' + S, H); await import('/per-assets/js/app.js'); }
+async function apri() { PT('codice_ok'); gate.remove(); sessionStorage.setItem('per-' + S, H); await import('/per-assets/js/app.js'); }
 async function prova() {
   const v = inp.value.replace(/\D/g, '');
   if (v.length !== 5) { err.textContent = 'Il codice ha cinque cifre.'; return; }
-  if (await sha(S + ':' + v) === H) apri(); else { err.textContent = 'Codice non corretto. Lo trova sulla lettera.'; inp.select(); }
+  if (await sha(S + ':' + v) === H) apri(); else { PT('codice_errato'); err.textContent = 'Codice non corretto. Lo trova sulla lettera.'; inp.select(); }
 }
 document.getElementById('ok').onclick = prova;
 inp.addEventListener('keydown', e => { if (e.key === 'Enter') prova(); });

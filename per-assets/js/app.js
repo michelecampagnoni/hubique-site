@@ -340,7 +340,7 @@ function vai(n) {
   count.textContent = String(n + 1).padStart(2, '0') + ' / ' + SLIDES.length;
   bar.style.width = ((n + 1) / SLIDES.length * 100) + '%';
   dots.querySelectorAll('button').forEach((b, i) => b.classList.toggle('on', i === n));
-  history.replaceState(null, '', '#' + (n + 1));
+  history.replaceState(null, '', '#' + (n + 1)); window.__slide = n + 1; window.PT && window.PT('slide', { slide: n + 1, nome: s.nome });
 }
 addEventListener('keydown', e => {
   if (e.key === 'Escape') { lb.classList.remove('on'); return; }
