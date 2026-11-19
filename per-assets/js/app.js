@@ -234,10 +234,89 @@ const EXTRA = {
     </div>` },
 };
 const KITSLIDE = { DWG: () => conDemo('progetto'), MARG: () => conDemo('commessa'), DDT: () => conDemo('ddt'), RAP: () => EXTRA.RAP, FOL: () => EXTRA.FOL };
-const parti = PER.para.split('. Sono soluzioni');
+const parti = (PER.para || '').split('. Sono soluzioni');
 const scenari = parti[0].replace(/\.$/, '').split('; ').map(x => x.charAt(0).toUpperCase() + x.slice(1));
 const chiusuraTesto = parti[1] ? 'Sono soluzioni' + parti[1] : '';
-const SLIDES = [
+// ---------- presentazione personalizzata per Rosi Materiale Elettrico (risposta a Ivano Allegro, 19/11/2026) ----------
+// Domanda del cliente: «la vostra proposta riguarda diversi protagonisti del nostro processo»: una slide per ruolo, da girare ai colleghi.
+const ruolo = (i, t, p, cosa) => `<div class="tile r" style="--i:${i}"><div class="n" style="font-size:clamp(17px,1.4vw,23px)">${t}</div><h3>${p}</h3><p>${cosa}</p></div>`;
+const SLIDES_ROSI = [
+  { id: 'apertura', nome: 'Apertura', scena: 'edificio', off: 3.0, sc: .86, html: `
+    <div class="in">
+      <div class="kick r" style="--i:0">PER ROSI MATERIALE ELETTRICO</div>
+      <h1 class="r" style="--i:1">Dal catalogo alla risposta, <em>in pochi minuti</em></h1>
+      <p class="lead r" style="--i:2">Una presentazione breve da girare ai colleghi: cosa cambia, ruolo per ruolo, quando l'intelligenza artificiale lavora sui vostri cataloghi, sulle vostre offerte e sull'assistenza.</p>
+      <div class="legend pe r" style="--i:3">${SISTEMI.map(k => `<button data-sys="${k}" style="--c:${hex(SYS[k].c)}"><i></i>${SYS[k].t}</button>`).join('')}</div>
+    </div>
+    <div class="hint">MUOVI IL MOUSE SULL'EDIFICIO · FRECCE PER AVANZARE</div>` },
+
+  { id: 'ruoli', nome: 'Chi ne ha vantaggio', scena: 'ambient', bg: M + 'magazzino.jpg', o: .18, html: `
+    <div class="in" style="width:min(30vw,440px)">
+      <div class="kick r" style="--i:0">I PROTAGONISTI DEL PROCESSO</div>
+      <h2 class="r" style="--i:1">Ognuno ha il suo problema. <em>Uno strumento per ciascuno.</em></h2>
+      <p class="lead r" style="--i:2">Dalla richiesta del cliente alla consegna e all'assistenza: lo stesso sistema, usato da persone diverse, ognuna per il proprio pezzo.</p>
+    </div>
+    <div class="tiles sette" style="grid-template-columns:repeat(2,1fr)">
+      ${ruolo(2, 'Ufficio commerciale', 'Richieste e offerte che si accumulano', 'Le richieste dei clienti ricevono una prima risposta e una bozza di preventivo pronte da rivedere, partendo da cataloghi e listini.')}
+      ${ruolo(3, 'Ufficio tecnico', 'Sempre le stesse domande sui prodotti', 'Le risposte tecniche si preparano dalle schede prodotto e dai cataloghi, con la fonte indicata. Il tecnico controlla, non riscrive.')}
+      ${ruolo(4, 'Agenti e rete vendita', 'Offerte inviate e poi dimenticate', 'Ogni offerta inviata viene seguita: dopo il tempo giusto il sistema propone il richiamo, già scritto.')}
+      ${ruolo(5, 'Assistenza e post-vendita', 'Rapportini e interventi da ricopiare', 'Il tecnico detta a voce: ore, materiali e lavori svolti, con foto e firma del cliente, senza ricopiare niente in ufficio.')}
+    </div>` },
+
+  { id: 'catalogo', nome: 'Risposte e preventivi', scena: 'progetto', off: 3.15, sc: .82, kn: .7, bg: M + 'edificio.jpg', o: .1, html: `
+    <div class="in">
+      <div class="kick r" style="--i:0">UFFICIO COMMERCIALE E TECNICO</div>
+      <h2 class="r" style="--i:1">Risposte tecniche e preventivi <em>dal vostro catalogo</em></h2>
+      <ol class="pts num">
+        <li ${r(2)}>Il sistema legge <b>cataloghi, listini e schede prodotto</b>: avvolgicavo, quadri, multiprese, illuminazione, con tutte le loro varianti.</li>
+        <li ${r(3)}>Alla richiesta di un cliente prepara <b>la risposta tecnica e la bozza di preventivo</b>, con i vostri prezzi e le vostre condizioni.</li>
+        <li ${r(4)}>Per ogni affermazione indica <b>da quale scheda o pagina del catalogo</b> viene.</li>
+        <li ${r(5)}><b>La rivede una persona</b> prima che parta: niente esce senza il vostro sì.</li>
+      </ol>
+      <div class="note r" style="--i:6">SI APPOGGIA AI PROGRAMMI E AI FOGLI DI CALCOLO CHE USATE GIÀ</div>
+    </div>
+    <div class="cap3 r" style="--i:7">PASSA SUI DOCUMENTI · CLIC PER RIVEDERE IL PERCORSO</div>` },
+
+  { id: 'richiami', nome: 'Richiami offerte', scena: 'carte', off: 3.05, sc: .8, kn: .6, bg: M + 'riconciliazione.jpg', o: .14, html: `
+    <div class="in">
+      <div class="kick r" style="--i:0">AGENTI E UFFICIO COMMERCIALE</div>
+      <h2 class="r" style="--i:1">Nessun preventivo <em>resta senza risposta</em></h2>
+      <ul class="pts">
+        <li ${r(2)}>Ogni offerta inviata viene tenuta <b>sotto controllo</b>: chi ha risposto, chi no.</li>
+        <li ${r(3)}>Dopo il tempo giusto il sistema <b>propone il richiamo</b>, già scritto con il riferimento dell'offerta.</li>
+        <li ${r(4)}>Lo approva chi segue il cliente: <b>nessuna mail parte da sola</b>.</li>
+        <li ${r(5)}>Le richieste in arrivo dal sito e dalla posta <b>trovano subito la persona giusta</b>.</li>
+      </ul>
+    </div>` },
+
+  { id: 'assistenza', nome: 'Assistenza a voce', scena: 'ambient', bg: M + 'cantiere.jpg', o: .3, html: `
+    <div class="in">
+      <div class="kick r" style="--i:0">ASSISTENZA E POST-VENDITA</div>
+      <h2 class="r" style="--i:1">Il tecnico parla. <em>Il rapportino si scrive da solo.</em></h2>
+      <ul class="pts">
+        <li ${r(2)}>Dopo un intervento, <b>un messaggio vocale</b> al posto del modulo da compilare la sera.</li>
+        <li ${r(3)}>Ore, materiali e lavori svolti vengono letti e <b>collegati al cliente e alla commessa</b>.</li>
+        <li ${r(4)}>Foto e firma del cliente <b>restano nel rapportino</b>.</li>
+        <li ${r(5)}>Il responsabile lo <b>rivede</b> prima che entri in archivio.</li>
+      </ul>
+    </div>` },
+
+  { ...per('soluzioni'), html: per('soluzioni').html.replace("L'AI propone, voi decidete.</p>", "L'AI propone, voi decidete.</p>\n      <p class=\"lead r\" style=\"--i:3\"><b>E non ci fermiamo al catalogo:</b> realizziamo anche <em>soluzioni custom</em>, costruite su misura sul vostro modo di lavorare.</p>") },
+
+  { id: 'chiusura', nome: 'Il prossimo passo', scena: 'istanza', off: 3.5, sc: .82, bg: M + 'centrale.jpg', o: .16, html: `
+    <div class="in">
+      <div class="kick r" style="--i:0">IL PROSSIMO PASSO</div>
+      <h2 class="r" style="--i:1">Se c'è interesse, <em>una demo di 20 minuti</em></h2>
+      <div class="deploy">
+        <div class="dep r" style="--i:2"><h3>IN AZIENDA</h3><p>Veniamo da voi e mostriamo i casi dei vostri colleghi, sui vostri cataloghi.</p></div>
+        <div class="dep r" style="--i:3"><h3>SU TEAMS</h3><p>Una videochiamata breve, con le persone che ne hanno interesse.</p></div>
+      </div>
+      <div class="same r" style="--i:4">I dati restano vostri: il sistema è <b>un'istanza dedicata</b>, in cloud gestito da noi o installata da voi. L'ultima parola è sempre di chi lo usa.</div>
+      <div class="contact r" style="--i:6"><div class="mk">HQ</div><div><div class="who">Michele Campagnoni</div><div class="role">CEO · HUBIQUE</div><a class="pe" href="tel:+393282588293">+39 328 2588293</a> · <a class="pe" href="mailto:m.campagnoni@hubique.it">m.campagnoni@hubique.it</a></div></div>
+    </div>` },
+];
+
+const SLIDES = PER.deck === 'rosi' ? SLIDES_ROSI : [
   { id: 'apertura', nome: 'Apertura', scena: 'edificio', off: 3.0, sc: .86, html: `
     <div class="in">
       <div class="kick r" style="--i:0">PRESENTAZIONE RISERVATA</div>
@@ -253,7 +332,7 @@ const SLIDES = [
       <ul class="pts">${scenari.map((t, i) => `<li ${r(i + 2)}>${esc(t)}.</li>`).join('')}</ul>
       ${chiusuraTesto ? `<p class="lead r" style="--i:5">${esc(chiusuraTesto)}</p>` : ''}
     </div>` },
-  ...PER.kits.map(k => KITSLIDE[k]()),
+  ...(PER.kits || []).map(k => KITSLIDE[k]()),
   { ...per('soluzioni'), html: per('soluzioni').html.replace("L'AI propone, voi decidete.</p>", "L'AI propone, voi decidete.</p>\n      <p class=\"lead r\" style=\"--i:3\"><b>E non ci fermiamo al catalogo:</b> realizziamo anche <em>soluzioni custom</em>, costruite su misura sul vostro modo di lavorare e sui vostri problemi.</p>") },
   { ...per('chiusura'), html: per('chiusura').html.replace(/<div class="contact[\s\S]*?<\/a><\/div><\/div>/, `${btnDemo.replace('--i:6','--i:5')}<div class="contact r" style="--i:6"><div class="mk">HQ</div><div><div class="who">Michele Campagnoni</div><div class="role">CEO · HUBIQUE</div><a class="pe" href="tel:+393282588293">+39 328 2588293</a> · <a class="pe" href="mailto:m.campagnoni@hubique.it">m.campagnoni@hubique.it</a></div></div>`) },
 ];
