@@ -241,14 +241,13 @@ const chiusuraTesto = parti[1] ? 'Sono soluzioni' + parti[1] : '';
 // Domanda del cliente: «la vostra proposta riguarda diversi protagonisti del nostro processo»: una slide per ruolo, da girare ai colleghi.
 const ruolo = (i, t, p, cosa) => `<div class="tile r" style="--i:${i}"><div class="n" style="font-size:clamp(17px,1.4vw,23px)">${t}</div><h3>${p}</h3><p>${cosa}</p></div>`;
 const SLIDES_ROSI = [
-  { id: 'apertura', nome: 'Apertura', scena: 'edificio', off: 3.0, sc: .86, html: `
+  { id: 'apertura', nome: 'Apertura', scena: 'elettricoCasa', off: 3.0, sc: .86, html: `
     <div class="in">
       <div class="kick r" style="--i:0">PER ROSI MATERIALE ELETTRICO</div>
       <h1 class="r" style="--i:1">Dal catalogo alla risposta, <em>in pochi minuti</em></h1>
       <p class="lead r" style="--i:2">Una presentazione breve da girare ai colleghi: cosa cambia, ruolo per ruolo, quando l'intelligenza artificiale lavora sui vostri cataloghi, sulle vostre offerte e sull'assistenza.</p>
-      <div class="legend pe r" style="--i:3">${SISTEMI.map(k => `<button data-sys="${k}" style="--c:${hex(SYS[k].c)}"><i></i>${SYS[k].t}</button>`).join('')}</div>
     </div>
-    <div class="hint">MUOVI IL MOUSE SULL'EDIFICIO · FRECCE PER AVANZARE</div>` },
+    <div class="hint">MUOVI IL MOUSE · PASSA SUI COMPONENTI · FRECCE PER AVANZARE</div>` },
 
   { id: 'ruoli', nome: 'Chi ne ha vantaggio', scena: 'ambient', bg: M + 'magazzino.jpg', o: .18, html: `
     <div class="in" style="width:min(30vw,440px)">
@@ -263,7 +262,22 @@ const SLIDES_ROSI = [
       ${ruolo(5, 'Assistenza e post-vendita', 'Rapportini e interventi da ricopiare', 'Il tecnico detta a voce: ore, materiali e lavori svolti, con foto e firma del cliente, senza ricopiare niente in ufficio.')}
     </div>` },
 
-  { id: 'catalogo', nome: 'Risposte e preventivi', scena: 'progetto', off: 3.15, sc: .82, kn: .7, bg: M + 'edificio.jpg', o: .1, html: `
+  { id: 'dwg', nome: 'Dal DWG al progetto', scena: 'dwgElettrico', off: 3.2, sc: .86, kn: .7, html: `
+    <div class="in">
+      <div class="kick r" style="--i:0">UFFICIO TECNICO · IMPIANTO ELETTRICO</div>
+      <h2 class="r" style="--i:1">Dalla planimetria DWG, <em>il progetto tecnico e i materiali</em></h2>
+      <ol class="pts num">
+        <li ${r(2)}>Parte dal <b>DWG dell'architetto</b>: legge locali, muri e porte.</li>
+        <li ${r(3)}>Colloca <b>punti luce, prese e interruttori</b> locale per locale, secondo il livello di dotazione che scegliete.</li>
+        <li ${r(4)}>Traccia <b>circuiti, linee dedicate e quadro</b> e prepara lo schema del progetto tecnico.</li>
+        <li ${r(5)}>Calcola <b>i materiali necessari</b>: pezzi, metri di cavo e tubo, abbinati ai vostri listini.</li>
+        <li ${r(6)}><b>Lo rivede il progettista</b>: la bozza è sua da correggere e firmare.</li>
+      </ol>
+      <div class="note r" style="--i:7">ESEMPIO DIMOSTRATIVO · DA PROVARE SUI VOSTRI DISEGNI</div>
+    </div>
+    <div class="cap3 r" style="--i:8">PASSA SUI DOCUMENTI · CLIC PER RIVEDERE IL PERCORSO</div>` },
+
+  { id: 'catalogo', nome: 'Risposte e preventivi', scena: 'catalogoRisposta', off: 3.05, sc: .82, kn: .65, bg: M + 'magazzino.jpg', o: .1, html: `
     <div class="in">
       <div class="kick r" style="--i:0">UFFICIO COMMERCIALE E TECNICO</div>
       <h2 class="r" style="--i:1">Risposte tecniche e preventivi <em>dal vostro catalogo</em></h2>
@@ -277,7 +291,7 @@ const SLIDES_ROSI = [
     </div>
     <div class="cap3 r" style="--i:7">PASSA SUI DOCUMENTI · CLIC PER RIVEDERE IL PERCORSO</div>` },
 
-  { id: 'richiami', nome: 'Richiami offerte', scena: 'carte', off: 3.05, sc: .8, kn: .6, bg: M + 'riconciliazione.jpg', o: .14, html: `
+  { id: 'richiami', nome: 'Richiami offerte', scena: 'richiamiOfferte', off: 3.0, sc: .8, kn: .6, html: `
     <div class="in">
       <div class="kick r" style="--i:0">AGENTI E UFFICIO COMMERCIALE</div>
       <h2 class="r" style="--i:1">Nessun preventivo <em>resta senza risposta</em></h2>
@@ -289,7 +303,7 @@ const SLIDES_ROSI = [
       </ul>
     </div>` },
 
-  { id: 'assistenza', nome: 'Assistenza a voce', scena: 'ambient', bg: M + 'cantiere.jpg', o: .3, html: `
+  { id: 'assistenza', nome: 'Assistenza a voce', scena: 'rapportinoVoce', off: 3.0, sc: .82, kn: .65, html: `
     <div class="in">
       <div class="kick r" style="--i:0">ASSISTENZA E POST-VENDITA</div>
       <h2 class="r" style="--i:1">Il tecnico parla. <em>Il rapportino si scrive da solo.</em></h2>
@@ -303,7 +317,7 @@ const SLIDES_ROSI = [
 
   { ...per('soluzioni'), html: per('soluzioni').html.replace("L'AI propone, voi decidete.</p>", "L'AI propone, voi decidete.</p>\n      <p class=\"lead r\" style=\"--i:3\"><b>E non ci fermiamo al catalogo:</b> realizziamo anche <em>soluzioni custom</em>, costruite su misura sul vostro modo di lavorare.</p>") },
 
-  { id: 'chiusura', nome: 'Il prossimo passo', scena: 'istanza', off: 3.5, sc: .82, bg: M + 'centrale.jpg', o: .16, html: `
+  { id: 'chiusura', nome: 'Il prossimo passo', scena: 'istanza', off: 3.5, sc: .82, html: `
     <div class="in">
       <div class="kick r" style="--i:0">IL PROSSIMO PASSO</div>
       <h2 class="r" style="--i:1">Se c'è interesse, <em>una demo di 20 minuti</em></h2>

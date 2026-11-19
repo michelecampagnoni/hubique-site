@@ -487,6 +487,260 @@ S.ambient = () => {
   return { group: g, pick: [], cam: [0, 0, 12], look: [0, 0, 0], update(t) { dots.rotation.y = t * .015; dots.position.y = Math.sin(t * .3) * .15; } };
 };
 
+// ---------- scene verticali ELETTRICO (Rosi Materiale Elettrico, 19/11/2026): solo quadri, cavi, punti luce e prese ----------
+const GIALLO = 0xe9a300, VERDE = 0x1c9c5a;
+function docE(titolo, righe, piede, sotto = 'BOZZA DA RIVEDERE') {
+  return texCanvas(600, 800, (x, W, H) => {
+    x.fillStyle = 'rgba(255,255,255,.98)'; x.beginPath(); x.roundRect(6, 6, W - 12, H - 12, 22); x.fill();
+    x.lineWidth = 3; x.strokeStyle = 'rgba(21,121,189,.45)'; x.stroke();
+    x.fillStyle = '#1579bd'; x.beginPath(); x.roundRect(6, 6, W - 12, 120, [22, 22, 0, 0]); x.fill();
+    x.fillStyle = '#fff'; x.textBaseline = 'middle'; x.font = `700 34px ${FONT}`; x.fillText('HUBIQUE', 40, 46); x.font = `600 25px ${FONT}`; x.fillText(sotto, 40, 90);
+    x.fillStyle = '#1a1d45'; x.font = `700 40px ${FONT}`; titolo.forEach((t, i) => x.fillText(t, 40, 182 + i * 48));
+    const y0 = 182 + titolo.length * 48 + 34;
+    righe.forEach(([a, b], i) => { const y = y0 + i * 62; x.fillStyle = '#3b3f63'; x.font = `600 29px ${FONT}`; x.fillText(a, 40, y); x.fillStyle = '#1579bd'; x.textAlign = 'right'; x.font = `700 29px ${FONT}`; x.fillText(b, W - 40, y); x.textAlign = 'left'; x.strokeStyle = 'rgba(21,121,189,.15)'; x.lineWidth = 2; x.beginPath(); x.moveTo(40, y + 30); x.lineTo(W - 40, y + 30); x.stroke(); });
+    x.fillStyle = '#ff5a1f'; x.font = `700 26px ${FONT}`; x.fillText(piede, 40, H - 50);
+  });
+}
+const ease2 = k => k <= 0 ? 0 : k >= 1 ? 1 : 1 - Math.pow(1 - k, 3);
+function docMesh(tex, tip, T, r, pick, g) {
+  const grp = new THREE.Group(), face = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.93), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+  const sh = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 3.5), new THREE.MeshBasicMaterial({ map: softTex, transparent: true, depthWrite: false, opacity: .8 })); sh.position.set(.08, -.12, -.1);
+  grp.add(sh, face); grp.userData = { tip, T, r, lift: 0, liftT: 0 }; g.add(grp); pick.push(grp); return grp;
+}
+function animaDocs(docs, T, t, dt, da, passo) {
+  docs.forEach((d, i) => {
+    const u = d.userData, k = ease2((T - da - i * passo) / .9);
+    d.visible = k > .01; d.scale.setScalar(.7 + k * .3); d.position.copy(u.T); d.position.y += (1 - k) * -1.2;
+    u.lift += (u.liftT - u.lift) * Math.min(1, dt * 8); d.position.z += u.lift * .55; d.position.y += Math.sin(t * 1.05 + i) * .035 + u.lift * .1;
+    d.rotation.set((1 - k) * .7, u.r, 0); d.children.forEach(c => { if (c.material) c.material.opacity = c.material.map === softTex ? k * .8 : k; });
+  });
+}
+function tubo(pts, col, r = .03) {
+  const curve = new Poly(pts), geo = new THREE.TubeGeometry(curve, 140, r, 8, false);
+  const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: col, roughness: .35, metalness: .2 })); geo.setDrawRange(0, 0);
+  return { curve, geo, mesh, tot: geo.index.count };
+}
+
+// --- apertura: casa in spaccato con il solo impianto elettrico
+S.elettricoCasa = () => {
+  const g = new THREE.Group(), pick = [], Y0 = -1.6, Y1 = 0, Y2 = 1.7, W = 6, D = 4;
+  [Y0, Y1, Y2].forEach((y, i) => { const s = glassBox(W, .08, D, { opacity: i === 0 ? .7 : .42, edge: .5 }); s.position.y = y; g.add(s); });
+  const back = glassBox(W, Y2 - Y0, .05, { opacity: .2, edge: .3 }); back.position.set(0, (Y0 + Y2) / 2, -D / 2); g.add(back);
+  const left = glassBox(.05, Y2 - Y0, D, { opacity: .2, edge: .3 }); left.position.set(-W / 2, (Y0 + Y2) / 2, 0); g.add(left);
+  [[W / 2, D / 2], [W / 2, -D / 2], [-W / 2, D / 2]].forEach(([x, z]) => { const c = glassBox(.08, Y2 - Y0, .08, { opacity: .5, edge: .6 }); c.position.set(x, (Y0 + Y2) / 2, z); g.add(c); });
+  const base = new THREE.Group(); base.position.y = Y0 - .05; base.add(shadowDisc(5.4)); base.add(hudRings([4.2, 5.1, 6.0])); g.add(base);
+  // tetto con moduli fotovoltaici
+  const YR = 3.3, ang = Math.atan((YR - Y2) / (D / 2 + .2)), slope = Math.hypot(YR - Y2, D / 2 + .2), pv = [];
+  [1, -1].forEach(s => {
+    const r = new THREE.Group(); r.position.set(0, (Y2 + YR) / 2, s * (D / 2 + .2) / 2); r.rotation.x = s * ang; r.add(glassBox(W + .4, .05, slope, { opacity: .22, edge: .45 }));
+    if (s === 1) for (let i = 0; i < 6; i++) for (let j = 0; j < 2; j++) {
+      const geo = new THREE.BoxGeometry(.86, .03, 1.08), m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x1d2a8f, roughness: .3, metalness: .45 }));
+      m.position.set(-2.5 + i * 1, .05, -.58 + j * 1.16); r.add(m); const e = lines(geo, 0xbfc8ff, .7); e.position.copy(m.position); r.add(e); pv.push(m);
+    }
+    g.add(r);
+  });
+  // quadro generale, montante e linee di piano
+  const quadro = new THREE.Group(), qg = new THREE.BoxGeometry(.5, .8, .18);
+  quadro.add(solid(qg, 0xf4f6fb, { rough: .3 }), lines(qg, IND, .9));
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 4; j++) { const b = solid(new THREE.BoxGeometry(.07, .1, .05), j === 0 ? RED : GIALLO, { rough: .5 }); b.position.set(-.14 + i * .14, .22 - j * .16, .1); quadro.add(b); }
+  quadro.position.set(2.5, Y0 + .6, D / 2 - .3); quadro.userData.tip = '<b>QUADRO ELETTRICO</b>Interruttori, differenziali e protezioni: scelti dal progetto, con le quantità nel computo.'; g.add(quadro); pick.push(quadro);
+  const linee = [
+    tubo([[2.5, Y0 + 1.05, D / 2 - .3], [2.5, Y1 + .3, D / 2 - .3], [2.5, Y1 + .3, -1.2], [-2.5, Y1 + .3, -1.2]], GIALLO),
+    tubo([[2.5, Y1 + .3, D / 2 - .3], [2.5, Y2 + .3, D / 2 - .3], [2.5, Y2 + .3, .4], [-2.5, Y2 + .3, .4]], GIALLO),
+    tubo([[-2.5, Y0 + .35, 1.4], [-2.5, Y0 + .35, -1.4], [2.2, Y0 + .35, -1.4], [2.2, Y0 + .35, 1.2]], VERDE, .025),
+    tubo([[2.5, Y2 + .3, D / 2 - .3], [2.5, YR - .5, 0], [.2, YR - .5, 0]], 0xe9a300, .03),
+  ];
+  linee.forEach(l => g.add(l.mesh));
+  const beads = linee.map(l => { const m = new THREE.InstancedMesh(new THREE.SphereGeometry(.06, 10, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }), 5); m.count = 0; m.frustumCulled = false; g.add(m); return m; });
+  // punti luce e prese
+  const luci = [[-1.8, Y1 - .05, -.4], [0, Y1 - .05, .6], [1.5, Y1 - .05, -.5], [-1.8, Y2 - .05, -.3], [.4, Y2 - .05, .2], [1.8, Y2 - .05, -.6]].map(p => {
+    const m = solid(new THREE.CylinderGeometry(.14, .14, .04, 20), 0xfff2c4, { emissive: 0xe9a300 }); m.position.set(...p); m.userData.tip = '<b>PUNTI LUCE</b>Posizionati sulla planimetria e contati uno per uno.'; g.add(m); pick.push(m); return m;
+  });
+  const prese = [[-2.9, Y1 + .3, -1.9], [-1.0, Y1 + .3, -1.95], [1.2, Y1 + .3, -1.95], [-2.9, Y2 + .3, -1.9], [.9, Y2 + .3, -1.95], [2.6, Y2 + .3, -1.95], [-2.95, Y0 + .3, .6]].map(p => {
+    const m = solid(new THREE.BoxGeometry(.2, .16, .06), 0x1579bd, { rough: .4 }); m.position.set(...p); m.userData.tip = '<b>PRESE E INTERRUTTORI</b>Ogni punto ha il suo circuito, la sua linea e il suo materiale.'; g.add(m); pick.push(m); return m;
+  });
+  const inv = solid(new THREE.BoxGeometry(.5, .7, .2), 0xf4f6fb, { rough: .3 }); inv.position.set(-2.6, Y2 + .55, -1.8); inv.add(lines(new THREE.BoxGeometry(.5, .7, .2), IND, .9)); inv.userData.tip = '<b>INVERTER E MODULI</b>Fotovoltaico e accumulo collegati al quadro.'; g.add(inv); pick.push(inv);
+  g.position.y = .55; g.scale.setScalar(.92);
+  let t0 = 0, lastT = 0;
+  return {
+    group: g, pick, cam: [4.2, 3.4, 11.5], look: [0, 1.2, 0],
+    update(t) {
+      lastT = t; const T = t - t0;
+      linee.forEach((l, i) => { const k = ease2((T - .6 - i * .35) / 1.1); l.geo.setDrawRange(0, Math.floor(l.tot * k / 3) * 3); const b = beads[i]; b.count = k >= 1 ? 5 : 0;
+        if (k >= 1) for (let j = 0; j < 5; j++) { l.curve.getPoint((j / 5 + t * .12) % 1, dummy.position); dummy.scale.setScalar(1); dummy.updateMatrix(); b.setMatrixAt(j, dummy.matrix); } b.instanceMatrix.needsUpdate = true; });
+      luci.forEach((m, i) => { const k = ease2((T - 1.4 - i * .12) / .5); m.scale.setScalar(Math.max(.001, k)); m.material.emissiveIntensity = .7 + .3 * Math.sin(t * 2 + i); });
+      prese.forEach((m, i) => { const k = ease2((T - 1.8 - i * .1) / .5); m.scale.setScalar(Math.max(.001, k)); });
+      pv.forEach((m, i) => { m.material.emissive.setHex(0x1b2a7a).multiplyScalar(.5 + .5 * Math.sin(t * 1.3 + i * .4)); });
+    },
+    hover(o) { return o ? o.userData.tip : null; }, click() { t0 = lastT; },
+  };
+};
+
+// --- planimetria DWG → progetto tecnico: punti luce e prese, cavi, distinta materiali
+S.dwgElettrico = () => {
+  const g = new THREE.Group(), pick = [], Y = -1.4, ALT = .95;
+  const MURI = [[-2.7, -1.7, 2.7, -1.7], [2.7, -1.7, 2.7, 1.7], [2.7, 1.7, -2.7, 1.7], [-2.7, 1.7, -2.7, -1.7], [-.6, -1.7, -.6, 1.7], [-.6, .2, 2.7, .2], [-2.7, -.1, -.6, -.1]];
+  const SW = 6.4, SD = 4.25, tex = texCanvas(1280, 850, (x, W, H) => {
+    const px = v => (v + SW / 2) / SW * W, pz = v => (v + SD / 2) / SD * H;
+    x.fillStyle = '#0f4f86'; x.fillRect(0, 0, W, H); x.strokeStyle = 'rgba(255,255,255,.1)'; x.lineWidth = 1;
+    for (let i = 0; i < W; i += 40) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, H); x.stroke(); } for (let j = 0; j < H; j += 40) { x.beginPath(); x.moveTo(0, j); x.lineTo(W, j); x.stroke(); }
+    x.strokeStyle = '#eaf4fc'; x.lineWidth = 7; MURI.forEach(([a, b, c, d]) => { x.beginPath(); x.moveTo(px(a), pz(b)); x.lineTo(px(c), pz(d)); x.stroke(); });
+    x.fillStyle = '#eaf4fc'; x.textBaseline = 'middle'; x.font = `700 40px ${FONT}`; x.fillText('DWG', 34, 42); x.font = `500 25px ${FONT}`; x.fillText('PLANIMETRIA · SOLO MURI', W / 2 - 150, H - 28);
+  });
+  const foglio = new THREE.Mesh(new THREE.PlaneGeometry(SW, SD), new THREE.MeshBasicMaterial({ map: tex, transparent: true, side: THREE.DoubleSide }));
+  foglio.rotation.x = -Math.PI / 2; foglio.position.y = Y; foglio.userData.tip = '<b>LA PLANIMETRIA DWG</b>Si parte dal disegno dell\'architetto: locali, muri e porte letti dal file.'; g.add(foglio); pick.push(foglio);
+  const base = new THREE.Group(); base.position.y = Y - .03; base.add(shadowDisc(4.6)); g.add(base);
+  const muri = MURI.map(([a, b, c, d]) => { const lx = Math.abs(c - a) || .05, lz = Math.abs(d - b) || .05, m = glassBox(lx, ALT, lz, { opacity: .3, edge: .5 }); m.position.set((a + c) / 2, Y + .006, (b + d) / 2); m.children.forEach(ch => ch.position.y = ALT / 2); g.add(m); return m; });
+  const L = [[-1.65, -.9], [-1.65, .8], [.3, -.75], [1.9, -.75], [.3, .95], [1.9, .95]];
+  const luci = L.map(([x, z]) => { const m = solid(new THREE.CylinderGeometry(.13, .13, .04, 20), 0xfff2c4, { emissive: 0xe9a300 }); m.position.set(x, Y + ALT - .03, z); m.userData.tip = '<b>PUNTI LUCE</b>Collocati nei locali secondo la norma e contati uno per uno.'; g.add(m); pick.push(m); return m; });
+  const P = [[-2.62, -1.2], [-2.62, -.4], [-2.62, .5], [-2.62, 1.3], [-1.0, 1.62], [-.52, -1.2], [-.52, .6], [.4, -1.62], [1.8, -1.62], [2.62, -.5], [.9, 1.62], [2.1, 1.62], [2.62, .8]];
+  const prese = P.map(([x, z]) => { const m = solid(new THREE.BoxGeometry(.16, .14, .07), 0x1579bd, { rough: .4 }); m.position.set(x, Y + .22, z); m.userData.tip = '<b>PRESE</b>Altezze e quantità secondo il livello di dotazione scelto.'; g.add(m); pick.push(m); return m; });
+  const IT = [[-.64, -.8], [-.64, 1.0], [-.64, .45], [2.1, .21], [2.64, 1.5]];
+  const inter = IT.map(([x, z]) => { const m = solid(new THREE.BoxGeometry(.1, .14, .07), 0xffffff, { rough: .4 }); m.position.set(x, Y + .5, z); g.add(m); return m; });
+  const quadro = new THREE.Group(), qg = new THREE.BoxGeometry(.28, .5, .12); quadro.add(solid(qg, 0xf4f6fb, { rough: .3 }), lines(qg, IND, .9));
+  quadro.position.set(2.58, Y + .55, 1.25); quadro.userData.tip = '<b>QUADRO</b>Circuiti, protezioni e linee dedicate calcolati dal progetto.'; g.add(quadro); pick.push(quadro);
+  const cav = [
+    tubo([[2.5, Y + .55, 1.25], [2.5, Y + ALT - .05, 1.25], [1.9, Y + ALT - .05, .95], [.3, Y + ALT - .05, .95], [.3, Y + ALT - .05, -.75], [1.9, Y + ALT - .05, -.75]], GIALLO, .022),
+    tubo([[.3, Y + ALT - .05, .95], [-1.65, Y + ALT - .05, .8], [-1.65, Y + ALT - .05, -.9]], GIALLO, .022),
+    tubo([[2.5, Y + .5, 1.25], [2.5, Y + .3, -.5], [2.5, Y + .3, .8]], 0x1c9c5a, .02),
+    tubo([[2.5, Y + .3, 1.5], [.6, Y + .3, 1.55], [-.5, Y + .3, .6], [-.5, Y + .3, -1.2]], 0x1c9c5a, .02),
+  ];
+  cav.forEach(c => g.add(c.mesh));
+  const QT = [
+    { t: 'Punti luce', c: GIALLO, x: -2.2, tip: '<b>PUNTI LUCE</b>Il numero esce dal conteggio sul disegno.' },
+    { t: 'Prese', c: 0x1579bd, x: 0, tip: '<b>PRESE E INTERRUTTORI</b>Contati per locale e per circuito.' },
+    { t: 'Cavi', c: VERDE, x: 2.2, tip: '<b>CAVI E TUBI</b>Lunghezze calcolate sui percorsi.' },
+  ].map(q => { const m = new THREE.Mesh(new THREE.PlaneGeometry(1.76, .55), new THREE.MeshBasicMaterial({ map: tagTex(q.t, q.c), transparent: true, depthWrite: false })); m.position.set(q.x, -.55, 2.55); m.userData.tip = q.tip; g.add(m); pick.push(m); return m; });
+  const docs = [
+    docMesh(docE(['Distinta', 'materiali'], [['Punti luce', '28 pz'], ['Prese', '64 pz'], ['Interruttori', '22 pz'], ['Cavo FG17', '1.480 m'], ['Tubo corrugato', '1.120 m']], 'DA LISTINO · ESEMPIO'), '<b>DISTINTA MATERIALI</b>Quantità di ogni articolo, calcolate dal progetto e abbinate al vostro listino.', new THREE.Vector3(-1.3, 2.15, -.6), .12, pick, g),
+    docMesh(docE(['Progetto', 'tecnico'], [['Circuiti luce', '6'], ['Circuiti prese', '8'], ['Linee dedicate', '4'], ['Potenza impegnata', '12 kW'], ['Riferimento', 'CEI 64-8']], 'DA RIVEDERE · ESEMPIO'), '<b>PROGETTO TECNICO</b>Schema dei circuiti e dimensionamento: una bozza che il progettista rivede e firma.', new THREE.Vector3(1.3, 2.15, -.7), -.12, pick, g),
+  ];
+  g.position.y = -.12;
+  let t0 = 0, lastT = 0;
+  return {
+    group: g, pick, cam: [1.8, 5.2, 12.2], look: [0, .6, 0],
+    update(t, dt) {
+      lastT = t; const T = t - t0;
+      muri.forEach((m, i) => { m.scale.y = Math.max(.001, ease2((T - .4 - i * .07) / .8)); });
+      luci.forEach((m, i) => { const k = ease2((T - 1.4 - i * .12) / .5); m.scale.setScalar(Math.max(.001, k)); m.material.emissiveIntensity = .7 + .3 * Math.sin(t * 2 + i); });
+      prese.forEach((m, i) => { m.scale.setScalar(Math.max(.001, ease2((T - 1.9 - i * .06) / .4))); });
+      inter.forEach((m, i) => { m.scale.setScalar(Math.max(.001, ease2((T - 2.4 - i * .1) / .4))); });
+      quadro.scale.setScalar(Math.max(.001, ease2((T - 2.2) / .5)));
+      cav.forEach((c, i) => { const k = ease2((T - 2.7 - i * .3) / 1); c.geo.setDrawRange(0, Math.floor(c.tot * k / 3) * 3); });
+      QT.forEach((m, i) => { const k = ease2((T - 3.7 - i * .18) / .6); m.material.opacity = k; m.visible = k > .01; m.scale.setScalar(.8 + k * .2); m.position.y = -.75 + k * .18 + Math.sin(t * 1.2 + i) * .02; });
+      animaDocs(docs, T, t, dt, 4.2, .35);
+    },
+    hover(o) { docs.forEach(d => d.userData.liftT = d === o ? 1 : 0); return o ? o.userData.tip : null; }, click() { t0 = lastT; },
+  };
+};
+
+// --- catalogo → risposta tecnica e preventivo
+S.catalogoRisposta = () => {
+  const g = new THREE.Group(), pick = [], base = new THREE.Group();
+  base.position.y = -1.6; base.add(shadowDisc(4.8)); base.add(hudRings([3.6, 4.4, 5.2])); g.add(base);
+  const prod = [];
+  // avvolgicavo
+  const reel = new THREE.Group();
+  const drum = solid(new THREE.CylinderGeometry(.42, .42, .5, 28), 0xe9a300, { rough: .5 }); drum.rotation.x = Math.PI / 2; reel.add(drum);
+  [-.3, .3].forEach(z => { const f = solid(new THREE.CylinderGeometry(.7, .7, .06, 32), 0xf4f6fb, { rough: .35 }); f.rotation.x = Math.PI / 2; f.position.z = z; reel.add(f); reel.add(lines(new THREE.CylinderGeometry(.7, .7, .06, 32), IND, .5)).children.at(-1).position.set(0, 0, z); reel.children.at(-1).rotation.x = Math.PI / 2; });
+  reel.position.set(-2.4, 1.3, 0); reel.userData.tip = '<b>AVVOLGICAVO</b>Le varianti di lunghezza, sezione e prese arrivano dal catalogo.'; g.add(reel); pick.push(reel); prod.push(reel);
+  // quadro
+  const qd = new THREE.Group(), qg = new THREE.BoxGeometry(1, 1.2, .3); qd.add(solid(qg, 0xf4f6fb, { rough: .3 }), lines(qg, IND, .9));
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 3; j++) { const b = solid(new THREE.BoxGeometry(.14, .22, .08), j === 0 ? RED : GIALLO, { rough: .5 }); b.position.set(-.33 + i * .22, .3 - j * .32, .18); qd.add(b); }
+  qd.position.set(-2.4, -.1, 0); qd.userData.tip = '<b>QUADRI</b>Configurazioni e codici letti dalle schede prodotto.'; g.add(qd); pick.push(qd); prod.push(qd);
+  // multipresa
+  const mp = new THREE.Group(), mg = new THREE.BoxGeometry(1.5, .24, .3); mp.add(solid(mg, 0xffffff, { rough: .4 }), lines(mg, IND, .9));
+  for (let i = 0; i < 4; i++) { const h = solid(new THREE.CylinderGeometry(.07, .07, .02, 16), 0x1a1d45, { rough: .6 }); h.rotation.x = Math.PI / 2; h.position.set(-.5 + i * .33, 0, .16); mp.add(h); }
+  mp.position.set(-2.4, -1.3, 0); mp.userData.tip = '<b>MULTIPRESE</b>Ogni modello con il suo codice, prezzo e disponibilità.'; g.add(mp); pick.push(mp); prod.push(mp);
+  // cerchio di lettura al centro
+  const lente = new THREE.Group(); const ring = new THREE.Mesh(new THREE.TorusGeometry(.7, .05, 12, 48), new THREE.MeshStandardMaterial({ color: IND, roughness: .3, metalness: .3 })); lente.add(ring);
+  const lab = label('LEGGE LE SCHEDE', { w: 1.8, h: .26, size: 52 }); lab.position.set(0, -1.05, 0); lente.add(lab); lente.position.set(-.2, .1, .3); g.add(lente);
+  const docs = [
+    docMesh(docE(['Risposta', 'tecnica'], [['Prodotto', 'quadro ASC'], ['Grado IP', 'da scheda'], ['Fonte', 'scheda p. 14'], ['Stato', 'da verificare']], 'FONTE INDICATA'), '<b>RISPOSTA TECNICA</b>Scritta dalle vostre schede, con la pagina da cui viene. La rivede il tecnico.', new THREE.Vector3(2.0, 2.0, -.3), .1, pick, g),
+    docMesh(docE(['Preventivo', 'cliente'], [['Quadro', '4 pz'], ['Avvolgicavo', '12 pz'], ['Multiprese', '30 pz'], ['Listino', 'del cliente']], 'CONDIZIONI VOSTRE'), '<b>BOZZA DI PREVENTIVO</b>Prezzi e condizioni dai vostri listini. Non parte senza il vostro sì.', new THREE.Vector3(2.0, -1.35, -.1), -.1, pick, g),
+  ];
+  docs.forEach(d => d.scale.multiplyScalar(.7));
+  const fili = [];
+  prod.forEach((p, i) => docs.forEach((d, j) => {
+    const a = p.position.clone().add(new THREE.Vector3(.75, 0, 0)), b = d.userData.T.clone().add(new THREE.Vector3(-.9, 0, 0));
+    const curve = new THREE.CubicBezierCurve3(a, a.clone().add(new THREE.Vector3(1, 0, .3)), b.clone().add(new THREE.Vector3(-1, 0, .3)), b);
+    const geo = new THREE.TubeGeometry(curve, 50, .014, 6, false), mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: IND, transparent: true, opacity: .55 })); geo.setDrawRange(0, 0); g.add(mesh);
+    const bead = new THREE.Mesh(new THREE.SphereGeometry(.05, 10, 8), new THREE.MeshBasicMaterial({ color: RED })); bead.visible = false; g.add(bead);
+    fili.push({ curve, geo, bead, tot: geo.index.count, i: i * 2 + j });
+  }));
+  g.position.y = -.1;
+  let t0 = 0, lastT = 0;
+  return {
+    group: g, pick, cam: [1.2, 2.2, 13], look: [0, .2, 0],
+    update(t, dt) {
+      lastT = t; const T = t - t0;
+      prod.forEach((p, i) => { const k = ease2((T - .3 - i * .25) / .7); p.scale.setScalar(Math.max(.001, k)); p.rotation.y = Math.sin(t * .6 + i) * .25 + (1 - k) * 1.2 + (p === reel ? .9 : 0); });
+      lente.rotation.z = t * .6; lente.children[1].rotation.z = -t * .6; lente.scale.setScalar(.85 + .08 * Math.sin(t * 2));
+      fili.forEach((f, i) => { const k = ease2((T - 1.6 - i * .1) / .8); f.geo.setDrawRange(0, Math.floor(f.tot * k / 3) * 3); f.bead.visible = k >= 1; if (k >= 1) f.curve.getPoint((t * .35 + i * .17) % 1, f.bead.position); });
+      animaDocs(docs, T, t, dt, 2.4, .4);
+    },
+    hover(o) { docs.forEach(d => d.userData.liftT = d === o ? 1 : 0); return o ? o.userData.tip : null; }, click() { t0 = lastT; },
+  };
+};
+
+// --- richiami automatici delle offerte
+S.richiamiOfferte = () => {
+  const g = new THREE.Group(), pick = [], base = new THREE.Group();
+  base.position.y = -1.6; base.add(shadowDisc(4.8)); base.add(hudRings([3.6, 4.4, 5.2])); g.add(base);
+  const docs = [
+    docMesh(docE(['Offerta', 'quadri e cavi'], [['Cliente', 'impresa A'], ['Inviata', '12/11'], ['Stato', 'nessuna risposta']], 'DA 7 GIORNI', 'OFFERTA INVIATA'), '<b>OFFERTA INVIATA</b>Il sistema sa a chi è stata inviata e quando.', new THREE.Vector3(-2.7, 1.2, -.2), .16, pick, g),
+    docMesh(docE(['Offerta', 'illuminazione'], [['Cliente', 'impresa B'], ['Inviata', '14/11'], ['Aperta', 'sì, 2 volte']], 'IN ATTESA', 'OFFERTA INVIATA'), '<b>OFFERTA APERTA</b>Si vede anche chi l\'ha già letta.', new THREE.Vector3(0, 1.2, -.5), 0, pick, g),
+    docMesh(docE(['Richiamo', 'proposto'], [['A', 'impresa A'], ['Riferimento', 'offerta 12/11'], ['Testo', 'già scritto']], 'DA APPROVARE', 'BOZZA DI RICHIAMO'), '<b>RICHIAMO PROPOSTO</b>Dopo il tempo giusto la bozza è già pronta. La approva chi segue il cliente.', new THREE.Vector3(2.7, 1.2, -.2), -.16, pick, g),
+  ];
+  docs.forEach(d => d.scale.multiplyScalar(.9));
+  const pts = [[-2.7, -.9, 0], [-.9, -1.15, 0], [.9, -1.15, 0], [2.7, -.9, 0]];
+  const lin = tubo(pts, IND, .03); g.add(lin.mesh);
+  const nodi = pts.map((p, i) => { const m = solid(new THREE.SphereGeometry(.13, 16, 12), i === 3 ? VERDE : IND, { rough: .4 }); m.position.set(...p); g.add(m); return m; });
+  const etichette = [['INVIATA', -2.7], ['APERTA', -.9], ['7 GIORNI', .9], ['RICHIAMO ✓', 2.7]].map(([t, x], i) => { const m = label(t, { w: 1.5, h: .24, size: 46, color: i === 3 ? '#1c9c5a' : '#1579bd' }); m.position.set(x, -1.55, 0); g.add(m); return m; });
+  const campana = new THREE.Group(); const cb = solid(new THREE.SphereGeometry(.28, 20, 14, 0, Math.PI * 2, 0, Math.PI * .7), 0xe9a300, { rough: .4 }); campana.add(cb);
+  const bt = solid(new THREE.SphereGeometry(.07, 10, 8), 0xe9a300); bt.position.y = -.33; campana.add(bt); campana.position.set(.9, -.25, .1); g.add(campana);
+  const bead = new THREE.Mesh(new THREE.SphereGeometry(.07, 10, 8), new THREE.MeshBasicMaterial({ color: RED })); g.add(bead);
+  g.position.y = -.1;
+  let t0 = 0, lastT = 0;
+  return {
+    group: g, pick, cam: [0, 2.2, 13.2], look: [0, .2, 0],
+    update(t, dt) {
+      lastT = t; const T = t - t0;
+      animaDocs(docs, T, t, dt, .4, .5);
+      const k = ease2((T - 1.8) / 1.6); lin.geo.setDrawRange(0, Math.floor(lin.tot * k / 3) * 3); lin.curve.getPoint((t * .22) % 1, bead.position); bead.visible = k >= 1;
+      nodi.forEach((m, i) => m.scale.setScalar(Math.max(.001, ease2((T - 1.8 - i * .5) / .4)))); etichette.forEach((m, i) => { m.material.opacity = ease2((T - 2 - i * .5) / .4); });
+      campana.rotation.z = Math.sin(t * 6) * .25 * (T > 3.4 ? 1 : 0); campana.scale.setScalar(Math.max(.001, ease2((T - 3.2) / .4)));
+    },
+    hover(o) { docs.forEach(d => d.userData.liftT = d === o ? 1 : 0); return o ? o.userData.tip : null; }, click() { t0 = lastT; },
+  };
+};
+
+// --- assistenza: il tecnico detta a voce, il rapportino si scrive da solo
+S.rapportinoVoce = () => {
+  const g = new THREE.Group(), pick = [], base = new THREE.Group();
+  base.position.y = -1.6; base.add(shadowDisc(4.8)); base.add(hudRings([3.6, 4.4, 5.2])); g.add(base);
+  const tel = new THREE.Group(), tg = new THREE.BoxGeometry(1, 1.9, .14);
+  tel.add(solid(tg, 0x1a1d45, { rough: .3 }), lines(tg, IND, .8));
+  const schermo = new THREE.Mesh(new THREE.PlaneGeometry(.86, 1.7), new THREE.MeshBasicMaterial({ map: texCanvas(256, 512, (x, W, H) => { x.fillStyle = '#eaf4fc'; x.fillRect(0, 0, W, H); x.fillStyle = '#1579bd'; x.beginPath(); x.arc(W / 2, H * .42, 58, 0, 7); x.fill(); x.fillStyle = '#fff'; x.beginPath(); x.roundRect(W / 2 - 14, H * .42 - 34, 28, 52, 14); x.fill(); x.strokeStyle = '#fff'; x.lineWidth = 6; x.beginPath(); x.arc(W / 2, H * .42 + 6, 26, 0, Math.PI); x.stroke(); x.fillStyle = '#3b3f63'; x.font = `700 28px ${FONT}`; x.textAlign = 'center'; x.fillText('Sto dettando…', W / 2, H * .72); }) }));
+  schermo.position.z = .08; tel.add(schermo); tel.position.set(-2.8, .1, 0); tel.rotation.y = .25; tel.userData.tip = '<b>IL TECNICO PARLA</b>Un messaggio vocale al termine dell\'intervento, anche dal cantiere.'; g.add(tel); pick.push(tel);
+  const onde = [0, 1, 2].map(i => { const c = circle(.5 + i * .3, IND, .55, 48, Math.PI * .9, -Math.PI * .45); c.rotation.set(Math.PI / 2, 0, 0); c.position.set(-2.1, .1, .2); g.add(c); return c; });
+  const docs = [docMesh(docE(['Rapportino', 'di intervento'], [['Cliente', 'impianto civile'], ['Ore', '3,5'], ['Materiali', '4 voci'], ['Foto', '3'], ['Firma cliente', '✓ presente']], 'DA RIVEDERE · ESEMPIO', 'DETTATO A VOCE'), '<b>RAPPORTINO</b>Ore, materiali e lavori letti dalla voce e collegati alla commessa. Lo rivede il responsabile.', new THREE.Vector3(1.4, 1.1, -.4), -.1, pick, g)];
+  const foto = [0, 1, 2].map(i => { const m = new THREE.Mesh(new THREE.PlaneGeometry(.6, .45), new THREE.MeshBasicMaterial({ map: texCanvas(192, 144, (x, W, H) => { x.fillStyle = ['#cfe3f4', '#e9d9a8', '#cfe9d9'][i]; x.fillRect(0, 0, W, H); x.strokeStyle = '#1579bd'; x.lineWidth = 6; x.strokeRect(3, 3, W - 6, H - 6); x.fillStyle = '#1579bd'; x.beginPath(); x.arc(W * .5, H * .5, 22, 0, 7); x.fill(); }) })); m.position.set(3.4 - i * .2, -1.0 + i * .55, .3 + i * .05); m.rotation.z = (i - 1) * .12; g.add(m); return m; });
+  g.position.y = -.85;
+  let t0 = 0, lastT = 0;
+  return {
+    group: g, pick, cam: [1.2, 2.4, 12.5], look: [0, .4, 0],
+    update(t, dt) {
+      lastT = t; const T = t - t0;
+      tel.scale.setScalar(Math.max(.001, ease2((T - .2) / .6))); tel.position.y = .1 + Math.sin(t * 1.2) * .06;
+      onde.forEach((c, i) => { const ph = ((t * .8 + i * .33) % 1); c.position.x = -2.1 + ph * 1.1; c.material.opacity = (1 - ph) * .65 * ease2((T - .8) / .6); c.scale.setScalar(1 + ph * .4); });
+      animaDocs(docs, T, t, dt, 1.6, .4);
+      foto.forEach((m, i) => { const k = ease2((T - 2.6 - i * .25) / .5); m.visible = k > .01; m.scale.setScalar(.6 + .4 * k); m.position.y = -1.0 + i * .55 + (1 - k) * -.5 + Math.sin(t + i) * .03; });
+    },
+    hover(o) { docs.forEach(d => d.userData.liftT = d === o ? 1 : 0); return o ? o.userData.tip : null; }, click() { t0 = lastT; },
+  };
+};
+
 // ---------- ciclo, mouse, passaggio ----------
 const ray = new THREE.Raycaster(); const mouse = new THREE.Vector2(9, 9);
 let mx = 0, my = 0, drag = false, lastX = 0, vel = 0, yaw = 0, moved = 0, hovered = null;
