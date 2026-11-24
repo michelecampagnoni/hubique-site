@@ -2210,6 +2210,127 @@
    "pagina": "https://www.scamilloforlanini.rm.it/web/guest/w/uoc-oncologia-duplica-1",
    "piano": "2° piano",
    "responsabile": "Direttore/Responsabile Paolo Emiliozzi"
+  },
+  {
+   "id": 140,
+   "titolo": "UOS Anestesia e Rianimazione dei trapianti solidi",
+   "tipo": "UOS",
+   "lat": 41.868952,
+   "lng": 12.453576,
+   "categoria": "Anestesia",
+   "edificio": "E04",
+   "edificio_nome": "PUDDU INGRESSO INTERNO",
+   "edificio_lat": 41.868952,
+   "edificio_lng": 12.453576,
+   "piano": "5° piano",
+   "responsabile": "Direttore/Responsabile icaela Maritti"
+  },
+  {
+   "id": 141,
+   "titolo": "UOS Anestesia Materno Infantile",
+   "tipo": "UOS",
+   "lat": 41.867969,
+   "lng": 12.455079,
+   "categoria": "Anestesia",
+   "edificio": "E08",
+   "edificio_nome": "SALA",
+   "edificio_lat": 41.867969,
+   "edificio_lng": 12.455079,
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Eufrasia Frattarelli"
+  },
+  {
+   "id": 142,
+   "titolo": "UOS Follow-up trapianti di rene",
+   "tipo": "UOS",
+   "lat": 41.868138,
+   "lng": 12.456407,
+   "categoria": "Nefrologia",
+   "edificio": "E15",
+   "edificio_nome": "BASSI",
+   "edificio_lat": 41.868138,
+   "edificio_lng": 12.456407,
+   "telefoni": [
+    "06 5870 4816"
+   ],
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Roberto Colonnelli"
+  },
+  {
+   "id": 143,
+   "titolo": "UOS Trapianti di rene",
+   "tipo": "UOS",
+   "lat": 41.868138,
+   "lng": 12.456407,
+   "categoria": "Chirurgia",
+   "edificio": "E15",
+   "edificio_nome": "BASSI",
+   "edificio_lat": 41.868138,
+   "edificio_lng": 12.456407,
+   "telefoni": [
+    "06 5870 4816"
+   ],
+   "piano": "Piano terra",
+   "responsabile": "Direttore/Responsabile Giuseppe Iaria"
+  },
+  {
+   "id": 144,
+   "titolo": "UOS Diagnostica invasiva nella patologia epatica",
+   "tipo": "UOS",
+   "lat": 41.868138,
+   "lng": 12.456407,
+   "categoria": "Epatologia",
+   "edificio": "E15",
+   "edificio_nome": "BASSI",
+   "edificio_lat": 41.868138,
+   "edificio_lng": 12.456407,
+   "telefoni": [
+    "06 5870 3808"
+   ],
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Valerio Giannelli"
+  },
+  {
+   "id": 145,
+   "titolo": "UOS Genomica",
+   "tipo": "UOS",
+   "lat": 41.868842,
+   "lng": 12.457399,
+   "categoria": "Genetica",
+   "edificio": "E03",
+   "edificio_nome": "MORGAGNI",
+   "edificio_lat": 41.868842,
+   "edificio_lng": 12.457399,
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Iene Bottillo"
+  },
+  {
+   "id": 146,
+   "titolo": "UOS Diagnostica per Immagini coordinamento attività ambulatoriali",
+   "tipo": "UOS",
+   "lat": 41.869906,
+   "lng": 12.455875,
+   "categoria": "Radiologia",
+   "edificio": "E10",
+   "edificio_nome": "PIASTRA",
+   "edificio_lat": 41.869906,
+   "edificio_lng": 12.455875,
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Teresa Pasquariello"
+  },
+  {
+   "id": 147,
+   "titolo": "UOS Diagnostica per Immagini in Oncologia coordinamento percorsi interni",
+   "tipo": "UOS",
+   "lat": 41.869906,
+   "lng": 12.455875,
+   "categoria": "Radiologia",
+   "edificio": "E10",
+   "edificio_nome": "PIASTRA",
+   "edificio_lat": 41.869906,
+   "edificio_lng": 12.455875,
+   "piano": "1° piano",
+   "responsabile": "Direttore/Responsabile Giovanni Regine"
   }
  ]
 }
