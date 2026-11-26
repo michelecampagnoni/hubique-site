@@ -49,7 +49,7 @@ const SLIDES = [
     <div class="in">
       <div class="kick r" style="--i:0">Proposta Hubique · Agenzie immobiliari</div>
       <h1 class="r" style="--i:1">HubAgency: <em>strumenti che lavorano per l'agenzia</em></h1>
-      <p class="lead r" style="--i:2">Conti, sito, dossier, arredo, ristrutturazione, persone, nuovi contatti dai portali e agenti AI: otto strumenti per le agenzie e le reti immobiliari.</p>
+      <p class="lead r" style="--i:2">Nuovi contatti dai portali, agenti AI, ristrutturazione, arredo, casa 3D, conti, persone e sito: otto strumenti per le agenzie e le reti immobiliari.</p>
     </div>
     <div class="hint">Passa sui punti della mappa · Frecce per avanzare · Punti generici, a scopo illustrativo</div>` },
 
@@ -65,23 +65,23 @@ const SLIDES = [
       </ol>
     </div>` },
 
-  { id: 'conti', nome: 'Conti Agenzia', scena: 'ambient', html: demo({
-    n: 1, kick: 'Conti Agenzia', titolo: 'Il mese dell\'agenzia,', em: 'in una schermata',
-    cosa: 'Cosa è entrato, cosa è uscito, cosa resta e quali incassi arrivano nei prossimi 60 giorni. Dalle trattative alla previsione, fino alle provvigioni degli agenti.',
-    vant: [['Agenzia', 'Sa quanto guadagna davvero ogni mese.'], ['Agenzia', 'Vede quali trattative rendono e quali fanno perdere tempo.'], ['Rete', 'Conti letti con gli stessi criteri in tutta la rete.']],
-    nota: 'Il collegamento ai gestionali della rete è da definire insieme.', url: DEMO.conti, img: 'demo-conti.jpg', alt: 'Conti Agenzia, schermata «Il mio mese»' }) },
+  { id: 'trovalead', nome: 'Trova lead', scena: 'ambient', html: demo({
+    n: 1, kick: `Trova lead`, titolo: `I privati che vendono,`, em: `appena escono sui portali`,
+    cosa: `Legge gli annunci dei privati su Immobiliare.it, idealista e Casa.it, toglie i doppioni tra portali e mette in cima i più recenti e quelli con il prezzo al metro quadro più basso della zona, con un punteggio. Per ogni annuncio mostra i clienti acquirenti compatibili; la ricerca si salva e l'avviso arriva sul telefono quando esce un annuncio nuovo.`,
+    vant: [['Agenzia', `Nuove acquisizioni senza passare le giornate sui portali.`], ['Agenzia', `Si chiama per primi, quando l'annuncio è appena uscito.`], ['Rete', `Stesso metodo in tutte le agenzie, elenchi esportabili in Excel.`]],
+    nota: `Nella demo gli annunci sono reali, letti dai portali al momento della ricerca. Telefono ed email passano al contatto solo se l'annuncio li riporta.`, url: DEMO.login, img: 'demo-trova-lead.jpg', alt: `Elenco delle opportunità di Trova lead su Milano`, eti: 'ACCOUNT DIMOSTRATIVO · ANNUNCI REALI', login: true }) },
 
-  { id: 'sito', nome: 'Il tuo sito in un\'ora', scena: 'ambient', html: demo({
-    n: 2, kick: 'Il tuo sito in un\'ora', titolo: 'Il sito dell\'agenzia,', em: 'fatto dall\'agente',
-    cosa: 'L\'agente sceglie uno dei 30 modelli e cambia solo testi, foto, colore e logo. Gli annunci entrano nel sito con un interruttore, come per i portali.',
-    vant: [['Agenzia', 'Un sito proprio, senza webmaster.'], ['Agenzia', 'Annunci sempre allineati, senza doppio lavoro.'], ['Rete', 'Un\'immagine coerente della rete, sito per sito.']],
-    nota: 'Anteprima dimostrativa, senza pubblicazione reale. Da aprire da computer o tablet.', url: DEMO.sito, img: 'demo-sito.jpg', alt: 'Galleria dei modelli di sito' }) },
+  { id: 'agenti', nome: 'Agenti AI', scena: 'ambient', html: demo({
+    n: 2, kick: `Agenti AI`, titolo: `Agenti AI che rispondono`, em: `e scrivono per primi`,
+    cosa: `L'assistente inbound risponde a ogni ora su WhatsApp, email e telefono: qualifica il contatto, dà le informazioni dell'agenzia e fissa l'appuntamento. Le campagne outbound scrivono per prime ad acquirenti da riattivare, proprietari da valutare e privati trovati con Trova lead, con i follow-up automatici.`,
+    vant: [['Agenzia', `Nessun contatto perso, anche la sera e nel fine settimana.`], ['Agenzia', `Gli agenti parlano solo con chi è già interessato.`], ['Rete', `Stesso servizio in tutta la rete, anche per altri business.`]],
+    nota: `Gli agenti lavorano entro le regole fissate dall'agenzia: impegni, offerte e prezzi restano alle persone. Nella demo gli agenti sono in pausa.`, url: DEMO.login, img: 'demo-agenti.jpg', alt: `Pagina AI Agents con assistente inbound e campagne outbound`, eti: 'ACCOUNT DIMOSTRATIVO · DATI FITTIZI', login: true }) },
 
-  { id: 'dossier', nome: 'Dossier Immobile', scena: 'ambient', html: demo({
-    n: 3, kick: 'Dossier Immobile', titolo: 'Dall\'incarico al dossier,', em: 'con la casa in 3D',
-    cosa: 'Dalla planimetria catastale nascono la casa 3D, le foto degli ambienti arredati e un dossier A4 con il marchio dell\'agenzia. Si stampa o si invia come link.',
-    vant: [['Agenzia', 'Una presentazione professionale in pochi minuti.'], ['Agenzia', 'Un argomento in più per acquisire l\'incarico.'], ['Rete', 'Stessa impaginazione e stesso stile in tutta la rete.']],
-    nota: 'Nella demo dati, testi e foto sono d\'esempio. Il percorso guidato è in cinque passi.', url: DEMO.dossier, img: 'demo-dossier.jpg', alt: 'Casa 3D generata dalla planimetria' }) },
+  { id: 'ristr', nome: 'Ristrutturazione', scena: 'ambient', html: demo({
+    n: 3, kick: `Quanto costerebbe ristrutturarlo`, titolo: `La casa da sistemare,`, em: `con il conto dei lavori`,
+    cosa: `Nel Dossier Immobile per l'acquirente, due scelte con un tocco: rinfrescata, parziale o completa, e finitura base, media o alta. Esce la spesa a forchetta voce per voce (demolizioni, pavimenti, bagni, impianti, serramenti, tinteggiatura), con il perché di ogni cifra, la fonte del prezzo, il costo al metro quadro e le settimane di cantiere.`,
+    vant: [['Agenzia', `L'obiezione «ma quanto devo spenderci?» trova risposta subito.`], ['Agenzia', `Le case da ristrutturare si propongono con numeri, non con impressioni.`], ['Rete', `Uno strumento in più che i portali non danno.`]],
+    nota: `Stima indicativa con fonti dichiarate, non è un preventivo: serve sempre il sopralluogo di un'impresa. Nella versione per il proprietario non compare.`, url: DEMO.ristruttura, img: 'demo-ristr.jpg', alt: `Pagina «Quanto costerebbe ristrutturarlo» del dossier` }) },
 
   { id: 'arreda', nome: 'Il tuo arredo', scena: 'ambient', html: demo({
     n: 4, kick: 'Il tuo arredo nella casa in vendita', titolo: 'La casa in vendita', em: 'con i mobili di chi la guarda',
@@ -89,29 +89,29 @@ const SLIDES = [
     vant: [['Agenzia', 'Contatti interessati a quella casa, dall\'annuncio.'], ['Agenzia', 'Annunci più coinvolgenti per chi li guarda.'], ['Rete', 'Una funzione di rete, con il marchio della rete.']],
     nota: 'Il risultato è un\'immagine indicativa: mobili e proporzioni possono differire.', url: DEMO.arreda, img: 'demo-arreda.jpg', alt: 'Stanza in vendita arredata con i mobili del visitatore', eti: 'IMMAGINE INDICATIVA' }) },
 
-  { id: 'ristr', nome: 'Ristrutturazione', scena: 'ambient', html: demo({
-    n: 5, kick: `Quanto costerebbe ristrutturarlo`, titolo: `La casa da sistemare,`, em: `con il conto dei lavori`,
-    cosa: `Nel Dossier Immobile per l'acquirente, due scelte con un tocco: rinfrescata, parziale o completa, e finitura base, media o alta. Esce la spesa a forchetta voce per voce (demolizioni, pavimenti, bagni, impianti, serramenti, tinteggiatura), con il perché di ogni cifra, la fonte del prezzo, il costo al metro quadro e le settimane di cantiere.`,
-    vant: [['Agenzia', `L'obiezione «ma quanto devo spenderci?» trova risposta subito.`], ['Agenzia', `Le case da ristrutturare si propongono con numeri, non con impressioni.`], ['Rete', `Uno strumento in più che i portali non danno.`]],
-    nota: `Stima indicativa con fonti dichiarate, non è un preventivo: serve sempre il sopralluogo di un'impresa. Nella versione per il proprietario non compare.`, url: DEMO.ristruttura, img: 'demo-ristr.jpg', alt: `Pagina «Quanto costerebbe ristrutturarlo» del dossier` }) },
+  { id: 'dossier', nome: 'Dossier Immobile', scena: 'ambient', html: demo({
+    n: 5, kick: 'Dossier Immobile', titolo: 'Dall\'incarico al dossier,', em: 'con la casa in 3D',
+    cosa: 'Dalla planimetria catastale nascono la casa 3D, le foto degli ambienti arredati e un dossier A4 con il marchio dell\'agenzia. Si stampa o si invia come link.',
+    vant: [['Agenzia', 'Una presentazione professionale in pochi minuti.'], ['Agenzia', 'Un argomento in più per acquisire l\'incarico.'], ['Rete', 'Stessa impaginazione e stesso stile in tutta la rete.']],
+    nota: 'Nella demo dati, testi e foto sono d\'esempio. Il percorso guidato è in cinque passi.', url: DEMO.dossier, img: 'demo-dossier.jpg', alt: 'Casa 3D generata dalla planimetria' }) },
+
+  { id: 'conti', nome: 'Conti Agenzia', scena: 'ambient', html: demo({
+    n: 6, kick: 'Conti Agenzia', titolo: 'Il mese dell\'agenzia,', em: 'in una schermata',
+    cosa: 'Cosa è entrato, cosa è uscito, cosa resta e quali incassi arrivano nei prossimi 60 giorni. Dalle trattative alla previsione, fino alle provvigioni degli agenti.',
+    vant: [['Agenzia', 'Sa quanto guadagna davvero ogni mese.'], ['Agenzia', 'Vede quali trattative rendono e quali fanno perdere tempo.'], ['Rete', 'Conti letti con gli stessi criteri in tutta la rete.']],
+    nota: 'Il collegamento ai gestionali della rete è da definire insieme.', url: DEMO.conti, img: 'demo-conti.jpg', alt: 'Conti Agenzia, schermata «Il mio mese»' }) },
 
   { id: 'talent', nome: 'HubAgency Talent', scena: 'ambient', html: demo({
-    n: 6, kick: `HubAgency Talent`, titolo: `Selezione e formazione`, em: `per tutta la rete`,
+    n: 7, kick: `HubAgency Talent`, titolo: `Selezione e formazione`, em: `per tutta la rete`,
     cosa: `Il profilo del candidato ideale per ogni ruolo, costruito con questionari mirati su ogni competenza; il candidato risponde da qualsiasi dispositivo e il punteggio, calcolato con regole fisse, arriva al titolare come proposta interna, con la spiegazione. Annunci pronti per tutti i portali, percorsi di formazione costruiti sulle lacune di ognuno, allenamento quotidiano a gioco e un cruscotto per la direzione.`,
     vant: [['Agenzia', `Meno colloqui a vuoto e nuovi agenti operativi prima.`], ['Agenzia', `Quello che si impara non si perde, con pochi minuti al giorno.`], ['Rete', `Un metodo unico di selezione e formazione in tutta la rete.`]],
     nota: `Questionari scritti in collaborazione con uno psicometrista certificato; decide sempre una persona. Tutte le funzioni nella <a class="pe" href="https://hubique.it/presentazione-agenzie-talent-g576uba0ak/" target="_blank" rel="noopener" style="color:var(--viola)">presentazione di HubAgency Talent</a>.`, url: DEMO.talent, img: 'demo-t-cruscotto.jpg', alt: `Cruscotto della rete di HubAgency Talent` }) },
 
-  { id: 'trovalead', nome: 'Trova lead', scena: 'ambient', html: demo({
-    n: 7, kick: `Trova lead`, titolo: `I privati che vendono,`, em: `appena escono sui portali`,
-    cosa: `Legge gli annunci dei privati su Immobiliare.it, idealista e Casa.it, toglie i doppioni tra portali e mette in cima i più recenti e quelli con il prezzo al metro quadro più basso della zona, con un punteggio. Per ogni annuncio mostra i clienti acquirenti compatibili; la ricerca si salva e l'avviso arriva sul telefono quando esce un annuncio nuovo.`,
-    vant: [['Agenzia', `Nuove acquisizioni senza passare le giornate sui portali.`], ['Agenzia', `Si chiama per primi, quando l'annuncio è appena uscito.`], ['Rete', `Stesso metodo in tutte le agenzie, elenchi esportabili in Excel.`]],
-    nota: `Nella demo gli annunci sono reali, letti dai portali al momento della ricerca. Telefono ed email passano al contatto solo se l'annuncio li riporta.`, url: DEMO.login, img: 'demo-trova-lead.jpg', alt: `Elenco delle opportunità di Trova lead su Milano`, eti: 'ACCOUNT DIMOSTRATIVO · ANNUNCI REALI', login: true }) },
-
-  { id: 'agenti', nome: 'Agenti AI', scena: 'ambient', html: demo({
-    n: 8, kick: `Agenti AI`, titolo: `Agenti AI che rispondono`, em: `e scrivono per primi`,
-    cosa: `L'assistente inbound risponde a ogni ora su WhatsApp, email e telefono: qualifica il contatto, dà le informazioni dell'agenzia e fissa l'appuntamento. Le campagne outbound scrivono per prime ad acquirenti da riattivare, proprietari da valutare e privati trovati con Trova lead, con i follow-up automatici.`,
-    vant: [['Agenzia', `Nessun contatto perso, anche la sera e nel fine settimana.`], ['Agenzia', `Gli agenti parlano solo con chi è già interessato.`], ['Rete', `Stesso servizio in tutta la rete, anche per altri business.`]],
-    nota: `Gli agenti lavorano entro le regole fissate dall'agenzia: impegni, offerte e prezzi restano alle persone. Nella demo gli agenti sono in pausa.`, url: DEMO.login, img: 'demo-agenti.jpg', alt: `Pagina AI Agents con assistente inbound e campagne outbound`, eti: 'ACCOUNT DIMOSTRATIVO · DATI FITTIZI', login: true }) },
+  { id: 'sito', nome: 'Il tuo sito in un\'ora', scena: 'ambient', html: demo({
+    n: 8, kick: 'Il tuo sito in un\'ora', titolo: 'Il sito dell\'agenzia,', em: 'fatto dall\'agente',
+    cosa: 'L\'agente sceglie uno dei 30 modelli e cambia solo testi, foto, colore e logo. Gli annunci entrano nel sito con un interruttore, come per i portali.',
+    vant: [['Agenzia', 'Un sito proprio, senza webmaster.'], ['Agenzia', 'Annunci sempre allineati, senza doppio lavoro.'], ['Rete', 'Un\'immagine coerente della rete, sito per sito.']],
+    nota: 'Anteprima dimostrativa, senza pubblicazione reale. Da aprire da computer o tablet.', url: DEMO.sito, img: 'demo-sito.jpg', alt: 'Galleria dei modelli di sito' }) },
 
   { id: 'vantaggi', nome: 'Vantaggi per la rete', scena: 'ambient', html: `
     <div class="in stretta">
@@ -120,7 +120,7 @@ const SLIDES = [
       <p class="lead r" style="--i:2">Otto strumenti, un solo partner.</p>
     </div>
     <div class="tiles">
-      ${[['Un fornitore, più strumenti', 'Conti, sito, dossier, arredo, ristrutturazione, persone, nuovi contatti e agenti AI da un solo partner.'],
+      ${[['Un fornitore, più strumenti', 'Nuovi contatti, agenti AI, ristrutturazione, arredo, casa 3D, conti, persone e sito da un solo partner.'],
          ['Nessun doppione', 'Ogni strumento risponde a un bisogno preciso, accanto a quelli che la rete ha già.'],
          ['Immagine di rete uniforme', 'Siti e dossier con lo stesso stile e lo stesso marchio.'],
          ['Contatti e argomenti per vendere', 'Trova lead scova i privati che vendono, gli agenti AI li contattano e rispondono a ogni ora; arredo, casa 3D, dossier e conto dei lavori aiutano a chiudere.'],
